@@ -4,135 +4,155 @@
 Proposal
 @endsection
 
+<!-- Link ke CSS DataTables -->
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css"> --}}
+
+
+{{-- <!-- Link ke JavaScript DataTables (termasuk jQuery) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+
+
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
-        <div class="card-body">
-            {{-- <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">No Bimbingan</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="xx.xxx.xxx"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div> --}}
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">NPM</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="13.2019.1.00819"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Nama Mahasiswa</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="Sony Adi Adriko"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Judul yang diajukan</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="Sistem pendukung keputusan "
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 1</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="Dosen Pembimbing 1"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 2</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="Dosen Pembimbing 2"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlSelect1" class="form-label">Ketua Seminar</label>
-                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <div class="col-md">
-                    <small class="text-bold fw-semibold">Dosen Penguji</small>
-                    <div class="form-check mt-3">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                      <label class="form-check-label" for="defaultCheck1"> Audit SI-TI </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" />
-                      <label class="form-check-label" for="defaultCheck2"> Recommender System </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" />
-                      <label class="form-check-label" for="defaultCheck3"> Business Inteligence </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" />
-                        <label class="form-check-label" for="defaultCheck3"> Perencanaan Strategis SI/TI </label>
-                      </div>
-                  </div>
-            </div>
-            <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Ruangan Seminar</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="A-204"
-                  aria-describedby="defaultFormControlHelp"
-                />
-            </div>
-            <div class="mb-3">
-                <label for="html5-datetime-local-input" class="form-label">Datetime</label>
-                
-                  <input
-                    class="form-control"
-                    type="datetime-local"
-                    value="2021-06-18T12:30:00"
-                    id="html5-datetime-local-input"
-                  />
-              </div>
-        <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <h5 class="card-header">Tabel Pengajuan Seminar Proposal</h5>
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        {{-- <th>File Proposal</th>
+                        <th>Slip Pembayaran</th> --}}
+                        <th>Action</th>
+
+                </thead>
+                <tbody>
+                    @php
+                    $no=1;
+                    @endphp
+                    @foreach($sempros as $semp)
+                    <tr>
+                        <td>{{ $semp->id }}</td>
+                        <td>{{ $semp->nama }}</td>
+                        <td>{{ $semp->npm }}</td>
+                        {{-- <td>{{ $semp->file_proposal }}</td>
+                        <td>{{ $semp->file_slip_pembayaran }}</td> --}}
+                        <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id) }}" class="btn btn-primary">Detail</a></td>
+                    </tr>
+                    @php
+                    $no++;
+                    @endphp
+                    @endforeach
+                    
+                </tbody>
+            </table>  
         </div>
-        
-      </div>
     </div>
+    </div>
+    {{-- <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <form id="updateStatusForm" method="POST">
+                @csrf
+
+                <input type="hidden" id="val_id" name="val_id"/>
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mb-3">
+                  <label for="nama" class="form-label">Nama</label>
+                  <input type="text" id="nama" class="form-control" placeholder="Enter Name" />
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col mb-3">
+                  <label for="npm" class="form-label">npm</label>
+                  <input type="text" id="npm"  class="form-control" placeholder="xxxx@xxx.xx"/>
+                </div>
+                <div class="col mb-3">
+                  <label for="bidangilmu" class="form-label">Bidang Ilmu</label>
+                  <input
+                    type="text"
+                    id="bidangilmu"
+                    class="form-control"
+                    placeholder="DD / MM / YY"
+                  />
+                </div>
+              </div>
+                <div class="row">
+                    <div class="col mb-3">
+                      <label for="matakuliahpilihan" class="form-label">Matakuliah Pilihan</label>
+                      <input
+                        type="text"
+                        id="matakuliahpilihan"
+                        class="form-control"
+                        placeholder="Enter Matakuliah Pilihan"
+                      />
+                    </div>
+                  </div>
+                  <!-- Tambahkan data judul -->
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="judul" class="form-label">Judul</label>
+                      <input
+                        type="text"
+                        id="judul"
+                        class="form-control"
+                        placeholder="Enter Judul"
+                      />
+                    </div>
+                  </div>
+                  <!-- Tambahkan data status -->
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="status" class="form-label">Status</label>
+                      <input
+                        type="text"
+                        id="status"
+                        class="form-control"
+                        placeholder="Enter Status"
+                        readonly
+                      />
+                    </div>
+                  </div>
+              
+            </div>
+            <input type="hidden" name="status" value="acc"/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" id="btnacc" class="btn btn-success" data-status="acc">Acc</button>
+
+            </div>
+            </form>
+          </div>
+        </div>
+      </div> --}}
 </div>
-
-
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   $(document).ready(function() {
+  $('#dataTable').DataTable({
+    paging: true,
+    searching: true,
+    ordering: true,
+    // Opsi lainnya
+  });
+});
+  </script>
+

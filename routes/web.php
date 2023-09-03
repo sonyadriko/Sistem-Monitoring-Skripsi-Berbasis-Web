@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mahasiswa\PengajuanJudulController;
 use App\Http\Controllers\BidangIlmuController;
+use App\Http\Controllers\KoordinatorJudulController;
+use App\Http\Controllers\KoordinatorSeminarController;
+use App\Http\Controllers\PembagianDosenController;
+use App\Http\Controllers\BimbinganProposalController;
+
 use App\Http\Controllers\SeminarProposalController;
 
 
@@ -24,42 +29,70 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    
+    
+    Route::get('/proposal', function () {
+        return view('mahasiswa/proposal/index');
+    });
+    
+    Route::controller(PengajuanJudulController::class)->group(function () {
+        Route::get('/proposal/pengajuan_judul', 'create')->name('pengajuan-judul.create');
+        Route::post('/proposal/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
+        // Route::match(['get','post'], 'koordinator/updatedetail/{id}');
+    });
+    
+    Route::controller(KoordinatorJudulController::class)->group(function () {
+        Route::get('/koordinator/pengajuan_judul', 'index')->name('pengajuan-judul.index');
+        Route::get('/koordinator/pengajuan_judul/detail/{id}', 'detail');
+        Route::post('/koordinator/pengajuan_judul/update-status/{id_tema}', 'updatestatus2')->name('update_status');
+        // Route::post('/koordinator/pengajuan_judul/updatedetail/{id}', 'updatestatus'); 
+    });
+    
+    Route::controller(KoordinatorSeminarController::class)->group(function () {
+        Route::get('/koordinator/jadwal_seminar_proposal', 'index')->name('jadwal-seminar-proposal.index');
+        Route::get('/koordinator/jadwal_seminar_proposal/detail/{id}', 'detail');
+    }); 
+    
+    
+    Route::controller(BidangIlmuController::class)->group(function () {
+        Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.create');
+        Route::post('/dosen/bidang_ilmu', 'store')->name('bidang-ilmu.submit');
+    });
+    
+    Route::controller(SeminarProposalController::class)->group(function ()
+    {
+        Route::get('/proposal/seminar_proposal', 'create')->name('seminar-proposal.create');
+        Route::post('/proposal/seminar_proposal', 'store')->name('seminar-proposal.submit');
+    
+    });
+    
+    Route::controller(PembagianDosenController::class)->group(function () 
+    { 
+        Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
+        Route::get('/koordinator/pembagian_dosen/create', 'create')->name('pembagian-dosen.create');
+        Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
+    
+    }); 
 
-
-Route::get('/proposal', function () {
-    return view('mahasiswa/proposal/index');
+    Route::controller(BimbinganProposalController::class)->group(function (){
+        Route::get('/proposal/bimbingan', 'index')->name('bimbingan-mhs.index');
+        Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
+    });
+  
+    // Route::get('/koordinator/pengajuan_judul_proposal', function (){
+    //     return view('koordinator/pengajuan_judul_proposal/index');
+    // })->name('pengajuan_judul_proposal');
+    // Route::get('/koordinator/pembagian_dosen', function (){
+    //     return view('koordinator/pembagian_dosen/index');
+    // })->name('pembagian_dosen');
+    // Route::get('/koordinator/jadwal_seminar_proposal', function (){
+    //     return view('koordinator/penjadwalan/seminar_proposal/index');
+    // })->name('jadwal_seminar_proposal');
+    Route::get('/dosen/berita_acara_seminar', function (){
+        return view('dosen/berita_acara/seminar/index');
+    })->name('berita_acara_seminar');
 });
 
-Route::controller(PengajuanJudulController::class)->group(function () {
-    Route::get('/koordinator/pengajuan_judul', 'index')->name('pengajuan-judul.index');
-    Route::get('/proposal/pengajuan_judul', 'create')->name('pengajuan-judul.create');
-    Route::post('/proposal/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
-    Route::get('/koordinator/getdetail/{id}', 'getDetail');
-    Route::post('/koordinator/updatedetail/{id}', 'updatestatus');
-});
-
-Route::controller(BidangIlmuController::class)->group(function () {
-    Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu');
-    Route::post('/dosen/bidang_ilmu', 'store')->name('bidang-ilmu.submit');
-});
-
-Route::controller(SeminarProposalController::class)->group(function ()
-{
-    Route::get('/proposal/seminar_proposal', 'create')->name('seminar-proposal.create');
-    Route::post('/proposal/seminar_proposal', 'store')->name('seminar-proposal.submit');
-
-});
-// Route::get('/koordinator/pengajuan_judul_proposal', function (){
-//     return view('koordinator/pengajuan_judul_proposal/index');
-// })->name('pengajuan_judul_proposal');
-Route::get('/koordinator/pembagian_dosen', function (){
-    return view('koordinator/pembagian_dosen/index');
-})->name('pembagian_dosen');
-Route::get('/koordinator/jadwal_seminar_proposal', function (){
-    return view('koordinator/penjadwalan/seminar_proposal/index');
-})->name('jadwal_seminar_proposal');
-Route::get('/dosen/berita_acara_seminar', function (){
-    return view('dosen/berita_acara/seminar/index');
-})->name('berita_acara_seminar');

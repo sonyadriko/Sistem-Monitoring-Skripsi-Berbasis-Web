@@ -10,9 +10,9 @@ Proposal
         <h5 class="card-header">Berita Acara Seminar Proposal</h5>
         {{-- <p class="card-header">Dosen penguji dapat mengisi berita acara seminar proposal dibawah ini</p> --}}
         <div class="card-body">
-            <div class="table-responsive">
-            <table class="table table-sm"/>
-                <tbody class="table-responsive">
+            <div class="card-datatable table-responsive  pt-0">
+            <table class="table table-borderless"/>
+                <tbody class="table-border-bottom-0">
                     <tr>
                         <td>NPM</td>
                         <td>13.2019.1.00819</td>

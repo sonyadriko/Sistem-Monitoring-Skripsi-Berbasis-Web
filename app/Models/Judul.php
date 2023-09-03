@@ -18,8 +18,9 @@ class Judul extends Model
         'mk_pilihan',
         'judul',
         'status',
+        'dosen',
         'updated_at',
         'created_at'
     ];
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_tema';
 }

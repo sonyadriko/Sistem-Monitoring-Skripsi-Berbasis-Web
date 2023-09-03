@@ -23,10 +23,8 @@ Proposal
                 type="text"
                 id="name"
                 name="nama"
-                {{-- value="sony adi adriko" --}}
-                value="{{Auth::user()->name}}"
-
-                {{-- placeholder="Sony Adi Adriko" --}}
+                value="sony adi adriko"
+                placeholder="Sony Adi Adriko"
                 readonly
                 autocomplete="nama"
               />
@@ -40,9 +38,9 @@ Proposal
                 class="form-control"
                 type="text"
                 id="npm"
-                value="{{Auth::user()->kode_unik}}"
+                value="13.2019.1.00819"
                 name="npm"
-                {{-- placeholder="13.2019.1.00819" --}}
+                placeholder="13.2019.1.00819"
                 readonly
                 />
                 @error('npm')
@@ -52,10 +50,10 @@ Proposal
             <div class="mb-3">
               <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
               <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
-                <option value="" selected disabled="">Open this select menu</option>
-                @foreach($bidang_ilmu as $bi)
-                <option value="{{$bi->id}}">{{$bi->topik_bidang_ilmu}}</option>
-                @endforeach
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
               </select>
             </div>
             <div class="mb-3">

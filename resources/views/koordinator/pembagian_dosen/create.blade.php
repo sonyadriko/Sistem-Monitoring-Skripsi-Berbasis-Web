@@ -1,0 +1,54 @@
+@extends('layouts/template')
+
+@section('title')
+Proposal
+@endsection
+
+@section('content')
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card mb-4">
+        <h5 class="card-header">Pembagian Dosen Pembimbing</h5>
+        <div class="card-body">
+          <form action="{{route('pembagian-dosen.store')}}" method="POST">
+            @csrf
+            <div class="mb-3">
+              <label for="id_pengajuan_judul" class="form-label">Id Pengajuan Judul</label>
+              <select class="form-select" id="npm" name="npm" aria-label="Default select example">
+                  @foreach($juduls as $jud)
+                      <option value="{{ $jud->id_tema }}">{{ $jud->npm }}</option>
+                  @endforeach
+              </select>
+          </div>
+      
+          <div class="mb-3">
+              <label for="dospem_1" class="form-label">Dosen Pembimbing 1</label>
+              <select class="form-select" id="dospem_1" name="dospem_1" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="Dosen A">Dosen A</option>
+                  <option value="Dosen B">Dosen B</option>
+                  <option value="Dosen C">Dosen C</option>
+              </select>
+          </div>
+      
+          <div class="mb-3">
+              <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
+              <select class="form-select" id="dospem_2" name="dospem_2" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="Dosen A">Dosen A</option>
+                  <option value="Dosen B">Dosen B</option>
+                  <option value="Dosen C">Dosen C</option>
+              </select>
+          </div>
+       
+      
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+            <button type="submit" class="btn btn-primary" name="action" value="sudah">Submit</button>
+        </div>
+          </form>
+      </div>
+    </div>
+</div>
+
+
+@endsection

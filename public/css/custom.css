@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:900,700,600,800,400|Plus+Jakarta+Sans:500,700");
+@font-face {
+    font-family: "Font Awesome 5 Free-Solid";
+    font-style: normal; font-weight: 400;
+    src: ur1("https ://fonts.animaapp.com/FontAwesome5Free-Solid")
+    format ("opentype");
+    }
+
+.progress-bimbingan-mahasiswa {
+align-items: flex-start;
+background-color: var (--white-lilac);
+display: flex;
+height: 935px; width: 1440px;
+}
+.hidden,
+.hidden * {
+pointer-events: none;
+visibility: hidden;
+}
+.navigation-left {
+align-items: center;
+background-color: var (--eerie-black);
+display: flex;
+flex-direction: column;
+min-height: 935px;
+padding: 22px 0;
+width: 224px;
+}
+.form-1{
+    align-items: center;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0px 0px 25px #3a3b4526;
+    display:flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 339px;
+    overflow: hidden;
+    width: 770px;
+}
+
+.overlap-group-1 {
+    align-items: center;
+    background-color: var(--white-11lac); border-radius: 14px 14px 0px 0px; display: flex; height: 64px; min-width: 770px;
+    padding: 0 24px;
+}
+
+.valign-text-middle {
+    display: flex;
+    flex-direction: column; justify-content: center;
+}
+.review-dosen-pembimbing {
+    height: 38px;
+    letter-spacing: 0; line-height: 38px; min-width: 204px; white-space: nowrap;
+}
+.revisi-rumusan-masa {
+    color: var (--new-car-2);
+    font-family: var (--font-family-plus_jakarta_sans);
+    font-size: var (--font-size-x1);
+    font-weight: 400; letter-spacing: 0; line-height: 32px; margin-right: 2px; min-height: 225px; width: 720px;
+}
+.span1-1 {
+    color: var (--eerie-black);
+    font-weight: 500;
+}
+span0-1 {
+    color: var (--eerie-black);
+    font-weight: 700
+}

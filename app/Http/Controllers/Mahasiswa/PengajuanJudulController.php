@@ -11,17 +11,13 @@ class PengajuanJudulController extends Controller
 {
     //
 
-    public function index()
-    {
-        $juduls = Judul::all();
-        return view('koordinator/pengajuan_judul.index', compact('juduls'));
-
-    }
+   
 
     public function create()
     {
         // $juduls = Judul::all();
-        return view('mahasiswa/proposal/pengajuan_judul.index');
+        $bidang_ilmu = DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get();
+        return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu'));
     }
 
     public function store(Request $request)
@@ -56,28 +52,5 @@ class PengajuanJudulController extends Controller
         return redirect('/dashboard');
     }
 
-    public function getdetail($id)
-    {
-        $data = DB::table('tema')->where('id', $id)->first();
-        return response()->json($data);
-    }
-
-    public function updatestatus($id,Request $request)
-    {
-        // Validasi data jika diperlukan
-       dd($request->all());
-    $request->validate([
-        'newStatus' => 'required|string', // Sesuaikan validasi dengan kebutuhan Anda
-    ]);
-
-    // Update status dalam tabel 'tema'
-    DB::table('tema')
-        ->where('id', $id) // Gunakan operator 'id' secara langsung
-        ->update([
-            'status' => $request->input('newStatus'),
-            'updated_at' => now(), // Menggunakan fungsi now() untuk mengisi updated_at
-        ]);
-
-    return response()->json("berhasil");
-    }
+    
 }

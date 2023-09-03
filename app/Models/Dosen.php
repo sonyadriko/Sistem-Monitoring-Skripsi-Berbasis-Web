@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SeminarProposal extends Model
+class Dosen extends Model
 {
-    protected $table = 'seminar_proposal';
+    protected $table = 'dosen';
+   
 
     protected $fillable = [
-        'nama',
         'npm',
-        'file_proposal',
-        'file_slip_pembayaran',
+        'dospem_1',
+        'dospem_2',
         'updated_at',
         'created_at'
     ];
     protected $primaryKey = 'id';
-
 }

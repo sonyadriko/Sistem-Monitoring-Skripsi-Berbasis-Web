@@ -104,6 +104,11 @@
             </a>
           </li>
           <li class="menu-item">
+            <a href="{{ route('bidang-ilmu.create')}}" class="menu-link">
+              <div data-i18n="Account">Bidang Ilmu</div>
+            </a>
+          </li>
+          <li class="menu-item">
             <a href="{{ route('seminar-proposal.create')}}" class="menu-link">
               <div data-i18n="Notifications">Pendaftaran Seminar Proposal</div>
             </a>

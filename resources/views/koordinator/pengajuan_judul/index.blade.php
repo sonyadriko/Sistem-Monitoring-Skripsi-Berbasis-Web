@@ -5,11 +5,12 @@ Proposal
 @endsection
 
 <!-- Link ke CSS DataTables -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css"> --}}
 
-<!-- Link ke JavaScript DataTables (termasuk jQuery) -->
+
+{{-- <!-- Link ke JavaScript DataTables (termasuk jQuery) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
 
 
 @section('content')
@@ -18,8 +19,10 @@ Proposal
         <h5 class="card-header">Table Pengajuan Judul Proposal</h5>
     
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
+      <div class="card-datatable table-responsive  pt-0">
+        <table class="table datatables-basicd border-top"/>
+        {{-- <div class="table-responsive"> --}}
+            {{-- <table class="table table-bordered id="dataTable" width="100%" cellspacing="0"> --}}
                 <thead>
                     <tr>
                         <th>No</th>
@@ -29,29 +32,20 @@ Proposal
                         <th>Action</th>
                 </thead>
                 <tbody>
-                    @php
+                    {{-- @php
                     $no=1;
-                    @endphp
+                    @endphp --}}
                     @foreach($juduls as $judul)
                     <tr>
-                        <td>{{ $no }}</td>
+                        <td>{{ $judul->id_tema }}</td>
                         <td>{{ $judul->nama }}</td>
                         <td>{{ $judul->npm }}</td>
-                        <td>{{ $judul->bidang_ilmu }}</td>
-                        {{-- <td><a href='edit_data_training.php?GetID=' style="text-decoration: none; list-style: none;"><input type='submit' value='Detail' id='editbtn' class="btn btn-primary btn-user" ></a></td>
-                         --}}
-                         <td><button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalCenter"
-                            data-item-id="{{ $judul->id }}"
-                          > Detail
-                        </button></td>
+                        <td>{{ $judul->topik_bidang_ilmu }}</td>
+                        <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_tema) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
-                    @php
+                    {{-- @php
                     $no++;
-                    @endphp
+                    @endphp --}}
                     @endforeach
                     
                 </tbody>
@@ -59,11 +53,13 @@ Proposal
         </div>
     </div>
     </div>
-    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    {{-- <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <form id="updateStatusForm" method="POST" action="javascript:void(0)">
+            <form id="updateStatusForm" method="POST">
                 @csrf
+
+                <input type="hidden" id="val_id" name="val_id"/>
             <div class="modal-header">
               <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
               <button
@@ -77,23 +73,13 @@ Proposal
               <div class="row">
                 <div class="col mb-3">
                   <label for="nama" class="form-label">Nama</label>
-                  <input
-                    type="text"
-                    id="nama"
-                    class="form-control"
-                    placeholder="Enter Name"
-                  />
+                  <input type="text" id="nama" class="form-control" placeholder="Enter Name" />
                 </div>
               </div>
               <div class="row g-2">
                 <div class="col mb-3">
                   <label for="npm" class="form-label">npm</label>
-                  <input
-                    type="text"
-                    id="npm"
-                    class="form-control"
-                    placeholder="xxxx@xxx.xx"
-                  />
+                  <input type="text" id="npm"  class="form-control" placeholder="xxxx@xxx.xx"/>
                 </div>
                 <div class="col mb-3">
                   <label for="bidangilmu" class="form-label">Bidang Ilmu</label>
@@ -143,18 +129,18 @@ Proposal
                   </div>
               
             </div>
+            <input type="hidden" name="status" value="acc"/>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Close
                   </button>
-                  <button type="button" class="btn btn-danger">Tolak</button>
-                  <button type="button" id="btn-acc" class="btn btn-success" data-status="acc">Acc</button>
+                  <button type="submit" id="btnacc" class="btn btn-success" data-status="acc">Acc</button>
 
             </div>
             </form>
           </div>
         </div>
-      </div>
+      </div> --}}
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -169,16 +155,16 @@ Proposal
 });
   </script>
 
-  <script>
-    // public/js/script.js
-document.addEventListener('DOMContentLoaded', function() {
+
+  {{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
     $('#modalCenter').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Tombol yang di-klik
         var itemId = button.data('item-id'); // Ambil data ID dari tombol
 
         // Ambil data dari server menggunakan AJAX
         $.ajax({
-            url: '{{url('/koordinator/getdetail')}}'+"/"+itemId, // URL dari route yang menangani request ini
+            url: '{{url('/koordinator/pengajuan_judul/getdetail')}}'+"/"+itemId, // URL dari route yang menangani request ini
             method: 'GET',
             success: function(data) {
                 // Isi input dengan data yang diambil
@@ -190,33 +176,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('#status').val(data.status);
 
             }
-        });
+        }); 
+    //     $('#btnacc').on('click',function(e) {
+    //         e.preventDefault(); // Mencegah form submit bawaan
+    //     var itemId = button.data('item-id'); // Ambil
+    //     $.ajax({
+    //       url: '{{ url('/koordinator/updatedetail') }}'+"/"+itemId, // Ganti dengan URL endpoint yang sesuai di server Anda
+    //       method: 'POST',
 
-        $('#updateStatusForm').submit(function(e) {
-            e.preventDefault(); // Mencegah form submit bawaan
-        var itemId = button.data('item-id'); // Ambil
-        $.ajax({
-          url: '{{ url('/koordinator/updatedetail') }}'+"/"+itemId, // Ganti dengan URL endpoint yang sesuai di server Anda
-          method: 'POST',
-          data: $(this).serialize(), // Mengambil data formulir
-          success: function(response) {
-            // Tanggapan dari server (jika ada)
-            console.log('Status berhasil diperbarui: ' + response);
+    //     //   data: $(this).serialize(), // Mengambil data formulir
+    //       success: function(response) {
+    //         // Tanggapan dari server (jika ada)
+    //         console.log('Status berhasil diperbarui: ' + response);
 
-            // Perbarui tampilan status pada modal
-            location.reload();
-          },
-          error: function(xhr, status, error) {
-            // Penanganan kesalahan jika ada
-            console.error('Terjadi kesalahan: ' + error);
-          }
-        });
+    //         // Perbarui tampilan status pada modal
+    //         location.reload();
+    //       },
+    //       error: function(xhr, status, error) {
+    //         // Penanganan kesalahan jika ada
+    //         console.error('Terjadi kesalahan: ' + error);
+    //       }
+    //     });
 
-    });
+    // });
         
     });
 });
 
     </script>
 
-  
+{{--   
+<script>
+    $(document).ready(function () {
+        $('#accbutton').click(function () {
+            var temaId = $(this).data('tema-id');
+
+            $.ajax({
+              
+                method: 'POST',
+                url: '{{ url('/koordinator/pengajuan_judul/updatedetail') }}'+"/"+temaId, 
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+                success: function (response) {
+                    // Proses respons atau lakukan apa pun yang diperlukan
+                    alert(response.message);
+                },
+                error: function (error) {
+                    // Handle error
+                    alert('Error: ' + error.responseJSON.message);
+                }
+            });
+        });
+    });
+</script> --}}
