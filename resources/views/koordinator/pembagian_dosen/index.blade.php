@@ -16,7 +16,7 @@ Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <a href="{{ route('pembagian-dosen.create') }}" class="btn btn-primary">Create</a>
+        {{-- <a href="{{ route('pembagian-dosen.create') }}" class="btn btn-primary">Create</a> --}}
         <h5 class="card-header">Tabel Pembagian Dosen</h5>
     
     <div class="card-body">
@@ -26,26 +26,39 @@ Proposal
                     <tr>
                         {{-- <th>No</th> --}}
                         <th>NPM</th>
-                        <th>Dospem 1</th>
-                        <th>Dospem 2</th>
+                        <th>Judul</th>
+                        <th>Status</th>
+                        <th>Dapat Dosen</th>
                         <th>Action</th>
                 </thead>
                 <tbody>
                     {{-- @php
                     $no=1;
                     @endphp --}}
-                    @foreach($dosens as $dosen)
+                    @foreach($temas as $tema)
                     <tr>
-                        <td>{{ $dosen->npm }}</td>
-                        <td>{{ $dosen->dospem_1 }}</td>
-                        <td>{{ $dosen->dospem_2 }}</td>
-                        <td><a href="{{ url('/koordinator/pembagian_dosen/create/' . $dosen->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td>{{ $tema->npm }}</td>
+                        {{-- <td>{{ $dosen->nama_dospem1 }}</td>
+                        <td>{{ $dosen->nama_dospem2 }}</td> --}}
+                        <td>{{ $tema->judul }}</td>
+                        <td>{{ $tema->status }}</td>
+                        <td>{{ $tema->dosen }}</td>
+
+                        {{-- <td>{{ $judul->npm }}</td> --}}
+                        <td>
+                            @if($tema->status === 'terima' && $tema->dosen === 'belum')
+                            <a href="{{ url('/koordinator/pembagian_dosen/edit/' . $tema->id_tema) }}" class="btn btn-primary">Add Dosen</a></td>
+                            @else
+                            {{-- <a href="{{ url('/koordinator/pembagian_dosen/detail/' . $tema->id_tema) }}" class="btn btn-primary">Detail</a></td> --}}
+                            <a href="{{ url('/koordinator/pembagian_dosen/edit/' . $tema->id_tema) }}" class="btn btn-primary disabled-button" disabled>Add Dosen</a></td>
+
+                            @endif
                     </tr>
-                    {{-- @php
+                   
+                    @endforeach
+                     {{-- @php
                     $no++;
                     @endphp --}}
-                    @endforeach
-                    
                 </tbody>
             </table>  
         </div>

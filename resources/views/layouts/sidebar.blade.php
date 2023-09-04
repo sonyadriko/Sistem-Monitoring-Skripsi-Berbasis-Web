@@ -119,7 +119,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="pages-account-settings-connections.html" class="menu-link">
+            <a href="{{ route('pengajuan-st.index') }}" class="menu-link">
               <div data-i18n="Connections">Surat Tugas Bimbingan</div>
             </a>
           </li>

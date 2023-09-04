@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Judul as Judul;
 
 class PengajuanJudulController extends Controller
@@ -41,12 +42,15 @@ class PengajuanJudulController extends Controller
         $pengajuan = new Judul();
         $pengajuan->nama = $validatedData['nama'];
         $pengajuan->npm = $validatedData['npm'];
-        $pengajuan->bidang_ilmu = $validatedData['bidang_ilmu'];
+        // $pengajuan->user_id = Auth::user()->id();
+        $pengajuan->user_id = Auth::user()->id;
+        $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
         $mk = implode(', ', $validatedData['mk_pilihan']);
         $pengajuan->mk_pilihan = $mk;
         $pengajuan->judul = $validatedData['judul'];
         // var_dump($pengajuan);
         $pengajuan->status='pending';
+        $pengajuan->dosen='belum';
         $pengajuan->save();
 
         return redirect('/dashboard');

@@ -105,3 +105,9 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.disabled-button {
+  pointer-events: none; /* Prevent click events */
+  opacity: 0.5; /* Reduce opacity to indicate it's disabled */
+  cursor: not-allowed; /* Change cursor style */
+}

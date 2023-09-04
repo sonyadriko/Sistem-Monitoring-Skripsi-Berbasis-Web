@@ -14,7 +14,8 @@ class Judul extends Model
     protected $fillable = [
         'nama',
         'npm',
-        'bidang_ilmu',
+        'user_id',
+        'bidang_ilmu_id',
         'mk_pilihan',
         'judul',
         'status',

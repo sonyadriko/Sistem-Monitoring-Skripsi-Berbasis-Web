@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dosen extends Model
+class DetailUser extends Model
 {
-    protected $table = 'dosen';
+    protected $table = 'detail_users';
    
 
     protected $fillable = [
-        'npm',
-        'dospem_1',
-        'dospem_2',
-        'nama_dospem1',
-        'nama_dospem2',
+        'alamat_mhs',
+        'no_telp_mhs',
+        'alamat_orang_tua',
+        'no_telp_orang_tua',
         'updated_at',
         'created_at'
     ];

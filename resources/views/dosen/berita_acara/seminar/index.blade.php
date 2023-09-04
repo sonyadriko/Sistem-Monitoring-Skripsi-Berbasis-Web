@@ -11,7 +11,7 @@ Proposal
         {{-- <p class="card-header">Dosen penguji dapat mengisi berita acara seminar proposal dibawah ini</p> --}}
         <div class="card-body">
             <div class="card-datatable table-responsive  pt-0">
-            <table class="table table-borderless"/>
+            <table class="table table-borderless datatables-basicd border-top"/>
                 <tbody class="table-border-bottom-0">
                     <tr>
                         <td>NPM</td>

@@ -38,22 +38,17 @@ class KoordinatorJudulController extends Controller
         $action = $request->input('action');
 
     // Temukan data yang sesuai berdasarkan $id
-    $data = Judul::find($id_tema);
-    // $data = DB::table('tema')->where('id_tema','=','$id');
+        $data = Judul::find($id_tema);
+   
 
-    // Update status berdasarkan tindakan yang dipilih
-    if ($action === 'terima') {
-        $data->status = 'terima';
-    } elseif ($action === 'tolak') {
-        $data->status = 'tolak';
-    }
-    // if ($action === 'terima') {
-    //     $data->update(['status' => 'terima']);
-    // } elseif ($action === 'tolak') {
-    //     $data->update(['status' => 'tolak']);
-    // }
-    // Simpan perubahan ke database
-    $data->save();
+    
+        if ($action === 'terima') {
+            $data->status = 'terima';
+        } elseif ($action === 'tolak') {
+            $data->status = 'tolak';
+        }
+    
+        $data->save();
 
     // Redirect atau kembali ke halaman yang sesuai
     return redirect()->route('pengajuan-judul.index');

@@ -7,6 +7,9 @@ use App\Http\Controllers\KoordinatorJudulController;
 use App\Http\Controllers\KoordinatorSeminarController;
 use App\Http\Controllers\PembagianDosenController;
 use App\Http\Controllers\BimbinganProposalController;
+use App\Http\Controllers\DosenBimbinganProposalController;
+use App\Http\Controllers\SuratTugasController;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\SeminarProposalController;
 
@@ -36,6 +39,13 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('/proposal', function () {
         return view('mahasiswa/proposal/index');
+    });
+
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'index')->name('profile.index');
+        Route::get('/profile/edit/{id}', 'edit');
+        Route::post('/profile/update/{id}', 'store')->name('update-profile.store');
+
     });
     
     Route::controller(PengajuanJudulController::class)->group(function () {
@@ -72,8 +82,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(PembagianDosenController::class)->group(function () 
     { 
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
-        Route::get('/koordinator/pembagian_dosen/create', 'create')->name('pembagian-dosen.create');
+        Route::get('/koordinator/pembagian_dosen/edit/{id}', 'edit');
         Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
+        // Route::get('/koordinator/pembagian_dosen/detail/{id}', 'detail');
+
     
     }); 
 
@@ -82,6 +94,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
     });
   
+    Route::controller(DosenBimbinganProposalController::class)->group(function (){
+        Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
+    });
+
+    Route::controller(SuratTugasController::class)->group(function (){
+        Route::get('/proposal/surat_tugas', 'index')->name('pengajuan-st.index');
+        Route::post('/proposal/surat_tugas', 'store')->name('pengajuan-st.store');
+    });
     // Route::get('/koordinator/pengajuan_judul_proposal', function (){
     //     return view('koordinator/pengajuan_judul_proposal/index');
     // })->name('pengajuan_judul_proposal');
