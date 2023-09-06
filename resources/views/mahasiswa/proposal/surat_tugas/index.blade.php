@@ -142,18 +142,18 @@ Surat Tugas
         <div class="card mb-4">
           <h5 class="card-header">Form Pengajuan Surat Tugas</h5>
           <div class="card-body">
-            <form action="{{route('pengajuan-st.store')}}" method="POST">
+            <form action="{{route('pengajuan-st.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
               <div class="mb-3">
-                <label for="html5-date-input" class="form-label">Tanggal Sidang Proposal Skripsi</label>
-                <input class="form-control" type="date" name="tanggal_sidang_proposal" id="html5-date-input" />
+                <label for="html5-tanggal_sidang_proposal-input" class="form-label">Tanggal Sidang Proposal Skripsi</label>
+                <input class="form-control" type="date" name="tanggal_sidang_proposal" id="tanggal_sidang_proposal" />
               </div>
               <div class="mb-3">
-                <label for="formFile" class="form-label">Upload File Proposal Skripsi</label>
+                <label for="file_proposal" class="form-label">Upload File Proposal Skripsi</label>
                 <input class="form-control" type="file" name="file_proposal" id="file_proposal" />
             </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Upload File Slip Pembayaran Surat Tugas</label>
+                <label for="file_slip_pembayaran" class="form-label">Upload File Slip Pembayaran Surat Tugas</label>
                 <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">

@@ -10,6 +10,7 @@ use App\Http\Controllers\BimbinganProposalController;
 use App\Http\Controllers\DosenBimbinganProposalController;
 use App\Http\Controllers\SuratTugasController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KoordinatorSuratTugasController;
 
 use App\Http\Controllers\SeminarProposalController;
 
@@ -33,6 +34,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('storage-files/{file}', 'StorageFileController@show')->name('storage-files.show');
+
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     
@@ -96,11 +101,16 @@ Route::group(['middleware' => 'auth'], function () {
   
     Route::controller(DosenBimbinganProposalController::class)->group(function (){
         Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
+        Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
     });
 
     Route::controller(SuratTugasController::class)->group(function (){
         Route::get('/proposal/surat_tugas', 'index')->name('pengajuan-st.index');
         Route::post('/proposal/surat_tugas', 'store')->name('pengajuan-st.store');
+    });
+
+    Route::controller(KoordinatorSuratTugasController::class)->group(function (){
+        Route::get('/koordinator/surat_tugas', 'index');
     });
     // Route::get('/koordinator/pengajuan_judul_proposal', function (){
     //     return view('koordinator/pengajuan_judul_proposal/index');

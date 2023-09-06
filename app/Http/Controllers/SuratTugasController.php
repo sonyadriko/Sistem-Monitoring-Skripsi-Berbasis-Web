@@ -11,48 +11,45 @@ class SuratTugasController extends Controller
 {
     public function index()
     {
-        // $juduls = Judul::all();
-        // $datas = DB::table('detail_users')
-        // ->join('tema', 'tema.user_id', '=', 'detail_users.user_id')
-        // ->select('detail_users.*', 'tema.judul')
-        // ->where('detail_users.user_id', '=', Auth::user()->id);
-
         $datas = DB::table('detail_users')
         ->join('tema', 'tema.user_id', '=', 'detail_users.user_id')
         ->join('dosen', 'dosen.user_id', '=', 'detail_users.user_id')
         ->select('detail_users.*', 'tema.*', 'dosen.*')
         ->where('detail_users.user_id', '=', Auth::user()->id)
         ->first();
-
-
-
         return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
-
     }
-
         // dd(request()->all());
     public function store(Request $request)
     {
+        // dd(request()->all());
+
         $validatedData = $request->validate([
             'detail_users_id' => 'required',
             'tema_id' => 'required',
             'dosen_id' => 'required',
-            'tanggal_sidang_proposal' => 'required',
+            'user_id' => 'required',
+            'tanggal_sidang_proposal' => 'required|date',
             'file_proposal' => 'required|mimes:pdf,docx|max:1000',
             'file_slip_pembayaran' => 'required|mimes:pdf,docx|max:1000',
         ], [
-            'tanggal_sidang_proposal.required' => 'tema_id is required.',
-            'file_proposal.required' => 'dospem_1 is required.',
-            'file_slip_pembayaran.required' => 'dospem_2 is required.',
+            'detail_users_id.required' => 'detail_users_id is required.',
+            'tema_id.required' => 'tema_id is required.',
+            'user_id.required' => 'user_id is required.',
+            'dosen_id.required' => 'dosen_id is required.',
+            'tanggal_sidang_proposal.required' => 'tanggal_sidang_proposal is required.',
+            'file_proposal.required' => 'file_proposal is required.',
+            'file_slip_pembayaran.required' => 'file_slip_pembayaran is required.',
         ]);    
+        $userFolder = 'uploads/' . Auth::user()->name;
         if ($request->hasFile('file_proposal')) {
-            $proposalFilePath = $request->file('file_proposal')->store('uploads/'.Auth::user()->name);
+            $proposalFilePath = $request->file('file_proposal')->store($userFolder);
         } else {
             return redirect()->back()->with('error', 'File proposal tidak valid.');
         }
     
         if ($request->hasFile('file_slip_pembayaran')) {
-            $slipPembayaranFilePath = $request->file('file_slip_pembayaran')->store('uploads/'.Auth::user()->name);
+            $slipPembayaranFilePath = $request->file('file_slip_pembayaran')->store($userFolder);
         } else {
             return redirect()->back()->with('error', 'File slip pembayaran tidak valid.');
         }

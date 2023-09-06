@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\SeminarProposal as SeminarProposal;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -11,15 +12,27 @@ class SeminarProposalController extends Controller
     public function create()
     {
         // $juduls = Judul::all();
-        return view('mahasiswa/proposal/seminar_proposal.index');
+        $datas = DB::table('users')
+            ->join('tema', 'tema.user_id', '=', 'users.id')
+            ->join('dosen', 'dosen.user_id', '=', 'users.id')
+            ->select('users.*', 'tema.*', 'dosen.*')
+            ->where('users.id', '=', Auth::user()->id)
+            ->where('tema.status', '=', 'terima')
+            ->where('tema.dosen', '=', 'sudah')
+            ->first();
+        return view('mahasiswa/proposal/seminar_proposal.index', compact('datas'));
     }
     public function store(Request $request)
     {
                 // dd($request->all());
 
         $validatedData = $request->validate([
-            'nama' => 'required|string',
-            'npm' => 'required|string',
+            // 'nama' => 'required|string',
+            // 'npm' => 'required|string',
+            'dosen_id' => 'required',
+            'tema_id' => 'required',
+
+
             'proposal_file' => 'required|mimes:pdf,docx|max:1000',
             'slip_file' => 'required|mimes:pdf,docx|max:1000',
 
@@ -51,8 +64,11 @@ class SeminarProposalController extends Controller
         //     $slipPembayaranFilePath = $request->file('slip_pembayaran_file')->store('slip_pembayaran');
     
             $seminarProposal = new SeminarProposal();
-            $seminarProposal->nama=$validatedData['nama'];
-            $seminarProposal->npm=$validatedData['npm'];
+            // $seminarProposal->nama=$validatedData['nama'];
+            // $seminarProposal->npm=$validatedData['npm'];
+            $seminarProposal->user_id=Auth::user()->id;
+            $seminarProposal->dosen_id=$validatedData['dosen_id'];
+            $seminarProposal->tema_id=$validatedData['tema_id'];
             $seminarProposal->file_proposal = $proposalFilePath;
             $seminarProposal->file_slip_pembayaran = $slipPembayaranFilePath;
 

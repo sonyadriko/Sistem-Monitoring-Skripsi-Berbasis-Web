@@ -4,15 +4,6 @@
 Proposal
 @endsection
 
-<!-- Link ke CSS DataTables -->
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css"> --}}
-
-
-{{-- <!-- Link ke JavaScript DataTables (termasuk jQuery) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
-
-
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
@@ -37,12 +28,12 @@ Proposal
                     @endphp
                     @foreach($sempros as $semp)
                     <tr>
-                        <td>{{ $semp->id }}</td>
-                        <td>{{ $semp->nama }}</td>
-                        <td>{{ $semp->npm }}</td>
+                        <td>{{ $semp->id_seminar_proposal }}</td>
+                        <td>{{ $semp->name }}</td>
+                        <td>{{ $semp->kode_unik }}</td>
                         {{-- <td>{{ $semp->file_proposal }}</td>
                         <td>{{ $semp->file_slip_pembayaran }}</td> --}}
-                        <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id_seminar_proposal) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @php
                     $no++;

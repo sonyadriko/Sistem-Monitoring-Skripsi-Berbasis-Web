@@ -26,7 +26,8 @@ Proposal
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  placeholder="13.2019.1.00819"
+                  value="{{$users->kode_unik}}"
+
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -37,7 +38,7 @@ Proposal
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  placeholder="Sony Adi Adriko"
+                  value="{{$users->name}}"
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -48,7 +49,7 @@ Proposal
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  placeholder="Sistem pendukung keputusan "
+                  value="{{$tema->judul}}"
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -76,6 +77,10 @@ Proposal
                 />
             </div>
             <div class="mb-3">
+              <label for="defaultFormControlInput" class="form-label">File Proposal</label>
+              <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe>
+          </div>
+            <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Ketua Seminar</label>
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                   <option selected>Open this select menu</option>
@@ -87,7 +92,7 @@ Proposal
             <div class="mb-3">
                 <div class="col-md">
                     <small class="text-bold fw-semibold">Dosen Penguji</small>
-                    <div class="form-check mt-3">
+                    {{-- <div class="form-check mt-3">
                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
                       <label class="form-check-label" for="defaultCheck1"> Audit SI-TI </label>
                     </div>
@@ -102,7 +107,7 @@ Proposal
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" />
                         <label class="form-check-label" for="defaultCheck3"> Perencanaan Strategis SI/TI </label>
-                      </div>
+                      </div> --}}
                   </div>
             </div>
             <div class="mb-3">

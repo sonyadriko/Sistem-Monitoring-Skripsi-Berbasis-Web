@@ -16,5 +16,5 @@ class BidangIlmu extends Model
         'updated_at',
         'created_at'
     ];
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_bidang_ilmu';
 }

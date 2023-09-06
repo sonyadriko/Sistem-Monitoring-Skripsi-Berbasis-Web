@@ -17,7 +17,7 @@ class PengajuanJudulController extends Controller
     public function create()
     {
         // $juduls = Judul::all();
-        $bidang_ilmu = DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get();
+        $bidang_ilmu = DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu')->get();
         return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu'));
     }
 

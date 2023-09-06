@@ -66,8 +66,6 @@ class PembagianDosenController extends Controller
             'user_id.required' => 'user_id is required.',
 
         ]);    
-        // $data = Judul::find($id_tema);
-
         $action = $request->input('action');
         $id_tema = $request->input('id_tema');
 

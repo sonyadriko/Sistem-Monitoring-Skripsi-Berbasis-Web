@@ -13,23 +13,18 @@ class KoordinatorJudulController extends Controller
     //
     public function index()
     {
-        // $juduls = Judul::all();
         $juduls = DB::table('tema')
-        ->join('bidang_ilmu', 'bidang_ilmu.id', 'tema.bidang_ilmu_id')
+        ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'tema.bidang_ilmu_id')
         ->orderBy('tema.created_at', 'desc')->get();
         return view('koordinator/pengajuan_judul.index', compact('juduls'));
 
     }
     public function detail($id)
     {
-        // $data = DB::table('tema')->where('id', $id)->first();
-        // $data = Judul::find($id_tema);
         $data = [
             'data' => DB::table('tema')->where('id_tema', '=',$id)->first(),
-            'bidang_ilmu' => DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get(),
+            'bidang_ilmu' => DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu')->get(),
         ];
-        // $data = DB::table('tema')->where('id_tema', '=',$id)->first();
-        // $bidang_ilmu = DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get();
         return view('koordinator/pengajuan_judul.detail', $data);
 
     }
@@ -53,17 +48,4 @@ class KoordinatorJudulController extends Controller
     // Redirect atau kembali ke halaman yang sesuai
     return redirect()->route('pengajuan-judul.index');
     }
-
-    // public function updatestatus($id,Request $request)
-    // {
-    // $tema = Tema::find($id_tema);
-    // if (!$tema) {
-    //     return response()->json(['message' => 'Tema not found'], 404);
-    // }
-    // // Ubah status menjadi "acc"
-    // $tema->status = 'acc';
-    // $tema->save();
-
-    // return response()->json(['message' => 'Status updated successfully']);
-    // }
 }

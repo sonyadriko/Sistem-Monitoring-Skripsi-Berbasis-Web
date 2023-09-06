@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="index.html" class="app-brand-link">
+      <a href="{{url('/home')}}" class="app-brand-link">
         <span class="app-brand-logo demo">
           {{-- <svg
             width="25"
@@ -77,17 +77,52 @@
       </li>
       @endif
 
-
-        @unless(Request::is('dashboard*'))
-      <!-- Layouts -->
+      @if(Auth::user()->role_id == 2)
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link">
           <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Dashboard</div>
+        </a>
+      </li>
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Bidang Ilmu</span>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('bidang-ilmu.create')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Bidang Ilmu</div>
+        </a>
+      </li>
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Bimbingan</span>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('bimbingan-dosen.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Mahasiswa Bimbingan</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Pengajuan</div>
+        </a>
+      </li>
+      @endif
+
+      @if(Auth::user()->role_id == 1)
+      @unless(Request::is('dashboard*'))
+      <!-- Layouts -->
+      <li class="menu-item">
+        <a href="{{route('profile.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Profile</div>
         </a>
-
-        
       </li>
+      @endif
+
+      
+
 
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Pengajuan & Surat</span>
@@ -104,20 +139,15 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="{{ route('bidang-ilmu.create')}}" class="menu-link">
-              <div data-i18n="Account">Bidang Ilmu</div>
-            </a>
-          </li>
-          <li class="menu-item">
             <a href="{{ route('seminar-proposal.create')}}" class="menu-link">
               <div data-i18n="Notifications">Pendaftaran Seminar Proposal</div>
             </a>
           </li>
-          <li class="menu-item">
+          {{-- <li class="menu-item">
             <a href="pages-account-settings-connections.html" class="menu-link">
               <div data-i18n="Connections">Surat Survey ke Perusahaan</div>
             </a>
-          </li>
+          </li> --}}
           <li class="menu-item">
             <a href="{{ route('pengajuan-st.index') }}" class="menu-link">
               <div data-i18n="Connections">Surat Tugas Bimbingan</div>
@@ -129,7 +159,7 @@
         <span class="menu-header-text">Bimbingan Proposal</span>
       </li>
       <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link">
+        <a href="{{route('bimbingan-mhs.index')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
           <div data-i18n="Authentications">Progress Bimbingan</div>
         </a>

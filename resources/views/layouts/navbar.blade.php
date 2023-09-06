@@ -57,8 +57,17 @@
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-semibold d-block">John Doe</span>
-                      <small class="text-muted">Admin</small>
+                      <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
+                      <small class="text-muted">
+                        @if(Auth::user()->role_id == 1)
+                            Mahasiswa
+                        @elseif(Auth::user()->role_id == 2)
+                            Dosen
+                        @elseif(Auth::user()->role_id == 3)
+                            Koordiantor
+                        @endif
+                    </small>
+                    
                     </div>
                   </div>
                 </a>

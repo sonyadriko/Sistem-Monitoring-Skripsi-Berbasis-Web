@@ -16,32 +16,32 @@ Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Table Pengajuan Judul Proposal</h5>
+        <h5 class="card-header">Table Daftar Mahasiswa Bimbingan Proposal</h5>
     
     <div class="card-body">
-      <div class="card-datatable table-responsive  pt-0">
-        <table class="table datatables-basicd border-top"/>
+      <div class=" table-responsive  pt-0">
+        <table class="table"/>
         {{-- <div class="table-responsive"> --}}
             {{-- <table class="table table-bordered id="dataTable" width="100%" cellspacing="0"> --}}
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>NPM</th>
-                        <th>Topik/Tema</th>
+                        <th>Judul</th>
+                        {{-- <th>Topik/Tema</th> --}}
                         <th>Action</th>
                 </thead>
                 <tbody>
                     {{-- @php
                     $no=1;
                     @endphp --}}
-                    @foreach($juduls as $judul)
+                    @foreach($dosens as $dosen)
                     <tr>
-                        <td>{{ $judul->id_tema }}</td>
-                        <td>{{ $judul->nama }}</td>
-                        <td>{{ $judul->npm }}</td>
-                        <td>{{ $judul->topik_bidang_ilmu }}</td>
-                        <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_tema) }}" class="btn btn-primary">Detail</a></td>
+                        <td>{{ $dosen->id_dosen }}</td>
+                        <td>{{ $dosen->name }}</td>
+                        <td>{{ $dosen->judul }}</td>
+                        {{-- <td>{{ $dosen->topik_bidang_ilmu }}</td> --}}
+                        <td><a href="{{ url('/koordinator/bimbingan_proposal/detail/' . $dosen->id_dosen) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     {{-- @php
                     $no++;

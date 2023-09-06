@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\BidangIlmu as BidangIlmu;
 
 
@@ -26,6 +28,7 @@ class BidangIlmuController extends Controller
         ]);
         
         $form = new BidangIlmu();
+        $form->user_id = Auth::user()->id;
         $form->topik_bidang_ilmu = $validatedData['topik_bidang_ilmu'];
         $form->mata_kuliah_pendukung = $validatedData['mata_kuliah_pendukung'];
         $form->keterangan = $validatedData['keterangan'];

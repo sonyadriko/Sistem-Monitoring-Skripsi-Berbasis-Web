@@ -69,7 +69,7 @@ Proposal
               <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
                 @foreach($bidang_ilmu as $bi)
                     <option value="{{$data->bidang_ilmu_id}}" 
-                    @if ($data->bidang_ilmu_id == $bi->id)
+                    @if ($data->bidang_ilmu_id == $bi->id_bidang_ilmu)
                     selected
                     @endif>{{$bi->topik_bidang_ilmu}}</option>
                 @endforeach
