@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'kode_unik' => $data['npm'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => "1",
         ]);
     }
 }

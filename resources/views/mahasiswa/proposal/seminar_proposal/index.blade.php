@@ -53,7 +53,7 @@ Proposal
                   readonly
                 />
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">Judul</label>
                 <input
                   type="text"
@@ -64,14 +64,14 @@ Proposal
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 1</label>
                 <input
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  value="{{$datas->nama_dospem1}}"
+                  {{-- value="{{$datas->nama_dospem1}}" --}}
                   placeholder="Dosen Pembimbing 1"
                   aria-describedby="defaultFormControlHelp"
                   readonly
@@ -84,14 +84,14 @@ Proposal
                   class="form-control"
                   id="defaultFormControlInput"
                   placeholder="Dosen Pembimbing 2"
-                  value="{{$datas->nama_dospem2}}"
+                  {{-- value="{{$datas->nama_dospem2}}" --}}
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}">
-            <input type="hidden" name="dosen_id" value="{{ $datas->id_dosen }}">
+            {{-- <input type="hidden" name="dosen_id" value="{{ $datas->id_dosen }}"> --}}
             <div class="mb-3">
                 <label for="formFile" class="form-label">Upload File Proposal Skripsi</label>
                 <input class="form-control" type="file" name="proposal_file" id="proposal_file" />

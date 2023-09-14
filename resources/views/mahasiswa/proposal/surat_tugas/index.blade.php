@@ -3,7 +3,20 @@
 @section('title')
 Surat Tugas
 @endsection
- {{-- <div class="mb-3">
+ 
+@section('content')
+<div class="container-xxl flex-grow-1 container-p-y">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+        <div class="card mb-4">
+          <h5 class="card-header">Form Pengajuan Surat Tugas</h5>
+          <div class="card-body">
+            <form action="{{route('pengajuan-st.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat Mahasiswa</label>
                 <input
                   class="form-control"
@@ -36,6 +49,8 @@ Surat Tugas
                   class="form-control"
                   type="text"
                   id="alamatot"
+                  value="{{$datas->alamat_orang_tua}}"
+
                   name="alamatot"
                   placeholder="Masukan Alamat Orang Tua..."
                   />
@@ -55,8 +70,8 @@ Surat Tugas
                   @error('notelpot')
                   <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
-              </div> --}}
-              {{-- <div class="mb-3">
+              </div> 
+               <div class="mb-3">
                 <label for="judulskripsi" class="form-label">Judul Skripsi</label>
                 <input
                   class="form-control"
@@ -78,7 +93,7 @@ Surat Tugas
                   type="text"
                   id="dospem1"
                   name="dospem1"
-                  value="{{$datas->nama_dospem1}}"
+                  {{-- value="{{$datas->nama_dospem1}}" --}}
                   readonly
                   placeholder="Masukan Dosen Pembimbing 1..."
                   />
@@ -94,16 +109,15 @@ Surat Tugas
                   type="text"
                   id="dospem2"
                   name="dospem2"
-                  value="{{$datas->nama_dospem2}}"
+                  {{-- value="{{$datas->nama_dospem2}}" --}}
                   readonly
                   placeholder="Masukan Dosen Pembimbing 2..."
                   />
                   @error('dospem2')
                   <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
-              </div> --}}
-
-               {{-- <div class="mb-3">
+              </div>
+               <div class="mb-3">
               <label for="name" class="form-label">Nama Mahasiswa</label>
               <input
                 class="form-control"
@@ -131,19 +145,7 @@ Surat Tugas
                 @error('npm')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div> --}}
-@section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
-        <div class="card mb-4">
-          <h5 class="card-header">Form Pengajuan Surat Tugas</h5>
-          <div class="card-body">
-            <form action="{{route('pengajuan-st.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf
+            </div>
               <div class="mb-3">
                 <label for="html5-tanggal_sidang_proposal-input" class="form-label">Tanggal Sidang Proposal Skripsi</label>
                 <input class="form-control" type="date" name="tanggal_sidang_proposal" id="tanggal_sidang_proposal" />
@@ -158,8 +160,6 @@ Surat Tugas
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}">
-            <input type="hidden" name="detail_users_id" value="{{ $datas->id_detail_users }}">
-            <input type="hidden" name="dosen_id" value="{{ $datas->id_dosen }}">
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>

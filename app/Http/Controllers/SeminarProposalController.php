@@ -14,11 +14,9 @@ class SeminarProposalController extends Controller
         // $juduls = Judul::all();
         $datas = DB::table('users')
             ->join('tema', 'tema.user_id', '=', 'users.id')
-            ->join('dosen', 'dosen.user_id', '=', 'users.id')
-            ->select('users.*', 'tema.*', 'dosen.*')
+            ->select('users.*', 'tema.*')
             ->where('users.id', '=', Auth::user()->id)
             ->where('tema.status', '=', 'terima')
-            ->where('tema.dosen', '=', 'sudah')
             ->first();
         return view('mahasiswa/proposal/seminar_proposal.index', compact('datas'));
     }
@@ -29,7 +27,7 @@ class SeminarProposalController extends Controller
         $validatedData = $request->validate([
             // 'nama' => 'required|string',
             // 'npm' => 'required|string',
-            'dosen_id' => 'required',
+            // 'dosen_id' => 'required',
             'tema_id' => 'required',
 
 
@@ -67,7 +65,7 @@ class SeminarProposalController extends Controller
             // $seminarProposal->nama=$validatedData['nama'];
             // $seminarProposal->npm=$validatedData['npm'];
             $seminarProposal->user_id=Auth::user()->id;
-            $seminarProposal->dosen_id=$validatedData['dosen_id'];
+            // $seminarProposal->dosen_id=$validatedData['dosen_id'];
             $seminarProposal->tema_id=$validatedData['tema_id'];
             $seminarProposal->file_proposal = $proposalFilePath;
             $seminarProposal->file_slip_pembayaran = $slipPembayaranFilePath;

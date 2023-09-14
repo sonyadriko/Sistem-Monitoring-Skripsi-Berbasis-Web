@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\BidangIlmu as BidangIlmu;
 
 
@@ -12,7 +12,16 @@ class BidangIlmuController extends Controller
 {
     public function index()
     {
-        return view('dosen/bidang_ilmu.index');
+        $bi = DB::table('bidang_ilmu')
+            ->join('users', 'users.id', 'bidang_ilmu.user_id')
+            ->where('user_id', '=', Auth::user()->id)->get();
+
+        return view('dosen/bidang_ilmu.index', compact('bi'));
+    }
+
+    public function create()
+    {
+        return view('dosen/bidang_ilmu.create');
     }
 
     public function store(Request $request)

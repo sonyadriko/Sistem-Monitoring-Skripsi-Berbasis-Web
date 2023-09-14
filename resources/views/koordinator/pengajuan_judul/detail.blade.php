@@ -64,9 +64,10 @@ Proposal
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            
             <div class="mb-3">
               <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
-              <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
+              <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example" readonly>
                 @foreach($bidang_ilmu as $bi)
                     <option value="{{$data->bidang_ilmu_id}}" 
                     @if ($data->bidang_ilmu_id == $bi->id_bidang_ilmu)
@@ -76,20 +77,20 @@ Proposal
                     
               </select>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <div class="col-md">
                     <small class="text-bold fw-semibold">Mata Kuliah Pilihan</small>
                     <textarea class="form-control" id="mk_pilihan" name="keterangan" rows="3" placeholder="Masukan keterangan singkat mengenai tema/judul penelitian">{{$data->mk_pilihan}}</textarea>
                     
                 </div>
-            </div>
-            <div>
+            </div> --}}
+            {{-- <div>
                 <label for="exampleFormControlTextarea1" class="form-label">Rencana Judul Proposal</label>
                 <textarea class="form-control @error('judul') is-invalid @enderror" id="exampleFormControlTextarea1"  name="judul" rows="3">{{$data->judul}}</textarea>
                 @error('judul')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <form action="{{ route('update_status', ['id_tema' => $data->id_tema]) }}" method="POST">

@@ -18,9 +18,9 @@ class ProfileController extends Controller
         //     ->orderBy('tema.created_at', 'desc')->get();
         // return view('koordinator/pengajuan_judul.index', compact('juduls'));
 
-        $details = DB::table('detail_users')
+        $details = DB::table('users')
             // ->join('users', 'users.id', 'detail_users.user_id')
-            ->where('user_id', '=', Auth::user()->id)->first();
+            ->where('id', '=', Auth::user()->id)->first();
         
         return view('/mahasiswa/profile.index', compact('details'));
     }
@@ -28,7 +28,7 @@ class ProfileController extends Controller
     public function edit($id){
 
         $data = [
-            'data' => DB::table('detail_users')->where('user_id', '=',$id)->first(),
+            'data' => DB::table('users')->where('id', '=',$id)->first(),
             // 'bidang_ilmu' => DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get(),
         ];
        
@@ -50,8 +50,8 @@ class ProfileController extends Controller
         ]);
 
         // Update the user's profile information
-        DB::table('detail_users')
-        ->where('user_id', '=', $id)
+        DB::table('users')
+        ->where('id', '=', $id)
         ->update([
             'alamat_mhs' => $validatedData['alamat'],
             'no_telp_mhs' => $validatedData['notelpmhs'],

@@ -58,7 +58,7 @@ Proposal
                 @endforeach
               </select>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <div class="col-md">
                     <small class="text-bold fw-semibold">Mata Kuliah Pilihan Semester VII</small>
                     <div class="form-check mt-3">
@@ -106,7 +106,7 @@ Proposal
                 @error('judul')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>

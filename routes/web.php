@@ -73,8 +73,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     
     Route::controller(BidangIlmuController::class)->group(function () {
-        Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.create');
-        Route::post('/dosen/bidang_ilmu', 'store')->name('bidang-ilmu.submit');
+        Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
+        Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
+        Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
     });
     
     Route::controller(SeminarProposalController::class)->group(function ()

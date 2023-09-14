@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Judul extends Model
+class Pengajuan extends Model
 {
 
     protected $table = 'tema';
@@ -16,8 +16,8 @@ class Judul extends Model
         'npm',
         'user_id',
         'bidang_ilmu_id',
-        'mk_pilihan',
-        'judul',
+        // 'mk_pilihan',
+        // 'judul',
         'status',
         'dosen',
         'updated_at',

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'kode_unik',
         'email',
         'password',
+        'role_id',
     ];
 
     /**

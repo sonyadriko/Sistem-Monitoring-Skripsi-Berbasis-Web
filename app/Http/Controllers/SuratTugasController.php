@@ -11,11 +11,10 @@ class SuratTugasController extends Controller
 {
     public function index()
     {
-        $datas = DB::table('detail_users')
-        ->join('tema', 'tema.user_id', '=', 'detail_users.user_id')
-        ->join('dosen', 'dosen.user_id', '=', 'detail_users.user_id')
-        ->select('detail_users.*', 'tema.*', 'dosen.*')
-        ->where('detail_users.user_id', '=', Auth::user()->id)
+        $datas = DB::table('users')
+        ->join('tema', 'tema.user_id', '=', 'users.id')
+        ->select('users.*', 'tema.*')
+        ->where('users.id', '=', Auth::user()->id)
         ->first();
         return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
     }

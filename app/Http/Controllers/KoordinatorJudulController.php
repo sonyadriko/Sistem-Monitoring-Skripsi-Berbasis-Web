@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Judul as Judul;
+use App\Models\Pengajuan as Pengajuan;
 use Illuminate\Support\Facades\DB;
 
 
@@ -24,6 +24,7 @@ class KoordinatorJudulController extends Controller
         $data = [
             'data' => DB::table('tema')->where('id_tema', '=',$id)->first(),
             'bidang_ilmu' => DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu')->get(),
+            
         ];
         return view('koordinator/pengajuan_judul.detail', $data);
 
@@ -33,7 +34,7 @@ class KoordinatorJudulController extends Controller
         $action = $request->input('action');
 
     // Temukan data yang sesuai berdasarkan $id
-        $data = Judul::find($id_tema);
+        $data = Pengajuan::find($id_tema);
    
 
     

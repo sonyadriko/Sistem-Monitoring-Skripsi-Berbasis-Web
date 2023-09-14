@@ -88,7 +88,7 @@
         <span class="menu-header-text">Bidang Ilmu</span>
       </li>
       <li class="menu-item">
-        <a href="{{route('bidang-ilmu.create')}}" class="menu-link">
+        <a href="{{route('bidang-ilmu.index')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Bidang Ilmu</div>
         </a>
