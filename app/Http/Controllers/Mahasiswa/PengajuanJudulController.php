@@ -16,8 +16,12 @@ class PengajuanJudulController extends Controller
 
     public function create()
     {
-        // $juduls = Judul::all();
-        $bidang_ilmu = DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu', 'status')->where('status', 'tersedia')->get();
+        $bidang_ilmu = DB::table('bidang_ilmu')
+        ->join('users', 'bidang_ilmu.user_id', '=', 'users.id')
+        ->select('bidang_ilmu.id_bidang_ilmu', 'bidang_ilmu.topik_bidang_ilmu', 'bidang_ilmu.status', 'bidang_ilmu.user_id', 'users.name')
+        ->where('bidang_ilmu.status', 'tersedia')
+        ->get();
+        // $bidang_ilmu = DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu', 'status', 'user_id')->where('status', 'tersedia')->get();
         return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu'));
     }
 
@@ -39,23 +43,21 @@ class PengajuanJudulController extends Controller
             // 'judul.required' => 'Judul is required.',
         ]);    
 
+        $values = explode(',', $validatedData['bidang_ilmu']);
+        $bidang_ilmu = trim($values[0]);
+        $dosen = trim($values[1]);
         
-        $data = DB::table('bidang_ilmu')->where('id_bidang_ilmu', '=', $validatedData['bidang_ilmu']);
-       
-       
+        $data = DB::table('bidang_ilmu')->where('id_bidang_ilmu', '=', $bidang_ilmu);
         $data->update(['status' => 'tidak']);
-        
 
+        
         $pengajuan = new Pengajuan();
         $pengajuan->nama = $validatedData['nama'];
         $pengajuan->npm = $validatedData['npm'];
-        // $pengajuan->user_id = Auth::user()->id();
+        $pengajuan->dosen = $dosen;
         $pengajuan->user_id = Auth::user()->id;
-        $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
-        // $mk = implode(', ', $validatedData['mk_pilihan']);
-        // $pengajuan->mk_pilihan = $mk;
-        // $pengajuan->judul = $validatedData['judul'];
-        // var_dump($pengajuan);
+        $pengajuan->bidang_ilmu_id = $bidang_ilmu;
+     
         $pengajuan->status='pending';
         $pengajuan->save();
 

@@ -17,8 +17,6 @@ Proposal
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
-                        {{-- <th>File Proposal</th>
-                        <th>Slip Pembayaran</th> --}}
                         <th>Action</th>
 
                 </thead>
@@ -31,8 +29,6 @@ Proposal
                         <td>{{ $st->id }}</td>
                         <td>{{ $st->name }}</td>
                         <td>{{ $st->kode_unik }}</td>
-                        {{-- <td>{{ $semp->file_proposal }}</td>
-                        <td>{{ $semp->file_slip_pembayaran }}</td> --}}
                         <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $st->id) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @php

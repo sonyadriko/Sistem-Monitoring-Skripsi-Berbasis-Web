@@ -54,59 +54,11 @@ Proposal
               <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
                 <option value="" selected disabled="">Open this select menu</option>
                 @foreach($bidang_ilmu as $bi)
-                <option value="{{$bi->id_bidang_ilmu}}">{{$bi->topik_bidang_ilmu}}</option>
+                <option value="{{$bi->id_bidang_ilmu}},{{$bi->name}}">{{$bi->topik_bidang_ilmu}}, {{$bi->name}}</option>
                 @endforeach
               </select>
             </div>
-            {{-- <div class="mb-3">
-                <div class="col-md">
-                    <small class="text-bold fw-semibold">Mata Kuliah Pilihan Semester VII</small>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="audit_siti" name="mk_pilihan[]" id="defaultCheck1" />
-                        <label class="form-check-label" for="defaultCheck1"> Audit SI-TI </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="recommender_system" name="mk_pilihan[]" id="defaultCheck2" />
-                        <label class="form-check-label" for="defaultCheck2"> Recommender System </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="business_intelligence" name="mk_pilihan[]" id="defaultCheck3" />
-                        <label class="form-check-label" for="defaultCheck3"> Business Intelligence </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="perencanaan_strategis" name="mk_pilihan[]" id="defaultCheck4" />
-                        <label class="form-check-label" for="defaultCheck4"> Perencanaan Strategis SI/TI </label>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="col-md">
-                    <small class="text-bold fw-semibold">Mata Kuliah Pilihan Semester VIII</small>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5" />
-                        <label class="form-check-label" for="defaultCheck5"> Manajemen Kualitas SI/TI </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6" />
-                        <label class="form-check-label" for="defaultCheck6"> Model dan Simulasi Sistem </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="rekayasa_kebutuhan" name="mk_pilihan[]" id="defaultCheck7" />
-                        <label class="form-check-label" for="defaultCheck7"> Rekayasa Kebutuhan </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="sistem_informasi_intelegensia" name="mk_pilihan[]" id="defaultCheck8" />
-                        <label class="form-check-label" for="defaultCheck8"> Sistem Informasi Intelegensia </label>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <label for="exampleFormControlTextarea1" class="form-label">Rencana Judul Proposal</label>
-                <textarea class="form-control @error('judul') is-invalid @enderror" id="exampleFormControlTextarea1" name="judul" rows="3"></textarea>
-                @error('judul')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div> --}}
+            
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>

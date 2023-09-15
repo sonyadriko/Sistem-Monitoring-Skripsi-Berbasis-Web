@@ -16,8 +16,6 @@ class Pengajuan extends Model
         'npm',
         'user_id',
         'bidang_ilmu_id',
-        // 'mk_pilihan',
-        // 'judul',
         'status',
         'dosen',
         'updated_at',

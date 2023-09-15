@@ -10,13 +10,12 @@ class BimbinganProposal extends Model
     protected $table = 'bimbingan_proposal';
 
     protected $fillable = [
-        'dosen_id',
-        'user_id',
-        'review_id',
-        'file_proposal',
-        'komentar',
+        // 'user_id',
+        // 'tema_id',
+        'dosen_pembimbing_utama',
+        'dosen_pembimbing_ii',
         'updated_at',
         'created_at'
     ];
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_bimbingan_proposal';
 }

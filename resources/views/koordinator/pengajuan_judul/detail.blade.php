@@ -17,16 +17,14 @@ Proposal
             {{-- <form action="{{route('pengajuan-judul.submit')}}" method="POST">
                 @csrf --}}
                 <div class="mb-3">
-                    <label for="name" class="form-label">Id</label>
+                    <label for="id" class="form-label">Id</label>
                     <input
                       class="form-control"
                       type="text"
-                      id="name"
-                      name="nama"
+                      id="id"
+                      name="id"
                       value="{{$data->id_tema}}"
-                      placeholder="Sony Adi Adriko"
                       readonly
-                      autocomplete="nama"
                     />
                     @error('nama')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -64,37 +62,42 @@ Proposal
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            
             <div class="mb-3">
-              <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
-              <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example" readonly>
-                @foreach($bidang_ilmu as $bi)
-                    <option value="{{$data->bidang_ilmu_id}}" 
-                    @if ($data->bidang_ilmu_id == $bi->id_bidang_ilmu)
-                    selected
-                    @endif>{{$bi->topik_bidang_ilmu}}</option>
-                @endforeach
-                    
-              </select>
-            </div>
-            {{-- <div class="mb-3">
-                <div class="col-md">
-                    <small class="text-bold fw-semibold">Mata Kuliah Pilihan</small>
-                    <textarea class="form-control" id="mk_pilihan" name="keterangan" rows="3" placeholder="Masukan keterangan singkat mengenai tema/judul penelitian">{{$data->mk_pilihan}}</textarea>
-                    
-                </div>
-            </div> --}}
-            {{-- <div>
-                <label for="exampleFormControlTextarea1" class="form-label">Rencana Judul Proposal</label>
-                <textarea class="form-control @error('judul') is-invalid @enderror" id="exampleFormControlTextarea1"  name="judul" rows="3">{{$data->judul}}</textarea>
-                @error('judul')
+              <label for="tbi" class="form-label">Topik Bidang Ilmu</label>
+              <input
+                class="form-control"
+                type="text"
+                id="tbi"
+                value="{{$data->topik_bidang_ilmu}}"
+                name="tbi"
+                readonly
+                />
+                @error('tbi')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div> --}}
+            </div>
+            <form action="{{ route('update_status', ['id_tema' => $data->id_tema]) }}" method="POST">
+              @csrf
+            <div class="mb-3">
+              <label for="dosen_pembimbing_utama" class="form-label">Dosen</label>
+              <input
+                class="form-control"
+                type="text"
+                id="dosen_pembimbing_utama"
+                value="{{$data->dosen}}"
+                name="dosen_pembimbing_utama"
+                readonly
+                />
+                @error('dosen_pembimbing_utama')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <input type="hidden" name="tema_id" value="{{$data->id_tema}}"/>
+            <input type="hidden" name="user_id" value="{{$data->user_id}}"/>
+
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                <form action="{{ route('update_status', ['id_tema' => $data->id_tema]) }}" method="POST">
-                    @csrf
+                
                 <div style="display: flex; justify-content: flex-end;">
                     @if ($data->status === 'pending')
                     <!-- Tombol "Terima" dan "Tolak" hanya ditampilkan jika status adalah "pending" -->
@@ -109,9 +112,10 @@ Proposal
         
             <!-- Tampilkan pesan jika status adalah "diterima" -->
             
-                </form>
+                
                 
             </div>
+          </form>
             {{-- </form> --}}
           </div>
       </div>
