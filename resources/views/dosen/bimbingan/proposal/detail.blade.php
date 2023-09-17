@@ -15,19 +15,16 @@ Bimbingan Proposal
            
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">NPM :</span>
-                    <span class="span1-1">13<br/></span>
+                    <span class="span1-1">{{$data->kode_unik}}<br/></span>
                     <span class="span0-1">Nama :</span>
-                    <span class="span1-1"><br/></span>
+                    <span class="span1-1">{{$data->name}}<br/></span>
                     <span class="span0-1">Tema :</span>
-                    <span class="span1-1"><br/></span>
+                    <span class="span1-1">{{$data->topik_bidang_ilmu}}<br/></span>
                     <span class="span0-1">Dosen Pembimbing Utama :</span>
-                    <span class="span1-1"><br/></span>
+                    <span class="span1-1">{{$data->dosen_pembimbing_utama}}<br/></span>
                     <span class="span0-1">Dosen Pembimbing II :</span>
-                    <span class="span1-1"><br/></span>
+                    <span class="span1-1">{{$data->dosen_pembimbing_ii}}<br/></span>
                 </p>
-              
-
-
         </div>
     </div>
     <div class="row">

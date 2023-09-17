@@ -12,6 +12,7 @@ class BidangIlmu extends Model
     protected $fillable = [
         'topik_bidang_ilmu',
         'mata_kuliah_pendukung',
+        'nama_dosen'
         'keterangan',
         'updated_at',
         'created_at'

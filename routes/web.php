@@ -102,8 +102,8 @@ Route::group(['middleware' => 'auth'], function () {
   
     Route::controller(DosenBimbinganProposalController::class)->group(function (){
         Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
-        // Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
-        Route::get('/dosen/bimbingan_proposal/detail', 'detail')->name('bimbingan-dosen.detail');
+        Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
+        // Route::get('/dosen/bimbingan_proposal/detail', 'detail')->name('bimbingan-dosen.detail');
 
     });
 

@@ -24,10 +24,7 @@ class KoordinatorJudulController extends Controller
     public function detail($id)
     {
         $data = [
-            'data' => DB::table('tema')->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'tema.bidang_ilmu_id')->select('tema.*', 'bidang_ilmu.topik_bidang_ilmu')->where('id_tema', '=',$id)->first(),
-            
-            // 'bidang_ilmu' => DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu')->get(),
-            
+            'data' => DB::table('tema')->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'tema.bidang_ilmu_id')->select('tema.*', 'bidang_ilmu.topik_bidang_ilmu')->where('id_tema', '=',$id)->first(), 
         ];
         return view('koordinator/pengajuan_judul.detail', $data);
 
@@ -62,6 +59,7 @@ class KoordinatorJudulController extends Controller
         $bp = new BimbinganProposal();
         $bp->user_id = $request['user_id'];
         $bp->tema_id = $request['tema_id'];
+        $bp->bidang_ilmu_id = $request['bidang_ilmu_id'];
         $bp->dosen_pembimbing_utama = $request['dosen_pembimbing_utama'];
         $bp->save();
 

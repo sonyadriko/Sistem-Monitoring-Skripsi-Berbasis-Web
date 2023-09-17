@@ -44,7 +44,7 @@ Bimbingan Proposal
                           aria-describedby="defaultFormControlHelp"
                         />
                     </div>
-                    <input type="hidden" name="dosen_id" value="{{$dosens->id_dosen}}"/>
+                    {{-- <input type="hidden" name="dosen_id" value="{{$dosens->id_dosen}}"/> --}}
                     <div class="d-flex justify-content-between mt-4">
                         {{-- <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button> --}}
                         <button type="submit" class="btn btn-primary">Submit</button>

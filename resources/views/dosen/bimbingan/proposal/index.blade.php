@@ -32,20 +32,20 @@ Proposal
                         <th>Action</th>
                 </thead>
                 <tbody>
-                    {{-- @php
+                    @php
                     $no=1;
-                    @endphp --}}
+                    @endphp
                     @foreach($bimbinganp as $dosen)
                     <tr>
+                        <td>{{ $no }}</td>
                         <td>{{ $dosen->name }}</td>
-                        <td>{{ $dosen->dosen_pembimbing_utama }}</td>
+                        <td>{{ $dosen->topik_bidang_ilmu }}</td>
                         {{-- <td>{{ $dosen->topik_bidang_ilmu }}</td> --}}
-                        {{-- <td>{{ $dosen->topik_bidang_ilmu }}</td> --}}
-                        <td><a href="{{ url('/koordinator/bimbingan_proposal/detail/' . $dosen->id_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ url('/dosen/bimbingan_proposal/detail/' . $dosen->id_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
-                    {{-- @php
+                    @php
                     $no++;
-                    @endphp --}}
+                    @endphp
                     @endforeach
                     
                 </tbody>

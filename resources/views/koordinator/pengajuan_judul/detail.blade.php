@@ -93,6 +93,7 @@ Proposal
                 @enderror
             </div>
             <input type="hidden" name="tema_id" value="{{$data->id_tema}}"/>
+            <input type="hidden" name="bidang_ilmu_id" value="{{$data->bidang_ilmu_id}}"/>
             <input type="hidden" name="user_id" value="{{$data->user_id}}"/>
 
             <div class="d-flex justify-content-between mt-4">

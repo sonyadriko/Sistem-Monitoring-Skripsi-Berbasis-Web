@@ -12,7 +12,7 @@ class BimbinganProposalController extends Controller
 {
     public function index()
     {
-        $dosens = DB::table('dosen')->where('user_id', '=', Auth::user()->id)->first();
+        $dosens = DB::table('bimbingan_proposal')->where('user_id', '=', Auth::user()->id)->first();
         
         return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
 
