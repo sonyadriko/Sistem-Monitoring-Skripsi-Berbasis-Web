@@ -6,20 +6,28 @@ Bimbingan Proposal
 
 <link rel="stylesheet" href="{{asset('/css/custom.css')}}" />
 
-
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+
+    {{-- @if($dosens && is_null($dosens->id_bimbingan_proposal))
+        <div class="alert alert-warning" role="alert">
+            Harap ajukan judul terlebih dahulu sebelum melanjutkan.
+        </div>
+    @endif --}}
+    @if(is_null($dosens) || is_null($dosens->id_bimbingan_proposal))
+    
+    <div class="alert alert-warning" role="alert">
+        Harap ajukan judul terlebih dahulu sebelum melanjutkan.
+    </div>
+    @else
     <div class="card mb-4">
         <h5 class="card-header">Review Bimbingan Proposal</h5>
         <div class="card-body">
-           
-                <p class="revisi-rumusan-masa">
-                    <span class="span0-1">Revisi:<br/></span>
-                    <span class="span1-1">Rumusan masalah dan tujuan penelitian harus searah. <br/>Perbaiki alur tahapan penelitian (perlu diberikan informasi mengenai populasi dan sampel). <br/>
-                        Kurangi penggunaan kata "setelah itu".</span>
-                </p>
-
-
+            <p class="revisi-rumusan-masa">
+                <span class="span0-1">Revisi:<br/></span>
+                <span class="span1-1">Rumusan masalah dan tujuan penelitian harus searah. <br/>Perbaiki alur tahapan penelitian (perlu diberikan informasi mengenai populasi dan sampel). <br/>
+                    Kurangi penggunaan kata "setelah itu".</span>
+            </p>
         </div>
     </div>
     <div class="row">
@@ -33,7 +41,7 @@ Bimbingan Proposal
                         <label for="file_proposal" class="form-label">Upload File Proposal</label>
                         <input class="form-control" type="file" id="file_proposal" name="file_proposal" id="slip_file" />
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Keterangan</label>
                         <input
                           type="text"
@@ -43,8 +51,8 @@ Bimbingan Proposal
                           placeholder="komentar..."
                           aria-describedby="defaultFormControlHelp"
                         />
-                    </div>
-                    {{-- <input type="hidden" name="dosen_id" value="{{$dosens->id_dosen}}"/> --}}
+                    </div> --}}
+                    <input type="hidden" name="bimbingan_proposal_id" value="{{$dosens->id_bimbingan_proposal}}"/>
                     <div class="d-flex justify-content-between mt-4">
                         {{-- <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button> --}}
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -71,14 +79,6 @@ Bimbingan Proposal
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" disabled>Daftar</button>
                             </div>
-                            {{-- <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="rekayasa_kebutuhan" name="mk_pilihan[]" id="defaultCheck7" />
-                                <label class="form-check-label" for="defaultCheck7"> RKoordinator </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="sistem_informasi_intelegensia" name="mk_pilihan[]" id="defaultCheck8" />
-                                <label class="form-check-label" for="defaultCheck8"> Sistem Informasi Intelegensia </label>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -88,8 +88,7 @@ Bimbingan Proposal
     <div class="mb-3">
     <button type="submit" class="btn btn-primary">History Bimbingan</button>
     </div>
-    {{-- <button type="submit" class="btn btn-primary">Paper acuan / Referensi</button> --}}
-
-
+   
+    @endif
 </div>
 @endsection

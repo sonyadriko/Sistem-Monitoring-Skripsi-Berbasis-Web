@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\BimbinganProposal as BimbinganProposal;
+use App\Models\DetailBimbinganProposal as DetailBimbinganProposal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,9 +24,7 @@ class BimbinganProposalController extends Controller
                     // dd($request->all());
 
         $validatedData = $request->validate([
-            'dosen_id' => 'required',
             'file_proposal' => 'required|mimes:pdf,docx|max:1000',
-            'komentar' => 'string',
         ]);
 
         if ($request->hasFile('file_proposal')) {
@@ -33,15 +32,14 @@ class BimbinganProposalController extends Controller
             $fileName = $proposalFilePath->getClientOriginalName(); 
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
+            $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
         } else {
             return redirect()->back()->with('error', 'File proposal tidak valid.');
         }
         
-        $bimbingan = new BimbinganProposal();
-        $bimbingan->user_id = Auth::user()->id;
-        $bimbingan->dosen_id = $validatedData['dosen_id'];
-        $bimbingan->file_proposal = $proposalFilePath;
-        $bimbingan->komentar = $validatedData['komentar'];
+        $bimbingan = new DetailBimbinganProposal();
+        $bimbingan->bimbingan_proposal_id = $request['bimbingan_proposal_id'];
+        $bimbingan->file = $fileUrl;
         $bimbingan->save();
     
             // return redirect()->back()->with('success', 'File berhasil diunggah.');

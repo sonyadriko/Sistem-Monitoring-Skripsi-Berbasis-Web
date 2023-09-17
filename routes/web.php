@@ -100,12 +100,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
     });
   
-    Route::controller(DosenBimbinganProposalController::class)->group(function (){
-        Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
-        Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
-        // Route::get('/dosen/bimbingan_proposal/detail', 'detail')->name('bimbingan-dosen.detail');
+    // Route::controller(DosenBimbinganProposalController::class)->group(function (){
+    //     Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
+    //     Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
+    //     Route::post('/dosen/bimbingan_proposal/updaterevisi/{id}', 'updaterevisi')->name('bimbingan-dosen.addrevisi');
+
+    // });
+
+    Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
+        Route::get('/', [DosenBimbinganProposalController::class, 'index'])->name('bimbingan-dosen.index');
+        Route::get('/detail/{id}', [DosenBimbinganProposalController::class, 'detail'])->name('bimbingan-dosen.detail');
+        Route::post('/updaterevisi/{id}', [DosenBimbinganProposalController::class, 'updaterevisi'])->name('bimbingan-dosen.addrevisi');
+        Route::post('/accrevisi/{id}', [DosenBimbinganProposalController::class, 'accrevisi'])->name('bimbingan-dosen.accrevisi');
 
     });
+    
 
     Route::controller(SuratTugasController::class)->group(function (){
         Route::get('/proposal/surat_tugas', 'index')->name('pengajuan-st.index');
