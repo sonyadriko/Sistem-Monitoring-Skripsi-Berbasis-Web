@@ -9,11 +9,7 @@ Bimbingan Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 
-    {{-- @if($dosens && is_null($dosens->id_bimbingan_proposal))
-        <div class="alert alert-warning" role="alert">
-            Harap ajukan judul terlebih dahulu sebelum melanjutkan.
-        </div>
-    @endif --}}
+    
     @if(is_null($dosens) || is_null($dosens->id_bimbingan_proposal))
     
     <div class="alert alert-warning" role="alert">

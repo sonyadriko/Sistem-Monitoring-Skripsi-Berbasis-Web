@@ -6,33 +6,51 @@ Proposal
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  {{-- @if(is_null($datas) || is_null($datas->dosen_pembimbing_utama) || is_null($datas->dosen_pembimbing_ii))
+    @if(is_null($datas) || is_null($datas->acc_dosen_utama) || is_null($datas->acc_dosen_ii))
+    <div class="alert alert-warning" role="alert">
+      Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing utama dan ii.
+    </div>
+    @endif
+    
+  @elseif(is_null($datas) || is_null($datas->dosen_pembimbing_utama))
+ 
+  @if(is_null($datas) || is_null($datas->acc_dosen_utama))
+    
+    <div class="alert alert-warning" role="alert">
+        Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing.
+    </div>
+    @endif --}}
+   
+
+
+    {{-- @if (is_null($datas) || is_null($datas->dosen_pembimbing_utama))
+      @if(is_null($datas->acc_dosen_utama))
+    <div class="alert alert-warning" role="alert">
+        Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing utama.
+    </div>
+      @elseif(!is_null($datas->acc_dosen_utama))
+      <div class="alert alert-warning" role="alert">
+        Harap.
+    </div> --}}
+    {{-- @endif --}}
+      {{-- Pengecekan apakah dosen_pembimbing_utama tidak null dan dosen_pembimbing_ii null. Jika benar, pastikan acc_dosen_utama tidak null.
+      Pengecekan apakah dosen_pembimbing_utama tidak null. Jika benar, periksa apakah acc_dosen_utama tidak null.
+      Jika dosen_pembimbing_ii null (dan sebelumnya dicek bahwa dosen_pembimbing_utama tidak null), maka periksa apakah acc_dosen_utama tidak null dan acc_dosen_ii null, dan berikan peringatan yang sesuai. --}}
+    {{-- @else --}}
     <div class="card mb-4">
         <h5 class="card-header">Daftar Seminar Proposal</h5>
         <div class="card-body">
           <form action="{{route('seminar-proposal.submit')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">No Bimbingan</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  placeholder="xx.xxx.xxx"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div> --}}
             <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">NPM</label>
                 <input
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                value="{{Auth::user()->kode_unik}}"
-
-                  {{-- placeholder="13.2019.1.00819" --}}
+                  value="{{Auth::user()->kode_unik}}"
                   name="npm"
-                  {{-- value="13.2019.1.00819" --}}
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -53,18 +71,7 @@ Proposal
                   readonly
                 />
             </div>
-            {{-- <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Judul</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  value="{{$datas->judul}}"
-                  placeholder="Sistem pendukung keputusan "
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div> --}}
+      
             <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 1</label>
                 <input
@@ -107,6 +114,7 @@ Proposal
           </form>
       </div>
     </div>
+    {{-- @endif --}}
 </div>
 
 

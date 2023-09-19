@@ -163,7 +163,7 @@ Bimbingan Proposal
      <div class="card mb-4">
          <h5 class="card-header">Form Bimbingan Proposal</h5>
          <div class="card-body">
-             <p class="revisi-rumusan-masa">
+             <p >
                  <span class="span0-1">NPM :</span>
                  <span class="span1-1">{{ $data->kode_unik }}<br /></span>
                  <span class="span0-1">Nama :</span>
@@ -171,9 +171,27 @@ Bimbingan Proposal
                  <span class="span0-1">Tema :</span>
                  <span class="span1-1">{{ $data->topik_bidang_ilmu }}<br /></span>
                  <span class="span0-1">Dosen Pembimbing Utama :</span>
-                 <span class="span1-1">{{ $data->dosen_pembimbing_utama }}<br /></span>
+                 {{-- <span class="span1-1">{{ $data->dosen_pembimbing_utama }}<br /></span> --}}
+                 <input
+                    class="form-control input-like-span"
+                    type="text"
+                    id="dospem1"
+                    name="dospem1"
+                    value="{{ $data->dosen_pembimbing_utama }}"
+                    readonly
+                    autocomplete="off"
+                /><br/>
                  <span class="span0-1">Dosen Pembimbing II :</span>
-                 <span class="span1-1">{{ $data->dosen_pembimbing_ii }}<br /></span>
+                 {{-- <span class="span1-1">{{ $data->dosen_pembimbing_ii }}<br /></span> --}}
+                 <input
+                    class="form-control input-like-span"
+                    type="text"
+                    id="dospem2"
+                    name="dospem2"
+                    value="{{ $data->dosen_pembimbing_ii }}"
+                    readonly
+                    autocomplete="off"
+                /><br/>
              </p>
          </div>
      </div>
@@ -259,7 +277,44 @@ Bimbingan Proposal
          </div>
      </div>
      <div class="mb-3">
+        <div class="card mb-4">
+        
+            <div class="card-body">
+                <span class="span0-1">Proposal Acceptance </span>
+                {{-- <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal({{$data->id_bimbingan_proposal}})">
+                    Accept Proposal
+                </button> --}}
+                {{-- <form action="" method="POSt">
+                    <input type="hidden" name="dospem1" value="{{$data->dosen_pembimbing_utama}}"/>
+                    <input type="hidden" name="dospem2" value="{{$data->dosen_pembimbing_ii}}"/> --}}
+                @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
+                    @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
+                    Accept Proposal
+                    </button>
+                    @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
+                        Accept Proposal2
+                    </button>
+                    @endif
+                @else
+                {{-- <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
+                        Sudah Acc
+                </button> --}}
+                <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
+
+
+                @endif
+                
+
+                
+                {{-- </form> --}}
+                
+            </div>
+            
+        
      </div>
+ </div>
  </div>
  @endsection
  
@@ -309,14 +364,6 @@ Bimbingan Proposal
                     console.log('Respon dari server:', response.data);
                     $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
 
-                    // alert('Revisi berhasil dikirim!');
-                    // document.getElementById('successAlert').style.display = 'block';
-
-                    // Tambahkan event listener untuk tombol "OK"
-                    // document.getElementById('okButton').addEventListener('click', function() {
-                        // Lakukan refresh halaman
-                        // location.reload();
-                    // });
                     Swal.fire({
                         title: 'Revisi berhasil dikirim!',
                         icon: 'success',
@@ -347,7 +394,7 @@ Bimbingan Proposal
             cancelButtonText: 'Tidak'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Lakukan aksi jika pengguna memilih 'Ya'
+             
                 accRevisi(idDetailBimbinganProposal);
             }
         });
@@ -375,4 +422,152 @@ Bimbingan Proposal
                 console.error("Terjadi kesalahan: " + error);
             });
     }
+
+
+    function confirmAccProposal(idBimbinganProposal) {
+    const dospem1 = document.getElementById('dospem1').value;
+    const dospem2 = document.getElementById('dospem2').value;
+
+    Swal.fire({
+        title: 'Apakah Anda yakin ingin acc proposal ini?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            accProposal(idBimbinganProposal, dospem1, dospem2);
+        }
+    });
+}
+
+function accProposal(idBimbinganProposal, dospem1, dospem2) {
+    const data = {
+        dospem1: dospem1,
+        dospem2: dospem2
+    };
+
+    axios.post(`/dosen/bimbingan_proposal/accproposal/${idBimbinganProposal}`, data)
+        .then(function (response) {
+            console.log('Response from the server:', response.data);
+
+            // Show success message using SweetAlert
+            Swal.fire({
+                title: 'Proposal berhasil diacc!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();  // Reload the page
+                }
+            });
+        })
+        .catch(function (error) {
+            // Handle JSON response failure
+            console.error('Terjadi kesalahan:', error);
+            if (error.response && error.response.data) {
+                // If the response contains error message
+                Swal.fire({
+                    title: 'Terjadi kesalahan',
+                    text: error.response.data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                // If the response does not contain error message
+                Swal.fire({
+                    title: 'Terjadi kesalahan',
+                    text: 'Gagal memproses permintaan.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+}
+
+  
+//     function confirmAccProposal(idBimbinganProposal) {
+//         const dospem1 = document.getElementById('dospem1').value;
+//         const dospem2 = document.getElementById('dospem2').value;
+
+//         Swal.fire({
+//             title: 'Apakah Anda yakin ingin acc proposal ini?',
+//             icon: 'question',
+//             showCancelButton: true,
+//             confirmButtonText: 'Ya',
+//             cancelButtonText: 'Tidak'
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 accProposal(idBimbinganProposal);
+//             }
+//         });
+//     }
+
+
+//     function accProposal(idBimbinganProposal, dospem1, dospem2) {
+//         const data = {
+//             idBimbinganProposal: idBimbinganProposal,
+//             dospem1: dospem1,
+//             dospem2: dospem2
+//         };
+//     axios.post(`/dosen/bimbingan_proposal/accproposal/`, data)
+//         .then(function (response) {
+//             console.log('Response from the server:', response.data);
+
+//             // Show success message using SweetAlert
+//             Swal.fire({
+//                 title: 'Proposal berhasil diacc!',
+//                 icon: 'success',
+//                 confirmButtonText: 'OK'
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     // location.reload();  // Reload the page
+//                 }
+//             });
+//         })
+//         .catch(function (error) {
+//             // Handle JSON response failure
+//             console.error('Terjadi kesalahan:', error);
+//             if (error.response && error.response.data) {
+//                 // If the response contains error message
+//                 Swal.fire({
+//                     title: 'Terjadi kesalahan',
+//                     text: error.response.data.message,
+//                     icon: 'error',
+//                     confirmButtonText: 'OK'
+//                 });
+//             } else {
+//                 // If the response does not contain error message
+//                 Swal.fire({
+//                     title: 'Terjadi kesalahan',
+//                     text: 'Gagal memproses permintaan.',
+//                     icon: 'error',
+//                     confirmButtonText: 'OK'
+//                 });
+//             }
+//         });
+// }
+
+
+    // function accProposal(idBimbinganProposal) {
+    //     // Update the server data using AJAX
+    //     axios.post(`/dosen/bimbingan_proposal/accproposal/${idBimbinganProposal}`)
+    //         .then(function (response) {
+    //             console.log('Response from the server:', response.data);
+
+    //             // Show success message using SweetAlert
+    //             Swal.fire({
+    //                 title: 'Proposal berhasil diacc!',
+    //                 icon: 'success',
+    //                 confirmButtonText: 'OK'
+    //             }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                     location.reload();  // Reload the page
+    //                 }
+    //             });
+    //         })
+    //         .catch(function (error) {
+    //             console.error('Terjadi kesalahan:', error);
+    //         });
+    // }
 </script>

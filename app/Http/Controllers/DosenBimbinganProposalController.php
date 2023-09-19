@@ -54,41 +54,7 @@ class DosenBimbinganProposalController extends Controller
         return view('dosen/bimbingan/proposal.detail', ['data' => $data['data']]);
     }
 
-    // public function updaterevisi($id, Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'revisi' => 'required|string',
-        
-    //     ], [
-    //         'revisi.required' => 'revisi is required.',
-    //     ]);    
-
-    //     DB::table('detail_bimbingan_proposal')
-    //         ->where('id_bimbingan_proposal', '=', $id)
-    //         ->update([
-    //             'revisi' => $validatedData['revisi'],
-    //             'updated_at' => date('Y-m-d H:i:s'),
-    //         ]);
-
-    //     return response()->json("berhasil");
-    // }
-    // public function updaterevisi($id, Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'revisi' => 'required|string',
-    //     ], [
-    //         'revisi.required' => 'Revisi is required.',
-    //     ]);    
-
-    //     DB::table('detail_bimbingan_proposal')
-    //         ->where('id_bimbingan_proposal', $id)  // Sesuaikan dengan nama kolom di tabel
-    //         ->update([
-    //             'revisi' => $validatedData['revisi'],
-    //             'updated_at' => now(),
-    //         ]);
-
-    //     return response()->json("Berhasil memperbarui revisi");
-    // }
+   
     public function updaterevisi($id, Request $request)
     {
         $validatedData = $request->validate([
@@ -125,7 +91,7 @@ class DosenBimbinganProposalController extends Controller
                     ->where('id_detail_bimbingan_proposal', $id)
                     ->update([
                         'validasi' => 'acc',
-                        'updated_at' => now(),
+                        'updated_at' => now()
                     ]);
     
         if ($result) {
@@ -134,6 +100,97 @@ class DosenBimbinganProposalController extends Controller
             return response()->json("Gagal acc", 500); // Kode status 500 untuk Internal Server Error
         }
     }
-    
+
+    public function accproposal($id, Request $request)
+    {
+
+      
+
+        // Ambil data dari request
+        // $idBimbinganProposal = $request->input('idBimbinganProposal');
+        $dospem1 = $request->input('dospem1');
+        $dospem2 = $request->input('dospem2');
+        
+        $username = Auth::user()->name;
+
+        // return response()->json($request['dospem1']);
+        
+        
+        if ($username === $dospem1) {
+            $result_utama = DB::table('bimbingan_proposal')
+                ->where('id_bimbingan_proposal', $id)
+                ->update([
+                    'acc_dosen_utama' => 'acc',
+                    'tgl_acc_dosen_utama' => now()
+                ]);
+        
+            if ($result_utama) {
+                return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_utama!');
+            } else {
+                return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_utama.');
+            }
+        } elseif ($username === $dospem2) {
+            $result_ii = DB::table('bimbingan_proposal')
+                ->where('id_bimbingan_proposal', $id)
+                ->update([
+                    'acc_dosen_ii' => 'acc',
+                    'tgl_acc_dosen_ii' => now()
+                ]);
+        
+            if ($result_ii) {
+                return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_ii!');
+            } else {
+                return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_ii.');
+            }
+        } else {
+            return response()->json('sumpah gangerti');
+        }
+        
+
+        // $validatedData = $request->validate([
+        //     'dosen_pembimbing_utama' => 'string',
+        //     'dosen_pembimbing_ii' => 'string',
+        // ]);    
+
+        // $username = Auth::user()->name;
+
+        // if ($username === $validatedData['dosen_pembimbing_utama']) {
+        //     // Pengguna adalah dosen_pembimbing_utama
+
+        //     // Perbarui kolom yang sesuai berdasarkan peran
+        //     $result_utama = DB::table('bimbingan_proposal')
+        //         ->where('id_bimbingan_proposal', $id)
+        //         ->update([
+        //             'acc_dosen_utama' => 'acc',
+        //             'tgl_acc_dosen_utama' => now()
+        //         ]);
+
+        //     // Proses hasil untuk dosen_pembimbing_utama
+        //     if ($result_utama) {
+        //         return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_utama!');
+        //     } else {
+        //         return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_utama.');
+        //     }
+        // } elseif ($username === $validatedData['dosen_pembimbing_ii']) {
+        //     $result_ii = DB::table('bimbingan_proposal')
+        //         ->where('id_bimbingan_proposal', $id)
+        //         ->update([
+        //             'acc_dosen_ii' => 'acc',
+        //             'tgl_acc_dosen_ii' => now()
+        //         ]);
+
+        //     if ($result_ii) {
+        //         return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_ii!');
+        //     } else {
+        //         return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_ii.');
+        //     }
+        // } else {
+        //     return response()->json('sumpah gangerti');
+
+        // }
+
+
+    }
 }
+
 

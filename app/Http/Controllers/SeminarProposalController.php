@@ -14,7 +14,8 @@ class SeminarProposalController extends Controller
         // $juduls = Judul::all();
         $datas = DB::table('users')
             ->join('tema', 'tema.user_id', '=', 'users.id')
-            ->select('users.*', 'tema.*')
+            ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+            ->select('users.*', 'tema.*', 'bimbingan_proposal.*')
             ->where('users.id', '=', Auth::user()->id)
             ->where('tema.status', '=', 'terima')
             ->first();

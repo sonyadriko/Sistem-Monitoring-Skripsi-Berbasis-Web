@@ -14,6 +14,10 @@ class BimbinganProposal extends Model
         // 'tema_id',
         'dosen_pembimbing_utama',
         'dosen_pembimbing_ii',
+        'acc_dosen_utama',
+        'tgl_acc_dosen_utama',
+        'acc_dosen_ii',
+        'tgl_acc_dosen_ii',
         'updated_at',
         'created_at'
     ];
