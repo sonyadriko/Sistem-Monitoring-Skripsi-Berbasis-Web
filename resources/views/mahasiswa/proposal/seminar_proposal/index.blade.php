@@ -6,6 +6,12 @@ Proposal
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  @if(is_null($datas) || is_null($datas->id_tema))
+    
+  <div class="alert alert-warning" role="alert">
+      Harap ajukan judul terlebih dahulu sebelum melanjutkan.
+  </div>
+  @else
   {{-- @if(is_null($datas) || is_null($datas->dosen_pembimbing_utama) || is_null($datas->dosen_pembimbing_ii))
     @if(is_null($datas) || is_null($datas->acc_dosen_utama) || is_null($datas->acc_dosen_ii))
     <div class="alert alert-warning" role="alert">
@@ -78,7 +84,7 @@ Proposal
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  {{-- value="{{$datas->nama_dospem1}}" --}}
+                  value="{{$datas->dosen_pembimbing_utama}}"
                   placeholder="Dosen Pembimbing 1"
                   aria-describedby="defaultFormControlHelp"
                   readonly
@@ -91,7 +97,7 @@ Proposal
                   class="form-control"
                   id="defaultFormControlInput"
                   placeholder="Dosen Pembimbing 2"
-                  {{-- value="{{$datas->nama_dospem2}}" --}}
+                  value="{{$datas->dosen_pembimbing_ii}}"
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -114,7 +120,7 @@ Proposal
           </form>
       </div>
     </div>
-    {{-- @endif --}}
+    @endif
 </div>
 
 

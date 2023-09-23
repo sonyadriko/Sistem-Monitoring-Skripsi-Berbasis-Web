@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SeminarProposal as SeminarProposal;
+use App\Models\BeritaAcaraProposal as BeritaAcaraProposal;
+
 use Illuminate\Support\Facades\DB;
 
 class KoordinatorSeminarController extends Controller
@@ -17,51 +19,80 @@ class KoordinatorSeminarController extends Controller
 
     }
 
-    // public function detail($id)
-    // {
-    //     $data = [
-    //         'data' => DB::table('seminar_proposal')->where('id_seminar_proposal', '=', $id)->first(),
-            
-    //     ];
-
-
-    //     if ($data['data']) {
-    //         return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
-    //     } else {
-    //         // Handle the case when no record was found
-    //         return redirect()->back()->with('error', 'Record not found.');
-    //     }
-    // }
-
     public function detail($id)
     {
         $data = [
-            'data' => DB::table('seminar_proposal')->where('id_seminar_proposal', '=', $id)->first(),
+            'data' => DB::table('seminar_proposal')
+                ->join('users', 'users.id', 'seminar_proposal.user_id')
+                ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+                ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+                // ->select('users.kode_unik', 'users.name', 'seminar_proposal.*', 'bimbingan_proposal.*')
+                ->where('id_seminar_proposal', '=', $id)->first(),
         ];
 
-        if ($data['data']) {
-            $userId = $data['data']->user_id;
-            $temaId = $data['data']->tema_id;
+        $baru = [
+            'baru' => DB::table('users')->where('role_id', '2')->get(),
+        ];
+        return view('koordinator/penjadwalan/seminar_proposal.detail', $data, $baru);
 
-            $users = DB::table('users')->where('id', '=', $userId)->first();
-            $tema = DB::table('tema')->where('id_tema', '=', $temaId)->first();
 
-            if ($users) {
-                $data['users'] = $users;
-                $data['tema'] = $tema;
+        // if ($data['data']) {
+        //     $userId = $data['data']->user_id;
+        //     $temaId = $data['data']->tema_id;
 
-                return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
-            } else {
-                // Handle the case when no user record was found
-                return redirect()->back()->with('error', 'User not found.');
-            }
-        } else {
-            // Handle the case when no seminar proposal record was found
-            return redirect()->back()->with('error', 'Seminar proposal record not found.');
-        }
+        //     $users = DB::table('users')->where('id', '=', $userId)->first();
+        //     $tema = DB::table('tema')->where('id_tema', '=', $temaId)->first();
+
+        //     if ($users) {
+        //         $data['users'] = $users;
+        //         $data['tema'] = $tema;
+
+        //         return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
+        //     } else {
+        //         // Handle the case when no user record was found
+        //         return redirect()->back()->with('error', 'User not found.');
+        //     }
+        // } else {
+        //     // Handle the case when no seminar proposal record was found
+        //     return redirect()->back()->with('error', 'Seminar proposal record not found.');
+        // }
+    }
+    public function updatejadwal(Request $request, $id)
+    {
+    $data = SeminarProposal::where('id_seminar_proposal', $id)->first();
+
+    if (!$data) {
+        return redirect()->back()->with('error', 'Data not found.');
     }
 
+    // Update the fields
+    $data->dosen_penguji_1 = $request->input('dosen_penguji_1');
+    $data->dosen_penguji_2 = $request->input('dosen_penguji_2');
+    $data->ruangan = $request->input('ruangan_seminar');
+    $data->tanggal = $request->input('date');
+    $data->jam = $request->input('time');
 
-   
+    // Save the updated data
+    $data->save();
 
+    return redirect()->back()->with('success', 'Data updated successfully.');
+    }
+
+    public function createberitaacara(Request $request, $id)
+    {
+        $data = SeminarProposal::where('id_seminar_proposal', $id)->first();
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data not found.');
+        }
+        $data->cetak = 'sudah';
+        $data->save();
+
+        $ba = new BeritaAcaraProposal();
+
+        $ba->users_id = $request['user_id'];
+        $ba->seminar_proposal_id = $request['seminar_proposal_id'];
+        $ba->save();
+        return redirect()->back()->with('success', 'Data updated successfully.');
+
+    }
 }

@@ -11,7 +11,7 @@ use App\Http\Controllers\DosenBimbinganProposalController;
 use App\Http\Controllers\SuratTugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KoordinatorSuratTugasController;
-
+use App\Http\Controllers\BeritaAcaraProposalController;
 use App\Http\Controllers\SeminarProposalController;
 
 
@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(KoordinatorSeminarController::class)->group(function () {
         Route::get('/koordinator/jadwal_seminar_proposal', 'index')->name('jadwal-seminar-proposal.index');
         Route::get('/koordinator/jadwal_seminar_proposal/detail/{id}', 'detail');
+        Route::post('/koordinator/jadwal_seminar_proposal/update-status/{id}', 'updatejadwal')->name('jadwal-seminar-proposal-update');
+        Route::post('/koordinator/jadwal_seminar_proposal/cetak-berita-acara/{id}', 'createberitaacara')->name('cetak-berita-acara');
     }); 
     
     
@@ -90,9 +92,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
         Route::get('/koordinator/pembagian_dosen/edit/{id}', 'edit');
         Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
-        // Route::get('/koordinator/pembagian_dosen/detail/{id}', 'detail');
-
-    
     }); 
 
     Route::controller(BimbinganProposalController::class)->group(function (){
@@ -100,22 +99,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
     });
   
-    // Route::controller(DosenBimbinganProposalController::class)->group(function (){
-    //     Route::get('/dosen/bimbingan_proposal', 'index')->name('bimbingan-dosen.index');
-    //     Route::get('/dosen/bimbingan_proposal/detail/{id}', 'detail')->name('bimbingan-dosen.detail');
-    //     Route::post('/dosen/bimbingan_proposal/updaterevisi/{id}', 'updaterevisi')->name('bimbingan-dosen.addrevisi');
-
-    // });
-
     Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
         Route::get('/', [DosenBimbinganProposalController::class, 'index'])->name('bimbingan-dosen.index');
         Route::get('/detail/{id}', [DosenBimbinganProposalController::class, 'detail'])->name('bimbingan-dosen.detail');
         Route::post('/updaterevisi/{id}', [DosenBimbinganProposalController::class, 'updaterevisi'])->name('bimbingan-dosen.addrevisi');
         Route::post('/accrevisi/{id}', [DosenBimbinganProposalController::class, 'accrevisi'])->name('bimbingan-dosen.accrevisi');
         Route::post('/accproposal/{id}', [DosenBimbinganProposalController::class, 'accproposal'])->name('bimbingan-dosen.accproposal');
-
     });
-    
 
     Route::controller(SuratTugasController::class)->group(function (){
         Route::get('/proposal/surat_tugas', 'index')->name('pengajuan-st.index');
@@ -125,17 +115,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(KoordinatorSuratTugasController::class)->group(function (){
         Route::get('/koordinator/surat_tugas', 'index');
     });
-    // Route::get('/koordinator/pengajuan_judul_proposal', function (){
-    //     return view('koordinator/pengajuan_judul_proposal/index');
-    // })->name('pengajuan_judul_proposal');
-    // Route::get('/koordinator/pembagian_dosen', function (){
-    //     return view('koordinator/pembagian_dosen/index');
-    // })->name('pembagian_dosen');
-    // Route::get('/koordinator/jadwal_seminar_proposal', function (){
-    //     return view('koordinator/penjadwalan/seminar_proposal/index');
-    // })->name('jadwal_seminar_proposal');
-    Route::get('/dosen/berita_acara_seminar', function (){
-        return view('dosen/berita_acara/seminar/index');
-    })->name('berita_acara_seminar');
+    Route::group(['prefix' => 'dosen/berita_acara_proposal'], function () {
+        Route::get('/', [BeritaAcaraProposalController::class, 'index'])->name('berita-acara-proposal.index');
+    });
+
+   
 });
 

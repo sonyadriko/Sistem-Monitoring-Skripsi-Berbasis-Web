@@ -10,13 +10,19 @@ class SeminarProposal extends Model
     protected $table = 'seminar_proposal';
 
     protected $fillable = [
-        'nama',
-        'npm',
+        // 'nama',
+        // 'npm',
         'file_proposal',
         'file_slip_pembayaran',
+        'dosen_penguji_1',
+        'dosen_penguji_2',
+        'ruangan',
+        'tanggal',
+        'jam',
+        'cetak',
         'updated_at',
         'created_at'
     ];
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_seminar_proposal';
 
 }

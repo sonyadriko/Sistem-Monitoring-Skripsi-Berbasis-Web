@@ -108,6 +108,12 @@
           <div data-i18n="Layouts">Pengajuan</div>
         </a>
       </li>
+      <li class="menu-item">
+        <a href="{{route('berita-acara-proposal.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Berita Acara Proposal</div>
+        </a>
+      </li>
       @endif
 
       @if(Auth::user()->role_id == 1)

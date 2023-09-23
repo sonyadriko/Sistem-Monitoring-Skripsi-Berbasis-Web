@@ -145,51 +145,6 @@ class DosenBimbinganProposalController extends Controller
         } else {
             return response()->json('sumpah gangerti');
         }
-        
-
-        // $validatedData = $request->validate([
-        //     'dosen_pembimbing_utama' => 'string',
-        //     'dosen_pembimbing_ii' => 'string',
-        // ]);    
-
-        // $username = Auth::user()->name;
-
-        // if ($username === $validatedData['dosen_pembimbing_utama']) {
-        //     // Pengguna adalah dosen_pembimbing_utama
-
-        //     // Perbarui kolom yang sesuai berdasarkan peran
-        //     $result_utama = DB::table('bimbingan_proposal')
-        //         ->where('id_bimbingan_proposal', $id)
-        //         ->update([
-        //             'acc_dosen_utama' => 'acc',
-        //             'tgl_acc_dosen_utama' => now()
-        //         ]);
-
-        //     // Proses hasil untuk dosen_pembimbing_utama
-        //     if ($result_utama) {
-        //         return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_utama!');
-        //     } else {
-        //         return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_utama.');
-        //     }
-        // } elseif ($username === $validatedData['dosen_pembimbing_ii']) {
-        //     $result_ii = DB::table('bimbingan_proposal')
-        //         ->where('id_bimbingan_proposal', $id)
-        //         ->update([
-        //             'acc_dosen_ii' => 'acc',
-        //             'tgl_acc_dosen_ii' => now()
-        //         ]);
-
-        //     if ($result_ii) {
-        //         return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_ii!');
-        //     } else {
-        //         return response()->json('Tidak ada peran yang sesuai ditemukan untuk dosen_pembimbing_ii.');
-        //     }
-        // } else {
-        //     return response()->json('sumpah gangerti');
-
-        // }
-
-
     }
 }
 

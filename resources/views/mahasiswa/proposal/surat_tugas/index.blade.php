@@ -11,6 +11,16 @@ Surat Tugas
         {{ session('success') }}
     </div>
     @endif
+    {{-- @if(is_null($datas) || is_null($datas->alamat_mhs) || is_null($datas->no_telp_mhs) || is_null($datas->alamat_orang_tua) || is_null($datas->no_telp_orang_tua))
+    
+    <div class="alert alert-warning" role="alert">
+        Harap Melengkapi Profile 
+    </div>
+    @elseif(is_null($datas) || is_null($datas->id_tema))
+    <div class="alert alert-warning" role="alert">
+      Harap Mengajukan Judul 
+    </div>
+    @else --}}
         <div class="card mb-4">
           <h5 class="card-header">Form Pengajuan Surat Tugas</h5>
           <div class="card-body">
@@ -23,7 +33,8 @@ Surat Tugas
                   type="text"
                   id="alamat"
                   name="alamat"
-                  value="{{$datas->alamat_mhs}}"
+                  {{-- value="{{$datas->alamat_mhs}}" --}}
+                  value="{{ $datas ? $datas->alamat_mhs : '' }}"
                   placeholder="Masukan Alamat..."
                   />
                   @error('alamat')
@@ -36,6 +47,9 @@ Surat Tugas
                   class="form-control"
                   type="number"
                   id="notelpmhs"
+                  {{-- value="{{$datas->no_telp_mhs}}" --}}
+                  value="{{ $datas ? $datas->no_telp_mhs : '' }}"
+
                   name="notelpmhs"
                   placeholder="Masukan No Telp Mahasiswa..."
                   />
@@ -49,7 +63,9 @@ Surat Tugas
                   class="form-control"
                   type="text"
                   id="alamatot"
-                  value="{{$datas->alamat_orang_tua}}"
+                  {{-- value="{{$datas->alamat_orang_tua}}" --}}
+                  value="{{ $datas ? $datas->alamat_orang_tua : '' }}"
+                  
 
                   name="alamatot"
                   placeholder="Masukan Alamat Orang Tua..."
@@ -64,6 +80,9 @@ Surat Tugas
                   class="form-control"
                   type="number"
                   id="notelpot"
+                  {{-- value="{{$datas->no_telp_orang_tua}}" --}}
+                  value="{{ $datas ? $datas->no_telp_orang_tua : '' }}"
+
                   name="notelpot"
                   placeholder="Masukan No Telp Orang Tua..."
                   />
@@ -77,7 +96,7 @@ Surat Tugas
                   class="form-control"
                   type="text"
                   id="judulskripsi"
-                  value="{{$datas->judul}}"
+                  {{-- value="{{$datas->bidang_ilmu_id}}" --}}
                   name="judulskripsi"
                   placeholder="Masukan Dosen Pembimbing 1..."
                   readonly
@@ -159,7 +178,7 @@ Surat Tugas
                 <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-            <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}">
+            {{-- <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}"> --}}
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -167,5 +186,6 @@ Surat Tugas
             </form>
           </div>
       </div>
+      {{-- @endif --}}
 </div>
 @endsection

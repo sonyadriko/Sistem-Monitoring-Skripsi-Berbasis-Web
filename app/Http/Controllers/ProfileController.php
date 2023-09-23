@@ -13,13 +13,8 @@ class ProfileController extends Controller
     //
     public function index()
     {
-        // $juduls = DB::table('tema')
-        //     ->join('bidang_ilmu', 'bidang_ilmu.id', 'tema.bidang_ilmu_id')
-        //     ->orderBy('tema.created_at', 'desc')->get();
-        // return view('koordinator/pengajuan_judul.index', compact('juduls'));
 
         $details = DB::table('users')
-            // ->join('users', 'users.id', 'detail_users.user_id')
             ->where('id', '=', Auth::user()->id)->first();
         
         return view('/mahasiswa/profile.index', compact('details'));

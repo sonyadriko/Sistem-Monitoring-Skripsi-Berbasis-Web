@@ -67,7 +67,7 @@ class SeminarProposalController extends Controller
             // $seminarProposal->npm=$validatedData['npm'];
             $seminarProposal->user_id=Auth::user()->id;
             // $seminarProposal->dosen_id=$validatedData['dosen_id'];
-            $seminarProposal->tema_id=$validatedData['tema_id'];
+            // $seminarProposal->tema_id=$validatedData['tema_id'];
             $seminarProposal->file_proposal = $proposalFilePath;
             $seminarProposal->file_slip_pembayaran = $slipPembayaranFilePath;
 
@@ -77,7 +77,7 @@ class SeminarProposalController extends Controller
              $seminarProposal->save();
     
             // return redirect()->back()->with('success', 'File berhasil diunggah.');
-            return redirect()->route('pengajuan-judul.index');
+            return redirect()->route('/home');
 
         // }
     }
