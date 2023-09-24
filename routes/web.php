@@ -117,6 +117,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::group(['prefix' => 'dosen/berita_acara_proposal'], function () {
         Route::get('/', [BeritaAcaraProposalController::class, 'index'])->name('berita-acara-proposal.index');
+        Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');
+        Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
+
     });
 
    

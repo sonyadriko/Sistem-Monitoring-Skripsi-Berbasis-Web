@@ -23,12 +23,12 @@ class KoordinatorSeminarController extends Controller
     {
         $data = [
             'data' => DB::table('seminar_proposal')
-                ->join('users', 'users.id', 'seminar_proposal.user_id')
+                ->join('users', 'users.id', 'seminar_proposal.users_id')
                 ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-                // ->select('users.kode_unik', 'users.name', 'seminar_proposal.*', 'bimbingan_proposal.*')
                 ->where('id_seminar_proposal', '=', $id)->first(),
         ];
+        // dd($data);
 
         $baru = [
             'baru' => DB::table('users')->where('role_id', '2')->get(),

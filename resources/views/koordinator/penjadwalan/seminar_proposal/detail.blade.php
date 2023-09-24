@@ -39,6 +39,8 @@ Proposal
             <div class="mb-3">
               <label for="select1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
               <select class="form-select" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
+                <option value="" selected disabled>Open this select menu</option>
+
                   @foreach($baru as $datas)
                       <option value="{{$datas->id}}">{{$datas->name}}</option>
                   @endforeach
@@ -134,7 +136,7 @@ Proposal
               <input class="form-control" name="time" type="time" value="{{$data->jam}}" id="html5-time-input" readonly />
             </div>
           </div>
-          <input type="hidden" name="user_id" value="{{$data->user_id}}" />
+          <input type="hidden" name="user_id" value="{{$data->users_id}}" />
           <input type="hidden" name="seminar_proposal_id" value="{{$data->id_seminar_proposal}}" />
          
           <div class="d-flex justify-content-between mt-4">
