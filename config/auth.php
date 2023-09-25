@@ -40,6 +40,22 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'mahasiswa' => [
+            'driver' => 'session',
+            'provider' => 'mahasiswas',
+        ],
+        'dosen' => [
+            'driver' => 'session',
+            'provider' => 'dosens',
+        ],
+        'koordinator' => [
+            'driver' => 'session',
+            'provider' => 'koordinators'
+        ],
+        'ketuajurusan' => [
+            'driver' => 'session',
+            'provider' => 'ketuajurusans'
+        ],
     ],
 
     /*
@@ -64,6 +80,23 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'mahasiswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'dosens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'koordinators' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'ketuajurusans' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        
 
         // 'users' => [
         //     'driver' => 'database',
