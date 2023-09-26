@@ -13,7 +13,7 @@ class KoordinatorSeminarController extends Controller
     public function index()
     {
         // $sempros = SeminarProposal::all();
-        $sempros = DB::table('seminar_proposal')->join('users', 'users.id', 'seminar_proposal.user_id')->get();
+        $sempros = DB::table('seminar_proposal')->join('users', 'users.id', 'seminar_proposal.users_id')->get();
      
         return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros'));
 

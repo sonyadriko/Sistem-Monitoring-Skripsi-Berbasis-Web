@@ -14,6 +14,11 @@ use App\Http\Controllers\KoordinatorSuratTugasController;
 use App\Http\Controllers\BeritaAcaraProposalController;
 use App\Http\Controllers\SeminarProposalController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\KoordinatorController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\KoordinatorBeritaAcaraProposalController;
+
+
 
 
 
@@ -47,6 +52,12 @@ Route::controller(LoginController::class)->group(function () {
 
 
 Route::group(['middleware' => 'auth:dosen'], function() {
+
+    Route::controller(DosenController::class)->group(function () {
+        Route::get('/dosen', 'index')->name('dashboard:dosen');
+    });
+
+
     Route::controller(BidangIlmuController::class)->group(function () {
         Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
         Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
@@ -68,6 +79,21 @@ Route::group(['middleware' => 'auth:dosen'], function() {
 });
 
 Route::group(['middleware' => 'auth:koordinator'], function() {
+
+    // Route::get('/koordinator', function () {
+    //     return view('mahasiswa/proposal/index');
+    // });
+
+    Route::controller(KoordinatorController::class)->group(function () {
+        Route::get('/koordinator', 'index')->name('dashboard:koordinator');
+    });
+
+    Route::group(['prefix' => 'koordinator/berita_acara_proposal'], function () {
+        Route::get('/', [KoordinatorBeritaAcaraProposalController::class, 'index'])->name('koor-berita-acara-proposal.index');
+        Route::get('/detail/{id}', [KoordinatorBeritaAcaraProposalController::class, 'detail'])->name('koor-berita-acara-proposal.detail');
+
+    });
+
     Route::controller(KoordinatorJudulController::class)->group(function () {
         Route::get('/koordinator/pengajuan_judul', 'index')->name('pengajuan-judul.index');
         Route::get('/koordinator/pengajuan_judul/detail/{id}', 'detail');
@@ -82,7 +108,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::post('/koordinator/jadwal_seminar_proposal/cetak-berita-acara/{id}', 'createberitaacara')->name('cetak-berita-acara');
     }); 
     Route::controller(KoordinatorSuratTugasController::class)->group(function (){
-        Route::get('/koordinator/surat_tugas', 'index');
+        Route::get('/koordinator/surat_tugas', 'index')->name('surat-tugas.index');
     });
     Route::controller(PembagianDosenController::class)->group(function () 
     { 

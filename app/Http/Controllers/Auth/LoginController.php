@@ -165,10 +165,16 @@ class LoginController extends Controller
 
         if ($login) {
             // Authentication successful
-            return redirect('/dashboard');
+            if ($role === 'koordinator') {
+                return redirect('/koordinator');
+            } elseif ($role === 'dosen') {
+                return redirect('/dosen');
+            } else {
+                return redirect('/dashboard'); // Atau sesuaikan dengan halaman dashboard yang sesuai dengan peran
+            }
         } else {
             // Authentication failed
-            return redirect('/')->with('error', 'Login failed. Invalid credentials.');
+            return redirect('/login')->with('error', 'Invalid email or password. Please try again.');
         }
     }
 
