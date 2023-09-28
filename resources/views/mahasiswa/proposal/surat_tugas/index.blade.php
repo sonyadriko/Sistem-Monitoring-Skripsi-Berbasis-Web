@@ -96,7 +96,7 @@ Surat Tugas
                   class="form-control"
                   type="text"
                   id="judulskripsi"
-                  {{-- value="{{$datas->bidang_ilmu_id}}" --}}
+                  value="{{$datas->topik_bidang_ilmu}}"
                   name="judulskripsi"
                   placeholder="Masukan Dosen Pembimbing 1..."
                   readonly
@@ -112,7 +112,7 @@ Surat Tugas
                   type="text"
                   id="dospem1"
                   name="dospem1"
-                  {{-- value="{{$datas->nama_dospem1}}" --}}
+                  value="{{$datas->dosen_pembimbing_utama}}"
                   readonly
                   placeholder="Masukan Dosen Pembimbing 1..."
                   />
@@ -128,7 +128,7 @@ Surat Tugas
                   type="text"
                   id="dospem2"
                   name="dospem2"
-                  {{-- value="{{$datas->nama_dospem2}}" --}}
+                  value="{{$datas->dosen_pembimbing_ii}}"
                   readonly
                   placeholder="Masukan Dosen Pembimbing 2..."
                   />
@@ -178,6 +178,7 @@ Surat Tugas
                 <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
             {{-- <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}"> --}}
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>

@@ -12,7 +12,8 @@ class SuratTugasController extends Controller
     public function index()
     {
         $datas = DB::table('users')
-        // ->join('tema', 'tema.user_id', 'users.id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+        ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
         ->where('users.id', Auth::user()->id)
         ->first();
         return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
@@ -24,12 +25,16 @@ class SuratTugasController extends Controller
         $validatedData = $request->validate([
             
             'user_id' => 'required',
+            'bimbingan_proposal_id' => 'required',
+
             'tanggal_sidang_proposal' => 'required|date',
             'file_proposal' => 'required|mimes:pdf,docx|max:1000',
             'file_slip_pembayaran' => 'required|mimes:pdf,docx|max:1000',
         ], [
            
             'user_id.required' => 'user_id is required.',
+            'bimbingan_proposal_id.required' => 'bimbingan_proposal_id is required.',
+
             'tanggal_sidang_proposal.required' => 'tanggal_sidang_proposal is required.',
             'file_proposal.required' => 'file_proposal is required.',
             'file_slip_pembayaran.required' => 'file_slip_pembayaran is required.',
@@ -61,6 +66,8 @@ class SuratTugasController extends Controller
 
         $datau = new SuratTugas();
         $datau->user_id = $validatedData['user_id'];
+        $datau->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
+
         // $datau->tema_id=$validatedData['tema_id'];
         // $datau->dosen_id=$validatedData['dosen_id'];
         $datau->tanggal_sidang_proposal=$validatedData['tanggal_sidang_proposal'];

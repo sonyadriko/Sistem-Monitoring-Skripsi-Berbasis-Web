@@ -26,7 +26,10 @@ class KoordinatorJudulController extends Controller
         $data = [
             'data' => DB::table('tema')->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'tema.bidang_ilmu_id')->select('tema.*', 'bidang_ilmu.topik_bidang_ilmu')->where('id_tema', '=',$id)->first(), 
         ];
-        return view('koordinator/pengajuan_judul.detail', $data);
+        $dosen2 = [
+            'dosen2' => DB::table('users')->where('role_id', '2')->get(),
+        ];
+        return view('koordinator/pengajuan_judul.detail', $data, $dosen2);
 
     }
 
@@ -61,6 +64,7 @@ class KoordinatorJudulController extends Controller
         $bp->tema_id = $request['tema_id'];
         $bp->bidang_ilmu_id = $request['bidang_ilmu_id'];
         $bp->dosen_pembimbing_utama = $request['dosen_pembimbing_utama'];
+        $bp->dosen_pembimbing_ii = $request['dosen_penguji_ii'];
         $bp->save();
 
 

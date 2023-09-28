@@ -92,6 +92,16 @@ Proposal
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="mb-3">
+              <label for="dosen_pembimbing_utama" class="form-label">Dosen II</label>
+              <select class="form-select" id="select1" name="dosen_penguji_ii" aria-label="Default select example" onchange="updateSelectOptions()">
+                <option value="" selected disabled>Open this select menu</option>
+                <option value="Tidak Ada" >Tidak Ada</option>
+                  @foreach($dosen2 as $datas)
+                      <option value="{{$datas->name}}">{{$datas->name}}</option>
+                  @endforeach
+              </select>
+            </div>
             <input type="hidden" name="tema_id" value="{{$data->id_tema}}"/>
             <input type="hidden" name="bidang_ilmu_id" value="{{$data->bidang_ilmu_id}}"/>
             <input type="hidden" name="user_id" value="{{$data->user_id}}"/>

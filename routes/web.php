@@ -94,22 +94,26 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 
     });
 
-    Route::controller(KoordinatorJudulController::class)->group(function () {
-        Route::get('/koordinator/pengajuan_judul', 'index')->name('pengajuan-judul.index');
-        Route::get('/koordinator/pengajuan_judul/detail/{id}', 'detail');
-        Route::post('/koordinator/pengajuan_judul/update-status/{id_tema}', 'updatestatus2')->name('update_status');
-        // Route::post('/koordinator/pengajuan_judul/updatedetail/{id}', 'updatestatus'); 
+    Route::group(['prefix' => 'koordinator/pengajuan_judul'], function () {
+        Route::get('/', [KoordinatorJudulController::class, 'index'])->name('pengajuan-judul.index');
+        Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
+        Route::post('/update-status/{id_tema}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
     });
     
-    Route::controller(KoordinatorSeminarController::class)->group(function () {
-        Route::get('/koordinator/jadwal_seminar_proposal', 'index')->name('jadwal-seminar-proposal.index');
-        Route::get('/koordinator/jadwal_seminar_proposal/detail/{id}', 'detail');
-        Route::post('/koordinator/jadwal_seminar_proposal/update-status/{id}', 'updatejadwal')->name('jadwal-seminar-proposal-update');
-        Route::post('/koordinator/jadwal_seminar_proposal/cetak-berita-acara/{id}', 'createberitaacara')->name('cetak-berita-acara');
-    }); 
-    Route::controller(KoordinatorSuratTugasController::class)->group(function (){
-        Route::get('/koordinator/surat_tugas', 'index')->name('surat-tugas.index');
+    Route::group(['prefix' => 'koordinator/jadwal_seminar_proposal'], function () {
+        Route::get('/', [KoordinatorSeminarController::class, 'index'])->name('jadwal-seminar-proposal.index');
+        Route::get('/detail/{id}', [KoordinatorSeminarController::class, 'detail']);
+        Route::post('/update-status/{id}', [KoordinatorSeminarController::class, 'updatejadwal'])->name('jadwal-seminar-proposal-update');
+        Route::post('/cetak-berita-acara/{id}', [KoordinatorSeminarController::class, 'createberitaacara'])->name('cetak-berita-acara');
     });
+    
+
+    Route::group(['prefix' => 'koordinator/surat_tugas'], function () {
+        Route::get('/', [KoordinatorSuratTugasController::class, 'index'])->name('koor-surat-tugas.index');
+        Route::get('/detail/{id}', [KoordinatorSuratTugasController::class, 'detail'])->name('koor-surat-tugas.detail');
+        Route::post('/update/{id}', [KoordinatorSuratTugasController::class, 'update'])->name('koor-surat-tugas.update');
+    });
+
     Route::controller(PembagianDosenController::class)->group(function () 
     { 
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');

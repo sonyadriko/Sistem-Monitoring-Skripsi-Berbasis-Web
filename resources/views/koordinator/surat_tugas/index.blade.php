@@ -26,10 +26,10 @@ Proposal
                     @endphp
                     @foreach($surattugas as $st)
                     <tr>
-                        <td>{{ $st->id }}</td>
+                        <td>{{ $st->id_surat_tugas }}</td>
                         <td>{{ $st->name }}</td>
                         <td>{{ $st->kode_unik }}</td>
-                        <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $st->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ url('/koordinator/surat_tugas/detail/' . $st->id_surat_tugas) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @php
                     $no++;

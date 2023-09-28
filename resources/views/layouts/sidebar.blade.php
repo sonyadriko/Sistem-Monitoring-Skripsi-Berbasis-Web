@@ -43,13 +43,13 @@
               <div data-i18n="Account">Pengajuan Judul</div>
             </a>
           </li>
-          <li class="menu-item">
+          {{-- <li class="menu-item">
             <a href="{{ route('pembagian-dosen.create')}}" class="menu-link">
               <div data-i18n="Account">Pembagian Dosen</div>
             </a>
-          </li>
+          </li> --}}
           <li class="menu-item">
-            <a href="{{ route('surat-tugas.index')}}" class="menu-link">
+            <a href="{{ route('koor-surat-tugas.index')}}" class="menu-link">
               <div data-i18n="Notifications">Surat Tugas Bimbingan</div>
             </a>
           </li>
