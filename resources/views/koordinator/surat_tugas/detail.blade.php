@@ -45,7 +45,7 @@ Proposal
               </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Cetak</button>
             </div>
         </form>
       </div>
