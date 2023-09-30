@@ -12,8 +12,6 @@ class Pengajuan extends Model
    
 
     protected $fillable = [
-        'nama',
-        'npm',
         'user_id',
         'bidang_ilmu_id',
         'status',

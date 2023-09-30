@@ -6,6 +6,12 @@ Dashboard
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  @if (session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+  </div>
+@endif
+
   <div class="row">
     <!-- Proposal Skripsi Card -->
     <div class="col-md-4 col-lg-8 col-xl-4">

@@ -23,12 +23,7 @@ class SeminarProposalController extends Controller
     }
     public function store(Request $request)
     {
-                // dd($request->all());
-
         $validatedData = $request->validate([
-            // 'nama' => 'required|string',
-            // 'npm' => 'required|string',
-            // 'dosen_id' => 'required',
             'tema_id' => 'required',
 
 
@@ -37,11 +32,6 @@ class SeminarProposalController extends Controller
 
         ]);
 
-        // $filename = time().'.'.$request->proposal_file->extension();
-        // $filename2 = time().'.'.$request->slip_file->extension();
-
-        // $request->proosal_file->move(public_path('uploads'), $filename);
-        // $request->slip_file->move(public_path('uploads'), $filename2);
 
         if ($request->hasFile('proposal_file')) {
             $proposalFilePath = $request->file('proposal_file')->store('uploads');
@@ -56,29 +46,13 @@ class SeminarProposalController extends Controller
             return redirect()->back()->with('error', 'File slip pembayaran tidak valid.');
         }
 
+        $seminarProposal = new SeminarProposal();
+        $seminarProposal->user_id=Auth::user()->id;
+        $seminarProposal->file_proposal = $proposalFilePath;
+        $seminarProposal->file_slip_pembayaran = $slipPembayaranFilePath;
+        $seminarProposal->save();
 
+        return redirect()->route('/home');
 
-        // if ($request->file('proposal_file')->isValid() && $request->file('slip_pembayaran_file')->isValid()) {
-        //     $proposalFilePath = $request->file('proposal_file')->store('proposals');
-        //     $slipPembayaranFilePath = $request->file('slip_pembayaran_file')->store('slip_pembayaran');
-    
-            $seminarProposal = new SeminarProposal();
-            // $seminarProposal->nama=$validatedData['nama'];
-            // $seminarProposal->npm=$validatedData['npm'];
-            $seminarProposal->user_id=Auth::user()->id;
-            // $seminarProposal->dosen_id=$validatedData['dosen_id'];
-            // $seminarProposal->tema_id=$validatedData['tema_id'];
-            $seminarProposal->file_proposal = $proposalFilePath;
-            $seminarProposal->file_slip_pembayaran = $slipPembayaranFilePath;
-
-            // Setelah itu, Anda dapat menambahkan field lain sesuai kebutuhan
-            // $seminarProposal->field_name = $fieldValue;
-
-             $seminarProposal->save();
-    
-            // return redirect()->back()->with('success', 'File berhasil diunggah.');
-            return redirect()->route('/home');
-
-        // }
     }
 }

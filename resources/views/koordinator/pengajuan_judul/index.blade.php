@@ -32,20 +32,20 @@ Proposal
                         <th>Action</th>
                 </thead>
                 <tbody>
-                    {{-- @php
+                    @php
                     $no=1;
-                    @endphp --}}
+                    @endphp
                     @foreach($juduls as $judul)
                     <tr>
-                        <td>{{ $judul->id_tema }}</td>
-                        <td>{{ $judul->nama }}</td>
-                        <td>{{ $judul->npm }}</td>
+                        <td>{{ $no }}</td>
+                        <td>{{ $judul->name }}</td>
+                        <td>{{ $judul->kode_unik }}</td>
                         <td>{{ $judul->topik_bidang_ilmu }}</td>
                         <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_tema) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
-                    {{-- @php
+                    @php
                     $no++;
-                    @endphp --}}
+                    @endphp
                     @endforeach
                     
                 </tbody>

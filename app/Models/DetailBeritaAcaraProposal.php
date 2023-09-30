@@ -10,6 +10,7 @@ class DetailBeritaAcaraProposal extends Model
     protected $table = 'detail_berita_acara_proposal';
 
     protected $fillable = [
+        'berita_acara_proposal_id',
         'users_id',
         'presensi',
         'revisi',

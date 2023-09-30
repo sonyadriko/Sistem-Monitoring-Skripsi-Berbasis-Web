@@ -54,7 +54,7 @@ Proposal
               <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
                 <option value="" selected disabled="">Open this select menu</option>
                 @foreach($bidang_ilmu as $bi)
-                <option value="{{$bi->id_bidang_ilmu}},{{$bi->name}}">{{$bi->topik_bidang_ilmu}}, {{$bi->name}}</option>
+                <option value="{{$bi->id_bidang_ilmu}}">{{$bi->topik_bidang_ilmu}}, {{$bi->name}}</option>
                 @endforeach
               </select>
             </div>

@@ -50,15 +50,28 @@ class BeritaAcaraProposalController extends Controller
 
     public function store(Request $request)
     {
-        $dba = new DetailBeritaAcaraProposal();
+        // Validasi input
+        $request->validate([
+            'berita_acara_proposal_id' => 'required|integer', // Sesuaikan dengan aturan validasi yang sesuai
+            'revisi' => 'required|string', // Sesuaikan dengan aturan validasi yang sesuai
+            'nilai' => 'required|numeric', // Sesuaikan dengan aturan validasi yang sesuai
+        ]);
 
-        $dba->users_id = Auth::user()->id;
-        $dba->berita_acara_proposal_id = $request['ba_id'];
-        $dba->presensi = 'hadir';
-        $dba->revisi = $request['revisi'];
-        $dba->nilai = $request['nilai'];
+        try {
+            // Gunakan Eloquent untuk memasukkan data
+            DetailBeritaAcaraProposal::create([
+                'users_id' => Auth::user()->id,
+                'berita_acara_proposal_id' => $request->berita_acara_proposal_id,
+                'presensi' => 'hadir',
+                'revisi' => $request->revisi,
+                'nilai' => $request->nilai,
+            ]);
 
-        $dba->save();
-        return redirect()->back()->with('success', 'Data updated successfully.');
+            return redirect()->back()->with('success', 'Data successfully updated.');
+        } catch (\Exception $e) {
+            // Tangani error jika terjadi
+            return redirect()->back()->with('error', 'Failed to update data.');
+        }
     }
+
 }

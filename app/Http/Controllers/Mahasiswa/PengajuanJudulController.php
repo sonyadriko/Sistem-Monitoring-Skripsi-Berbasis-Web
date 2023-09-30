@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pengajuan as Pengajuan;
+use App\Models\BidangIlmu as BidangIlmu;
+
 
 class PengajuanJudulController extends Controller
 {
@@ -27,42 +29,27 @@ class PengajuanJudulController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
-            'nama' => 'required|string',
-            'npm' => 'required|string',
             'bidang_ilmu' => 'required|string',
-            // 'mk_pilihan' => 'required|array',
-            // 'judul' => 'required|string',
         ], [
-            'nama.required' => 'Nama is required.',
-            'npm.required' => 'NPM is required.',
             'bidang_ilmu.required' => 'Bidang Ilmu is required.',
-            // 'mk_pilihan.required' => 'At least one course must be selected.',
-            // 'mk_pilihan.array' => 'Invalid courses selected.',
-            // 'judul.required' => 'Judul is required.',
         ]);    
-
-        $values = explode(',', $validatedData['bidang_ilmu']);
-        $bidang_ilmu = trim($values[0]);
-        $dosen = trim($values[1]);
-        
-        $data = DB::table('bidang_ilmu')->where('id_bidang_ilmu', '=', $bidang_ilmu);
-        $data->update(['status' => 'tidak']);
-
-        
+    
+        // Perbarui status bidang ilmu
+        $bidangIlmu = BidangIlmu::findOrFail($validatedData['bidang_ilmu']);
+        $bidangIlmu->status = 'tidak';
+        $bidangIlmu->save();
+    
+        // Simpan pengajuan
         $pengajuan = new Pengajuan();
-        $pengajuan->nama = $validatedData['nama'];
-        $pengajuan->npm = $validatedData['npm'];
-        $pengajuan->dosen = $dosen;
         $pengajuan->user_id = Auth::user()->id;
-        $pengajuan->bidang_ilmu_id = $bidang_ilmu;
-     
-        $pengajuan->status='pending';
+        $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
+        $pengajuan->status = 'pending';
         $pengajuan->save();
-
-        return redirect('/dashboard');
+    
+        return redirect('/dashboard')->with('success', 'Pengajuan berhasil disimpan.');
     }
+    
 
     
 }

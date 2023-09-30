@@ -21,15 +21,17 @@ class BimbinganProposalController extends Controller
 
     public function store(Request $request)
     {
-                    // dd($request->all());
-
         $validatedData = $request->validate([
             'file_proposal' => 'required|mimes:pdf,docx|max:1000',
+            'file_proposal.required' => 'File proposal wajib diunggah.',
+            'file_proposal.mimes' => 'Tipe file harus pdf atau docx.',
+            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
+
         ]);
 
         if ($request->hasFile('file_proposal')) {
             $proposalFilePath = $request->file('file_proposal');
-            $fileName = $proposalFilePath->getClientOriginalName(); 
+            $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
@@ -38,7 +40,7 @@ class BimbinganProposalController extends Controller
         }
         
         $bimbingan = new DetailBimbinganProposal();
-        $bimbingan->bimbingan_proposal_id = $request['bimbingan_proposal_id'];
+        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id');
         $bimbingan->file = $fileUrl;
         $bimbingan->save();
     

@@ -75,7 +75,7 @@ Berita Acara Proposal
                   aria-describedby="defaultFormControlHelp"
                 />
             </div>
-            <input type="hidden" name="ba_id" value="{{$data->id_berita_acara_p}}"/>
+            <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}"/>
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
