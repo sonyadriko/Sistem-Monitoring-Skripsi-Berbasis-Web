@@ -81,7 +81,9 @@ Proposal
       </div>
       @else
       <div class="card-body">
-        <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal])}}" method="POST">
+        {{-- <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal])}}" method="POST"> --}}
+        <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal]) }}" method="POST" id="cetakForm">
+
           @csrf
           <div class="mb-3">
             <label for="npm" class="form-label">NPM</label>
@@ -142,7 +144,8 @@ Proposal
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
             @if(is_null($data)|| is_null($data->cetak))
-            <button type="submit" class="btn btn-primary" on>Cetak</button>
+            <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
+
             @endif
           </div>
          
@@ -154,6 +157,7 @@ Proposal
 
 
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
 function updateSelectOptions() {
@@ -177,3 +181,22 @@ function updateSelectOptions() {
   }
 }
 </script>
+
+<script>
+  function showConfirmation() {
+      Swal.fire({
+          title: 'Apakah Anda yakin ingin mencetak?',
+          text: 'Pastikan data sudah benar sebelum mencetak.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Cetak!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              document.getElementById('cetakForm').submit();
+          }
+      });
+  }
+  </script>
+  

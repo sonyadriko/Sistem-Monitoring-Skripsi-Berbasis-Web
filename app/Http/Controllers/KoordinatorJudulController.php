@@ -72,29 +72,4 @@ class KoordinatorJudulController extends Controller
     
         return redirect()->route('pengajuan-judul.index')->with('success', 'Status pengajuan diperbarui dan BimbinganProposal dibuat.');
     }
-    // public function updatestatus2(Request $request, $id_tema)
-    // {
-       
-    //     $action = $request->input('action');
-    //     $data = Pengajuan::find($id_tema);
-
-    //     if ($action === 'terima') {
-    //         $data->status = 'terima';
-
-    //     } elseif ($action === 'tolak') {
-    //         $data->status = 'tolak';
-    //     }
-    //     $data->save();
-
-    //     $bp = new BimbinganProposal();
-    //     $bp->user_id = $request['user_id'];
-    //     $bp->tema_id = $request['tema_id'];
-    //     $bp->bidang_ilmu_id = $request['bidang_ilmu_id'];
-    //     $bp->dosen_pembimbing_utama = $request['dosen_pembimbing_utama'];
-    //     $bp->dosen_pembimbing_ii = $request['dosen_pembimbing_ii'];
-    //     $bp->save();
-
-    //     return redirect()->route('pengajuan-judul.index');
-    // }
-    
 }

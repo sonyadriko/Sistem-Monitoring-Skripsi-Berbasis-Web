@@ -80,19 +80,30 @@ class KoordinatorSeminarController extends Controller
 
     public function createberitaacara(Request $request, $id)
     {
-        $data = SeminarProposal::where('id_seminar_proposal', $id)->first();
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data not found.');
+        try {
+            // Validasi input
+            $request->validate([
+                'user_id' => 'required|integer',
+                'seminar_proposal_id' => 'required|integer',
+            ]);
+
+            // Periksa apakah SeminarProposal dengan ID yang diberikan ada
+            $data = SeminarProposal::findOrFail($id);
+            
+            // Update data SeminarProposal
+            $data->cetak = 'sudah';
+            $data->save();
+
+            // Simpan data BeritaAcaraProposal
+            $ba = new BeritaAcaraProposal();
+            $ba->users_id = $request->input('user_id');
+            $ba->seminar_proposal_id = $request->input('seminar_proposal_id');
+            $ba->save();
+
+            return redirect()->back()->with('success', 'Data updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update data.');
         }
-        $data->cetak = 'sudah';
-        $data->save();
-
-        $ba = new BeritaAcaraProposal();
-
-        $ba->users_id = $request['user_id'];
-        $ba->seminar_proposal_id = $request['seminar_proposal_id'];
-        $ba->save();
-        return redirect()->back()->with('success', 'Data updated successfully.');
-
     }
+
 }

@@ -41,7 +41,6 @@ class DosenBimbinganProposalController extends Controller
         ];
         
         return view('dosen/bimbingan/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
-        // return view('dosen/bimbingan/proposal.detail', compact('data'));
 
     }
 
@@ -57,65 +56,60 @@ class DosenBimbinganProposalController extends Controller
    
     public function updaterevisi($id, Request $request)
     {
+        // Validasi input
         $validatedData = $request->validate([
             'revisi' => 'required|string',
         ], [
             'revisi.required' => 'Revisi is required.',
-        ]);    
+        ]);
     
-        // Pastikan $id sesuai dengan kolom yang ingin Anda cocokkan
-        $result = DB::table('detail_bimbingan_proposal')
-                    ->where('id_detail_bimbingan_proposal', $id)
-                    ->update([
-                        'revisi' => $validatedData['revisi'],
-                        'updated_at' => now(),
-                    ]);
+        try {
+            // Temukan detail bimbingan proposal berdasarkan ID
+            $detailBimbingan = DetailBimbinganProposal::findOrFail($id);
     
-        if ($result) {
+            // Update revisi
+            $detailBimbingan->revisi = $validatedData['revisi'];
+            $detailBimbingan->updated_at = now();
+            $detailBimbingan->save();
+    
             return response()->json("Berhasil memperbarui revisi");
-        } else {
-            return response()->json("Gagal memperbarui revisi", 500); // Kode status 500 untuk Internal Server Error
+        } catch (\Exception $e) {
+            // Tangani error jika terjadi
+            return response()->json("Gagal memperbarui revisi: " . $e->getMessage(), 500); // Kode status 500 untuk Internal Server Error
         }
     }
 
     public function accrevisi($id, Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'revisi' => 'required|string',
-        // ], [
-        //     'revisi.required' => 'Revisi is required.',
-        // ]);    
+        try {
+            // Temukan detail bimbingan proposal berdasarkan ID
+            $detailBimbingan = DetailBimbinganProposal::findOrFail($id);
     
-        // Pastikan $id sesuai dengan kolom yang ingin Anda cocokkan
-        $result = DB::table('detail_bimbingan_proposal')
-                    ->where('id_detail_bimbingan_proposal', $id)
-                    ->update([
-                        'validasi' => 'acc',
-                        'updated_at' => now()
-                    ]);
+            // Update validasi menjadi 'acc'
+            $detailBimbingan->validasi = 'acc';
+            $detailBimbingan->updated_at = now();
+            $detailBimbingan->save();
     
-        if ($result) {
             return response()->json("Berhasil acc");
-        } else {
-            return response()->json("Gagal acc", 500); // Kode status 500 untuk Internal Server Error
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Tangani error validasi
+            $errors = $e->errors();
+            return response()->json(['error' => 'Gagal acc', 'validation_errors' => $errors], 422);
+        } catch (\Exception $e) {
+            // Tangani error jika terjadi
+            return response()->json(['error' => 'Gagal acc: ' . $e->getMessage()], 500);
         }
+        
     }
 
     public function accproposal($id, Request $request)
     {
 
-      
-
-        // Ambil data dari request
-        // $idBimbinganProposal = $request->input('idBimbinganProposal');
         $dospem1 = $request->input('dospem1');
         $dospem2 = $request->input('dospem2');
         
         $username = Auth::user()->name;
 
-        // return response()->json($request['dospem1']);
-        
-        
         if ($username === $dospem1) {
             $result_utama = DB::table('bimbingan_proposal')
                 ->where('id_bimbingan_proposal', $id)
