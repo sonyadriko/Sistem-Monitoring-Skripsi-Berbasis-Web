@@ -103,7 +103,9 @@ Proposal
                 />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-            <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}">
+            {{-- <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}"> --}}
+            <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
+
             {{-- <input type="hidden" name="dosen_id" value="{{ $datas->id_dosen }}"> --}}
             <div class="mb-3">
                 <label for="formFile" class="form-label">Upload File Proposal Skripsi</label>
