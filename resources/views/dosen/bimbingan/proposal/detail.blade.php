@@ -216,7 +216,7 @@ Bimbingan Proposal
                              @endphp
                              @foreach($detail as $item)
                              <tr>
-                                 <td>{{ $item->id_detail_bimbingan_proposal }}</td>
+                                 <td>{{ $no }}</td>
                                  <td>{{ $item->created_at }}</td>
                                  <td>{{ $item->revisi }}</td>
                                  <td>
@@ -228,7 +228,6 @@ Bimbingan Proposal
                                          onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
                                          Tambahkan Revisi
                                      </button>
-                                     {{-- <button type="button" class="btn btn-primary">Acc Revisi</button> --}}
                                      <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
                                         Acc Revisi
                                     </button>
@@ -281,12 +280,6 @@ Bimbingan Proposal
         
             <div class="card-body">
                 <span class="span0-1">Proposal Acceptance </span>
-                {{-- <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal({{$data->id_bimbingan_proposal}})">
-                    Accept Proposal
-                </button> --}}
-                {{-- <form action="" method="POSt">
-                    <input type="hidden" name="dospem1" value="{{$data->dosen_pembimbing_utama}}"/>
-                    <input type="hidden" name="dospem2" value="{{$data->dosen_pembimbing_ii}}"/> --}}
                 @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
                     @if (Auth::user()->name == $data->dosen_pembimbing_utama)
                     <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
@@ -298,21 +291,9 @@ Bimbingan Proposal
                     </button>
                     @endif
                 @else
-                {{-- <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
-                        Sudah Acc
-                </button> --}}
                 <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
-
-
                 @endif
-                
-
-                
-                {{-- </form> --}}
-                
             </div>
-            
-        
      </div>
  </div>
  </div>
