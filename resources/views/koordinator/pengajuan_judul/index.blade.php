@@ -15,6 +15,11 @@ Proposal
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
+    </div>
+  @endif
     <div class="card mb-4">
         <h5 class="card-header">Table Pengajuan Judul Proposal</h5>
     

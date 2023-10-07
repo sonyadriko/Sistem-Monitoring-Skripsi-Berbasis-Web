@@ -14,6 +14,7 @@ use App\Http\Controllers\KoordinatorSuratTugasController;
 use App\Http\Controllers\BeritaAcaraProposalController;
 use App\Http\Controllers\SeminarProposalController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KoordinatorBeritaAcaraProposalController;
@@ -50,6 +51,14 @@ Route::controller(LoginController::class)->group(function () {
     // Route::get('/reset-auth-logout', 'password_reset_logout')->name('reset-auth-logout');
 });
 
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'showRegisterForm')
+    ->name('register')
+    ->middleware('guest');
+    // Route::post('/register', 'create')->name('regist');
+
+});
+
 
 Route::group(['middleware' => 'auth:dosen'], function() {
 
@@ -79,10 +88,6 @@ Route::group(['middleware' => 'auth:dosen'], function() {
 });
 
 Route::group(['middleware' => 'auth:koordinator'], function() {
-
-    // Route::get('/koordinator', function () {
-    //     return view('mahasiswa/proposal/index');
-    // });
 
     Route::controller(KoordinatorController::class)->group(function () {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
@@ -135,7 +140,8 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     
     Route::get('/proposal', function () {
         return view('mahasiswa/proposal/index');
-    });
+    })->name('proposal');
+    
 
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'index')->name('profile.index');

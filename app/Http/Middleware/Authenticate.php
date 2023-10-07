@@ -24,45 +24,64 @@ class Authenticate extends Middleware
 
         return $next($request);
     }
-
-
     protected function redirectTo($request)
     {
-        if (in_array('mahasiswa', $this->guards)) {
-            // Cek apakah 'mahasiswa' ada dalam daftar guards
-            if (!auth()->guard('mahasiswa')->check()) {
-                return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
-            } else {
-                return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
-            }
-        } else if (in_array('dosen', $this->guards)) {
-            // Cek apakah 'dosen' ada dalam daftar guards
-            if (!auth()->guard('dosen')->check()) {
-                return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
-            } else {
-                return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
-            }
-        } else if (in_array('koordinator', $this->guards)) {
-            // Cek apakah 'koordinator' ada dalam daftar guards
-            if (!auth()->guard('koordinator')->check()) {
-                return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
-
-            } else {
-                return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
-            }
-        } else if (in_array('ketuajurusan', $this->guards)) {
-            // Cek apakah 'ketuajurusan' ada dalam daftar guards
-            if (!auth()->guard('ketuajurusan')->check()) {
-                return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
-            } else {
-                return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
-            }
-        } else {
-            // Tidak ada peran yang sesuai, arahkan ke 'auth-login'
-            return route('auth-login');
+        if ($request->expectsJson()) {
+            return null;
         }
-        
+    
+        foreach ($this->guards as $guard) {
+            if (in_array($guard, ['mahasiswa', 'dosen', 'koordinator', 'ketuajurusan'])) {
+                if (!auth()->guard($guard)->check()) {
+                    return route('login');  // Mengarahkan ke 'login' jika tidak terotentikasi
+                } else {
+                    return route('dashboard');  // Mengarahkan ke 'dashboard' jika terotentikasi
+                }
+            }
+        }
+    
+        // Tidak ada peran yang sesuai, arahkan ke 'login'
+        return route('login');
     }
+    
+
+    // protected function redirectTo($request)
+    // {
+    //     if (in_array('mahasiswa', $this->guards)) {
+    //         // Cek apakah 'mahasiswa' ada dalam daftar guards
+    //         if (!auth()->guard('mahasiswa')->check()) {
+    //             return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
+    //         } else {
+    //             return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
+    //         }
+    //     } else if (in_array('dosen', $this->guards)) {
+    //         // Cek apakah 'dosen' ada dalam daftar guards
+    //         if (!auth()->guard('dosen')->check()) {
+    //             return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
+    //         } else {
+    //             return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
+    //         }
+    //     } else if (in_array('koordinator', $this->guards)) {
+    //         // Cek apakah 'koordinator' ada dalam daftar guards
+    //         if (!auth()->guard('koordinator')->check()) {
+    //             return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
+
+    //         } else {
+    //             return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
+    //         }
+    //     } else if (in_array('ketuajurusan', $this->guards)) {
+    //         // Cek apakah 'ketuajurusan' ada dalam daftar guards
+    //         if (!auth()->guard('ketuajurusan')->check()) {
+    //             return route('home'); // Mengarahkan ke 'auth-login' jika tidak terotentikasi
+    //         } else {
+    //             return route('dashboard'); // Mengarahkan ke 'dashboard' jika terotentikasi
+    //         }
+    //     } else {
+    //         // Tidak ada peran yang sesuai, arahkan ke 'auth-login'
+    //         return route('auth-login');
+    //     }
+        
+    // }
 
     
 }

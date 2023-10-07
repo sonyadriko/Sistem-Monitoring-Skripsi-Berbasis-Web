@@ -14,8 +14,9 @@ class KoordinatorController extends Controller
     {
         $mahasiswaCount = DB::table('users')->where('role_id', '1')->count();
         $dosenCount = DB::table('users')->where('role_id', '2')->count();
+        $pengajuanCount = DB::table('tema')->where('status', 'pending')->count();
 
 
-        return view('koordinator.index', compact('mahasiswaCount', 'dosenCount'));
+        return view('koordinator.index', compact('mahasiswaCount', 'dosenCount', 'pengajuanCount'));
     }
 }

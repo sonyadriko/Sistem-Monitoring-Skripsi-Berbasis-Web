@@ -67,12 +67,8 @@ Proposal
                   type="text"
                   class="form-control"
                   id="defaultFormControlInput"
-                  {{-- value="Sony Adi Adriko"
-                   --}}
                   name="nama"
                 value="{{Auth::user()->name}}"
-
-                  {{-- placeholder="Sony Adi Adriko" --}}
                   aria-describedby="defaultFormControlHelp"
                   readonly
                 />
@@ -103,10 +99,7 @@ Proposal
                 />
             </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-            {{-- <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}"> --}}
             <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
-
-            {{-- <input type="hidden" name="dosen_id" value="{{ $datas->id_dosen }}"> --}}
             <div class="mb-3">
                 <label for="formFile" class="form-label">Upload File Proposal Skripsi</label>
                 <input class="form-control" type="file" name="proposal_file" id="proposal_file" />

@@ -26,9 +26,8 @@ class BimbinganProposalController extends Controller
             'file_proposal.required' => 'File proposal wajib diunggah.',
             'file_proposal.mimes' => 'Tipe file harus pdf atau docx.',
             'file_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
-
         ]);
-
+    
         if ($request->hasFile('file_proposal')) {
             $proposalFilePath = $request->file('file_proposal');
             $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
@@ -36,15 +35,18 @@ class BimbinganProposalController extends Controller
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
         } else {
-            return redirect()->back()->with('error', 'File proposal tidak valid.');
+            return response()->json(['success' => false, 'message' => 'File proposal tidak valid.']);
         }
-        
+    
         $bimbingan = new DetailBimbinganProposal();
-        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id');
+        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id'); // Sesuaikan ini dengan input yang benar
         $bimbingan->file = $fileUrl;
         $bimbingan->save();
     
-            // return redirect()->back()->with('success', 'File berhasil diunggah.');
-        return redirect()->route('bimbingan-mhs.index');
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
     }
+    
+
+
 }

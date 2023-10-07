@@ -55,22 +55,24 @@ Proposal
           </div>
         </div>
       </div>
-  
-      <!-- similar columns here -->
-  
-      <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-        <div class="card">
-          <div class="row row-bordered g-0">
-            <div class="col-md-8">
-              <h5 class="card-header m-0 me-2 pb-3">Info Penting</h5>
+
+      <div class="row">
+        <div class="col-xl">
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Info Penting</h5>
             </div>
-            <div class="col-md-4 p-3">
+            <div class="card-body text-center">
+              <img src="img/illustrations/info_img.png" alt="Gambar Info Penting" class="img-fluid">
               <p>Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi</p>
             </div>
           </div>
         </div>
       </div>
-  
+      
+      
+      
+       
     </div>
   </div>
   

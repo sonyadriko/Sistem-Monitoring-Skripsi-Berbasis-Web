@@ -47,7 +47,7 @@ class PengajuanJudulController extends Controller
         $pengajuan->status = 'pending';
         $pengajuan->save();
     
-        return redirect('/dashboard')->with('success', 'Pengajuan berhasil disimpan.');
+        return redirect('/proposal')->with('success', 'Pengajuan berhasil dilakukan.');
     }
     
 

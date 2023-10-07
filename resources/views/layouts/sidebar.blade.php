@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/home')) }}" class="app-brand-link">
+      <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="app-brand-link">
         <span class="app-brand-text demo menu-text fw-bolder">Sistem Informasi</span>
       </a>
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -14,103 +14,12 @@
       <!-- Dashboard -->
       @if(Request::is('dashboard*'))
       <li class="menu-item active">
-        <a href="index.html" class="menu-link">
+        <a href="{{url('/dashboard')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
       @endif
-
-      @if(Auth::user()->role_id == 3)
-      <li class="menu-item">
-        <a href="{{route('dashboard:koordinator')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Dashboard</div>
-        </a>
-      </li>
-      
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Pengajuan & Surat</span>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
-          <div data-i18n="Account Settings">Proposal & Skripsi</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="{{ route('pengajuan-judul.index')}}" class="menu-link">
-              <div data-i18n="Account">Pengajuan Judul</div>
-            </a>
-          </li>
-          {{-- <li class="menu-item">
-            <a href="{{ route('pembagian-dosen.create')}}" class="menu-link">
-              <div data-i18n="Account">Pembagian Dosen</div>
-            </a>
-          </li> --}}
-          <li class="menu-item">
-            <a href="{{ route('koor-surat-tugas.index')}}" class="menu-link">
-              <div data-i18n="Notifications">Surat Tugas Bimbingan</div>
-            </a>
-          </li>
-          {{-- <li class="menu-item">
-            <a href="pages-account-settings-connections.html" class="menu-link">
-              <div data-i18n="Connections">Surat Survey ke Perusahaan</div>
-            </a>
-          </li> --}}
-          <li class="menu-item">
-            <a href="{{ route('jadwal-seminar-proposal.index') }}" class="menu-link">
-              <div data-i18n="Connections">Pendaftaran Sidang</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="{{ route('koor-berita-acara-proposal.index') }}" class="menu-link">
-              <div data-i18n="Connections">Berita Acara</div>
-            </a>
-          </li>
-        </ul>
-      </li>
-      @endif
-
-      @if(Auth::user()->role_id == 2)
-      <li class="menu-item">
-        <a href="{{route('dashboard:dosen')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Dashboard</div>
-        </a>
-      </li>
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Bidang Ilmu</span>
-      </li>
-      <li class="menu-item">
-        <a href="{{route('bidang-ilmu.index')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Bidang Ilmu</div>
-        </a>
-      </li>
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Bimbingan</span>
-      </li>
-      <li class="menu-item">
-        <a href="{{route('bimbingan-dosen.index')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Mahasiswa Bimbingan</div>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Pengajuan</div>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="{{route('berita-acara-proposal.index')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Berita Acara Proposal</div>
-        </a>
-      </li>
-      @endif
-
       @if(Auth::user()->role_id == 1)
       @unless(Request::is('dashboard*'))
       <!-- Layouts -->
@@ -120,8 +29,6 @@
           <div data-i18n="Layouts">Profile</div>
         </a>
       </li>
-      @endif
-
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Pengajuan & Surat</span>
       </li>
@@ -169,6 +76,100 @@
         </a>
       </li>
       @endif
+      @endif
+
+      @if(Auth::user()->role_id == 3)
+      <li class="menu-item">
+        <a href="{{route('dashboard:koordinator')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Dashboard</div>
+        </a>
+      </li>
+      
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Pengajuan & Surat</span>
+      </li>
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-dock-top"></i>
+          <div data-i18n="Account Settings">Proposal & Skripsi</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('pengajuan-judul.index')}}" class="menu-link">
+              <div data-i18n="Account">Pengajuan Judul</div>
+            </a>
+          </li>
+          {{-- <li class="menu-item">
+            <a href="{{ route('pembagian-dosen.create')}}" class="menu-link">
+              <div data-i18n="Account">Pembagian Dosen</div>
+            </a>
+          </li> --}}
+         
+          {{-- <li class="menu-item">
+            <a href="pages-account-settings-connections.html" class="menu-link">
+              <div data-i18n="Connections">Surat Survey ke Perusahaan</div>
+            </a>
+          </li> --}}
+          <li class="menu-item">
+            <a href="{{ route('jadwal-seminar-proposal.index') }}" class="menu-link">
+              <div data-i18n="Connections">Pendaftaran Sidang</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('koor-berita-acara-proposal.index') }}" class="menu-link">
+              <div data-i18n="Connections">Berita Acara</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('koor-surat-tugas.index')}}" class="menu-link">
+              <div data-i18n="Notifications">Surat Tugas Bimbingan</div>
+            </a>
+          </li>
+        </ul>
+      </li>
+      @endif
+
+      @if(Auth::user()->role_id == 2)
+      <li class="menu-item">
+        <a href="{{route('dashboard:dosen')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Dashboard</div>
+        </a>
+      </li>
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Bidang Ilmu</span>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('bidang-ilmu.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Bidang Ilmu</div>
+        </a>
+      </li>
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Bimbingan</span>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('bimbingan-dosen.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Mahasiswa Bimbingan</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Pengajuan</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('berita-acara-proposal.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Berita Acara Proposal</div>
+        </a>
+      </li>
+      @endif
+
+    
       <!-- Components -->
       {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> --}}
       <!-- Cards -->

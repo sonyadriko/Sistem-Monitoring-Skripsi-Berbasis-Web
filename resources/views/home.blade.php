@@ -10,7 +10,7 @@ Dashboard
   <div class="alert alert-success">
       {{ session('success') }}
   </div>
-@endif
+  @endif
 
   <div class="row">
     <!-- Proposal Skripsi Card -->
@@ -21,7 +21,7 @@ Dashboard
             <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
               <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                 <div class="card-title">
-                  <h5 class="text-nowrap mb-2">Proposal Skripsi</h5>
+                  <h5 class="text-nowrap mb-2"><a href="{{ route('proposal') }}">Proposal Skripsi</a></h5>
                 </div>
                 <iconify-icon icon="solar:book-linear"></iconify-icon>
               </div>
@@ -30,7 +30,7 @@ Dashboard
         </div>
       </div>
     </div>
-    
+
     <!-- Skripsi Card -->
     <div class="col-md-4 col-lg-8 col-xl-4">
       <div class="col-9 mb-4">
@@ -39,7 +39,7 @@ Dashboard
             <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
               <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                 <div class="card-title">
-                  <h5 class="text-nowrap mb-2">Skripsi</h5>
+                  <h5 class="text-nowrap mb-2"><a href="{{ route('proposal') }}">Skripsi</a></h5>
                 </div>
               </div>
             </div>
@@ -49,5 +49,4 @@ Dashboard
     </div>
   </div>
 </div>
-
-  @endsection
+@endsection
