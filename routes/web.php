@@ -174,7 +174,6 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
   
     Route::group(['prefix' => 'proposal/revisi_seminar_proposal'], function () {
         Route::get('/', [RevisiSeminarProposalController::class, 'index'])->name('revisi_sp.index');
-        // Route::get('/detail/{id}', [RevisiSeminarProposal::class, 'detail'])->name('koor-surat-tugas.detail');
         Route::post('/store', [RevisiSeminarProposalController::class, 'store'])->name('revisi_sp.store');
     });
     

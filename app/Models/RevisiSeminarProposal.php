@@ -10,7 +10,7 @@ class RevisiSeminarProposal extends Model
     protected $table = 'revisi_seminar_proposal';
 
     protected $fillable = [
-        'seminar_proposal_id',
+        'berita_acara_proposal_id',
         'file_revisi',
         'updated_at',
         'created_at'

@@ -142,7 +142,7 @@ Bimbingan Proposal
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
-                        text: 'Please select a file and provide a valid bimbingan_proposal_id.'
+                        text: 'Please select a file.'
                     });
                 }
             });
