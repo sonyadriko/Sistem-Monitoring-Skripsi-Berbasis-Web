@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class DosenBimbinganProposalController extends Controller
 {
-    
+
     public function index()
     {
         $bimbinganp = DB::table('bimbingan_proposal')
@@ -25,10 +25,10 @@ class DosenBimbinganProposalController extends Controller
                 ->orderBy('bimbingan_proposal.created_at', 'desc')
                 ->get();
         return view('dosen/bimbingan/proposal.index', compact('bimbinganp'));
-       
+
 
     }
-            
+
     public function detail($id)
     {
         $data = [
@@ -36,10 +36,10 @@ class DosenBimbinganProposalController extends Controller
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                     ->join('users', 'users.id', 'bimbingan_proposal.user_id')
                     ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu')
-                    ->where('id_bimbingan_proposal', '=',$id)->first(), 
+                    ->where('id_bimbingan_proposal', '=',$id)->first(),
             'detail' => DB::table('detail_bimbingan_proposal')->where('bimbingan_proposal_id', '=',$id)->get(),
         ];
-        
+
         return view('dosen/bimbingan/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
 
     }
@@ -53,7 +53,7 @@ class DosenBimbinganProposalController extends Controller
         return view('dosen/bimbingan/proposal.detail', ['data' => $data['data']]);
     }
 
-   
+
     public function updaterevisi($id, Request $request)
     {
         // Validasi input
@@ -62,16 +62,16 @@ class DosenBimbinganProposalController extends Controller
         ], [
             'revisi.required' => 'Revisi is required.',
         ]);
-    
+
         try {
             // Temukan detail bimbingan proposal berdasarkan ID
             $detailBimbingan = DetailBimbinganProposal::findOrFail($id);
-    
+
             // Update revisi
             $detailBimbingan->revisi = $validatedData['revisi'];
             $detailBimbingan->updated_at = now();
             $detailBimbingan->save();
-    
+
             return response()->json("Berhasil memperbarui revisi");
         } catch (\Exception $e) {
             // Tangani error jika terjadi
@@ -84,12 +84,12 @@ class DosenBimbinganProposalController extends Controller
         try {
             // Temukan detail bimbingan proposal berdasarkan ID
             $detailBimbingan = DetailBimbinganProposal::findOrFail($id);
-    
+
             // Update validasi menjadi 'acc'
             $detailBimbingan->validasi = 'acc';
             $detailBimbingan->updated_at = now();
             $detailBimbingan->save();
-    
+
             return response()->json("Berhasil acc");
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Tangani error validasi
@@ -99,7 +99,7 @@ class DosenBimbinganProposalController extends Controller
             // Tangani error jika terjadi
             return response()->json(['error' => 'Gagal acc: ' . $e->getMessage()], 500);
         }
-        
+
     }
 
     public function accproposal($id, Request $request)
@@ -107,8 +107,10 @@ class DosenBimbinganProposalController extends Controller
 
         $dospem1 = $request->input('dospem1');
         $dospem2 = $request->input('dospem2');
-        
+
         $username = Auth::user()->name;
+
+
 
         if ($username === $dospem1) {
             $result_utama = DB::table('bimbingan_proposal')
@@ -117,7 +119,7 @@ class DosenBimbinganProposalController extends Controller
                     'acc_dosen_utama' => 'acc',
                     'tgl_acc_dosen_utama' => now()
                 ]);
-        
+
             if ($result_utama) {
                 return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_utama!');
             } else {
@@ -130,7 +132,7 @@ class DosenBimbinganProposalController extends Controller
                     'acc_dosen_ii' => 'acc',
                     'tgl_acc_dosen_ii' => now()
                 ]);
-        
+
             if ($result_ii) {
                 return response()->json('Proposal berhasil diacc untuk dosen_pembimbing_ii!');
             } else {

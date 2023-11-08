@@ -46,22 +46,22 @@ Bimbingan Proposal
             <div class="card mb-4">
                 <h5 class="card-header">Persetujuan Seminar</h5>
                 <div class="card-body">
-                    
+
                         <div class="mb-3">
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5" 
+                                <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"
                                 {{-- {{ $persetujuanDosen1 ? 'checked' : '' }} {{ $persetujuanDosen1 ? 'disabled' : '' }}  --}}
                                 />
                                 <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6" 
+                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"
                                 {{-- {{ $persetujuanDosen2 ? 'checked' : '' }} {{ $persetujuanDosen2 ? 'disabled' : '' }}  --}}
                                 />
                                 <label class="form-check-label" for="defaultCheck6"> Dosen Pembimbing 2 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" 
+                                <button type="submit" class="btn btn-primary"
                                 {{-- {{ ($persetujuanDosen1 && $persetujuanDosen2) ? '' : 'disabled' }} --}}
                                 >Daftar</button>
                             </div>
@@ -71,7 +71,8 @@ Bimbingan Proposal
         </div>
     </div>
     <div class="mb-3">
-        <button type="button" class="btn btn-primary">History Bimbingan</button>
+        <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
+
     </div>
     @endif
 </div>

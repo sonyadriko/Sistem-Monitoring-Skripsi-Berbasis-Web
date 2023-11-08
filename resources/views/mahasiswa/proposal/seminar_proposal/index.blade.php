@@ -7,7 +7,7 @@ Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   @if(is_null($datas) || is_null($datas->id_tema))
-    
+
   <div class="alert alert-warning" role="alert">
       Harap ajukan judul terlebih dahulu sebelum melanjutkan.
   </div>
@@ -18,16 +18,16 @@ Proposal
       Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing utama dan ii.
     </div>
     @endif
-    
+
   @elseif(is_null($datas) || is_null($datas->dosen_pembimbing_utama))
- 
+
   @if(is_null($datas) || is_null($datas->acc_dosen_utama))
-    
+
     <div class="alert alert-warning" role="alert">
         Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing.
     </div>
     @endif --}}
-   
+
 
 
     {{-- @if (is_null($datas) || is_null($datas->dosen_pembimbing_utama))
@@ -50,36 +50,36 @@ Proposal
           <form action="{{route('seminar-proposal.submit')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">NPM</label>
+                <label for="npm" class="form-label">NPM</label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  value="{{Auth::user()->kode_unik}}"
-                  name="npm"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
+                type="text"
+                class="form-control"
+                id="npm"
+                value="{{Auth::user()->kode_unik}}"
+                name="npm"
+                aria-describedby="defaultFormControlHelp"
+                readonly
+              />
             </div>
             <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Nama Mahasiswa</label>
+                <label for="nama" class="form-label">Nama Mahasiswa</label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="defaultFormControlInput"
-                  name="nama"
+                type="text"
+                class="form-control"
+                id="nama"
+                name="nama"
                 value="{{Auth::user()->name}}"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
+                aria-describedby="defaultFormControlHelp"
+                readonly
                 />
             </div>
-      
+
             <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 1</label>
+                <label for="dospem1" class="form-label">Dosen Pembimbing 1</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="defaultFormControlInput"
+                  id="dospem1"
                   value="{{$datas->dosen_pembimbing_utama}}"
                   placeholder="Dosen Pembimbing 1"
                   aria-describedby="defaultFormControlHelp"
@@ -87,11 +87,11 @@ Proposal
                 />
             </div>
             <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Dosen Pembimbing 2</label>
+                <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="defaultFormControlInput"
+                  id="dospem2"
                   placeholder="Dosen Pembimbing 2"
                   value="{{$datas->dosen_pembimbing_ii}}"
                   aria-describedby="defaultFormControlHelp"
@@ -101,11 +101,11 @@ Proposal
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
             <div class="mb-3">
-                <label for="formFile" class="form-label">Upload File Proposal Skripsi</label>
+                <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
                 <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
             </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
+                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
                 <input class="form-control" type="file" name="slip_file" id="slip_file" />
             </div>
         <div class="d-flex justify-content-between mt-4">

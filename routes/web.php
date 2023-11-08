@@ -19,6 +19,8 @@ use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KoordinatorBeritaAcaraProposalController;
 use App\Http\Controllers\RevisiSeminarProposalController;
+use App\Http\Controllers\HistoryBimbinganController;
+
 
 
 
@@ -43,7 +45,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::controller 
+// Route::controller
 Route::controller(LoginController::class)->group(function () {
     Route::get('/auth-login', 'showLoginForm')
         ->name('auth-login')
@@ -106,14 +108,14 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
         Route::post('/update-status/{id_tema}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
     });
-    
+
     Route::group(['prefix' => 'koordinator/jadwal_seminar_proposal'], function () {
         Route::get('/', [KoordinatorSeminarController::class, 'index'])->name('jadwal-seminar-proposal.index');
         Route::get('/detail/{id}', [KoordinatorSeminarController::class, 'detail']);
         Route::post('/update-status/{id}', [KoordinatorSeminarController::class, 'updatejadwal'])->name('jadwal-seminar-proposal-update');
         Route::post('/cetak-berita-acara/{id}', [KoordinatorSeminarController::class, 'createberitaacara'])->name('cetak-berita-acara');
     });
-    
+
 
     Route::group(['prefix' => 'koordinator/surat_tugas'], function () {
         Route::get('/', [KoordinatorSuratTugasController::class, 'index'])->name('koor-surat-tugas.index');
@@ -121,14 +123,14 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::post('/update/{id}', [KoordinatorSuratTugasController::class, 'update'])->name('koor-surat-tugas.update');
     });
 
-    Route::controller(PembagianDosenController::class)->group(function () 
-    { 
+    Route::controller(PembagianDosenController::class)->group(function ()
+    {
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
         Route::get('/koordinator/pembagian_dosen/edit/{id}', 'edit');
         Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
-    }); 
+    });
 
-    
+
 });
 
 Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], function () {
@@ -138,12 +140,16 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    
-    
+
+
     Route::get('/proposal', function () {
         return view('mahasiswa/proposal/index');
     })->name('proposal');
-    
+
+    Route::group(['prefix' => 'mahasiswa/history_bimbingan_proposal'], function () {
+        Route::get('/', [HistoryBimbinganController::class, 'index'])->name('his-bim-mhs.index');
+    });
+
 
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'index')->name('profile.index');
@@ -151,40 +157,40 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
         Route::post('/profile/update/{id}', 'store')->name('update-profile.store');
 
     });
-    
+
     Route::controller(PengajuanJudulController::class)->group(function () {
         Route::get('/proposal/pengajuan_judul', 'create')->name('pengajuan-judul.create');
         Route::post('/proposal/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
         // Route::match(['get','post'], 'koordinator/updatedetail/{id}');
     });
-    
-    
+
+
     Route::controller(SeminarProposalController::class)->group(function ()
     {
         Route::get('/proposal/seminar_proposal', 'create')->name('seminar-proposal.create');
         Route::post('/proposal/seminar_proposal', 'store')->name('seminar-proposal.submit');
-    
+
     });
-    
-   
+
+
     Route::controller(BimbinganProposalController::class)->group(function (){
         Route::get('/proposal/bimbingan', 'index')->name('bimbingan-mhs.index');
         Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
     });
-  
+
     Route::group(['prefix' => 'proposal/revisi_seminar_proposal'], function () {
         Route::get('/', [RevisiSeminarProposalController::class, 'index'])->name('revisi_sp.index');
         Route::post('/store', [RevisiSeminarProposalController::class, 'store'])->name('revisi_sp.store');
     });
-    
+
 
     Route::controller(SuratTugasController::class)->group(function (){
         Route::get('/proposal/surat_tugas', 'index')->name('pengajuan-st.index');
         Route::post('/proposal/surat_tugas', 'store')->name('pengajuan-st.store');
     });
 
-    
 
-   
+
+
 });
 

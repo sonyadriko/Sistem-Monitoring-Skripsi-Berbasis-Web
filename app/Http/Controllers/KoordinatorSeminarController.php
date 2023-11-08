@@ -14,7 +14,7 @@ class KoordinatorSeminarController extends Controller
     {
         // $sempros = SeminarProposal::all();
         $sempros = DB::table('seminar_proposal')->join('users', 'users.id', 'seminar_proposal.users_id')->get();
-     
+
         return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros'));
 
     }
@@ -89,7 +89,7 @@ class KoordinatorSeminarController extends Controller
 
             // Periksa apakah SeminarProposal dengan ID yang diberikan ada
             $data = SeminarProposal::findOrFail($id);
-            
+
             // Update data SeminarProposal
             $data->cetak = 'sudah';
             $data->save();

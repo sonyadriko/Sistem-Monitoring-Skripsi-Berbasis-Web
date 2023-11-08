@@ -23,6 +23,7 @@ class SeminarProposalController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             'bimbingan_proposal_id' => 'required',
             'proposal_file' => 'required|mimes:pdf,docx|max:1000',
@@ -54,7 +55,7 @@ class SeminarProposalController extends Controller
         $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
         $seminarProposal->save();
 
-        return redirect('/proposal')->with('success', 'Seminar Proposal successfully created.');
+        return redirect('/proposal')->with('success', 'Berhasil Daftar Seminar Proposal.');
 
     }
 }

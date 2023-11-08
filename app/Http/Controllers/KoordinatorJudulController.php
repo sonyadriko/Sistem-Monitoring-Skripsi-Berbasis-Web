@@ -31,7 +31,7 @@ class KoordinatorJudulController extends Controller
                 ->join('users as dosen', 'dosen.id', 'bidang_ilmu.user_id')
                 // ->join('bimbingan_proposal', 'bimbingan_proposal.tema_id', 'tema.id_tema')
                 ->select('users.name', 'users.kode_unik', 'tema.*', 'bidang_ilmu.topik_bidang_ilmu', 'dosen.name as nama_dosen')
-                ->where('id_tema', '=',$id)->first(), 
+                ->where('id_tema', '=',$id)->first(),
         ];
         $dosen2 = [
             'dosen2' => DB::table('users')->where('role_id', '2')->get(),
@@ -51,14 +51,14 @@ class KoordinatorJudulController extends Controller
             'dosen_pembimbing_utama' => 'required|string',
             'dosen_pembimbing_ii' => 'required|string',
         ]);
-    
+
         $action = $request->input('action');
         $pengajuan = Pengajuan::findOrFail($id_tema);
-    
+
         // Perbarui status pengajuan
         $pengajuan->status = ($action === 'terima') ? 'terima' : 'tolak';
         $pengajuan->save();
-    
+
         // Simpan data BimbinganProposal
         $bp = new BimbinganProposal();
         $bp->fill($request->only([
@@ -69,7 +69,7 @@ class KoordinatorJudulController extends Controller
             'dosen_pembimbing_ii',
         ]));
         $bp->save();
-    
-        return redirect()->route('pengajuan-judul.index')->with('success', 'Status pengajuan diperbarui dan BimbinganProposal dibuat.');
+
+        return redirect()->route('pengajuan-judul.index')->with('success', 'Status pengajuan diperbarui dan Bimbingan Proposal dibuat.');
     }
 }
