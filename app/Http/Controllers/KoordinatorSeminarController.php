@@ -35,27 +35,6 @@ class KoordinatorSeminarController extends Controller
         ];
         return view('koordinator/penjadwalan/seminar_proposal.detail', $data, $baru);
 
-
-        // if ($data['data']) {
-        //     $userId = $data['data']->user_id;
-        //     $temaId = $data['data']->tema_id;
-
-        //     $users = DB::table('users')->where('id', '=', $userId)->first();
-        //     $tema = DB::table('tema')->where('id_tema', '=', $temaId)->first();
-
-        //     if ($users) {
-        //         $data['users'] = $users;
-        //         $data['tema'] = $tema;
-
-        //         return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
-        //     } else {
-        //         // Handle the case when no user record was found
-        //         return redirect()->back()->with('error', 'User not found.');
-        //     }
-        // } else {
-        //     // Handle the case when no seminar proposal record was found
-        //     return redirect()->back()->with('error', 'Seminar proposal record not found.');
-        // }
     }
     public function updatejadwal(Request $request, $id)
     {

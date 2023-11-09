@@ -1,15 +1,15 @@
 @extends('layouts/template')
 
 @section('title')
-Daftar Seminar Proposal
+Daftar Sidang Skripsi
 @endsection
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-  @if(is_null($datas) || is_null($datas->id_tema))
+  @if(is_null($datas) || is_null($datas->id_bimbingan_proposal))
 
   <div class="alert alert-warning" role="alert">
-      Harap ajukan judul terlebih dahulu sebelum melanjutkan.
+      Harap selesaikan proposal terlebih dahulu.
   </div>
   @else
   {{-- @if(is_null($datas) || is_null($datas->dosen_pembimbing_utama) || is_null($datas->dosen_pembimbing_ii))
@@ -45,9 +45,9 @@ Daftar Seminar Proposal
       Jika dosen_pembimbing_ii null (dan sebelumnya dicek bahwa dosen_pembimbing_utama tidak null), maka periksa apakah acc_dosen_utama tidak null dan acc_dosen_ii null, dan berikan peringatan yang sesuai. --}}
     {{-- @else --}}
     <div class="card mb-4">
-        <h5 class="card-header">Daftar Seminar Proposal</h5>
+        <h5 class="card-header">Daftar Sidang Skripsi</h5>
         <div class="card-body">
-          <form action="{{route('seminar-proposal.submit')}}" method="POST" enctype="multipart/form-data">
+          <form action="{{route('sidang_skripsi.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="npm" class="form-label">NPM</label>
@@ -98,14 +98,14 @@ Daftar Seminar Proposal
                   readonly
                 />
             </div>
-            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-            <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
+            {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}"> --}}
+            <input type="hidden" name="id_bimbingan_skripsi" value="{{$datas->id_bimbingan_skripsi}}">
             <div class="mb-3">
-                <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
-                <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
+                <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
+                <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
             </div>
             <div class="mb-3">
-                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
+                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Skripsi</label>
                 <input class="form-control" type="file" name="slip_file" id="slip_file" />
             </div>
         <div class="d-flex justify-content-between mt-4">
