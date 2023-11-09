@@ -9,7 +9,7 @@ Bimbingan Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Review Bimbingan Proposal</h5>
+        <h5 class="card-header">Review Seminar Proposal</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
                 <span class="span0-1">Revisi:<br/></span>

@@ -1,20 +1,16 @@
 @extends('layouts/template')
 
 @section('title')
-Bimbingan Proposal
+Bimbingan Skripsi
 @endsection
 
 <link rel="stylesheet" href="{{ asset('/css/custom.css') }}" />
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    @if(is_null($dosens) || is_null($dosens->id_bimbingan_proposal))
-    <div class="alert alert-warning" role="alert">
-        Harap ajukan judul terlebih dahulu sebelum melanjutkan.
-    </div>
-    @else
+
     <div class="card mb-4">
-        <h5 class="card-header">Review Bimbingan Proposal</h5>
+        <h5 class="card-header">Review Bimbingan Skripsi</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
                 <span class="span0-1">Revisi:<br/></span>
@@ -26,15 +22,15 @@ Bimbingan Proposal
     <div class="row">
         <div class="col-xl-6">
             <div class="card mb-4 mb-xl-0">
-                <h5 class="card-header">File Proposal</h5>
+                <h5 class="card-header">File Skripsi</h5>
                 <div class="card-body">
                     <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="file_proposal" class="form-label">Upload File Proposal</label>
-                            <input class="form-control" type="file" id="file_proposal" name="file_proposal" id="slip_file" />
+                            <label for="file_skripsi" class="form-label">Upload File Skripsi</label>
+                            <input class="form-control" type="file" id="file_skripsi" name="file_skripsi"  />
                         </div>
-                        <input type="hidden" id="bimbingan_proposal_id" name="bimbingan_proposal_id" value="{{ $dosens->id_bimbingan_proposal }}" />
+                        <input type="hidden" id="bimbingan_skripsi_id" name="bimbingan_skripsi_id" value="{{ $dosens->id_bimbingan_skripsi }}" />
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                         </div>
@@ -44,7 +40,7 @@ Bimbingan Proposal
         </div>
         <div class="col-xl-6">
             <div class="card mb-4">
-                <h5 class="card-header">Persetujuan Seminar</h5>
+                <h5 class="card-header">Persetujuan Sidang</h5>
                 <div class="card-body">
 
                         <div class="mb-3">
@@ -71,10 +67,10 @@ Bimbingan Proposal
         </div>
     </div>
     <div class="mb-3">
-        <button type="button" class="btn btn-primary">History Bimbingan</button>
+        <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
 
     </div>
-    @endif
+    {{-- @endif --}}
 </div>
 
 
@@ -93,16 +89,16 @@ Bimbingan Proposal
             submitBtn.addEventListener('click', function(event) {
                 event.preventDefault();
 
-                const file = document.getElementById('file_proposal').files[0];
-                const bimbinganProposalId = document.getElementById('bimbingan_proposal_id').value;
+                const file = document.getElementById('file_skripsi').files[0];
+                const bimbinganSkripsiId = document.getElementById('bimbingan_skripsi_id').value;
 
-                if (file && bimbinganProposalId) {
+                if (file && bimbinganSkripsiId) {
                     const formData = new FormData();
-                    formData.append('file_proposal', file);
-                    formData.append('bimbingan_proposal_id', bimbinganProposalId);
+                    formData.append('file_skripsi', file);
+                    formData.append('bimbingan_skripsi_id', bimbinganSkripsiId);
                     formData.append('_token', '{{ csrf_token() }}');
 
-                    fetch('{{ route('bimbingan-mhs.store') }}', {
+                    fetch('{{ route('bimbingans-mhs.store') }}', {
                         method: 'POST',
                         body: formData
                     })
@@ -116,7 +112,7 @@ Bimbingan Proposal
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Proposal Successfully Submitted!',
+                                title: 'File Skripsi Successfully Submitted!',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500

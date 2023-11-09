@@ -5,6 +5,7 @@ Proposal
 @endsection
 
 @section('content')
+
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
         <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
@@ -33,26 +34,51 @@ Proposal
               </div>
               <div class="mb-3">
                 <label for="dospem_2" class="form-label">Tanggal Seminar Proposal</label>
-                <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->tanggal}}" aria-describedby="defaultFormControlHelp" readonly />
+                <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$data->tanggal}}" aria-describedby="defaultFormControlHelp" readonly />
               </div>
-            <div class="mb-3">
-              <label for="defaultFormControlInput" class="form-label">File Proposal</label>
-              <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe>
+              <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
+              <div class="mb-3">
+                <label class="form-label">File Proposal</label>
+                <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
             </div>
             <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">Slip Pembayaran Bimbingan</label>
-                <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe>
-              </div>
+                <label  class="form-label">Slip Pembayaran Bimbingan</label>
+                <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
+
+            </div>
+
+
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-              <button type="submit" class="btn btn-primary">Cetak</button>
+              <button type="submit" id="submitBtn" class="btn btn-primary">Cetak</button>
+
             </div>
         </form>
       </div>
     </div>
 </div>
-@endsection
-
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Data updated successfully.',
+      confirmButtonText: 'OK',
+      showCancelButton: false,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: false,
+      willClose: () => {
+        window.location.href = "/proposal";
+      }
+    });
+  });
+});
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+@endsection
+
+

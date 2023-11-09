@@ -3,7 +3,7 @@
 @section('title')
 Surat Tugas
 @endsection
- 
+
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     @if(session('success'))
@@ -11,85 +11,27 @@ Surat Tugas
         {{ session('success') }}
     </div>
     @endif
-    {{-- @if(is_null($datas) || is_null($datas->alamat_mhs) || is_null($datas->no_telp_mhs) || is_null($datas->alamat_orang_tua) || is_null($datas->no_telp_orang_tua))
-    
-    <div class="alert alert-warning" role="alert">
-        Harap Melengkapi Profile 
-    </div>
-    @elseif(is_null($datas) || is_null($datas->id_tema))
-    <div class="alert alert-warning" role="alert">
-      Harap Mengajukan Judul 
-    </div>
-    @else --}}
+
+    @if(
+        optional($datas)->alamat_mhs === null ||
+        optional($datas)->no_telp_mhs === null ||
+        optional($datas)->alamat_orang_tua === null ||
+        optional($datas)->no_telp_orang_tua === null
+    )
+        <div class="alert alert-warning" role="alert">
+            Harap Melengkapi Profile
+        </div>
+    @elseif(optional($datas)->users_id === null)
+        <div class="alert alert-warning" role="alert">
+            Harap Mengajukan Judul
+        </div>
+
+    @else
         <div class="card mb-4">
           <h5 class="card-header">Form Pengajuan Surat Tugas</h5>
           <div class="card-body">
             <form action="{{route('pengajuan-st.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3">
-                <label for="alamat" class="form-label">Alamat Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="alamat"
-                  name="alamat"
-                  {{-- value="{{$datas->alamat_mhs}}" --}}
-                  value="{{ $datas ? $datas->alamat_mhs : '' }}"
-                  placeholder="Masukan Alamat..."
-                  />
-                  @error('alamat')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="notelpmhs" class="form-label">No Telp Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="notelpmhs"
-                  {{-- value="{{$datas->no_telp_mhs}}" --}}
-                  value="{{ $datas ? $datas->no_telp_mhs : '' }}"
-
-                  name="notelpmhs"
-                  placeholder="Masukan No Telp Mahasiswa..."
-                  />
-                  @error('notelpmhs')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="alamatot" class="form-label">Alamat Orang Tua Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="alamatot"
-                  {{-- value="{{$datas->alamat_orang_tua}}" --}}
-                  value="{{ $datas ? $datas->alamat_orang_tua : '' }}"
-                  
-
-                  name="alamatot"
-                  placeholder="Masukan Alamat Orang Tua..."
-                  />
-                  @error('alamatot')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="notelpot" class="form-label">No Telp Orang Tua</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="notelpot"
-                  {{-- value="{{$datas->no_telp_orang_tua}}" --}}
-                  value="{{ $datas ? $datas->no_telp_orang_tua : '' }}"
-
-                  name="notelpot"
-                  placeholder="Masukan No Telp Orang Tua..."
-                  />
-                  @error('notelpot')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div> 
                <div class="mb-3">
                 <label for="judulskripsi" class="form-label">Judul Skripsi</label>
                 <input
@@ -187,6 +129,6 @@ Surat Tugas
             </form>
           </div>
       </div>
-      {{-- @endif --}}
+      @endif
 </div>
 @endsection

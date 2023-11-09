@@ -70,6 +70,18 @@
         </a>
       </li>
       <li class="menu-item">
+        <a href="{{route('bimbingans-mhs.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <div data-i18n="Authentications">Bimbingan Skripsi</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('revisi_sp.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <div data-i18n="Authentications">Revisi Seminar Proposal</div>
+        </a>
+      </li>
+      <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Misc">Lain-lain</div>
@@ -85,7 +97,7 @@
           <div data-i18n="Layouts">Dashboard</div>
         </a>
       </li>
-      
+
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Pengajuan & Surat</span>
       </li>
@@ -105,7 +117,7 @@
               <div data-i18n="Account">Pembagian Dosen</div>
             </a>
           </li> --}}
-         
+
           {{-- <li class="menu-item">
             <a href="pages-account-settings-connections.html" class="menu-link">
               <div data-i18n="Connections">Surat Survey ke Perusahaan</div>
@@ -167,9 +179,15 @@
           <div data-i18n="Layouts">Berita Acara Proposal</div>
         </a>
       </li>
+      <li class="menu-item">
+        <a href="{{route('dosen-revisi-sempro.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Revisi Seminar Proposal</div>
+        </a>
+      </li>
       @endif
 
-    
+
       <!-- Components -->
       {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> --}}
       <!-- Cards -->

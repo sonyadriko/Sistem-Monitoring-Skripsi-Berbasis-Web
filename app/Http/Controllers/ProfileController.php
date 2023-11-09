@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DetailUser as DetailUser;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class ProfileController extends Controller
@@ -16,7 +17,7 @@ class ProfileController extends Controller
 
         $details = DB::table('users')
             ->where('id', '=', Auth::user()->id)->first();
-        
+
         return view('/mahasiswa/profile.index', compact('details'));
     }
 
@@ -26,7 +27,7 @@ class ProfileController extends Controller
             'data' => DB::table('users')->where('id', '=',$id)->first(),
             // 'bidang_ilmu' => DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get(),
         ];
-       
+
         // return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
 
         return view('/mahasiswa/profile.edit', $data);
@@ -52,12 +53,13 @@ class ProfileController extends Controller
             'no_telp_mhs' => $validatedData['notelpmhs'],
             'alamat_orang_tua' => $validatedData['alamat_orang_tua'],
             'no_telp_orang_tua' => $validatedData['notelpot'],
+            'updated_at' => now()
         ]);
 
         // return redirect()->back()->with('success', 'Profile updated successfully');
-        return redirect('/dashboard');
+        return redirect('/proposal')->with('success', 'Profile updated successfully');
 
 
-    
+
     }
 }

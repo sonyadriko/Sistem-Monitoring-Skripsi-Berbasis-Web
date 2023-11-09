@@ -10,13 +10,21 @@ use App\Models\SuratTugas as SuratTugas;
 class SuratTugasController extends Controller
 {
     public function index()
-    {
-        $datas = DB::table('users')
+{
+    $datas = DB::table('users')
         ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+        ->join('berita_acara_proposal', 'berita_acara_proposal.users_id', 'users.id')
         ->where('users.id', Auth::user()->id)
         ->first();
-        return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
+
+    // Check if $datas is null before passing it to the view
+    if (!$datas) {
+        // Handle the case where data is not found
+        return view('mahasiswa/proposal/surat_tugas.index')->with('datas', null);
+    }
+
+    return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
     }
 
     public function store(Request $request)

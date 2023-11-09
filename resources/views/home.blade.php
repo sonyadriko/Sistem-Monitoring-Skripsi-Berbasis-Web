@@ -39,7 +39,7 @@ Dashboard
             <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
               <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                 <div class="card-title">
-                  <h5 class="text-nowrap mb-2"><a href="{{ route('proposal') }}">Skripsi</a></h5>
+                  <h5 class="text-nowrap mb-2"><a href="{{ route('skripsi') }}">Skripsi</a></h5>
                 </div>
               </div>
             </div>
