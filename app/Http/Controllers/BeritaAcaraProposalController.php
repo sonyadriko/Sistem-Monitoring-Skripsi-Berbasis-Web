@@ -13,7 +13,7 @@ class BeritaAcaraProposalController extends Controller
     //
     public function index()
     {
-     
+
         $ba = DB::table('berita_acara_proposal')
         ->join('users', 'users.id', 'berita_acara_proposal.users_id')
         ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
@@ -22,15 +22,15 @@ class BeritaAcaraProposalController extends Controller
                   ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id);
         })
         ->get();
-    
+
         return view('dosen/berita_acara/seminar.index', compact('ba'));
-    
+
     }
     public function detail($id)
     {
         $data = [
             'data' => DB::table('berita_acara_proposal')
-               
+
                 ->join('users', 'users.id', 'berita_acara_proposal.users_id')
                 ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
                 ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
@@ -41,11 +41,7 @@ class BeritaAcaraProposalController extends Controller
                 ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
                 ->first(),
         ];
-       
-    
-        // return view('dosen/berita_acara/seminar.detail', $data);
         return view('dosen/berita_acara/seminar.detail', $data);
-
     }
 
     public function store(Request $request)

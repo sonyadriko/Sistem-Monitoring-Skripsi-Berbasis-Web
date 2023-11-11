@@ -82,6 +82,13 @@
         </a>
       </li>
       <li class="menu-item">
+        <a href="{{route('revisi_sk.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <div data-i18n="Authentications">Revisi Sidang Skripsi</div>
+        </a>
+      </li>
+
+      <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Misc">Lain-lain</div>
@@ -125,12 +132,17 @@
           </li> --}}
           <li class="menu-item">
             <a href="{{ route('jadwal-seminar-proposal.index') }}" class="menu-link">
-              <div data-i18n="Connections">Pendaftaran Sidang</div>
+              <div data-i18n="Connections">Pendaftaran Seminar Proposal</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="{{ route('koor-berita-acara-proposal.index') }}" class="menu-link">
-              <div data-i18n="Connections">Berita Acara</div>
+              <div data-i18n="Connections">Berita Acara Proposal</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('koor-berita-acara-skripsi.index') }}" class="menu-link">
+              <div data-i18n="Connections">Berita Acara Skripsi</div>
             </a>
           </li>
           <li class="menu-item">
@@ -138,6 +150,12 @@
               <div data-i18n="Notifications">Surat Tugas Bimbingan</div>
             </a>
           </li>
+          <li class="menu-item">
+            <a href="{{ route('jadwal-sidang-skripsi.index')}}" class="menu-link">
+              <div data-i18n="Notifications">Pendaftaran Sidang Skripsi</div>
+            </a>
+          </li>
+
         </ul>
       </li>
       @endif
@@ -180,9 +198,21 @@
         </a>
       </li>
       <li class="menu-item">
+        <a href="{{route('berita-acara-skripsi.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Berita Acara Skripsi</div>
+        </a>
+      </li>
+      <li class="menu-item">
         <a href="{{route('dosen-revisi-sempro.index')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Revisi Seminar Proposal</div>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{route('dosen-revisi-semhas.index')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Revisi Sidang Skripsi</div>
         </a>
       </li>
       @endif

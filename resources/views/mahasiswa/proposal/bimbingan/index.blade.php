@@ -71,7 +71,8 @@ Bimbingan Proposal
         </div>
     </div>
     <div class="mb-3">
-        <button type="button" class="btn btn-primary">History Bimbingan</button>
+        <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
+
 
     </div>
     @endif

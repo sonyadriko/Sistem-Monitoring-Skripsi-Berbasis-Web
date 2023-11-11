@@ -24,6 +24,11 @@ use App\Http\Controllers\BimbinganSkripsiController;
 use App\Http\Controllers\DosenRevisiSeminarProposal;
 use App\Http\Controllers\SidangSkripsiController;
 use App\Http\Controllers\KoordinatorSidangSkripsiController;
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\KoordinatorBeritaAcaraSkripsiController;
+use App\Http\Controllers\BeritaAcaraSkripsiController;
+use App\Http\Controllers\RevisiSidangSkripsiController;
+use App\Http\Controllers\DosenRevisiSidangSkripsiController;
 
 
 
@@ -96,6 +101,20 @@ Route::group(['middleware' => 'auth:dosen'], function() {
         Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
     });
 
+    Route::group(['prefix' => 'dosen/berita_acara_skripsi'], function () {
+        Route::get('/', [BeritaAcaraSkripsiController::class, 'index'])->name('berita-acara-skripsi.index');
+        Route::get('/detail/{id}', [BeritaAcaraSkripsiController::class, 'detail'])->name('berita-acara-skripsi.detail');
+        Route::post('/detail/store', [BeritaAcaraSkripsiController::class, 'store'])->name('berita-acara-skripsi.store');
+    });
+
+    Route::group(['prefix' => 'dosen/revisi_sidang_skripsi'], function () {
+        Route::get('/', [DosenRevisiSidangSkripsiController::class, 'index'])->name('dosen-revisi-semhas.index');
+        Route::get('/detail/{id}', [DosenRevisiSidangSkripsiController::class, 'detail'])->name('dosen-revisi-semhas.detail');
+
+        // Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');
+        // Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
+    });
+
     Route::group(['prefix' => 'dosen/revisi_seminar_proposal'], function () {
         Route::get('/', [DosenRevisiSeminarProposal::class, 'index'])->name('dosen-revisi-sempro.index');
         Route::get('/detail/{id}', [DosenRevisiSeminarProposal::class, 'detail'])->name('dosen-revisi-sempro.detail');
@@ -117,11 +136,29 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 
     });
 
+
+    Route::group(['prefix' => 'koordinator/berita_acara_skripsi'], function () {
+        Route::get('/', [KoordinatorBeritaAcaraSkripsiController::class, 'index'])->name('koor-berita-acara-skripsi.index');
+        Route::get('/detail/{id}', [KoordinatorBeritaAcaraSkripsiController::class, 'detail'])->name('koor-berita-acara-skripsi.detail');
+
+    });
+
+
     Route::group(['prefix' => 'koordinator/pengajuan_judul'], function () {
         Route::get('/', [KoordinatorJudulController::class, 'index'])->name('pengajuan-judul.index');
         Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
         Route::post('/update-status/{id_tema}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
     });
+
+    Route::group(['prefix' => 'koordinator/ruangan'], function () {
+        Route::get('/', [RuanganController::class, 'index'])->name('ruangan.index');
+        Route::get('/create', [RuanganController::class, 'create'])->name('ruangan.create');
+        Route::post('/store', [RuanganController::class, 'store'])->name('ruangan.store');
+        Route::get('/edit/{id}', [RuanganController::class, 'edit']);
+        Route::post('/edit/{id}', [RuanganController::class, 'update'])->name('ruangan.update');
+        Route::delete('/delete/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
+    });
+
 
     Route::group(['prefix' => 'koordinator/jadwal_seminar_proposal'], function () {
         Route::get('/', [KoordinatorSeminarController::class, 'index'])->name('jadwal-seminar-proposal.index');
@@ -133,7 +170,9 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
     Route::group(['prefix' => 'koordinator/jadwal_sidang_skripsi'], function () {
         Route::get('/', [KoordinatorSidangSkripsiController::class, 'index'])->name('jadwal-sidang-skripsi.index');
         Route::get('/detail/{id}', [KoordinatorSidangSkripsiController::class, 'detail']);
-        Route::post('/update-status/{id}', [KoordinatorSidangSkripsiController::class, 'updatejadwal'])->name('jadwal-sidang-skripsi-update');
+        Route::post('/detail/{id}', [KoordinatorSidangSkripsiController::class, 'update'])->name('jadwal-sidang-skripsi-update');
+        Route::post('/cetak-berita-acara/{id}', [KoordinatorSidangSkripsiController::class, 'createberitaacara'])->name('cetak-berita-acara-s');
+
         // Route::post('/cetak-berita-acara/{id}', [KoordinatorSidangSkripsiController::class, 'createberitaacarask'])->name('cetak-berita-acara-sk');
     });
 
@@ -217,6 +256,10 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
         Route::post('/store', [RevisiSeminarProposalController::class, 'store'])->name('revisi_sp.store');
     });
 
+    Route::group(['prefix' => 'skripsi/revisi_sidang_skripsi'], function () {
+        Route::get('/', [RevisiSidangSkripsiController::class, 'index'])->name('revisi_sk.index');
+        Route::post('/store', [RevisiSidangSkripsiController::class, 'store'])->name('revisi_sk.store');
+    });
     Route::group(['prefix' => 'skripsi/sidang_skripsi'], function () {
         Route::get('/', [SidangSkripsiController::class, 'index'])->name('sidang_skripsi.index');
         Route::post('/store', [SidangSkripsiController::class, 'store'])->name('sidang_skripsi.store');

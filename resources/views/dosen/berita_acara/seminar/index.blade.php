@@ -7,7 +7,7 @@ Berita Acara Proposal
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-    <h5 class="card-header">Tabel Pengajuan Seminar Proposal</h5>
+    <h5 class="card-header">Tabel Seminar Proposal</h5>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
@@ -35,7 +35,7 @@ Berita Acara Proposal
                     @endphp
                     @endforeach
                 </tbody>
-            </table>  
+            </table>
         </div>
     </div>
     </div>

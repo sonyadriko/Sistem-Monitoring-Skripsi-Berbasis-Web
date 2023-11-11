@@ -1,34 +1,36 @@
 @extends('layouts/template')
 
 @section('title')
-Bidang Ilmu
+Proposal
 @endsection
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Table Bidang Ilmu</h5>
+        <h5 class="card-header">Table Daftar Mahasiswa Revisi Seminar Proposal</h5>
+
     <div class="card-body">
-      <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-success mb-3">Tambah Data</a>
       <div class=" table-responsive  pt-0">
-        <table class="table">
+        <table class="table"/>
+        {{-- <div class="table-responsive"> --}}
+            {{-- <table class="table table-bordered id="dataTable" width="100%" cellspacing="0"> --}}
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tema</th>
-                        <th>Keterangan</th>
-                        {{-- <th>Action</th> --}}
+                        <th>Nama</th>
+                        <th>Judul</th>
+                        <th>Action</th>
                 </thead>
                 <tbody>
                     @php
                     $no=1;
                     @endphp
-                    @foreach($bi as $dosen)
+                    @foreach($rev as $dosen)
                     <tr>
                         <td>{{ $no }}</td>
+                        <td>{{ $dosen->name }}</td>
                         <td>{{ $dosen->topik_bidang_ilmu }}</td>
-                        <td>{{ $dosen->keterangan }}</td>
-                        {{-- <td><a href="{{ url('/koordinator/bimbingan_proposal/detail/' . $dosen->id_bidang_ilmu) }}" class="btn btn-primary">Detail</a></td> --}}
+                        <td><a href="{{ url('/dosen/revisi_sidang_skripsi/detail/' . $dosen->id_revisi_sidang_skripsi) }}" class="btn btn-primary">Cek Revisi</a></td>
                     </tr>
                     @php
                     $no++;
@@ -38,7 +40,6 @@ Bidang Ilmu
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
     </div>
 </div>
@@ -54,4 +55,3 @@ Bidang Ilmu
   });
 });
   </script>
-
