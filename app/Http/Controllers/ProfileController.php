@@ -57,7 +57,7 @@ class ProfileController extends Controller
         ]);
 
         // return redirect()->back()->with('success', 'Profile updated successfully');
-        return redirect('/proposal')->with('success', 'Profile updated successfully');
+        return redirect('/dashboard')->with('success', 'Profile updated successfully');
 
 
 

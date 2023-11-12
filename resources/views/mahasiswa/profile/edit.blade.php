@@ -1,124 +1,55 @@
-@extends('layouts/template')
-
-@section('title')
-Edit Profile
-@endsection
+@extends('layout.master')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+    <div>
+      <h4 class="mb-3 mb-md-0">Edit Profile</h4>
     </div>
-    @endif
-        <div class="card mb-4">
-          <h5 class="card-header">Form Pengajuan</h5>
-          <div class="card-body">
-            <form action="{{ route('update-profile.store', ['id' => Auth::user()->id]) }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="name"
-                      name="nama"
-                      value="{{Auth::user()->name}}"
-                      readonly
-                    />
-                    @error('nama')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+
+          {{-- <h6 class="card-title">Data Mahasiswa</h6> --}}
+
+          <form action="{{ route('update-profile.store', ['id' => Auth::user()->id]) }}" method="POST">
+            @csrf
             <div class="mb-3">
-              <label for="npm" class="form-label">NPM</label>
-              <input
-                class="form-control"
-                type="text"
-                id="npm"
-                name="npm"
-                value="{{Auth::user()->kode_unik}}"
-                readonly
-              />
-              @error('npm')
-              <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
+              <label for="exampleInputUsername1" class="form-label">NPM</label>
+              <input type="text" class="form-control" id="exampleInputUsername1" value="{{ Auth::user()->kode_unik}}" autocomplete="off" placeholder="Username" readonly>
             </div>
             <div class="mb-3">
-                <label for="alamat" class="form-label">Alamat Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="alamat"
-                  name="alamat"
-                  value="{{$data->alamat_mhs}}"
-                  placeholder="Masukan Alamat..."
-                  />
-                  @error('alamat')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="notelpmhs" class="form-label">No Telp Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="notelpmhs"
-                  value="{{$data->no_telp_mhs}}"
-
-                  name="notelpmhs"
-                  placeholder="Masukan No Telp Mahasiswa..."
-                  />
-                  @error('notelpmhs')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="alamat_orang_tua" class="form-label">Alamat Orang Tua Mahasiswa</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  value="{{$data->alamat_orang_tua}}"
-
-                  id="alamat_orang_tua"
-                  name="alamat_orang_tua"
-                  placeholder="Masukan Alamat Orang Tua..."
-                  />
-                  @error('alamat_orang_tua')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="notelpot" class="form-label">No Telp Orang Tua</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="notelpot"
-                  value="{{$data->no_telp_orang_tua}}"
-
-                  name="notelpot"
-                  placeholder="Masukan No Telp Orang Tua..."
-                  />
-                  @error('notelpot')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-              </div>
-            <div class="d-flex justify-content-between mt-4">
-                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-              
-                <div style="display: flex; justify-content: flex-end;">
-                    
-                    <!-- Tombol "Terima" dan "Tolak" hanya ditampilkan jika status adalah "pending" -->
-                    <button type="submit" class="btn btn-primary">Submit</button>
-               
+                <label for="exampleInputEmail1" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" value="{{ $data->name}}" placeholder="text" readonly>
             </div>
-        
-            <!-- Tampilkan pesan jika status adalah "diterima" -->
-            
-                
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Alamat Mahasiswa</label>
+                <input type="text" class="form-control" id="alamat" name="alamat" value=" {{ $data->alamat_mhs }}" placeholder="alamat mahasiswa">
+              </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">No Telp Mahasiswa</label>
+              <input type="text" class="form-control" id="notelpmhs" name="notelpmhs" value="{{ $data->no_telp_mhs }}" placeholder="no telp mahasiswa">
             </div>
-        </form>
-          </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Alamat Orang Tua</label>
+              <input type="text" class="form-control" id="alamat_orang_tua" name="alamat_orang_tua" value="{{ $data->alamat_orang_tua }}" autocomplete="off" placeholder="alamat orang tua">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">No Telp Orang Tua</label>
+                <input type="text" class="form-control" id="notelpot" name="notelpot" autocomplete="off" value="{{ $data->no_telp_orang_tua }}" placeholder="no telp orang tua">
+              </div>
+            {{-- <button type="submit" class="btn btn-primary me-2">Submit</button> --}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            {{-- <button class="btn btn-secondary">Cancel</button> --}}
+            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+
+          </form>
+
+        </div>
       </div>
-</div>
+    </div>
+  </div>
 @endsection
