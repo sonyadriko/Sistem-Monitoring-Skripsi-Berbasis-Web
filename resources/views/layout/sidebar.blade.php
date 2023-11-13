@@ -22,13 +22,13 @@
       <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
           <i class="link-icon" data-feather="mail"></i>
-          <span class="link-title">Form</span>
+          <span class="link-title">Forms</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse" id="email">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ url('/email/inbox') }}" class="nav-link">Pengajuan Judul</a>
+              <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/email/read') }}" class="nav-link">Seminar Proposal</a>
