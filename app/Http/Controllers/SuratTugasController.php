@@ -67,6 +67,6 @@ class SuratTugasController extends Controller
         // Save to the database
         $suratTugas->save();
 
-        return redirect('/proposal')->with('success', 'Surat Tugas successfully created.');
+        return redirect('/dashboard')->with('success', 'Surat Tugas successfully created.');
     }
 }

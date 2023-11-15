@@ -23,10 +23,7 @@ Proposal
                 type="text"
                 id="name"
                 name="nama"
-                {{-- value="sony adi adriko" --}}
                 value="{{Auth::user()->name}}"
-
-                {{-- placeholder="Sony Adi Adriko" --}}
                 readonly
                 autocomplete="nama"
               />
@@ -58,7 +55,7 @@ Proposal
                 @endforeach
               </select>
             </div>
-            
+
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>

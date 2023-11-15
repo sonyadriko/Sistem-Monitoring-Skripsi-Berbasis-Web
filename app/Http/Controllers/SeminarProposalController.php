@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\SeminarProposal as SeminarProposal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class SeminarProposalController extends Controller
@@ -21,6 +21,46 @@ class SeminarProposalController extends Controller
             ->first();
         return view('mahasiswa/proposal/seminar_proposal.index', compact('datas'));
     }
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'bimbingan_proposal_id' => 'required',
+    //         'proposal_file' => 'required|mimes:pdf,docx|max:1000',
+    //         'slip_file' => 'required|mimes:pdf,docx|max:1000',
+    //     ], [
+    //         'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID is required.',
+    //         'proposal_file.required' => 'File proposal is required.',
+    //         'proposal_file.mimes' => 'File proposal must be a PDF or DOCX.',
+    //         'proposal_file.max' => 'File proposal may not be greater than 1000 KB.',
+    //         'slip_file.required' => 'File slip pembayaran is required.',
+    //         'slip_file.mimes' => 'File slip pembayaran must be a PDF or DOCX.',
+    //         'slip_file.max' => 'File slip pembayaran may not be greater than 1000 KB.',
+    //     ]);
+
+    //     // Check if files are present in the request
+    //     if ($request->hasFile('proposal_file') && $request->hasFile('slip_file')) {
+    //         // Generate unique file names
+    //         $fileProposalName = uniqid() . '.' . $request->file('proposal_file')->getClientOriginalExtension();
+    //         $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
+
+    //         // Store the files using the File facade
+    //         $userFolder = Auth::user()->name;
+    //         File::storeAs("uploads/{$userFolder}/seminar_proposal/", $fileProposalName, 'public');
+    //         File::storeAs("uploads/{$userFolder}/seminar_proposal/", $fileSlipPembayaranName, 'public');
+
+    //         // Save data to the database
+    //         $seminarProposal = new SeminarProposal();
+    //         $seminarProposal->users_id = Auth::user()->id;
+    //         $seminarProposal->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
+    //         $seminarProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
+    //         $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
+    //         $seminarProposal->save();
+
+    //         return redirect('/dashboard')->with('success', 'Berhasil Daftar Seminar Proposal.');
+    //     }
+
+    //     return redirect('/dashboard')->with('error', 'Gagal Daftar Seminar Proposal. File tidak ditemukan.');
+    // }
     public function store(Request $request)
     {
         // dd($request->all());
@@ -55,7 +95,7 @@ class SeminarProposalController extends Controller
         $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
         $seminarProposal->save();
 
-        return redirect('/proposal')->with('success', 'Berhasil Daftar Seminar Proposal.');
+        return redirect('/dashboard')->with('success', 'Berhasil Daftar Seminar Proposal.');
 
     }
 }

@@ -45,6 +45,8 @@ class BimbinganProposalController extends Controller
 
         // Return a success response
         return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
+        // return redirect('/dashboard')->with('success', 'Pengajuan berhasil dilakukan.');
+
     }
 
 

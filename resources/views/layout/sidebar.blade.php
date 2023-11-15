@@ -31,7 +31,7 @@
               <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/email/read') }}" class="nav-link">Seminar Proposal</a>
+              <a href="{{ route('seminar-proposal.create')}}" class="nav-link">Seminar Proposal</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/email/compose') }}" class="nav-link">Surat Survey</a>
@@ -51,87 +51,20 @@
           <span class="link-title">Calendar</span>
         </a>
       </li>
-      <li class="nav-item nav-category">Components</li>
+      <li class="nav-item nav-category">Bimbingan & Revisi</li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="" aria-controls="uiComponents">
-          <i class="link-icon" data-feather="feather"></i>
-          <span class="link-title">UI Kit</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
+        <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Bimbingan</span>
         </a>
-        <div class="collapse" id="uiComponents">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/accordion') }}" class="nav-link">Accordion</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/alerts') }}" class="nav-link">Alerts</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/badges') }}" class="nav-link">Badges</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/breadcrumbs') }}" class="nav-link">Breadcrumbs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/buttons') }}" class="nav-link">Buttons</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/button-group') }}" class="nav-link">Button group</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/cards') }}" class="nav-link">Cards</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/carousel') }}" class="nav-link">Carousel</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/collapse') }}" class="nav-link">Collapse</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/dropdowns') }}" class="nav-link">Dropdowns</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/list-group') }}" class="nav-link">List group</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/media-object') }}" class="nav-link">Media object</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/modal') }}" class="nav-link">Modal</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/navs') }}" class="nav-link">Navs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/navbar') }}" class="nav-link">Navbar</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/pagination') }}" class="nav-link">Pagination</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/popovers') }}" class="nav-link">Popvers</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/progress') }}" class="nav-link">Progress</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/scrollbar') }}" class="nav-link">Scrollbar</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/scrollspy') }}" class="nav-link">Scrollspy</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/spinners') }}" class="nav-link">Spinners</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/tabs') }}" class="nav-link">Tabs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/tooltips') }}" class="nav-link">Tooltips</a>
-            </li>
-          </ul>
-        </div>
       </li>
+      <li class="nav-item">
+        <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Revisi</span>
+        </a>
+      </li>
+
       {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
           <i class="link-icon" data-feather="anchor"></i>
@@ -312,7 +245,7 @@
     </ul>
   </div>
 </nav>
-<nav class="settings-sidebar">
+{{-- <nav class="settings-sidebar">
   <div class="sidebar-body">
     <a href="#" class="settings-sidebar-toggler">
       <i data-feather="settings"></i>
@@ -343,4 +276,4 @@
       </a>
     </div>
   </div>
-</nav>
+</nav> --}}

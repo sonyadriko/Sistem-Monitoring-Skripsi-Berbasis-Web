@@ -222,9 +222,8 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
-        Route::get('/proposal/pengajuan_judul', 'create')->name('pengajuan-judul.create');
-        Route::post('/proposal/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
-        // Route::match(['get','post'], 'koordinator/updatedetail/{id}');
+        Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
+        Route::post('/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
     });
 
 
@@ -237,8 +236,8 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
 
 
     Route::controller(BimbinganProposalController::class)->group(function (){
-        Route::get('/proposal/bimbingan', 'index')->name('bimbingan-mhs.index');
-        Route::post('/proposal/bimbingan', 'store')->name('bimbingan-mhs.store');
+        Route::get('/bimbingan_proposal', 'index')->name('bimbingan-mhs.index');
+        Route::post('/bimbingan_proposal', 'store')->name('bimbingan-mhs.store');
     });
 
     // Route::controller(BimbinganSkripsiController::class)->group(function (){
