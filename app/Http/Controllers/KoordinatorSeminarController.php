@@ -12,29 +12,21 @@ class KoordinatorSeminarController extends Controller
 {
     public function index()
     {
-        // $sempros = SeminarProposal::all();
         $sempros = DB::table('seminar_proposal')->join('users', 'users.id', 'seminar_proposal.users_id')->get();
-
         return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros'));
-
     }
-
     public function detail($id)
     {
-        $data = [
-            'data' => DB::table('seminar_proposal')
-                ->join('users', 'users.id', 'seminar_proposal.users_id')
-                ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
-                ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-                ->where('id_seminar_proposal', '=', $id)->first(),
-        ];
-        // dd($data);
-
-        $baru = [
-            'baru' => DB::table('users')->where('role_id', '2')->get(),
-        ];
+        $data = DB::table('seminar_proposal')
+        ->join('users', 'users.id', 'seminar_proposal.users_id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+        ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+        ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+        ->where('id_seminar_proposal', '=', $id)->first();
+        $baru = DB::table('users')->where('role_id', '2')->get();
         $listRuangan = DB::table('ruangan')->get();
-        return view('koordinator/penjadwalan/seminar_proposal.detail', $data, $baru, $listRuangan);
+
+    return view('koordinator/penjadwalan/seminar_proposal.detail', compact('data', 'baru', 'listRuangan'));
 
     }
     public function updatejadwal(Request $request, $id)
@@ -48,7 +40,7 @@ class KoordinatorSeminarController extends Controller
     // Update the fields
     $data->dosen_penguji_1 = $request->input('dosen_penguji_1');
     $data->dosen_penguji_2 = $request->input('dosen_penguji_2');
-    $data->ruangan = $request->input('ruangan_seminar');
+    $data->ruangan = $request->input('ruanganSeminar');
     $data->tanggal = $request->input('date');
     $data->jam = $request->input('time');
 

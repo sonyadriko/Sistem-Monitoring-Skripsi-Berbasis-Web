@@ -61,9 +61,9 @@ class KoordinatorSuratTugasController extends Controller
 
             $bimsk->save();
 
-            return redirect()->route('proposal')->with('success', 'Data updated successfully.');
+            return redirect()->route('dashboard')->with('success', 'Surat Tugas Berhasil dicetak.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating data.');
+            return redirect()->back()->with('error', 'Surat Tugas Gagal dicetak.');
         }
     }
 }

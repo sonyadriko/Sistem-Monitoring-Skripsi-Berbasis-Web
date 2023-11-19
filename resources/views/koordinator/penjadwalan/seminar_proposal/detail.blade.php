@@ -45,15 +45,16 @@ Proposal
                     <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
                     <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
                   </div>
-                <div class="mb-3">
-                  <label for="defaultFormControlInput" class="form-label">File Proposal</label>
-                  <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe>
-                </div>
+                  <div class="mb-3">
+                    <label for="defaultFormControlInput" class="form-label">File Proposal</label>
+                      {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
+                      <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
+
+                  </div>
                 <div class="mb-3">
                   <label for="select1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
                   <select class="form-select" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
                     <option value="" selected disabled>Open this select menu</option>
-
                       @foreach($baru as $datas)
                           <option value="{{$datas->id}}">{{$datas->name}}</option>
                       @endforeach
@@ -123,9 +124,12 @@ Proposal
                 <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
                 <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
               </div>
+
               <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">File Proposal</label>
-                <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe>
+                  {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
+                  <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
+
               </div>
               <div class="mb-3">
                 <label for="dosen_penguji_1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
@@ -140,7 +144,7 @@ Proposal
                   <label for="ruanganSeminar" class="form-label">Ruangan Seminar</label>
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" name="ruangan_seminar" id="ruanganSeminar" value="{{$data->ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
+                    <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
                 </div>
                 <div class="col-md-2">
                   <label for="html5-date-input" class="form-label">Date</label>

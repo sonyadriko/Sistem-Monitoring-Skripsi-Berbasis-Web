@@ -11,42 +11,23 @@ class KoordinatorSidangSkripsiController extends Controller
 {
     public function index()
     {
-        // $sempros = SeminarProposal::all();
         $semhas = DB::table('sidang_skripsi')->join('users', 'users.id', 'sidang_skripsi.users_id')->get();
-
         return view('koordinator/penjadwalan/sidang_skripsi.index', compact('semhas'));
-
     }
-    // public function detail($id)
-    // {
-    //     $data = [
-    //         'data' => DB::table('sidang_skripsi')
-    //             ->join('users', 'users.id', 'sidang_skripsi.users_id')
-    //             ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
-    //             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-    //             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-    //             ->where('id_sidang_skripsi', '=', $id)->first(),
-    //     ];
-    //     // dd($data);
-
-    //     $baru = [
-    //         'baru' => DB::table('users')->where('role_id', '2')->get(),
-    //     ];
-    //     $listRuangan = [
-    //         'listRuangan' => DB::table('ruangan')->get(),
-    //     ];
-    //     return view('koordinator/penjadwalan/sidang_skripsi.detail', $data, $baru, $listRuangan);
-
-    // }
     public function detail($id)
     {
         $data = DB::table('sidang_skripsi')
             ->join('users', 'users.id', 'sidang_skripsi.users_id')
+            ->join('users as penguji1', 'penguji1.id', 'sidang_skripsi.dosen_penguji_1')
+            ->join('users as penguji2', 'penguji2.id', 'sidang_skripsi.dosen_penguji_2')
+            ->join('users as penguji3', 'penguji3.id', 'sidang_skripsi.dosen_penguji_3')
             ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
             ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
-            ->where('id_sidang_skripsi', '=', $id)->first();
+            ->select('sidang_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii', 'ruangan.nama_ruangan', 'users.*', 'bimbingan_skripsi.*', 'bidang_ilmu.topik_bidang_ilmu', 'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3')
+            ->where('id_sidang_skripsi', '=', $id)
+            ->first();
 
         $baru = DB::table('users')->where('role_id', '2')->get();
         $listRuangan = DB::table('ruangan')->get();
@@ -55,8 +36,6 @@ class KoordinatorSidangSkripsiController extends Controller
     }
     public function update(Request $request, $id)
     {
-        // Validasi input form jika diperlukan
-        // dd($request)->all();
         $request->validate([
             'dosenPenguji1' => 'required',
             'dosenPenguji2' => 'required',
@@ -96,14 +75,14 @@ class KoordinatorSidangSkripsiController extends Controller
                 'sidang_skripsi_id' => 'required|integer',
             ]);
 
-            // Periksa apakah SeminarProposal dengan ID yang diberikan ada
+            // Periksa apakah SidangSkripsi dengan ID yang diberikan ada
             $data = SidangSkripsi::findOrFail($id);
 
-            // Update data SeminarProposal
+            // Update data SidangSkripsi
             $data->cetak = 'sudah';
             $data->save();
 
-            // Simpan data BeritaAcaraProposal
+            // Simpan data BeritaAcaraSkripsi
             $ba = new BeritaAcaraSkripsi();
             $ba->users_id = $request->input('user_id');
             $ba->sidang_skripsi_id = $request->input('sidang_skripsi_id');

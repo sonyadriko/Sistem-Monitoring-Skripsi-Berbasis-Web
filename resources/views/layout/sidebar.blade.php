@@ -30,7 +30,7 @@
         <div class="collapse" id="email">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a>
+              <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Tema</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('seminar-proposal.create')}}" class="nav-link">Seminar Proposal</a>
@@ -261,7 +261,7 @@
         <div class="collapse" id="email">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Judul</a>
+              <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Tema</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>

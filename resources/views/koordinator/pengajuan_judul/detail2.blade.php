@@ -1,24 +1,14 @@
-@extends('layout.master')
+@extends('layouts.template')
 
-@section('title')
-Proposal
-@endsection
+@section('title', 'Proposal')
 
-@section('css')
-<link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-
-@endsection
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
-    </ol>
-</nav>
-<div class="row">
 <div class="container-xxl flex-grow-1 container-p-y">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div class="card mb-4">
         <h5 class="card-header">Form Pengajuan</h5>
@@ -45,7 +35,7 @@ Proposal
                     <label for="dosen_pembimbing_utama" class="form-label">Dosen Pembimbing Utama</label>
                     <input class="form-control" type="text" id="dosen_pembimbing_utama" value="{{ $data->nama_dosen }}" name="dosen_pembimbing_utama" readonly />
                 </div>
-
+                
                 <div class="mb-3">
                     <label for="dosen_pembimbing_ii" class="form-label">Dosen Pembimbing II</label>
                     <select class="form-select" id="select1" name="dosen_pembimbing_ii" aria-label="Default select example">
@@ -58,7 +48,7 @@ Proposal
                         @endforeach
                     </select>
                 </div>
-
+                
 
                 <input type="hidden" name="tema_id" value="{{ $data->id_tema }}" />
                 <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
@@ -82,63 +72,4 @@ Proposal
         </div>
     </div>
 </div>
-</div>
 @endsection
-@push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
-@endpush
-
-@push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-@endpush
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-<script>
-    function updateSelectOptions() {
-      var select1 = document.getElementById("select1");
-      var select2 = document.getElementById("select2");
-      var select3 = document.getElementById("select3");
-
-      // Clear existing options in select2 and select3
-      select2.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
-      select3.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
-
-      // Get the selected option from select1
-      var selectedOption = select1.options[select1.selectedIndex];
-
-      // Clone the options from select1 to select2 and select3, excluding the selected option
-      for (var i = 0; i < select1.options.length; i++) {
-          if (select1.options[i] !== selectedOption) {
-              var option2 = document.createElement("option");
-              option2.value = select1.options[i].value;
-              option2.text = select1.options[i].text;
-              select2.add(option2);
-
-              var option3 = document.createElement("option");
-              option3.value = select1.options[i].value;
-              option3.text = select1.options[i].text;
-              select3.add(option3);
-          }
-      }
-    }
-    </script>
-
-
-<script>
-  function showConfirmation() {
-      Swal.fire({
-          title: 'Apakah Anda yakin ingin mencetak?',
-          text: 'Pastikan data sudah benar sebelum mencetak.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Cetak!'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              document.getElementById('cetakForm').submit();
-          }
-      });
-  }
-  </script>
