@@ -39,7 +39,7 @@ class RevisiSeminarProposalController extends Controller
             'file_revisi_proposal.mimes' => 'Tipe file harus pdf atau docx.',
             'file_revisi_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
         ]);
-    
+
         if ($request->hasFile('file_revisi_proposal')) {
             $proposalFilePath = $request->file('file_revisi_proposal');
             $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
@@ -49,13 +49,13 @@ class RevisiSeminarProposalController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'File proposal tidak valid.']);
         }
-    
+
         $revisi = new RevisiSeminarProposal();
         $revisi->berita_acara_proposal_id = $request->input('berita_acara_id'); // Sesuaikan ini dengan input yang benar
         $revisi->file_revisi = $fileUrl;
         $revisi->save();
-    
+
         // Return a success response
-        return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
+        return response()->json(['success' => true, 'message' => 'File revisi berhasil diunggah.']);
     }
 }

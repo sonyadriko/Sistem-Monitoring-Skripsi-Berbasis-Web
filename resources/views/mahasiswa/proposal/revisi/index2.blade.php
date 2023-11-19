@@ -1,40 +1,13 @@
-@extends('layout.master')
+@extends('layouts/template')
 
-@push('plugin-styles')
-  <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-@endpush
+@section('title')
+Revisi Seminar Proposal
+@endsection
+
+<link rel="stylesheet" href="{{ asset('/css/custom.css') }}" />
 
 @section('content')
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-
-  <div>
-    <h4 class="mb-3 mb-md-0">Bimbingan Proposal</h4>
-  </div>
-
-  {{-- <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-      <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
-      <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-    </div>
-    <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button>
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-      Download Report
-    </button>
-  </div> --}}
-</div>
-<h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>
-
-<div class="row">
-    <div class="container-xxl flex-grow-1 container-p-y">
+<div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
         <h5 class="card-header">Review Seminar Proposal</h5>
         <div class="card-body">
@@ -42,7 +15,7 @@
                 <span class="span0-1">Revisi:<br/></span>
 
                 @foreach($revisisp2 as $revisisp2)
-                <span class="span0-1">{{$revisisp2->revisi}} dari {{$revisisp2->name}}</span></br>
+                <span class="span0-1">{{$revisisp2->revisi}} dari {{$revisisp2->name}}</span>
                 @endforeach
             </p>
         </div>
@@ -72,16 +45,12 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" name="dospem" id="dospem"/>
-                            <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
+                            <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"/>
+                            <label class="form-check-label" for="defaultCheck5"> Dosen Penguji 1 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1"/>
-                            <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2"/>
-                            <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
+                            <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"/>
+                            <label class="form-check-label" for="defaultCheck6"> Dosen Penguji 2 </label>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn btn-primary">Daftar</button>
@@ -95,14 +64,7 @@
         <button type="button" class="btn btn-primary">History Revisi</button>
     </div>
 </div>
-</div>
-
-
-
-{{-- !-- row --> --}}
 @endsection
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ... Bagian HTML lainnya ... -->
@@ -140,7 +102,7 @@
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Revisi Proposal Berhasil disubmit.',
+                                title: 'File Proposal Successfully Submitted!',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500

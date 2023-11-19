@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <div class="sidebar-header">
-    <a href="{{route('dashboard')}}" class="sidebar-brand">
+    <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="sidebar-brand">
       SM<span> SKRIPSI</span>
     </a>
     <div class="sidebar-toggler not-active">
@@ -11,9 +11,11 @@
   </div>
   <div class="sidebar-body">
     <ul class="nav">
+      @if(Auth::user()->role_id == 1)
+
       {{-- <li class="nav-item nav-category">Main</li> --}}
       <li class="nav-item">
-        <a href="{{ url('/dashboard') }}" class="nav-link">
+        <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
@@ -34,7 +36,7 @@
               <a href="{{ route('seminar-proposal.create')}}" class="nav-link">Seminar Proposal</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/email/compose') }}" class="nav-link">Surat Survey</a>
+              <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
             </li>
           </ul>
         </div>
@@ -59,12 +61,11 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
+        <a href="{{route('revisi_sp.index')}}" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">Revisi</span>
         </a>
       </li>
-
       {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
           <i class="link-icon" data-feather="anchor"></i>
@@ -243,6 +244,89 @@
         </a>
       </li>
     </ul>
+    @elseif(Auth::user()->role_id == 3)
+    <li class="nav-item">
+        <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
+          <i class="link-icon" data-feather="box"></i>
+          <span class="link-title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item nav-category">Pengajuan & Surat</li>
+      <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
+          <i class="link-icon" data-feather="mail"></i>
+          <span class="link-title">Proposal & Skripsi</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="email">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Judul</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
+            </li>
+            {{-- <li class="nav-item">
+              <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
+            </li> --}}
+          </ul>
+        </div>
+      </li>
+
+    <li class="nav-item nav-category">Jadwal & Berita Acara</li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#penjadwalan" role="button" aria-controls="general">
+          <i class="link-icon" data-feather="book"></i>
+          <span class="link-title">Penjadwalan</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="penjadwalan">
+            <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Judul</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
+                </li>
+                {{-- <li class="nav-item">
+                  <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
+                </li> --}}
+              </ul>
+        </div>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#ba" role="button"  aria-controls="email">
+          <i class="link-icon" data-feather="mail"></i>
+          <span class="link-title">Berita Acara</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="ba">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('koor-berita-acara-proposal.index') }}" class="nav-link">BA Seminar Proposal</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('koor-berita-acara-skripsi.index') }}" class="nav-link">BA Sidang Skripsi</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item nav-category">Manajemen</li>
+      <li class="nav-item">
+        <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Data Pengguna</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Laporan Tahunan</span>
+        </a>
+      </li>
+      @endif
   </div>
 </nav>
 {{-- <nav class="settings-sidebar">
