@@ -29,7 +29,7 @@ use App\Http\Controllers\KoordinatorBeritaAcaraSkripsiController;
 use App\Http\Controllers\BeritaAcaraSkripsiController;
 use App\Http\Controllers\RevisiSidangSkripsiController;
 use App\Http\Controllers\DosenRevisiSidangSkripsiController;
-
+use App\Http\Controllers\PenjadwalanKoordinatorController;
 
 
 
@@ -128,6 +128,10 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 
     Route::controller(KoordinatorController::class)->group(function () {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
+    });
+
+    Route::controller(PenjadwalanKoordinatorController::class)->group(function () {
+        Route::get('/koordinator/penjadwalan', 'index')->name('penjadwalan-koordinator.index');
     });
 
     Route::group(['prefix' => 'koordinator/berita_acara_proposal'], function () {

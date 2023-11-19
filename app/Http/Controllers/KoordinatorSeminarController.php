@@ -33,7 +33,8 @@ class KoordinatorSeminarController extends Controller
         $baru = [
             'baru' => DB::table('users')->where('role_id', '2')->get(),
         ];
-        return view('koordinator/penjadwalan/seminar_proposal.detail', $data, $baru);
+        $listRuangan = DB::table('ruangan')->get();
+        return view('koordinator/penjadwalan/seminar_proposal.detail', $data, $baru, $listRuangan);
 
     }
     public function updatejadwal(Request $request, $id)

@@ -275,6 +275,13 @@
 
     <li class="nav-item nav-category">Jadwal & Berita Acara</li>
     <li class="nav-item">
+        <a href="{{ route('penjadwalan-koordinator.index') }}" class="nav-link">
+            <i class="link-icon" data-feather="hash"></i>
+            <span class="link-title">Penjadwalan</span>
+        </a>
+    </li>
+
+    {{-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#penjadwalan" role="button" aria-controls="general">
           <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Penjadwalan</span>
@@ -288,12 +295,9 @@
                 <li class="nav-item">
                   <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
                 </li>
-                {{-- <li class="nav-item">
-                  <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
-                </li> --}}
               </ul>
         </div>
-      </li>
+      </li> --}}
 
       <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#ba" role="button"  aria-controls="email">
