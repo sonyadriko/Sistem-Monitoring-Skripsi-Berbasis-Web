@@ -61,6 +61,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{{route('bimbingans-mhs.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Bimbingan Skripsi</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{route('revisi_sp.index')}}" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">Revisi</span>

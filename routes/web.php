@@ -30,6 +30,7 @@ use App\Http\Controllers\BeritaAcaraSkripsiController;
 use App\Http\Controllers\RevisiSidangSkripsiController;
 use App\Http\Controllers\DosenRevisiSidangSkripsiController;
 use App\Http\Controllers\PenjadwalanKoordinatorController;
+use App\Http\Controllers\DosenBimbinganSkripsiController;
 
 
 
@@ -95,6 +96,15 @@ Route::group(['middleware' => 'auth:dosen'], function() {
         Route::post('/accrevisi/{id}', [DosenBimbinganProposalController::class, 'accrevisi'])->name('bimbingan-dosen.accrevisi');
         Route::post('/accproposal/{id}', [DosenBimbinganProposalController::class, 'accproposal'])->name('bimbingan-dosen.accproposal');
     });
+
+    Route::group(['prefix' => 'dosen/bimbingan_skripsi'], function () {
+        Route::get('/', [DosenBimbinganSkripsiController::class, 'index'])->name('bimbingans-dosen.index');
+        Route::get('/detail/{id}', [DosenBimbinganSkripsiController::class, 'detail'])->name('bimbingans-dosen.detail');
+        Route::post('/updaterevisi/{id}', [DosenBimbinganSkripsiController::class, 'updaterevisi'])->name('bimbingans-dosen.addrevisi');
+        Route::post('/accrevisi/{id}', [DosenBimbinganSkripsiController::class, 'accrevisi'])->name('bimbingans-dosen.accrevisi');
+        Route::post('/accproposal/{id}', [DosenBimbinganSkripsiController::class, 'accproposal'])->name('bimbingans-dosen.accproposal');
+    });
+
     Route::group(['prefix' => 'dosen/berita_acara_proposal'], function () {
         Route::get('/', [BeritaAcaraProposalController::class, 'index'])->name('berita-acara-proposal.index');
         Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');

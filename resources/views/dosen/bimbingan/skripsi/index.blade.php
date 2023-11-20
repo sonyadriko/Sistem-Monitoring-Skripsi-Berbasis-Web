@@ -47,7 +47,7 @@ Bimbingan Proposal
                         @php
                         $no=1;
                         @endphp
-                        @foreach($bimbinganp as $dosen)
+                        @foreach($bimbingans as $dosen)
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ $dosen->name }}</td>
