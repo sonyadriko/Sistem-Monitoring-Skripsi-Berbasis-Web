@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Proposal
+Detail Surat Tugas
 @endsection
 
 @section('css')

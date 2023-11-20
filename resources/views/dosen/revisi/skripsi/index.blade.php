@@ -1,57 +1,89 @@
-@extends('layouts/template')
+@extends('layout.master3')
 
 @section('title')
-Proposal
+Berita Acara Seminar Skripsi
 @endsection
 
-@section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Table Daftar Mahasiswa Revisi Seminar Proposal</h5>
+@section('css')
+<link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <div class="card-body">
-      <div class=" table-responsive  pt-0">
-        <table class="table"/>
-        {{-- <div class="table-responsive"> --}}
-            {{-- <table class="table table-bordered id="dataTable" width="100%" cellspacing="0"> --}}
-                <thead>
+@endsection
+@section('content')
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Revisi Sidang Skripsi</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tabel Revisi Sidang Skripsi</h4>
+                <p class="card-title-desc">DataTables has most features enabled by
+                    default, so all you need to do to use it with your own tables is to call
+                    the construction function: <code>$().DataTable();</code>.
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Judul</th>
+                        <th>Tema</th>
                         <th>Action</th>
-                </thead>
-                <tbody>
-                    @php
-                    $no=1;
-                    @endphp
-                    @foreach($rev as $dosen)
-                    <tr>
-                        <td>{{ $no }}</td>
-                        <td>{{ $dosen->name }}</td>
-                        <td>{{ $dosen->topik_bidang_ilmu }}</td>
-                        <td><a href="{{ url('/dosen/revisi_sidang_skripsi/detail/' . $dosen->id_revisi_sidang_skripsi) }}" class="btn btn-primary">Cek Revisi</a></td>
                     </tr>
-                    @php
-                    $no++;
-                    @endphp
-                    @endforeach
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+                        @foreach($rev as $dosen)
+                        <tr>
+                            <td>{{ $no }}</td>
+                            <td>{{ $dosen->name }}</td>
+                            <td>{{ $dosen->topik_bidang_ilmu }}</td>
+                            <td><a href="{{ url('/dosen/revisi_sidang_skripsi/detail/' . $dosen->id_revisi_sidang_skripsi) }}" class="btn btn-primary">Cek Revisi</a></td>
+                        </tr>
+                        @php
+                        $no++;
+                        @endphp
+                        @endforeach
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
+            </div>
         </div>
-    </div>
-    </div>
-</div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-   $(document).ready(function() {
-  $('#dataTable').DataTable({
-    paging: true,
-    searching: true,
-    ordering: true,
-    // Opsi lainnya
-  });
-});
-  </script>
+@push('plugin-scripts')
+  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+@endpush
+
+@push('custom-scripts')
+  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+@endpush
+
+@section('script')
+<script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive/datatables.net-responsive.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
+<script src="{{ asset('assets2/js/app.min.js') }}"></script>
+@endsection

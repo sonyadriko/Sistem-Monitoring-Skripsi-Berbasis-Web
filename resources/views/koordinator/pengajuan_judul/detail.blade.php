@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Proposal
+Detail Pengajuan Tema
 @endsection
 
 @section('css')

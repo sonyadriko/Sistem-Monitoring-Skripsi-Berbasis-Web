@@ -1,33 +1,52 @@
-@extends('layouts/template')
+@extends('layout.master3')
 
 @section('title')
-Ruangan
+Proposal
 @endsection
 
+@section('css')
+<link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+
+@endsection
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Table Ruangan</h5>
-    <div class="card-body">
-      <a href="{{ url('/koordinator/ruangan/create') }}" class="btn btn-success mb-3">Tambah Data</a>
-      <div class=" table-responsive  pt-0">
-        <table class="table">
-                <thead>
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Lainnya</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Ruangan</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tabel List Ruangan</h4>
+                <p class="card-title-desc">DataTables has most features enabled by
+                    default, so all you need to do to use it with your own tables is to call
+                    the construction function: <code>$().DataTable();</code>.
+                </p>
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="{{ route('ruangan.create') }}" class="btn btn-success">Tambah Ruangan</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Ruangan</th>
                         <th>Action</th>
-                        {{-- <th>Action</th> --}}
-                </thead>
-                <tbody>
-                    @php
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @php
                     $no=1;
                     @endphp
                     @foreach($ruangan as $ruangan)
                     <tr>
                         <td>{{ $no }}</td>
                         <td>{{ $ruangan->nama_ruangan }}</td>
-                        {{-- <td>{{ $dosen->keterangan }}</td> --}}
                         <td><a href="{{ url('/koordinator/ruangan/edit/' . $ruangan->id_ruangan) }}" class="btn btn-primary">Edit</a>
                             <form action="{{ url('/koordinator/ruangan/delete/' . $ruangan->id_ruangan) }}" method="POST" style="display: inline-block;">
                                 @csrf
@@ -40,24 +59,33 @@ Ruangan
                     $no++;
                     @endphp
                     @endforeach
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
-</div>
-@endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-   $(document).ready(function() {
-  $('#dataTable').DataTable({
-    paging: true,
-    searching: true,
-    ordering: true,
-    // Opsi lainnya
-  });
-});
-  </script>
+    </div> <!-- end col -->
+</div> <!-- end row -->
 
+@endsection
+@push('plugin-scripts')
+  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+@endpush
+
+@push('custom-scripts')
+  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+@endpush
+
+@section('script')
+<script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive/datatables.net-responsive.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
+<script src="{{ asset('assets2/js/app.min.js') }}"></script>
+@endsection

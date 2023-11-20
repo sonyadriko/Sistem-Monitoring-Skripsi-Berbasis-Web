@@ -250,28 +250,25 @@
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
-      </li>
-      <li class="nav-item nav-category">Pengajuan & Surat</li>
-      <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
-          <i class="link-icon" data-feather="mail"></i>
-          <span class="link-title">Proposal & Skripsi</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
+    </li>
+    <li class="nav-item nav-category">Pengajuan & Surat</li>
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
+                <i class="link-icon" data-feather="mail"></i>
+                <span class="link-title">Proposal & Skripsi</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
         <div class="collapse" id="email">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Tema</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
-            </li>
-            {{-- <li class="nav-item">
-              <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
-            </li> --}}
-          </ul>
+            <ul class="nav sub-menu">
+                <li class="nav-item">
+                    <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Tema</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
+                </li>
+            </ul>
         </div>
-      </li>
+    </li>
 
     <li class="nav-item nav-category">Jadwal & Berita Acara</li>
     <li class="nav-item">
@@ -330,6 +327,58 @@
           <span class="link-title">Laporan Tahunan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{route('ruangan.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Ruangan</span>
+        </a>
+      </li>
+     @elseif(Auth::user()->role_id == 2)
+     <li class="nav-item">
+        <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
+          <i class="link-icon" data-feather="box"></i>
+          <span class="link-title">Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Bidang Ilmu</li>
+    <li class="nav-item">
+        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Topik</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Bimbingan & Revisi</li>
+    <li class="nav-item">
+        <a href="{{route('bimbingan-dosen.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Mahasiswa Bimbingan</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('dosen-revisi-sempro.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Revisi Seminar Proposal</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('dosen-revisi-semhas.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Revisi Sidang Skripsi</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Berita Acara</li>
+    <li class="nav-item">
+        <a href="{{route('berita-acara-proposal.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Seminar Proposal</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('berita-acara-skripsi.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Sidang Skripsi</span>
+        </a>
+    </li>
       @endif
   </div>
 </nav>
