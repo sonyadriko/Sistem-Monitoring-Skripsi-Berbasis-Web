@@ -1,7 +1,10 @@
 @extends('layout.master')
 
-@section('content')
+@section('title')
+Profile
+@endsection
 
+@section('content')
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
     @if(session('success'))
 <div class="alert alert-success">

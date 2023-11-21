@@ -23,7 +23,7 @@
       <li class="nav-item nav-category">Pengajuan & Surat</li>
       <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
-          <i class="link-icon" data-feather="mail"></i>
+          <i class="link-icon" data-feather="inbox"></i>
           <span class="link-title">Forms</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
@@ -56,31 +56,49 @@
           <span class="link-title">Calendar</span>
         </a>
       </li> --}}
-      <li class="nav-item nav-category">Bimbingan & Revisi</li>
-      <li class="nav-item">
+    <li class="nav-item nav-category">Bimbingan & Revisi</li>
+    <li class="nav-item">
         <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan</span>
         </a>
-      </li>
-      <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <a href="{{route('bimbingans-mhs.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan Skripsi</span>
         </a>
-      </li>
-      <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <a href="{{route('revisi_sp.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+          <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Revisi Seminar Proposal</span>
         </a>
-      </li>
-      <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <a href="{{route('revisi_sk.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+          <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Revisi Sidang Skripsi</span>
         </a>
-      </li>
+    </li>
+    <li class="nav-item nav-category">Lain - lain</li>
+    <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#lainlain" role="button"  aria-controls="lainlain">
+            <i class="link-icon" data-feather="mail"></i>
+            <span class="link-title">Lain - lain</span>
+            <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="lainlain">
+            <ul class="nav sub-menu">
+                <li class="nav-item">
+                    <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Surat Survey Perusahaan</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('faq')}}" class="nav-link">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </li>
       {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
           <i class="link-icon" data-feather="anchor"></i>
@@ -269,7 +287,7 @@
     <li class="nav-item nav-category">Pengajuan & Surat</li>
         <li class="nav-item ">
             <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
-                <i class="link-icon" data-feather="mail"></i>
+                <i class="link-icon" data-feather="book-open"></i>
                 <span class="link-title">Proposal & Skripsi</span>
                 <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
@@ -288,7 +306,7 @@
     <li class="nav-item nav-category">Jadwal & Berita Acara</li>
     <li class="nav-item">
         <a href="{{ route('penjadwalan-koordinator.index') }}" class="nav-link">
-            <i class="link-icon" data-feather="hash"></i>
+            <i class="link-icon" data-feather="calendar"></i>
             <span class="link-title">Penjadwalan</span>
         </a>
     </li>
@@ -313,7 +331,7 @@
 
       <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#ba" role="button"  aria-controls="email">
-          <i class="link-icon" data-feather="mail"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Berita Acara</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
@@ -332,19 +350,19 @@
       <li class="nav-item nav-category">Manajemen</li>
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Data Pengguna</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="clipboard"></i>
           <span class="link-title">Laporan Tahunan</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="smile"></i>
           <span class="link-title">Ruangan</span>
         </a>
       </li>

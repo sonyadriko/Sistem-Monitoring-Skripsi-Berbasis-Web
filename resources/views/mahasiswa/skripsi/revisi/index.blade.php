@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-Revisi Seminar Proposal
+Revisi Sidang Skripsi
 @endsection
 
 
@@ -18,7 +18,7 @@ Revisi Seminar Proposal
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
 
   <div>
-    <h4 class="mb-3 mb-md-0">Revisi Seminar Proposal</h4>
+    <h4 class="mb-3 mb-md-0">Revisi Sidang Skripsi</h4>
   </div>
 
 </div>

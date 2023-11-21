@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Proposal
+Sidang Skripsi
 @endsection
 
 @section('css')
@@ -14,7 +14,7 @@ Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Sidang Skripsi</li>
     </ol>
 </nav>
 <div class="row">
@@ -115,7 +115,6 @@ Proposal
           </div>
           @else
           <div class="card-body">
-            {{-- <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal])}}" method="POST"> --}}
             <form action="{{ route('cetak-berita-acara-s', ['id' => $data->id_sidang_skripsi]) }}" method="POST" id="cetakForm">
               @csrf
               <div class="mb-3">

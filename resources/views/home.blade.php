@@ -4,6 +4,10 @@
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
 @endpush
 
+@section('title')
+Dashboard
+@endsection
+
 @section('content')
 @if(session('success'))
 <div class="alert alert-success">

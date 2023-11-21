@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Proposal
+Ruangan
 @endsection
 
 @section('css')

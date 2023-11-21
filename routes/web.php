@@ -32,6 +32,7 @@ use App\Http\Controllers\DosenRevisiSidangSkripsiController;
 use App\Http\Controllers\PenjadwalanKoordinatorController;
 use App\Http\Controllers\DosenBimbinganSkripsiController;
 use App\Http\Controllers\HistoryBimbinganSkripsiController;
+use App\Http\Controllers\FAQController;
 
 
 
@@ -234,8 +235,8 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
-        Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
-        Route::post('/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
+        Route::get('/pengajuan_tema', 'create')->name('pengajuan-judul.create');
+        Route::post('/pengajuan_tema', 'store')->name('pengajuan-judul.submit');
     });
 
 
@@ -281,6 +282,9 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
         Route::post('/surat_tugas', 'store')->name('pengajuan-st.store');
     });
 
+    Route::controller(FAQController::class)->group(function () {
+        Route::get('/faq', 'index')->name('faq');
+    });
 
 
 

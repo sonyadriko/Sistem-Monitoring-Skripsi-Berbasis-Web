@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Proposal
+Sidang Skripsi
 @endsection
 
 @section('css')
@@ -14,14 +14,14 @@ Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Sidang Skripsi</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Pengajuan Seminar Proposal</h4>
+                <h4 class="card-title">Tabel Pengajuan Sidang Skripsi</h4>
                 <p class="card-title-desc">DataTables has most features enabled by
                     default, so all you need to do to use it with your own tables is to call
                     the construction function: <code>$().DataTable();</code>.

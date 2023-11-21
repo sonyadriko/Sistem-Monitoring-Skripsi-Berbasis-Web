@@ -1,9 +1,14 @@
 @extends('layout.master3')
-@section('title')@endsection
+
 @push('plugin-styles')
 <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
 <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet">
 @endpush
+
+@section('title')
+Pengajuan Tema
+@endsection
+
 @section('css')
 <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet">
 @endsection
@@ -41,13 +46,12 @@
                         </li>
                     </ul>
 
-
                     <!-- wizard-nav -->
                     <div class="tab-content twitter-bs-wizard-tab-content">
                         <div class="tab-pane" id="seller-details">
                             <div class="text-center mb-4">
                                 <h5>Step Pertama</h5>
-                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pengajuan judul proposal skripsi terdapat pada gambar dibawah ini.</p>
+                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pengajuan tema proposal skripsi terdapat pada gambar dibawah ini.</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
@@ -135,7 +139,7 @@
             </div>
             <div class="card-body">
                 {{-- <h6 class="card-title">Form Grid</h6> --}}
-                <h4 class="card-title mb-0">Selamat! Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>
+                <h4 class="card-title mb-0">Selamat! Pengajuan Tema Proposal Skripsimu Sudah disubmit.</h4>
                 <h6 class="mb-3">Selanjutnya menunggu konfirmasi dan pembagian dosen dari koordinator, berikut isi dari pengajuan yang anda lakukan.</h4>
                 <form>
                     <div class="row">
@@ -162,9 +166,9 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <input type="text" class="form-control" placeholder="Enter last name" value="{{ $temacek->status }}" readonly>
+                                <input type="text" class="form-control @if($temacek->status == 'pending') bg-warning @elseif($temacek->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $temacek->status }}" readonly>
                             </div>
-                        </div><!-- Col -->
+                        </div>
                     </div><!-- Row -->
                 </form>
                 {{-- <button type="button" class="btn btn-primary submit">Submit form</button> --}}
