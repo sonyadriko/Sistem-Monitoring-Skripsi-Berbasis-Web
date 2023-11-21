@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Detail Berita Acara Proposal
+Detail Bimbingan Proposal
 @endsection
 
 @section('css')
@@ -13,8 +13,8 @@ Detail Berita Acara Proposal
 @section('content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Seminar Proposal</li>
+      <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Bimbingan Proposal</li>
     </ol>
 </nav>
 <div class="row">

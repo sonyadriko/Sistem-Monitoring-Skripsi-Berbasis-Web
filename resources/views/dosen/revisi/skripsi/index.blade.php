@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Berita Acara Seminar Skripsi
+Revisi Sidang Skripsi
 @endsection
 
 @section('css')

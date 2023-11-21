@@ -7,13 +7,8 @@
     <div class="col-md-8 col-xl-6 mx-auto">
       <div class="card">
         <div class="row">
-          {{-- <div class="col-md-4 pe-md-0">
-            <div class="auth-side-wrapper" style="background-image: url({{ url('https://via.placeholder.com/219x452') }})">
-                <div class="auth-side-wrapper" style="background-image: url({{ asset('img/Logo-SI-219x452.png') }})">
-
-            </div> --}}
           </div>
-          <div class="col-md-8 ps-md-0">
+          <div class="col-md-8 ps-md-0 mx-auto">
             <div class="auth-form-wrapper px-4 py-5">
               <a href="#" class="noble-ui-logo d-block mb-2">Login<span></span></a>
               <h5 class="text-muted fw-normal mb-4">Izinkan Sistem mengenali anda.</h5>

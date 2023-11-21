@@ -37,7 +37,7 @@
 
   {{-- @include('layout.head-css') --}}
 </head>
-<body data-base-url="{{url('/')}}">
+<body data-base-url="{{url('/')}}" class="sidebar-dark">
 
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
