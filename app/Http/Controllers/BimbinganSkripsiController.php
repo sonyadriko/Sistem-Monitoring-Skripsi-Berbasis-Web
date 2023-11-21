@@ -15,6 +15,7 @@ class BimbinganSkripsiController extends Controller
     {
         $dosens = DB::table('bimbingan_skripsi')
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
+        ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
         ->where('user_id', '=', Auth::user()->id)->first();
         // return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
         return view('mahasiswa/skripsi/bimbingan.index', compact('dosens'));

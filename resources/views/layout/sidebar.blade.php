@@ -69,7 +69,13 @@
       <li class="nav-item">
         <a href="{{route('revisi_sp.index')}}" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Revisi</span>
+          <span class="link-title">Revisi Seminar Proposal</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{route('revisi_sk.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Revisi Sidang Skripsi</span>
         </a>
       </li>
       {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
@@ -357,7 +363,13 @@
     <li class="nav-item">
         <a href="{{route('bimbingan-dosen.index')}}" class="nav-link">
           <i class="link-icon" data-feather="hash"></i>
-          <span class="link-title">Mahasiswa Bimbingan</span>
+          <span class="link-title">Bimbingan Proposal</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('bimbingans-dosen.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="hash"></i>
+          <span class="link-title">Bimbingan Skripsi</span>
         </a>
     </li>
     <li class="nav-item">

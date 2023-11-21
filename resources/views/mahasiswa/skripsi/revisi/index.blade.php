@@ -1,74 +1,99 @@
-@extends('layouts/template')
+@extends('layout.master')
+
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
+@endpush
 
 @section('title')
-Revisi Sidang Skripsi
+Revisi Seminar Proposal
 @endsection
 
-<link rel="stylesheet" href="{{ asset('/css/custom.css') }}" />
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Review Sidang Skripsi</h5>
-        <div class="card-body">
-            <p class="revisi-rumusan-masa">
-                <span class="span0-1">Revisi:<br/></span>
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
 
-                @foreach($revisisk2 as $revisi)
-                <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span>
-                @endforeach
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4 mb-xl-0">
-                <h5 class="card-header">File Revisi Skripsi</h5>
-                <div class="card-body">
-                    <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
-                            <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
-                        </div>
-                        <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-                        </div>
-                    </form>
-                </div>
+  <div>
+    <h4 class="mb-3 mb-md-0">Revisi Seminar Proposal</h4>
+  </div>
+
+</div>
+{{-- <h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6> --}}
+
+<div class="row">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card mb-4">
+            <h5 class="card-header">Review Sidang Skripsi</h5>
+            <div class="card-body">
+                <p class="revisi-rumusan-masa">
+                    <span class="span0-1">Revisi:<br/></span>
+
+                    @foreach($revisisk2 as $revisi)
+                    <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span>
+                    @endforeach
+                </p>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <h5 class="card-header">Acc Revisi Skripsi</h5>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"/>
-                            <label class="form-check-label" for="defaultCheck5"> Dosen Penguji 1 </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"/>
-                            <label class="form-check-label" for="defaultCheck6"> Dosen Penguji 2 </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck7"/>
-                            <label class="form-check-label" for="defaultCheck7"> Dosen Penguji 3 </label>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="submit" class="btn btn-primary">Daftar</button>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4 mb-xl-0">
+                    <h5 class="card-header">File Revisi Skripsi</h5>
+                    <div class="card-body">
+                        <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
+                                <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
+                            </div>
+                            <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <h5 class="card-header">Acc Revisi Skripsi</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"/>
+                                <label class="form-check-label" for="defaultCheck5"> Dosen Penguji 1 </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"/>
+                                <label class="form-check-label" for="defaultCheck6"> Dosen Penguji 2 </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck7"/>
+                                <label class="form-check-label" for="defaultCheck7"> Dosen Penguji 3 </label>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="submit" class="btn btn-primary">Daftar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mb-3">
-        <button type="button" class="btn btn-primary">History Revisi</button>
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary">History Revisi</button>
+        </div>
     </div>
 </div>
+
+
+
+{{-- !-- row --> --}}
 @endsection
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ... Bagian HTML lainnya ... -->
@@ -142,3 +167,4 @@ Revisi Sidang Skripsi
         }
     });
 </script>
+

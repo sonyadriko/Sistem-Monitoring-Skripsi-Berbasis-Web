@@ -114,7 +114,7 @@ Bimbingan Skripsi
             @endif
         </div>
         <div class="mb-3">
-            <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
+            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
 
         </div>
         {{-- @endif --}}

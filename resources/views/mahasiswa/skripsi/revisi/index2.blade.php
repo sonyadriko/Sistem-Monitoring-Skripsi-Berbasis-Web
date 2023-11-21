@@ -1,39 +1,21 @@
-@extends('layout.master')
-
-@push('plugin-styles')
-  <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-@endpush
+@extends('layouts/template')
 
 @section('title')
-Revisi Seminar Proposal
+Revisi Sidang Skripsi
 @endsection
 
+<link rel="stylesheet" href="{{ asset('/css/custom.css') }}" />
 
 @section('content')
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-
-  <div>
-    <h4 class="mb-3 mb-md-0">Revisi Seminar Proposal</h4>
-  </div>
-
-</div>
-{{-- <h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6> --}}
-
-<div class="row">
-    <div class="container-xxl flex-grow-1 container-p-y">
+<div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Review Seminar Proposal</h5>
+        <h5 class="card-header">Review Sidang Skripsi</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
                 <span class="span0-1">Revisi:<br/></span>
 
-                @foreach($revisisp2 as $revisisp2)
-                <span class="span0-1">{{$revisisp2->revisi}} dari {{$revisisp2->name}}</span></br>
+                @foreach($revisisk2 as $revisi)
+                <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span>
                 @endforeach
             </p>
         </div>
@@ -41,15 +23,15 @@ Revisi Seminar Proposal
     <div class="row">
         <div class="col-xl-6">
             <div class="card mb-4 mb-xl-0">
-                <h5 class="card-header">File Revisi Proposal</h5>
+                <h5 class="card-header">File Revisi Skripsi</h5>
                 <div class="card-body">
                     <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="file_revisi_proposal" class="form-label">Upload File Revisi Proposal</label>
-                            <input class="form-control" type="file" id="file_revisi_proposal" name="file_revisi_proposal" />
+                            <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
+                            <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
                         </div>
-                        <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_berita_acara_p }}" />
+                        <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                         </div>
@@ -59,20 +41,20 @@ Revisi Seminar Proposal
         </div>
         <div class="col-xl-6">
             <div class="card mb-4">
-                <h5 class="card-header">Acc Revisi Seminar Proposal</h5>
+                <h5 class="card-header">Acc Revisi Skripsi</h5>
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" name="dospem" id="dospem"/>
-                            <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
+                            <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"/>
+                            <label class="form-check-label" for="defaultCheck5"> Dosen Penguji 1 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1"/>
-                            <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
+                            <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"/>
+                            <label class="form-check-label" for="defaultCheck6"> Dosen Penguji 2 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2"/>
-                            <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
+                            <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck7"/>
+                            <label class="form-check-label" for="defaultCheck7"> Dosen Penguji 3 </label>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn btn-primary">Daftar</button>
@@ -86,14 +68,7 @@ Revisi Seminar Proposal
         <button type="button" class="btn btn-primary">History Revisi</button>
     </div>
 </div>
-</div>
-
-
-
-{{-- !-- row --> --}}
 @endsection
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ... Bagian HTML lainnya ... -->
@@ -108,16 +83,16 @@ Revisi Seminar Proposal
             submitBtn.addEventListener('click', function(event) {
                 event.preventDefault();
 
-                const file = document.getElementById('file_revisi_proposal').files[0];
+                const file = document.getElementById('file_revisi_skripsi').files[0];
                 const berita_acara_id = document.getElementById('berita_acara_id').value;
 
                 if (file && berita_acara_id) {
                     const formData = new FormData();
-                    formData.append('file_revisi_proposal', file);
+                    formData.append('file_revisi_skripsi', file);
                     formData.append('berita_acara_id', berita_acara_id);
                     formData.append('_token', '{{ csrf_token() }}');
 
-                    fetch('{{ route('revisi_sp.store') }}', {
+                    fetch('{{ route('revisi_sk.store') }}', {
                         method: 'POST',
                         body: formData
                     })
@@ -131,7 +106,7 @@ Revisi Seminar Proposal
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Revisi Proposal Berhasil disubmit.',
+                                title: 'File Skripsi Successfully Submitted!',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500

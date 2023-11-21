@@ -109,9 +109,6 @@ class DosenBimbinganProposalController extends Controller
         $dospem2 = $request->input('dospem2');
 
         $username = Auth::user()->name;
-
-
-
         if ($username === $dospem1) {
             $result_utama = DB::table('bimbingan_proposal')
                 ->where('id_bimbingan_proposal', $id)

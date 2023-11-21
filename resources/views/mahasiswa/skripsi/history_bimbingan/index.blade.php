@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-History Bimbingan Proposal
+History Bimbingan Skripsi
 @endsection
 
 
@@ -17,7 +17,7 @@ History Bimbingan Proposal
 @endif
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">History Bimbingan Proposal</h4>
+    <h4 class="mb-3 mb-md-0">History Bimbingan Skripsi</h4>
   </div>
 </div>
 <h6 class="mb-4">Seluruh informasi mengenai history bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>

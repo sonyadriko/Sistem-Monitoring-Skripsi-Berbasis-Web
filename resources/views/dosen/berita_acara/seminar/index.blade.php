@@ -48,7 +48,7 @@ Berita Acara Seminar Proposal
                         @endphp
                         @foreach($ba as $ba)
                         <tr>
-                            <td>{{ $ba->id_berita_acara_p }}</td>
+                            <td>{{ $no }}</td>
                             <td>{{ $ba->name }}</td>
                             <td>{{ $ba->kode_unik }}</td>
                             <td><a href="{{ url('/dosen/berita_acara_proposal/detail/'.$ba->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>

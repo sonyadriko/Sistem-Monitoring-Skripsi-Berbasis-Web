@@ -53,7 +53,7 @@ Bimbingan Proposal
                             <td>{{ $dosen->name }}</td>
                             <td>{{ $dosen->topik_bidang_ilmu }}</td>
                             {{-- <td>{{ $dosen->topik_bidang_ilmu }}</td> --}}
-                            <td><a href="{{ url('/dosen/bimbingan_proposal/detail/' . $dosen->id_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/dosen/bimbingan_skripsi/detail/' . $dosen->id_bimbingan_skripsi) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;
