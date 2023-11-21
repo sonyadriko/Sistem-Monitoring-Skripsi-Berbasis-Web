@@ -376,45 +376,45 @@
     <li class="nav-item nav-category">Bidang Ilmu</li>
     <li class="nav-item">
         <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Topik</span>
         </a>
     </li>
     <li class="nav-item nav-category">Bimbingan & Revisi</li>
     <li class="nav-item">
         <a href="{{route('bimbingan-dosen.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan Proposal</span>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{route('bimbingans-dosen.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan Skripsi</span>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{route('dosen-revisi-sempro.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Revisi Seminar Proposal</span>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{route('dosen-revisi-semhas.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Revisi Sidang Skripsi</span>
         </a>
     </li>
     <li class="nav-item nav-category">Berita Acara</li>
     <li class="nav-item">
         <a href="{{route('berita-acara-proposal.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="book-open"></i>
           <span class="link-title">Seminar Proposal</span>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{route('berita-acara-skripsi.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
+          <i class="link-icon" data-feather="file-text"></i>
           <span class="link-title">Sidang Skripsi</span>
         </a>
     </li>
