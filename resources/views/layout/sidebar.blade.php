@@ -38,10 +38,13 @@
             <li class="nav-item">
               <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('sidang_skripsi.index')}}" class="nav-link">Sidang Skripsi</a>
+            </li>
           </ul>
         </div>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a href="{{ url('/apps/chat') }}" class="nav-link">
           <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Chat</span>
@@ -52,7 +55,7 @@
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">Calendar</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item nav-category">Bimbingan & Revisi</li>
       <li class="nav-item">
         <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
@@ -184,7 +187,7 @@
           </ul>
         </div>
       </li> --}}
-      <li class="nav-item nav-category">Pages</li>
+      {{-- <li class="nav-item nav-category">Pages</li> --}}
       {{-- <li class="nav-item {{ active_class(['general/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#general" role="button" aria-expanded="{{ is_active_route(['general/*']) }}" aria-controls="general">
           <i class="link-icon" data-feather="book"></i>
@@ -248,13 +251,13 @@
           </ul>
         </div>
       </li> --}}
-      <li class="nav-item nav-category">Docs</li>
+      {{-- <li class="nav-item nav-category">Docs</li>
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
           <i class="link-icon" data-feather="hash"></i>
           <span class="link-title">Documentation</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
     @elseif(Auth::user()->role_id == 3)
     <li class="nav-item">

@@ -52,7 +52,7 @@ class SidangSkripsiController extends Controller
         $SidangSkripsi->file_slip_pembayaran = "uploads/{$userFolder}/sidang_skripsi/{$fileSlipPembayaranName}";
         $SidangSkripsi->save();
 
-        return redirect('/dashboard')->with('success', 'Berhasil Daftar Seminar Proposal.');
+        return redirect('/dashboard')->with('success', 'Berhasil Daftar Sidang Skripsi.');
 
     }
 }

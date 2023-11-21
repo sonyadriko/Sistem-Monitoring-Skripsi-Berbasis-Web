@@ -1,122 +1,272 @@
-@extends('layouts/template')
+@extends('layout.master3')
 
 @section('title')
 Daftar Sidang Skripsi
 @endsection
 
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
+@endpush
+
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-  @if(is_null($datas) || is_null($datas->id_bimbingan_proposal))
 
-  <div class="alert alert-warning" role="alert">
-      Harap selesaikan proposal terlebih dahulu.
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Forms</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Skripsi</li>
+    </ol>
+</nav>
+{{-- <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+
+  <div>
+    <h4 class="mb-3 mb-md-0">Alur Pendaftaran Seminar Proposal Skripsi</h4>
   </div>
-  @else
-  {{-- @if(is_null($datas) || is_null($datas->dosen_pembimbing_utama) || is_null($datas->dosen_pembimbing_ii))
-    @if(is_null($datas) || is_null($datas->acc_dosen_utama) || is_null($datas->acc_dosen_ii))
-    <div class="alert alert-warning" role="alert">
-      Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing utama dan ii.
+
+  <div class="d-flex align-items-center flex-wrap text-nowrap">
+    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+      <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
+      <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
     </div>
-    @endif
+    <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
+      <i class="btn-icon-prepend" data-feather="printer"></i>
+      Print
+    </button>
+    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+      <i class="btn-icon-prepend" data-feather="download-cloud"></i>
+      Download Report
+    </button>
+  </div>
+</div> --}}
+{{-- <h6 class="mb-4">Langkah-langkah yang harus dilalui saat ingin melakukan pengajuan proposal skripsi.</h6> --}}
 
-  @elseif(is_null($datas) || is_null($datas->dosen_pembimbing_utama))
-
-  @if(is_null($datas) || is_null($datas->acc_dosen_utama))
-
-    <div class="alert alert-warning" role="alert">
-        Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing.
-    </div>
-    @endif --}}
-
-
-
-    {{-- @if (is_null($datas) || is_null($datas->dosen_pembimbing_utama))
-      @if(is_null($datas->acc_dosen_utama))
-    <div class="alert alert-warning" role="alert">
-        Harap menyelesaikan bimbingan proposal dulu sampai diacc oleh dosen pembimbing utama.
-    </div>
-      @elseif(!is_null($datas->acc_dosen_utama))
-      <div class="alert alert-warning" role="alert">
-        Harap.
-    </div> --}}
-    {{-- @endif --}}
-      {{-- Pengecekan apakah dosen_pembimbing_utama tidak null dan dosen_pembimbing_ii null. Jika benar, pastikan acc_dosen_utama tidak null.
-      Pengecekan apakah dosen_pembimbing_utama tidak null. Jika benar, periksa apakah acc_dosen_utama tidak null.
-      Jika dosen_pembimbing_ii null (dan sebelumnya dicek bahwa dosen_pembimbing_utama tidak null), maka periksa apakah acc_dosen_utama tidak null dan acc_dosen_ii null, dan berikan peringatan yang sesuai. --}}
-    {{-- @else --}}
-    <div class="card mb-4">
-        <h5 class="card-header">Daftar Sidang Skripsi</h5>
-        <div class="card-body">
-          <form action="{{route('sidang_skripsi.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="npm" class="form-label">NPM</label>
-                <input
-                type="text"
-                class="form-control"
-                id="npm"
-                value="{{Auth::user()->kode_unik}}"
-                name="npm"
-                aria-describedby="defaultFormControlHelp"
-                readonly
-              />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Alur Pendaftaran Sidang Skripsi</h4>
             </div>
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama Mahasiswa</label>
-                <input
-                type="text"
-                class="form-control"
-                id="nama"
-                name="nama"
-                value="{{Auth::user()->name}}"
-                aria-describedby="defaultFormControlHelp"
-                readonly
-                />
-            </div>
+            <div class="card-body">
+                <h6 class="mb-4">Langkah-langkah yang harus dilalui saat ingin melakukan pendaftaran sidang skripsi.</h6>
 
-            <div class="mb-3">
-                <label for="dospem1" class="form-label">Dosen Pembimbing 1</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="dospem1"
-                  value="{{$datas->dosen_pembimbing_utama}}"
-                  placeholder="Dosen Pembimbing 1"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
+                <div id="basic-pills-wizard" class="twitter-bs-wizard">
+                    <ul class="twitter-bs-wizard-nav d-flex justify-content-center">
+                        <li class="nav-item">
+                            <a href="#seller-details" class="nav-link disable-click" data-toggle="tab">
+                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Pertama">
+                                    <i class="bx bx-list-ul"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bank-detail" class="nav-link disable-click" data-toggle="tab">
+                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Kedua">
+                                    <i class="bx bxs-bank"></i>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- wizard-nav -->
+                    <div class="tab-content twitter-bs-wizard-tab-content">
+                        <div class="tab-pane" id="seller-details">
+                            <div class="text-center mb-4">
+                                <h5>Step Pertama</h5>
+                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran seminar proposal skripsi terdapat pada gambar dibawah ini.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                <li class="next"><a href="javascript: void(0);" class="btn btn-primary" >Next <i
+                                            class="bx bx-chevron-right ms-1"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- tab pane -->
+                        <div class="tab-pane" id="bank-detail">
+                            <div>
+                                <div class="text-center mb-4">
+                                    <h5>Step Kedua</h5>
+                                    <p class="card-title-desc">Melakukan pengisian form pendaftaran seminar dibawah ini.</p>
+                                </div>
+                                <form action="{{route('sidang_skripsi.store')}}" method="POST" enctype="multipart/form-data" id="yourFormId">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="npm" class="form-label">NPM</label>
+                                        <input type="text" class="form-control" id="npm" value="{{Auth::user()->kode_unik}}" name="npm" aria-describedby="defaultFormControlHelp"readonly/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nama" class="form-label">Nama Mahasiswa</label>
+                                        <input type="text" class="form-control" id="nama" name="nama" value="{{Auth::user()->name}}" aria-describedby="defaultFormControlHelp" readonly />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dospem1" class="form-label">Dosen Pembimbing 1</label>
+                                        <input type="text" class="form-control" id="dospem1" value="{{$datas->dosen_pembimbing_utama}}" placeholder="Dosen Pembimbing 1" aria-describedby="defaultFormControlHelp" readonly />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
+                                        <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
+                                    </div>
+                                    {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}"> --}}
+                                    <input type="hidden" name="id_bimbingan_skripsi" value="{{$datas->id_bimbingan_skripsi}}">
+                                    <div class="mb-3">
+                                        <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
+                                        <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Skripsi</label>
+                                        <input class="form-control" type="file" name="slip_file" id="slip_file" />
+                                    </div>
+                                </form>
+                                <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                    <li class="previous"><a href="javascript: void(0);" class="btn btn-primary" onclick="nextTab()"><i
+                                                class="bx bx-chevron-left me-1"></i> Previous</a></li>
+                                    <li class="float-end"><a href="javascript: void(0);" class="btn btn-primary" onclick="showConfirmation()">Save
+                                            Changes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- tab pane -->
+                    </div>
+                    <!-- end tab content -->
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="dospem2"
-                  placeholder="Dosen Pembimbing 2"
-                  value="{{$datas->dosen_pembimbing_ii}}"
-                  aria-describedby="defaultFormControlHelp"
-                  readonly
-                />
-            </div>
-            {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}"> --}}
-            <input type="hidden" name="id_bimbingan_skripsi" value="{{$datas->id_bimbingan_skripsi}}">
-            <div class="mb-3">
-                <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
-                <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
-            </div>
-            <div class="mb-3">
-                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Skripsi</label>
-                <input class="form-control" type="file" name="slip_file" id="slip_file" />
-            </div>
-        <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- end card body -->
         </div>
-          </form>
-      </div>
+        <!-- end card -->
     </div>
-    @endif
+    <!-- end col -->
 </div>
 
 
+{{-- !-- row --> --}}
+@endsection
+
+
+@section('script')
+    <script src="{{ URL::asset('assets2/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.js') }}"></script>
+    <script src="{{ URL::asset('assets2/js/app.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Your existing nextTab function in the global scope
+        function nextTab() {
+            var nextTab = $('.nav-item.active').next('li.nav-item');
+            if (nextTab.length > 0) {
+                nextTab.find('a.nav-link').click();
+            }
+        }
+
+        // Your existing previousTab function in the global scope
+        function previousTab() {
+            var prevTab = $('.nav-item.active').prev('li.nav-item');
+            if (prevTab.length > 0) {
+                prevTab.find('a.nav-link').click();
+            }
+        }
+
+        function showConfirmation() {
+    // Check if both files are uploaded
+            var proposalFile = $('#proposal_file').val();
+            var slipFile = $('#slip_file').val();
+
+            if (proposalFile === '' || slipFile === '') {
+                // If either file is not uploaded, show an error message
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please upload both proposal and slip files before saving changes.',
+                    icon: 'error',
+                });
+            } else {
+                // If both files are uploaded, show the confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to save changes?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user clicks "Yes," submit the form
+                        saveChanges();
+                    }
+                });
+            }
+        }
+
+
+        // function showConfirmation() {
+        //     // Use SweetAlert to show a simple confirmation message
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: 'Do you want to save changes?',
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Yes',
+        //         cancelButtonText: 'No',
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             // If the user clicks "Yes," submit the form
+        //             saveChanges();
+        //         }
+        //     });
+        // }
+
+        function saveChanges() {
+            // Gather form data
+            var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+
+            // Standard form submission
+            form.submit();
+        }
+
+
+
+
+        $(document).ready(function () {
+            // Initialize the wizard
+            $('#basic-pills-wizard').bootstrapWizard({
+                // Options and configurations for the wizard
+                // ...
+
+                onTabClick: function (tab, navigation, index) {
+                    // Handle tab click event if needed
+                    return true;
+                },
+
+                onNext: function (tab, navigation, index) {
+                    // Handle next button click event if needed
+                    return true; // Return false to prevent moving to the next tab
+                },
+
+                onPrevious: function (tab, navigation, index) {
+                    // Handle previous button click event if needed
+                    return true; // Return false to prevent moving to the previous tab
+                },
+
+                onTabShow: function (tab, navigation, index) {
+                    // Handle tab show event if needed
+                }
+            });
+        });
+    </script>
 @endsection
