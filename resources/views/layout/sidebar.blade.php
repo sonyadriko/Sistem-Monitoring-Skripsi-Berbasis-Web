@@ -366,6 +366,12 @@
           <span class="link-title">Ruangan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{route('ruangan.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="smile"></i>
+          <span class="link-title">Info Penting</span>
+        </a>
+      </li>
      @elseif(Auth::user()->role_id == 2)
      <li class="nav-item">
         <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
@@ -416,6 +422,39 @@
         <a href="{{route('berita-acara-skripsi.index')}}" class="nav-link">
           <i class="link-icon" data-feather="file-text"></i>
           <span class="link-title">Sidang Skripsi</span>
+        </a>
+    </li>
+    @elseif(Auth::user()->role_id == 4)
+    <li class="nav-item">
+        <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : (auth()->user()->role_id === 4 ? url('/ketua_jurusan') : url('/dashboard'))) }}" class="nav-link">
+          <i class="link-icon" data-feather="box"></i>
+          <span class="link-title">Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Data</li>
+    <li class="nav-item">
+        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="sidebar"></i>
+          <span class="link-title">Mahasiswa</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="sidebar"></i>
+          <span class="link-title">Dosen</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="sidebar"></i>
+          <span class="link-title">Bidang Ilmu</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Jadwal</li>
+    <li class="nav-item">
+        <a href="{{route('bimbingan-dosen.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="book"></i>
+          <span class="link-title">Daftar Jadwal</span>
         </a>
     </li>
       @endif

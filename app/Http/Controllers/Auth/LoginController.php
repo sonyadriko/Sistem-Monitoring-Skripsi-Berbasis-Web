@@ -89,8 +89,10 @@ class LoginController extends Controller
                 return redirect('/koordinator');
             } elseif ($role === 'dosen') {
                 return redirect('/dosen');
-            } else {
+            } elseif ($role == 'mahasiswa') {
                 return redirect('/dashboard'); // Atau sesuaikan dengan halaman dashboard yang sesuai dengan peran
+            } elseif ($role = 'ketuajurusan') {
+                return redirect('/ketua_jurusan');
             }
         } else {
             // Authentication failed
@@ -107,7 +109,7 @@ class LoginController extends Controller
            auth()->guard('ketuajurusan')->logout();
             return redirect('/');
         }
-    
+
 
 
     // public function logout(Request $request)
@@ -132,5 +134,5 @@ class LoginController extends Controller
     //         }
     //     }
     // }
-    
+
 }

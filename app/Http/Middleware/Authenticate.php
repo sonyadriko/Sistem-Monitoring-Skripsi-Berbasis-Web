@@ -29,7 +29,7 @@ class Authenticate extends Middleware
         if ($request->expectsJson()) {
             return null;
         }
-    
+
         foreach ($this->guards as $guard) {
             if (in_array($guard, ['mahasiswa', 'dosen', 'koordinator', 'ketuajurusan'])) {
                 if (!auth()->guard($guard)->check()) {
@@ -39,11 +39,11 @@ class Authenticate extends Middleware
                 }
             }
         }
-    
+
         // Tidak ada peran yang sesuai, arahkan ke 'login'
         return route('login');
     }
-    
+
 
     // protected function redirectTo($request)
     // {
@@ -80,8 +80,8 @@ class Authenticate extends Middleware
     //         // Tidak ada peran yang sesuai, arahkan ke 'auth-login'
     //         return route('auth-login');
     //     }
-        
+
     // }
 
-    
+
 }
