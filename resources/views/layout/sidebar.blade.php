@@ -439,13 +439,13 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+        <a href="{{route('data-dsn')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Dosen</span>
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+        <a href="{{route('data-bi')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Bidang Ilmu</span>
         </a>

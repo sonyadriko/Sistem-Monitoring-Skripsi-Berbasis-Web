@@ -35,6 +35,8 @@ use App\Http\Controllers\HistoryBimbinganSkripsiController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\KajurController;
 use App\Http\Controllers\KajurDataMahasiswaController;
+use App\Http\Controllers\KajurDataDosenController;
+use App\Http\Controllers\KajurDataBidangIlmuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +79,12 @@ Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     });
     Route::controller(KajurDataMahasiswaController::class)->group(function () {
         Route::get('/ketua_jurusan/data_mahasiswa', 'index')->name('data-mhs');
+    });
+    Route::controller(KajurDataDosenController::class)->group(function () {
+        Route::get('/ketua_jurusan/data_dosen', 'index')->name('data-dsn');
+    });
+    Route::controller(KajurDataBidangIlmuController::class)->group(function () {
+        Route::get('/ketua_jurusan/data_bidang_ilmu', 'index')->name('data-bi');
     });
 });
 
