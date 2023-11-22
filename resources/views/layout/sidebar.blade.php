@@ -433,7 +433,7 @@
     </li>
     <li class="nav-item nav-category">Data</li>
     <li class="nav-item">
-        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+        <a href="{{route('data-mhs')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Mahasiswa</span>
         </a>
