@@ -26,11 +26,8 @@ Bimbingan Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel List Mahasiswa Bimbingan Proposal</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
-                </p>
+                <h4 class="card-title">Mahasiswa Bimbingan Proposal</h4>
+                <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</p>
             </div>
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">

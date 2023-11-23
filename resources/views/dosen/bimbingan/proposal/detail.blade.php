@@ -11,18 +11,15 @@ Detail Bimbingan Proposal
 
 @endsection
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Bimbingan Proposal</li>
-    </ol>
-</nav>
+
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
+        <h4>Status Bimbingan Proposal</h4>
+        <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
         <div class="card mb-4">
-            <h5 class="card-header">Form Bimbingan Proposal</h5>
+            <h5 class="card-header">Data Mahasiswa dan Dosen Pembimbing</h5>
             <div class="card-body">
-                <p >
+                <p>
                     <span class="span0-1">NPM :</span>
                     <span class="span1-1">{{ $data->kode_unik }}<br /></span>
                     <span class="span0-1">Nama :</span>
