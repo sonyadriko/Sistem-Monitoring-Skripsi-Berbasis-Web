@@ -33,7 +33,22 @@ Dashboard
               <div class="card-title">
                 <h5 class="text-nowrap mb-2">Mahasiswa Bimbingan</h5>
               </div>
-              <iconify-icon icon="solar:book-linear"></iconify-icon>
+              <iconify-icon icon="solar:book-linear"><?php echo $mahasiswaCount ?></iconify-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card mb-4">
+        <div class="card-body p-3">
+          <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
+            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+              <div class="card-title">
+                <h5 class="text-nowrap mb-2">Jadwal Menguji</h5>
+              </div>
+              <iconify-icon icon="solar:book-linear"><?php echo $s3 ?></iconify-icon>
             </div>
           </div>
         </div>
@@ -48,22 +63,7 @@ Dashboard
               <div class="card-title">
                 <h5 class="text-nowrap mb-2">Bidang Ilmu</h5>
               </div>
-              <iconify-icon icon="solar:book-linear"></iconify-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card mb-4">
-        <div class="card-body p-3">
-          <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-              <div class="card-title">
-                <h5 class="text-nowrap mb-2">Pengajuan Masuk</h5>
-              </div>
-              <iconify-icon icon="solar:book-linear"></iconify-icon>
+              <iconify-icon icon="solar:book-linear"><?php echo $BICount ?></iconify-icon>
             </div>
           </div>
         </div>

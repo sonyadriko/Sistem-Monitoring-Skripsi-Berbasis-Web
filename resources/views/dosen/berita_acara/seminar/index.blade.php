@@ -27,9 +27,7 @@ Berita Acara Seminar Proposal
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Tabel Berita Acara Seminar Proposal</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
+                <p class="card-title-desc">Jadwal Seminar Proposal sebagai dosen penguji dapat dilihat pada tabel dibawah ini.</code>.
                 </p>
             </div>
             <div class="card-body">
