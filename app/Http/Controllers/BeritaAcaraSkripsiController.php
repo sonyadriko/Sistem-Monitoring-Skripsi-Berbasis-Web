@@ -16,6 +16,7 @@ class BeritaAcaraSkripsiController extends Controller
         $baskripsi = DB::table('berita_acara_skripsi')
         ->join('users', 'users.id', 'berita_acara_skripsi.users_id')
         ->join('sidang_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'berita_acara_skripsi.sidang_skripsi_id')
+        // ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
         ->where(function($query) {
             $query->where('sidang_skripsi.dosen_penguji_1', '=', Auth::user()->id)
                   ->orWhere('sidang_skripsi.dosen_penguji_2', '=', Auth::user()->id)

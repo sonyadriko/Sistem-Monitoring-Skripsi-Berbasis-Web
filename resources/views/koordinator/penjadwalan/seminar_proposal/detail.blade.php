@@ -133,11 +133,11 @@ Seminar Proposal
               </div>
               <div class="mb-3">
                 <label for="dosen_penguji_1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
-                <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data->dosen_penguji_1}}" readonly />
+                <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data->nama_penguji_1}}" readonly />
               </div>
               <div class="mb-3">
                 <label for="dosen_penguji_2" class="form-label">Dosen Penguji 2</label>
-                <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data->dosen_penguji_2}}" readonly />
+                <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data->nama_penguji_2}}" readonly />
               </div>
               <div class="row mb-3">
                 <div class="col-md-2">

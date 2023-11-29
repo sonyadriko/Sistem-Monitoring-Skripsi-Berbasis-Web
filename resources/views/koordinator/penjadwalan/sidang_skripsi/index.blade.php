@@ -21,10 +21,8 @@ Sidang Skripsi
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Pengajuan Sidang Skripsi</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
+                <h4 class="card-title">Pengajuan Sidang Skripsi</h4>
+                <p class="card-title-desc">List pengajuan sidang skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body">

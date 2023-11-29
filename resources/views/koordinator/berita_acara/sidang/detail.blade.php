@@ -48,7 +48,7 @@ Detail Berita Acara Sidang Skripsi
                             <td>Judul</td>
                             <td>{{$data->topik_bidang_ilmu}}</td>
                             <td>Ruang, Waktu</td>
-                            <td>{{$data->ruangan}}, {{$data->jam}}</td>
+                            <td>{{$data->nama_ruangan}}, {{$data->jam}}</td>
                         </tr>
                         <tr>
                             <td>Dosen Pembimbing 1</td>

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\BimbinganProposal as BimbinganProposal;
 use App\Models\DetailBimbinganProposal as DetailBimbinganProposal;
-
 use Illuminate\Support\Facades\DB;
 
 class DosenBimbinganProposalController extends Controller

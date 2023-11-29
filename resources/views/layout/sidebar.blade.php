@@ -349,7 +349,7 @@
 
       <li class="nav-item nav-category">Manajemen</li>
       <li class="nav-item">
-        <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
+        <a href="{{route('data-pengguna.index')}}" target="_blank" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Data Pengguna</span>
         </a>

@@ -37,6 +37,7 @@ use App\Http\Controllers\KajurController;
 use App\Http\Controllers\KajurDataMahasiswaController;
 use App\Http\Controllers\KajurDataDosenController;
 use App\Http\Controllers\KajurDataBidangIlmuController;
+use App\Http\Controllers\DataPenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +152,10 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 
     Route::controller(KoordinatorController::class)->group(function () {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
+    });
+
+    Route::controller(DataPenggunaController::class)->group(function () {
+        Route::get('/koordinator/data_pengguna', 'index')->name('data-pengguna.index');
     });
 
     Route::controller(PenjadwalanKoordinatorController::class)->group(function () {

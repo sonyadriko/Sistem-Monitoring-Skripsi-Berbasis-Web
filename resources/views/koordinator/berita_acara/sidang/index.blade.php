@@ -21,10 +21,8 @@ Berita Acara Sidang Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Berita Acara Sidang Skripsi</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
+                <h4 class="card-title">Berita Acara Sidang Skripsi</h4>
+                <p class="card-title-desc">List berita acara sidang skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body">
@@ -34,6 +32,8 @@ Berita Acara Sidang Proposal
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
+                        <th>Jadwal Seminar</th>
+                        <th>Ruangan</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -46,6 +46,12 @@ Berita Acara Sidang Proposal
                             <td>{{ $no }}</td>
                             <td>{{ $ba->name }}</td>
                             <td>{{ $ba->kode_unik }}</td>
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                            @endphp
+                            <td>{{ $formatTanggal }}</td>
+                            <td>{{ $ba->nama_ruangan }}</td>
                             <td><a href="{{ url('/koordinator/berita_acara_skripsi/detail/' . $ba->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php

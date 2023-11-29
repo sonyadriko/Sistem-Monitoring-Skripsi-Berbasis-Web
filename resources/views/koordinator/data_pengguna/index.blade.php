@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Seminar Proposal
+Data Pengguna
 @endsection
 
 @section('css')
@@ -13,44 +13,43 @@ Seminar Proposal
 @section('content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item"><a href="#">Manajemen</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pengajuan Seminar Proposal</h4>
-                <p class="card-title-desc">List pengajuan seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
-                </p>
+                <h4 class="card-title">Manajemen Data Mahasiswa</h4>
+                <p class="card-title-desc">Data mahasiswa dapat dilihat pada tabel dibawah ini, terdapat filter mengenai angkatan mahasiswa dan tombol detailnya.</p>
             </div>
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NPM</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @php
                         $no=1;
                         @endphp
-                        @foreach($sempros as $semp)
+                        @foreach($datas as $data)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $semp->name }}</td>
-                            <td>{{ $semp->kode_unik }}</td>
-                            <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id_seminar_proposal) }}" class="btn btn-primary">Detail</a></td>
+                            <td>{{ $data->kode_unik }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->email }}</td>
+                            {{-- <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id_tema) }}" class="btn btn-primary">Detail</a></td> --}}
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-
                     </tbody>
                 </table>
 

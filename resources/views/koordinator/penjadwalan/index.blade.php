@@ -17,7 +17,7 @@ Penjadwalan
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
 
   <div>
-    <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+    <h4 class="mb-3 mb-md-0">Penjadwalan</h4>
   </div>
 
   {{-- <div class="d-flex align-items-center flex-wrap text-nowrap">
@@ -35,7 +35,7 @@ Penjadwalan
     </button>
   </div> --}}
 </div>
-<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi</h6>
+<h6 class="mb-4">Silahkan memilih tombol dibawah ini untuk membuat jadwal seminar proposal atau sidang skripsi, anda juga dapat melihat jadwal yang telah dibuat sebelumnya.</h6>
 
 
 
@@ -73,22 +73,20 @@ Penjadwalan
             </div>
         </a>
     </div>
-
-
-<div class="col-md-3">
-    <div class="card mb-4">
-    <div class="card-body p-3">
-        <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-            <div class="card-title">
-            <h5 class="text-nowrap mb-2">Jadwal Dibuat</h5>
+    {{-- <div class="col-md-3">
+        <div class="card mb-4">
+        <div class="card-body p-3">
+            <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
+            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                <div class="card-title">
+                <h5 class="text-nowrap mb-2">Jadwal Dibuat</h5>
+                </div>
+                <iconify-icon icon="solar:book-linear">{{$jadwalCount}}</iconify-icon>
             </div>
-            <iconify-icon icon="solar:book-linear">{{$jadwalCount}}</iconify-icon>
+            </div>
         </div>
         </div>
-    </div>
-    </div>
-</div>
+    </div> --}}
 </div>
 
 
