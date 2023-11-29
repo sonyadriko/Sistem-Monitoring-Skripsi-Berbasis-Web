@@ -383,7 +383,7 @@
     <li class="nav-item">
         <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
-          <span class="link-title">Topik</span>
+          <span class="link-title">Tema Penelitian</span>
         </a>
     </li>
     <li class="nav-item nav-category">Bimbingan & Revisi</li>

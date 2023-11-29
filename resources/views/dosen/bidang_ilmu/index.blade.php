@@ -19,18 +19,15 @@ Topik
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bidang Ilmu</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Topik</li>
+      <li class="breadcrumb-item active" aria-current="page">Tema Penelitian</li>
     </ol>
 </nav>
 <div class="row">
-    <div class="col-12">
+    <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel List Topik</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
-                </p>
+                <h5 class="card-title">Tabel List Tema Penelitian</h4>
+                <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
                 <div class="d-flex justify-content-end mb-3">
                     <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
                 </div>
@@ -41,8 +38,8 @@ Topik
                     <tr>
                         <th>No</th>
                         <th>Tema</th>
-                        <th>Keterangan</th>
-                        {{-- <th>Action</th> --}}
+                        {{-- <th>Keterangan</th> --}}
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,8 +50,8 @@ Topik
                     <tr>
                         <td>{{ $no }}</td>
                         <td>{{ $dosen->topik_bidang_ilmu }}</td>
-                        <td>{{ $dosen->keterangan }}</td>
-                        {{-- <td><a href="{{ url('/koordinator/bimbingan_proposal/detail/' . $dosen->id_bidang_ilmu) }}" class="btn btn-primary">Detail</a></td> --}}
+                        {{-- <td>{{ $dosen->keterangan }}</td> --}}
+                        <td><a href="{{ url('/dosen/bidang_ilmu/detail/' . $dosen->id_bidang_ilmu) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @php
                     $no++;

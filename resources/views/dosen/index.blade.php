@@ -20,12 +20,12 @@ Dashboard
     <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
   </div>
 </div>
-<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi</h6>
+<h6 class="mb-4">Anda login sebagai <b>Dosen Pembimbing </b></h6>
 
 
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-body p-3">
           <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
@@ -40,7 +40,7 @@ Dashboard
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-body p-3">
           <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
@@ -55,7 +55,7 @@ Dashboard
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-body p-3">
           <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
@@ -70,20 +70,7 @@ Dashboard
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="card mb-4">
-        <div class="card-body p-3">
-          <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-              <div class="card-title">
-                <h5 class="text-nowrap mb-2">Tema Disetorkan</h5>
-              </div>
-              <iconify-icon icon="solar:book-linear"></iconify-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 
 

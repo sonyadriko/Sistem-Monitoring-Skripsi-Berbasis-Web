@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth:dosen'], function() {
         Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
         Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
         Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
+        Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('bidang-ilmu.detail');
     });
 
     Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
