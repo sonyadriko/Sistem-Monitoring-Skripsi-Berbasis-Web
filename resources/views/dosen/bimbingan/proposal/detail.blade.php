@@ -13,147 +13,158 @@ Detail Bimbingan Proposal
 @section('content')
 
 <div class="row">
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4>Status Bimbingan Proposal</h4>
-        <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
+    <h4>Status Bimbingan Proposal</h4>
+    <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
+    <div class="col-md-12 stretch-card">
         <div class="card mb-4">
             <h5 class="card-header">Data Mahasiswa dan Dosen Pembimbing</h5>
             <div class="card-body">
-                <p>
-                    <span class="span0-1">NPM :</span>
-                    <span class="span1-1">{{ $data->kode_unik }}<br /></span>
-                    <span class="span0-1">Nama :</span>
-                    <span class="span1-1">{{ $data->name }}<br /></span>
-                    <span class="span0-1">Tema :</span>
-                    <span class="span1-1">{{ $data->topik_bidang_ilmu }}<br /></span>
-                    <span class="span0-1">Dosen Pembimbing Utama :</span>
-                    {{-- <span class="span1-1">{{ $data->dosen_pembimbing_utama }}<br /></span> --}}
-                    <input
-                       class="form-control input-like-span"
-                       type="text"
-                       id="dospem1"
-                       name="dospem1"
-                       value="{{ $data->dosen_pembimbing_utama }}"
-                       readonly
-                       autocomplete="off"
-                   /><br/>
-                    <span class="span0-1">Dosen Pembimbing II :</span>
-                    {{-- <span class="span1-1">{{ $data->dosen_pembimbing_ii }}<br /></span> --}}
-                    <input
-                       class="form-control input-like-span"
-                       type="text"
-                       id="dospem2"
-                       name="dospem2"
-                       value="{{ $data->dosen_pembimbing_ii }}"
-                       readonly
-                       autocomplete="off"
-                   /><br/>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="mb-3">
-                <div class="card mb-4 mb-xl-0">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>Revisi Dosen</th>
-                                    <th>File</th>
-                                    <th>Validasi Revisi</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $no=1;
-                                @endphp
-                                @foreach($detail as $item)
-                                <tr>
-                                    <td>{{ $no }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>{{ $item->revisi }}</td>
-                                    <td>
-                                        <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                                    </td>
-                                    <td>{{ $item->validasi }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
-                                            Tambahkan Revisi
-                                        </button>
-                                        <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
-                                           Acc Revisi
-                                       </button>
-
-                                    </td>
-                                </tr>
-                                @php
-                                $no++;
-                                @endphp
-                                @endforeach
-
-                                <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form id="revisiForm">
-                                                    @csrf
-                                                    <input type="hidden" id="idBimbinganProposal" name="id_bimbingan_proposal">
-                                                    <div class="form-group">
-                                                        <label for="revisiInput">Revisi:</label>
-                                                        <textarea class="form-control" id="revisiInput" name="revisi"
-                                                            rows="4" cols="50"></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Submit Revisi</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="successAlert" class="alert alert-success" style="display: none;">
-                                   Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
-                               </div>
-
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">NPM </label>
+                            <input type="text" class="form-control" value="{{ $data->kode_unik }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">Nama </label>
+                            <input type="text" class="form-control" value="{{ $data->name }}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label class="form-label">Bidang Ilmu </label>
+                            <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">Dosen Pembimbing Utama </label>
+                            <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_utama }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">Nama </label>
+                            <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mb-3">
-           <div class="card mb-4">
-
-               <div class="card-body">
-                   <span class="span0-1">Proposal Acceptance </span>
-                   @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
-                       @if (Auth::user()->name == $data->dosen_pembimbing_utama)
-                       <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
-                       Accept Proposal
-                       </button>
-                       @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
-                       <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
-                           Accept Proposal2
-                       </button>
-                       @endif
-                   @else
-                   <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
-                   @endif
-               </div>
-           </div>
-       </div>
     </div>
 </div>
+<div class="row">
+    <div class="mb-3">
+        <div class="card mb-4 mb-xl-0">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Bimbingan</th>
+                            {{-- <th>Revisi Dosen</th> --}}
+                            <th>File</th>
+                            <th>Validasi Revisi</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+                        @foreach($detail as $item)
+                        <tr>
+                            <td>{{ $no }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $no }}</td>
+                            <td>
+                                <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
+                            </td>
+                            <td>{{ $item->validasi }}</td>
+                            <td>
+                                @if($item->validasi === 'acc')
+                                    Revisi sudah di Acc
+                                @else
+                                    <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
+                                        Tambahkan Revisi
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
+                                        Acc Revisi
+                                    </button>
+                                @endif
+                            </td>
+
+                        </tr>
+                        @php
+                        $no++;
+                        @endphp
+                        @endforeach
+
+                        <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="revisiForm">
+                                            @csrf
+                                            <input type="hidden" id="idBimbinganProposal" name="id_bimbingan_proposal">
+                                            <div class="form-group">
+                                                <label for="revisiInput">Revisi:</label>
+                                                <textarea class="form-control" id="revisiInput" name="revisi"
+                                                    rows="4" cols="50"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit Revisi</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="successAlert" class="alert alert-success" style="display: none;">
+                            Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
+                        </div>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mb-3">
+    <div class="card mb-4">
+        <h5 class="card-header">Persetujuan Seminar Proposal</h5>
+        <div class="card-body">
+            <span class="span0-1">Persetujuan Seminar </span>
+            @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
+                @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
+                Setujui Proposal
+                </button>
+                @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
+                Setujui Proposal
+                </button>
+                @endif
+            @else
+            <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
+            @endif
+        </div>
+    </div>
+</div>
+
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

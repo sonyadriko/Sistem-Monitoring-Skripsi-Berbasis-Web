@@ -26,7 +26,7 @@ Revisi Sidang Skripsi
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Revisi Sidang Skripsi</h4>
+                <h4 class="card-title">Revisi Mahasiswa Sidang Skripsi</h4>
                 <p class="card-title-desc">Tabel berikut merupakan list mahasiswa yang telah melakukan sidang dan masih memerlukan revisi pada skripsinya.</code>.
                 </p>
             </div>

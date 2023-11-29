@@ -26,7 +26,7 @@ Bimbingan Skripsi
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel List Mahasiswa Bimbingan Skripsi</h4>
+                <h4 class="card-title">Mahasiswa Bimbingan Skripsi</h4>
                 <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</code>.
                 </p>
             </div>
@@ -36,7 +36,7 @@ Bimbingan Skripsi
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Tema</th>
+                        <th>Bidang Ilmu</th>
                         {{-- <th>Topik/Tema</th> --}}
                         <th>Action</th>
                     </tr>

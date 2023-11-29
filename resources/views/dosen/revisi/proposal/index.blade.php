@@ -26,7 +26,7 @@ Revisi Seminar Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Revisi Seminar Proposal</h4>
+                <h4 class="card-title">Revisi Mahasiswa Seminar Proposal</h4>
                 <p class="card-title-desc">Tabel berikut merupakan list mahasiswa yang telah melakukan seminar dan masih memerlukan revisi pada proposalnya.</code>.
                 </p>
             </div>

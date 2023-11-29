@@ -35,7 +35,7 @@ Bimbingan Proposal
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Tema</th>
+                        <th>Bidang Ilmu</th>
                         {{-- <th>Topik/Tema</th> --}}
                         <th>Action</th>
                     </tr>
