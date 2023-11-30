@@ -29,23 +29,26 @@ Detail Berita Acara Seminar Proposal
                         <tr>
                             <td>NPM</td>
                             <td>{{$data->kode_unik}}</td>
-                            <td>Hari Tanggal</td>
-                            <td>Senin, 7 Agustus 2023</td>
+                            <td>No Ujian</td>
+                            <td>{{$data->id_berita_acara_p}}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
                             <td>{{$data->name}}</td>
                             @php
-                            $dateFromDatabase = $data->tanggal;
-                            $formattedDate = date('d F Y', strtotime($dateFromDatabase));
+                            // $dateFromDatabase = $data->tanggal;
+                            // $formattedDate = date('d F Y', strtotime($dateFromDatabase));
                             // echo $formattedDate; // Hasil: 28 Juni 2021
+
+                                $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
 
                             @endphp
                             <td>Hari Tanggal</td>
-                            <td>{{$formattedDate}}</td>
+                            <td>{{$formatTanggal}}</td>
                         </tr>
                         <tr>
-                            <td>Judul</td>
+                            <td>Tema / Judul</td>
                             <td>{{$data->topik_bidang_ilmu}}</td>
                             <td>Ruang, Waktu</td>
                             <td>{{$data->nama_ruangan}}, {{$data->jam}}</td>
@@ -58,9 +61,10 @@ Detail Berita Acara Seminar Proposal
                         </tr>
                         <tr>
                             <td>Dosen Penguji</td>
-                            <td>{{$data->nama_penguji_1}}<br/>
-                                {{$data->nama_penguji_2}}
+                            <td>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                {{$data->nama_penguji_2}} (Dosen Penguji 2)
                             </td>
+                            <td>
                         </tr>
                     </tbody>
                 </table>
@@ -104,6 +108,10 @@ Detail Berita Acara Seminar Proposal
         </div>
     </div>
 </div>
+<div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+
+  </div>
 @endsection
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
