@@ -36,13 +36,8 @@ Detail Berita Acara Seminar Proposal
                             <td>Nama</td>
                             <td>{{$data->name}}</td>
                             @php
-                            // $dateFromDatabase = $data->tanggal;
-                            // $formattedDate = date('d F Y', strtotime($dateFromDatabase));
-                            // echo $formattedDate; // Hasil: 28 Juni 2021
-
                                 $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
                                 $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-
                             @endphp
                             <td>Hari Tanggal</td>
                             <td>{{$formatTanggal}}</td>
@@ -110,8 +105,7 @@ Detail Berita Acara Seminar Proposal
 </div>
 <div class="d-flex justify-content-between mt-4">
     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-
-  </div>
+</div>
 @endsection
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>

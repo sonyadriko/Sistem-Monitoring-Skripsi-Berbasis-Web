@@ -349,29 +349,29 @@
 
       <li class="nav-item nav-category">Manajemen</li>
       <li class="nav-item">
-        <a href="{{route('data-pengguna.index')}}" target="_blank" class="nav-link">
+        <a href="{{route('data-pengguna.index')}}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Data Pengguna</span>
         </a>
       </li>
       <li class="nav-item">
-        <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
+        <a href="{{route('lap-tahunan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="clipboard"></i>
           <span class="link-title">Laporan Tahunan</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="smile"></i>
+          <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Ruangan</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="smile"></i>
           <span class="link-title">Info Penting</span>
         </a>
-      </li>
+      </li> --}}
      @elseif(Auth::user()->role_id == 2)
      <li class="nav-item">
         <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">

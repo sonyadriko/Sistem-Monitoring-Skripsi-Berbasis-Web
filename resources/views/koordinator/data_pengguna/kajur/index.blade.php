@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Ruangan
+Data Pengguna
 @endsection
 
 @section('css')
@@ -14,49 +14,42 @@ Ruangan
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Manajemen</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Ruangan</li>
+      <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel List Ruangan</h4>
-                <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.
-                </p>
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('ruangan.create') }}" class="btn btn-success">Tambah Ruangan</a>
-                </div>
+                <h4 class="card-title">Manajemen Data Ketua Jurusan</h4>
+                <p class="card-title-desc">Data ketua jurusan dapat dilihat pada tabel dibawah ini.</p>
             </div>
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Ruangan</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @php
-                    $no=1;
-                    @endphp
-                    @foreach($ruangan as $ruangan)
-                    <tr>
-                        <td>{{ $no }}</td>
-                        <td>{{ $ruangan->nama_ruangan }}</td>
-                        <td><a href="{{ url('/koordinator/ruangan/edit/' . $ruangan->id_ruangan) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ url('/koordinator/ruangan/delete/' . $ruangan->id_ruangan) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-secondary" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @php
-                    $no++;
-                    @endphp
-                    @endforeach
+                        $no=1;
+                        @endphp
+                        @foreach($datas as $data)
+                        <tr>
+                            <td>{{ $no }}</td>
+                            <td>{{ $data->kode_unik }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->email }}</td>
+                            {{-- <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id_tema) }}" class="btn btn-primary">Detail</a></td> --}}
+                        </tr>
+                        @php
+                        $no++;
+                        @endphp
+                        @endforeach
                     </tbody>
                 </table>
 

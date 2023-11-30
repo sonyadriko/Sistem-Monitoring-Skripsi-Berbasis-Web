@@ -38,6 +38,7 @@ use App\Http\Controllers\KajurDataMahasiswaController;
 use App\Http\Controllers\KajurDataDosenController;
 use App\Http\Controllers\KajurDataBidangIlmuController;
 use App\Http\Controllers\DataPenggunaController;
+use App\Http\Controllers\KoordinatorLaporanTahunanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,8 +155,15 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
     });
 
+    Route::controller(KoordinatorLaporanTahunanController::class)->group(function () {
+        Route::get('/koordinator/laporan_tahunan', 'index')->name('lap-tahunan.index');
+    });
+
     Route::controller(DataPenggunaController::class)->group(function () {
         Route::get('/koordinator/data_pengguna', 'index')->name('data-pengguna.index');
+        Route::get('/koordinator/data_pengguna/mahasiswa', 'mhs')->name('data-pengguna-mhs.index');
+        Route::get('/koordinator/data_pengguna/dosen', 'dosen')->name('data-pengguna-dosen.index');
+        Route::get('/koordinator/data_pengguna/ketua_jurusan', 'kajur')->name('data-pengguna-kajur.index');
     });
 
     Route::controller(PenjadwalanKoordinatorController::class)->group(function () {
