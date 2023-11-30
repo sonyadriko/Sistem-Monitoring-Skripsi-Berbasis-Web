@@ -41,6 +41,9 @@
             <li class="nav-item">
                 <a href="{{ route('sidang_skripsi.index')}}" class="nav-link">Sidang Skripsi</a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>
+            </li>
           </ul>
         </div>
       </li>

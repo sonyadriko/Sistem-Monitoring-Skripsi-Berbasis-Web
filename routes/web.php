@@ -39,6 +39,7 @@ use App\Http\Controllers\KajurDataDosenController;
 use App\Http\Controllers\KajurDataBidangIlmuController;
 use App\Http\Controllers\DataPenggunaController;
 use App\Http\Controllers\KoordinatorLaporanTahunanController;
+use App\Http\Controllers\SuratSurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -254,6 +255,11 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     });
     Route::group(['prefix' => 'history_bimbingan_skripsi'], function () {
         Route::get('/', [HistoryBimbinganSkripsiController::class, 'index'])->name('his-bims-mhs.index');
+    });
+
+    Route::group(['prefix' => 'surat_survey_perusahaan'], function () {
+        Route::get('/', [SuratSurveyController::class, 'index'])->name('surat-survey.index');
+        Route::post('/', [SuratSurveyController::class, 'store'])->name('surat-survey.store');
     });
 
 
