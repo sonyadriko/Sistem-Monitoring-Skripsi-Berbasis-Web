@@ -93,9 +93,9 @@
         </a>
         <div class="collapse" id="lainlain">
             <ul class="nav sub-menu">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('faq')}}" class="nav-link">FAQ</a>
                 </li>
@@ -390,30 +390,41 @@
         </a>
     </li>
     <li class="nav-item nav-category">Bimbingan & Revisi</li>
-    <li class="nav-item">
-        <a href="{{route('bimbingan-dosen.index')}}" class="nav-link">
+    <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#bs" role="button"  aria-controls="email">
           <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Bimbingan Proposal</span>
+          <span class="link-title">Mahasiswa Bimbingan</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse" id="bs">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('bimbingan-dosen.index') }}" class="nav-link">Proposal Skripsi</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('bimbingan-dosen.index')}}" class="nav-link">Laporan Skripsi</a>
+            </li>
+          </ul>
+        </div>
     </li>
-    <li class="nav-item">
-        <a href="{{route('bimbingans-dosen.index')}}" class="nav-link">
+    <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#rev" role="button"  aria-controls="email">
           <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Bimbingan Skripsi</span>
+          <span class="link-title">Revisi</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse" id="rev">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('dosen-revisi-sempro.index') }}" class="nav-link">Seminar Proposal Skripsi</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('dosen-revisi-semhas.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
+            </li>
+          </ul>
+        </div>
     </li>
-    <li class="nav-item">
-        <a href="{{route('dosen-revisi-sempro.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Revisi Seminar Proposal</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{route('dosen-revisi-semhas.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Revisi Sidang Skripsi</span>
-        </a>
-    </li>
+
     <li class="nav-item nav-category">Berita Acara</li>
     <li class="nav-item">
         <a href="{{route('berita-acara-proposal.index')}}" class="nav-link">

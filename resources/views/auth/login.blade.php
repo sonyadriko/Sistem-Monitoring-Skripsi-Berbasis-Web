@@ -1,5 +1,9 @@
 @extends('layout.master2')
 
+@section('title')
+Login
+@endsection
+
 @section('content')
 <div class="page-content d-flex align-items-center justify-content-center">
 

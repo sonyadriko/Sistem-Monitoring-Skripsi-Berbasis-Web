@@ -35,8 +35,10 @@ Berita Acara Seminar Proposal
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
                         <th>NPM</th>
+                        <th>Mahasiswa</th>
+                        <th>Ruang</th>
+                        <th>Hari</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -47,8 +49,14 @@ Berita Acara Seminar Proposal
                         @foreach($ba as $ba)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $ba->name }}</td>
                             <td>{{ $ba->kode_unik }}</td>
+                            <td>{{ $ba->name }}</td>
+                            <td>{{ $ba->nama_ruangan }}</td>
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                            @endphp
+                            <td>{{ $formatTanggal }}</td>
                             <td><a href="{{ url('/dosen/berita_acara_proposal/detail/'.$ba->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php

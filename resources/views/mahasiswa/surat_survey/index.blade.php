@@ -142,7 +142,7 @@ Pengajuan Tema
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    <input type="hidden" value="{{$ss->id_bimbingan_proposal}}" name="bimbingan_proposal_id" id="bimbingan_proposal_id" />
                                     <div class="mb-3">
                                         <label for="durasi_survey" class="form-label">Durasi Survey Data untuk Penelitian (Bulan)</label>
                                         <select class="form-select" id="durasi_survey" name="durasi_survey">

@@ -25,16 +25,23 @@ class SuratSurveyController extends Controller
             'nama_perusahaan' => 'required|string',
             'nama_penerima' => 'required|string',
             'alamat_perusahaan' => 'required|string',
-            'durasi_survey' => 'required|integer', // Assuming you want an integer value
+            'durasi_survey' => 'required|integer',
         ]);
 
-        // Create a new instance of the model and fill it with the validated data
-        $pengajuanJudul = new SuratSurvey($validatedData);
+        // Concatenate the word "bulan" to the 'durasi' field
+        $durasiSurvey = $validatedData['durasi_survey'] . ' bulan';
 
-        // Save the model instance to the database
-        $pengajuanJudul->save();
+        $suratSurvey = new SuratSurvey([
+            'users_id' => Auth::user()->id,
+            'bimbingan_proposal_id' => $request->input('bimbingan_proposal_id'),
+            'nama_instansi' => $validatedData['nama_perusahaan'],
+            'nama_penerima' => $validatedData['nama_penerima'],
+            'alamat_instansi' => $validatedData['alamat_perusahaan'],
+            'durasi' => $durasiSurvey,
+        ]);
 
-        // Redirect or return a response as needed
-        return redirect()->route('surat-survey.index');
+        $suratSurvey->save();
+
+        return redirect('/dashboard')->with('success', 'Pengajuan Surat Survey Berhasil.');
     }
 }
