@@ -14,17 +14,15 @@ Pengajuan Tema
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Proposal & Skripsi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Tema</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Judul</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Pengajuan Tema</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
+                <h4 class="card-title">Pengajuan Judul Proposal Skripsi</h4>
+                <p class="card-title-desc">List pengajuan judul dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body">

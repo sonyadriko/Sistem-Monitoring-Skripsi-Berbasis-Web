@@ -15,7 +15,7 @@ class KoordinatorSuratTugasController extends Controller
 {
     public function index()
     {
-        $surattugas = DB::table('surat_tugas')->join('users', 'users.id', 'surat_tugas.user_id')->get();
+        $surattugas = DB::table('surat_tugas')->join('users', 'users.id', 'surat_tugas.user_id')->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'surat_tugas.user_id')->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')->get();
 
         return view('koordinator/surat_tugas.index', compact('surattugas'));
     }

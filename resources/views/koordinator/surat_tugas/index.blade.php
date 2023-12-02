@@ -14,17 +14,15 @@ Surat Tugas
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Proposal & Skripsi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Tema</li>
+      <li class="breadcrumb-item active" aria-current="page">Surat Tugas</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Pengajuan Tema</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
+                <h4 class="card-title">Pengajuan Surat Tugas Bimbingan</h4>
+                <p class="card-title-desc">Tabel dibawah ini merupakan pengajuan surat tugas bimbingan skripsi yang telah dilakukan mahasiswa.
                 </p>
             </div>
             <div class="card-body">
@@ -34,6 +32,7 @@ Surat Tugas
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
+                        <th>Bidang Ilmu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -46,6 +45,7 @@ Surat Tugas
                             <td>{{ $no }}</td>
                             <td>{{ $st->name }}</td>
                             <td>{{ $st->kode_unik }}</td>
+                            <td>{{ $st->topik_bidang_ilmu }}</td>
                             <td><a href="{{ url('/koordinator/surat_tugas/detail/' . $st->id_surat_tugas) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
