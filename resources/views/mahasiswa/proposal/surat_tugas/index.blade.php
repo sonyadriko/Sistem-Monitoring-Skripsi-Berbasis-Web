@@ -15,9 +15,18 @@
       <li class="breadcrumb-item active" aria-current="page">Surat Tugas Bimbingan</li>
     </ol>
 </nav>
-
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 <div class="row">
     <div class="col-lg-12">
+        @if(is_null($datas) || is_null($datas->acc_revisi))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc revisi proposal terlebih dahulu.
+        </div>
+        @else
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Alur Pengajuan Surat Tugas</h4>
@@ -121,14 +130,25 @@
                                   <div class="mb-3">
                                     <label for="tanggal_sidang_proposal" class="form-label">Tanggal Sidang Proposal Skripsi</label>
                                     <input class="form-control" type="date" name="tanggal_sidang_proposal" id="tanggal_sidang_proposal" />
+                                    @error('tanggal_sidang_proposal')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                   </div>
                                   <div class="mb-3">
                                     <label for="file_proposal" class="form-label">Upload File Proposal Skripsi</label>
                                     <input class="form-control" type="file" name="file_proposal" id="file_proposal" />
+                                    <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                    @error('file_proposal')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="file_slip_pembayaran" class="form-label">Upload File Slip Pembayaran Surat Tugas</label>
                                     <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
+                                    <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                    @error('file_slip_pembayaran')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
@@ -149,6 +169,7 @@
             </div>
             <!-- end card body -->
         </div>
+        @endif
         <!-- end card -->
     </div>
     <!-- end col -->

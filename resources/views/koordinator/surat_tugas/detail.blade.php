@@ -13,14 +13,14 @@ Detail Surat Tugas
 @section('content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item"><a href="#">Proposal & Skripsi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Surat Tugas</li>
     </ol>
 </nav>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-4">
-            <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
+            <h5 class="card-header">Detail Pengajuan Surat Tugas</h5>
             <div class="card-body">
                 <form action="{{ route('koor-surat-tugas.update', ['id' => $data->id_surat_tugas]) }}" method="POST">
                   @csrf
@@ -33,8 +33,8 @@ Detail Surat Tugas
                     <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
                   </div>
                   <div class="mb-3">
-                    <label for="bidang_ilmu" class="form-label">Judul yang diajukan</label>
-                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="bidang_ilmu" class="form-label">Alamat Mahasiswa</label>
+                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->alamat_mhs}}" aria-describedby="defaultFormControlHelp" readonly />
                   </div>
                   <div class="mb-3">
                     <label for="dospem_utama" class="form-label">Dosen Pembimbing 1</label>
@@ -51,12 +51,17 @@ Detail Surat Tugas
                   <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
                   <div class="mb-3">
                     <label class="form-label">File Proposal</label>
-                    <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
+                    <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">
+                        View Proposal
+                    </button>
                 </div>
+
+
                 <div class="mb-3">
                     <label  class="form-label">Slip Pembayaran Bimbingan</label>
-                    <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
-
+                    <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">
+                        View Slip Pembayaran
+                    </button>
                 </div>
 
 

@@ -26,6 +26,11 @@ Revisi Seminar Proposal
 
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
+    @if(is_null($revisisp) || is_null($revisisp->id_berita_acara_p))
+    <div class="alert alert-warning" role="alert">
+        Harap mendaftar seminar proposal terlebih dahulu.
+    </div>
+    @else
     <div class="card mb-4">
         <h5 class="card-header">Review Seminar Proposal</h5>
         <div class="card-body">
@@ -48,6 +53,10 @@ Revisi Seminar Proposal
                         <div class="mb-3">
                             <label for="file_revisi_proposal" class="form-label">Upload File Revisi Proposal</label>
                             <input class="form-control" type="file" id="file_revisi_proposal" name="file_revisi_proposal" />
+                            <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                            @error('file_revisi_proposal')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_berita_acara_p }}" />
                         <div class="d-flex justify-content-between mt-4">
@@ -85,6 +94,7 @@ Revisi Seminar Proposal
     <div class="mb-3">
         <button type="button" class="btn btn-primary">History Revisi</button>
     </div>
+    @endif
 </div>
 </div>
 

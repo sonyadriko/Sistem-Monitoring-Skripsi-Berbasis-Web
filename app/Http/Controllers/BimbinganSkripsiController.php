@@ -13,12 +13,12 @@ class BimbinganSkripsiController extends Controller
     //
     public function index()
     {
-        $dosens = DB::table('bimbingan_skripsi')
+        $bimbingans = DB::table('bimbingan_skripsi')
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
         ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
         ->where('user_id', '=', Auth::user()->id)->first();
         // return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
-        return view('mahasiswa/skripsi/bimbingan.index', compact('dosens'));
+        return view('mahasiswa/skripsi/bimbingan.index', compact('bimbingans'));
 
 
     }
@@ -26,9 +26,9 @@ class BimbinganSkripsiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_skripsi' => 'required|mimes:pdf,docx|max:1000',
+            'file_skripsi' => 'required|mimes:pdf|max:1000',
             'file_skripsi.required' => 'File Skripsi wajib diunggah.',
-            'file_skripsi.mimes' => 'Tipe file harus pdf atau docx.',
+            'file_skripsi.mimes' => 'Tipe file harus pdf',
             'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
         ]);
 

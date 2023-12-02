@@ -39,7 +39,11 @@ Bimbingan Skripsi
 <h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
-
+        @if(is_null($bimbingans) || is_null($bimbingans->id_bimbingan_skripsi))
+        <div class="alert alert-warning" role="alert">
+            Harap selesaikan tahap proposal terlebih dahulu sampai mempunyai surat tugas bimbingan.
+        </div>
+        @else
         <div class="card mb-4">
             <h5 class="card-header">Review Bimbingan Skripsi</h5>
             <div class="card-body">
@@ -60,8 +64,12 @@ Bimbingan Skripsi
                             <div class="mb-3">
                                 <label for="file_skripsi" class="form-label">Upload File Skripsi</label>
                                 <input class="form-control" type="file" id="file_skripsi" name="file_skripsi"  />
+                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                    @error('file_skripsi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
-                            <input type="hidden" id="bimbingan_skripsi_id" name="bimbingan_skripsi_id" value="{{ $dosens->id_bimbingan_skripsi }}" />
+                            <input type="hidden" id="bimbingan_skripsi_id" name="bimbingan_skripsi_id" value="{{ $bimbingans->id_bimbingan_skripsi }}" />
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                             </div>
@@ -69,18 +77,18 @@ Bimbingan Skripsi
                     </div>
                 </div>
             </div>
-            @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
+            @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
                 <div class="card mb-4">
                     <h5 class="card-header">Persetujuan Seminar</h5>
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
                                 <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" {{ $dosens->acc_dosen_utama ? '' : 'disabled' }}>Daftar</button>
+                                <button type="submit" class="btn btn-primary" {{ $bimbingans->acc_dosen_utama ? '' : 'disabled' }}>Daftar</button>
                             </div>
                         </div>
                     </div>
@@ -94,15 +102,15 @@ Bimbingan Skripsi
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
                                 <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $dosens->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
+                                <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $bimbingans->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
                                 <label class="form-check-label" for="defaultCheck6"> Dosen Pembimbing 2 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                {{-- <button type="submit" class="btn btn-primary" {{ ($bimbingans->acc_dosen_utama && $bimbingans->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>
@@ -117,7 +125,7 @@ Bimbingan Skripsi
             <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
 
         </div>
-        {{-- @endif --}}
+        @endif
     </div>
 </div>
 
@@ -169,7 +177,8 @@ Bimbingan Skripsi
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                location.reload();
+                                // location.reload();
+                                window.location.href = "{{ route('bimbingans-mhs.index') }}";
                             });
                         } else {
                             Swal.fire({

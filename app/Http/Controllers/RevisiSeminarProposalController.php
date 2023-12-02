@@ -34,9 +34,9 @@ class RevisiSeminarProposalController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_revisi_proposal' => 'required|mimes:pdf,docx|max:1000',
+            'file_revisi_proposal' => 'required|mimes:pdf|max:1000',
             'file_revisi_proposal.required' => 'File proposal wajib diunggah.',
-            'file_revisi_proposal.mimes' => 'Tipe file harus pdf atau docx.',
+            'file_revisi_proposal.mimes' => 'Tipe file harus pdf.',
             'file_revisi_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
         ]);
 

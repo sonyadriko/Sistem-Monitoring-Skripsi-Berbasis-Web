@@ -25,7 +25,11 @@ class RuanganController extends Controller
         // Validasi input form jika diperlukan
         $request->validate([
             'namaRuangan' => 'required|string|max:255',
-            // Tambahkan aturan validasi lainnya sesuai kebutuhan
+        ], [
+            'namaRuangan.required' => 'Nama Ruangan is required.',
+            'namaRuangan.string' => 'Nama Ruangan must be a string.',
+            'namaRuangan.max' => 'Nama Ruangan may not be greater than 255 characters.',
+            // Tambahkan pesan validasi lainnya sesuai kebutuhan
         ]);
 
         // Simpan data ke database

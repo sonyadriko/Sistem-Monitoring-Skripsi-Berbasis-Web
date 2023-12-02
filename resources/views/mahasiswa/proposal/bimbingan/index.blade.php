@@ -48,6 +48,10 @@ Bimbingan Proposal
                             <div class="mb-3">
                                 <label for="file_proposal" class="form-label">Upload File Proposal</label>
                                 <input class="form-control" type="file" id="file_proposal" name="file_proposal" id="slip_file" />
+                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                    @error('file_proposal')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                             <input type="hidden" id="bimbingan_proposal_id" name="bimbingan_proposal_id" value="{{ $dosens->id_bimbingan_proposal }}" />
                             <div class="d-flex justify-content-between mt-4">
@@ -59,7 +63,7 @@ Bimbingan Proposal
             </div>
             @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
-                <div class="card mb-4">
+                <div class="card mb-4 ">
                     <h5 class="card-header">Persetujuan Seminar</h5>
                     <div class="card-body">
                         <div class="mb-3">
@@ -90,10 +94,16 @@ Bimbingan Proposal
                                 <label class="form-check-label" for="defaultCheck6"> Dosen Pembimbing 2 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
+                                @if(is_null($dosens->acc_dosen_utama) || is_null($dosens->acc_dosen_ii))
+                                <button type="submit" class="btn btn-secondary" disabled">
+                                    Daftar
+                                </button>
+                                @else
                                 {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -128,10 +138,9 @@ Bimbingan Proposal
 
 function handleButtonClick() {
         // Check your conditions here
-        if ({{ $dosens->acc_dosen_utama && $dosens->acc_dosen_ii ? 'true' : 'false' }}) {
             // Redirect to the specified route
             window.location.href = "{{ route('seminar-proposal.create') }}";
-        }
+        // }
     }
     // Pastikan elemen sudah dimuat di dalam DOM
     document.addEventListener('DOMContentLoaded', function() {

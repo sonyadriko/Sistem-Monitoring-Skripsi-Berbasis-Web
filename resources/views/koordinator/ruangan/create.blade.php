@@ -27,6 +27,9 @@ Tambah Ruangan
                     <div class="mb-3">
                         <label for="namaRuangan" class="form-label">Nama Ruangan</label>
                         <input type="text" class="form-control" id="namaRuangan" name="namaRuangan" placeholder="Masukan Nama Ruangan..." aria-describedby="defaultFormControlHelp" />
+                        @error('namaRuangan')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>

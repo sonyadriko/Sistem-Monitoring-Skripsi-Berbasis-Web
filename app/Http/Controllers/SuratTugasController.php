@@ -15,6 +15,7 @@ class SuratTugasController extends Controller
         ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
         ->join('berita_acara_proposal', 'berita_acara_proposal.users_id', 'users.id')
+        ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
         ->where('users.id', Auth::user()->id)
         ->first();
 
@@ -33,16 +34,16 @@ class SuratTugasController extends Controller
             'user_id' => 'required|numeric',
             'bimbingan_proposal_id' => 'required|numeric',
             'tanggal_sidang_proposal' => 'required|date',
-            'file_proposal' => 'required|mimes:pdf,docx|max:1000',
-            'file_slip_pembayaran' => 'required|mimes:pdf,docx|max:1000',
+            'file_proposal' => 'required|mimes:pdf|max:1000',
+            'file_slip_pembayaran' => 'required|mimes:pdf|max:1000',
         ], [
             'user_id.required' => 'User ID is required.',
             'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID is required.',
             'file_proposal.required' => 'File proposal is required.',
-            'file_proposal.mimes' => 'File proposal must be a PDF or DOCX.',
+            'file_proposal.mimes' => 'File proposal must be a PDF.',
             'file_proposal.max' => 'File proposal may not be greater than 1000 KB.',
             'file_slip_pembayaran.required' => 'File slip pembayaran is required.',
-            'file_slip_pembayaran.mimes' => 'File slip pembayaran must be a PDF or DOCX.',
+            'file_slip_pembayaran.mimes' => 'File slip pembayaran must be a PDF.',
             'file_slip_pembayaran.max' => 'File slip pembayaran may not be greater than 1000 KB.',
 
         ]);

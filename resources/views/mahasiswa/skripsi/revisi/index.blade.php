@@ -26,6 +26,11 @@ Revisi Sidang Skripsi
 
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
+        @if(is_null($revisisk) || is_null($revisisk->id_berita_acara_s))
+    <div class="alert alert-warning" role="alert">
+        Harap mendaftar sidang skripsi terlebih dahulu.
+    </div>
+    @else
         <div class="card mb-4">
             <h5 class="card-header">Review Sidang Skripsi</h5>
             <div class="card-body">
@@ -48,6 +53,10 @@ Revisi Sidang Skripsi
                             <div class="mb-3">
                                 <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
                                 <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
+                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                @error('file_revisi_skripsi')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
                             <div class="d-flex justify-content-between mt-4">
@@ -85,6 +94,7 @@ Revisi Sidang Skripsi
         <div class="mb-3">
             <button type="button" class="btn btn-primary">History Revisi</button>
         </div>
+        @endif
     </div>
 </div>
 

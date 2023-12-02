@@ -21,31 +21,27 @@ Daftar Seminar Proposal
       <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
     </ol>
 </nav>
-{{-- <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-
-  <div>
-    <h4 class="mb-3 mb-md-0">Alur Pendaftaran Seminar Proposal Skripsi</h4>
-  </div>
-
-  <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-      <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
-      <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-    </div>
-    <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button>
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-      Download Report
-    </button>
-  </div>
-</div> --}}
-{{-- <h6 class="mb-4">Langkah-langkah yang harus dilalui saat ingin melakukan pengajuan proposal skripsi.</h6> --}}
-
 <div class="row">
     <div class="col-lg-12">
+        @if(is_null($datas) || is_null($datas->id_bimbingan_proposal))
+        <div class="alert alert-warning" role="alert">
+            Harap melakukan pengajuan tema terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->dosen_pembimbing_ii == 'tidak ada'))
+            @if(is_null($datas->acc_dosen_utama))
+            <div class="alert alert-warning" role="alert">
+                Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
+            </div>
+            @endif
+        @elseif(is_null($datas->acc_dosen_utama))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->acc_dosen_ii))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc dari dosen kedua terlebih dahulu.
+        </div>
+        @else
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Alur Pendaftaran Seminar Proposal Skripsi</h4>
@@ -130,10 +126,18 @@ Daftar Seminar Proposal
                                     <div class="mb-3">
                                         <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
                                         <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
+                                        <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                        @error('proposal_file')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="slip_file" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
                                         <input class="form-control" type="file" name="slip_file" id="slip_file" />
+                                        <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                        @error('slip_file')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 {{-- <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
@@ -155,6 +159,7 @@ Daftar Seminar Proposal
             </div>
             <!-- end card body -->
         </div>
+        @endif
         <!-- end card -->
     </div>
     <!-- end col -->

@@ -72,17 +72,22 @@
           <span class="link-title">Bimbingan Skripsi</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a href="{{route('revisi_sp.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Revisi Seminar Proposal</span>
+    <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#revisi" role="button"  aria-controls="revisi">
+          <i class="link-icon" data-feather="inbox"></i>
+          <span class="link-title">Revisi</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{route('revisi_sk.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Revisi Sidang Skripsi</span>
-        </a>
+        <div class="collapse" id="revisi">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('revisi_sp.index') }}" class="nav-link">Seminar Proposal Skripsi</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('revisi_sk.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
+            </li>
+          </ul>
+        </div>
     </li>
     <li class="nav-item nav-category">Lain - lain</li>
     <li class="nav-item ">

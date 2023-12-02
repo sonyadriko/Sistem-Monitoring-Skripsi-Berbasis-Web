@@ -23,6 +23,11 @@ Pengajuan Tema
 {{-- @if(is_null($ss) || is_null($ss->id_bimbingan_proposal)) --}}
 <div class="row">
     <div class="col-lg-12">
+        @if(is_null($ss) || is_null($ss->id_bimbingan_proposal))
+        <div class="alert alert-warning" role="alert">
+            Harap melakukan pengajuan tema terlebih dahulu.
+        </div>
+        @else
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Alur Pengajuan Surat Survey</h4>
@@ -110,7 +115,13 @@ Pengajuan Tema
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing Utama</label>
+                                        <input class="form-control" type="text" id="dosen_pembimbing" value="{{ $ss->dosen_pembimbing_utama }}" name="dosen_pembimbing" readonly/>
+                                        @error('dosen_pembimbing')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="mb-3">
                                         <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
                                         <input class="form-control" type="text" id="nama_perusahaan" name="nama_perusahaan"/>
@@ -131,14 +142,6 @@ Pengajuan Tema
                                         <label for="alamat_perusahaan" class="form-label">Alamat Perusahaan</label>
                                         <input class="form-control" type="text" id="alamat_perusahaan" name="alamat_perusahaan"/>
                                         @error('alamat_perusahaan')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing Utama</label>
-                                        <input class="form-control" type="text" id="dosen_pembimbing" value="{{ $ss->dosen_pembimbing_utama }}" name="dosen_pembimbing" readonly/>
-                                        @error('dosen_pembimbing')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -174,6 +177,7 @@ Pengajuan Tema
             <!-- end card body -->
         </div>
         <!-- end card -->
+        @endif
     </div>
     <!-- end col -->
 </div>

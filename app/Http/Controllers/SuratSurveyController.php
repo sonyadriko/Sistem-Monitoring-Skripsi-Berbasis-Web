@@ -25,7 +25,12 @@ class SuratSurveyController extends Controller
             'nama_perusahaan' => 'required|string',
             'nama_penerima' => 'required|string',
             'alamat_perusahaan' => 'required|string',
-            'durasi_survey' => 'required|integer',
+            'durasi_survey' => 'required|string',
+        ], [
+            'nama_perusahaan.required' => 'Nama Perusahaan is required.',
+            'nama_penerima.required' => 'Nama Penerima is required.',
+            'alamat_perusahaan.required' => 'Alamat Perusahaan is required.',
+            'durasi_survey.required' => 'Durasi Survey is required.',
         ]);
 
         // Concatenate the word "bulan" to the 'durasi' field

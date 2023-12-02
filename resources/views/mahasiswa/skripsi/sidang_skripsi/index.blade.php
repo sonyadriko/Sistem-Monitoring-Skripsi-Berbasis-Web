@@ -9,43 +9,19 @@ Daftar Sidang Skripsi
 @endpush
 
 @section('content')
-
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
       <li class="breadcrumb-item active" aria-current="page">Sidang Skripsi</li>
     </ol>
 </nav>
-{{-- <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-
-  <div>
-    <h4 class="mb-3 mb-md-0">Alur Pendaftaran Seminar Proposal Skripsi</h4>
-  </div>
-
-  <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-      <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
-      <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-    </div>
-    <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button>
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-      Download Report
-    </button>
-  </div>
-</div> --}}
-{{-- <h6 class="mb-4">Langkah-langkah yang harus dilalui saat ingin melakukan pengajuan proposal skripsi.</h6> --}}
-
 <div class="row">
     <div class="col-lg-12">
+        @if(is_null($datas) || is_null($datas->id_bimbingan_skripsi))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc daftar sidang skripsi dahulu.
+        </div>
+        @else
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Alur Pendaftaran Sidang Skripsi</h4>
@@ -75,7 +51,7 @@ Daftar Sidang Skripsi
                         <div class="tab-pane" id="seller-details">
                             <div class="text-center mb-4">
                                 <h5>Step Pertama</h5>
-                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran seminar proposal skripsi terdapat pada gambar dibawah ini.</p>
+                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran sidang skripsi skripsi terdapat pada gambar dibawah ini.</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
@@ -130,10 +106,18 @@ Daftar Sidang Skripsi
                                     <div class="mb-3">
                                         <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
                                         <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
+                                        <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                        @error('skripsi_file')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Skripsi</label>
                                         <input class="form-control" type="file" name="slip_file" id="slip_file" />
+                                        <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                        @error('slip_file')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </form>
                                 <ul class="pager wizard twitter-bs-wizard-pager-link">
@@ -152,6 +136,7 @@ Daftar Sidang Skripsi
             <!-- end card body -->
         </div>
         <!-- end card -->
+        @endif
     </div>
     <!-- end col -->
 </div>
@@ -185,7 +170,7 @@ Daftar Sidang Skripsi
 
         function showConfirmation() {
     // Check if both files are uploaded
-            var proposalFile = $('#proposal_file').val();
+            var proposalFile = $('#skripsi_file').val();
             var slipFile = $('#slip_file').val();
 
             if (proposalFile === '' || slipFile === '') {
@@ -237,6 +222,8 @@ Daftar Sidang Skripsi
 
             // Standard form submission
             form.submit();
+            // window.location.href = "{{ route('bimbingans-mhs.index') }}";
+            // location.reload();
         }
 
 
