@@ -42,7 +42,8 @@ class RevisiSeminarProposalController extends Controller
 
         if ($request->hasFile('file_revisi_proposal')) {
             $proposalFilePath = $request->file('file_revisi_proposal');
-            $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            // $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            $fileName = $proposalFilePath->getClientOriginalName();
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/revisi_seminar/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/revisi_seminar/'.$fileName;

@@ -79,8 +79,10 @@ class SeminarProposalController extends Controller
         ]);
 
         // Generate unique file names
-        $fileProposalName = uniqid() . '.' . $request->file('proposal_file')->getClientOriginalExtension();
-        $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
+        $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
+        // $fileProposalName = uniqid() . '.' . $request->file('proposal_file')->getClientOriginalExtension();
+        $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
+        // $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
 
         // Move the files to the appropriate directory
         $userFolder = Auth::user()->name;

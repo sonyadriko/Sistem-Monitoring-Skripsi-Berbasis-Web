@@ -19,7 +19,21 @@ Daftar Sidang Skripsi
     <div class="col-lg-12">
         @if(is_null($datas) || is_null($datas->id_bimbingan_skripsi))
         <div class="alert alert-warning" role="alert">
-            Harap mendapatkan acc daftar sidang skripsi dahulu.
+            Harap menyelesaikan tahap proposal terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->dosen_pembimbing_ii == 'tidak ada'))
+            @if(is_null($datas->acc_dosen_utama))
+            <div class="alert alert-warning" role="alert">
+                Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
+            </div>
+            @endif
+        @elseif(is_null($datas->acc_dosen_utama))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->acc_dosen_ii))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc dari dosen kedua terlebih dahulu.
         </div>
         @else
         <div class="card">

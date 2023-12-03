@@ -40,7 +40,8 @@ class RevisiSidangSkripsiController extends Controller
 
         if ($request->hasFile('file_revisi_skripsi')) {
             $skripsiFilePath = $request->file('file_revisi_skripsi');
-            $fileName = uniqid() . '.' . $skripsiFilePath->getClientOriginalExtension();
+            $fileName = $skripsiFilePath->getClientOriginalName();
+            // $fileName = uniqid() . '.' . $skripsiFilePath->getClientOriginalExtension();
             $userFolder = Auth::user()->name;
             $skripsiFilePath->move(public_path('uploads/'.$userFolder.'/revisi_skripsi/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/revisi_skripsi/'.$fileName;

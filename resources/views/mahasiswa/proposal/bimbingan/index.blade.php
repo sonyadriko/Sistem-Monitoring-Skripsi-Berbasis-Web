@@ -178,7 +178,9 @@ function handleButtonClick() {
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                location.reload();
+                                // location.reload();
+                                window.location.href = "{{ route('bimbingan-mhs.index') }}";
+
                             });
                         } else {
                             Swal.fire({

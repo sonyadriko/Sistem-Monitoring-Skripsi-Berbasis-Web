@@ -34,7 +34,8 @@ class BimbinganSkripsiController extends Controller
 
         if ($request->hasFile('file_skripsi')) {
             $proposalFilePath = $request->file('file_skripsi');
-            $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            // $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            $fileName = $proposalFilePath->getClientOriginalName();
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_skripsi/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/bimbingan_skripsi/'.$fileName;

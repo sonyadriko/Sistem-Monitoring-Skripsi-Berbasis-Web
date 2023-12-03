@@ -49,8 +49,10 @@ class SuratTugasController extends Controller
         ]);
 
         // Generate unique file names
-        $fileProposalName = uniqid() . '.' . $request->file('file_proposal')->getClientOriginalExtension();
-        $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();
+        // $fileProposalName = uniqid() . '.' . $request->file('file_proposal')->getClientOriginalExtension();
+        $fileProposalName = $request->file('file_proposal')->getClientOriginalName();
+        $fileSlipPembayaranName = $request->file('file_slip_pembayaran')->getClientOriginalName();
+        // $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();
 
         // Move the files to the appropriate directory
         $userFolder = Auth::user()->name;

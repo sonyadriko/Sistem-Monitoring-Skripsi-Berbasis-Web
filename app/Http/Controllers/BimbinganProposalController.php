@@ -30,7 +30,8 @@ class BimbinganProposalController extends Controller
 
         if ($request->hasFile('file_proposal')) {
             $proposalFilePath = $request->file('file_proposal');
-            $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            // $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
+            $fileName = $proposalFilePath->getClientOriginalName();
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
             $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;

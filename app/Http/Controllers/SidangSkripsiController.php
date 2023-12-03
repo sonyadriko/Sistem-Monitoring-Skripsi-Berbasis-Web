@@ -35,8 +35,10 @@ class SidangSkripsiController extends Controller
         ]);
 
         // Generate unique file names
-        $fileSkripsiName = uniqid() . '.' . $request->file('skripsi_file')->getClientOriginalExtension();
-        $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
+        // $fileSkripsiName = uniqid() . '.' . $request->file('skripsi_file')->getClientOriginalExtension();
+        $fileSkripsiName = $request->file('skripsi_file')->getClientOriginalName();
+        $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
+        // $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
 
         // Move the files to the appropriate directory
         $userFolder = Auth::user()->name;
