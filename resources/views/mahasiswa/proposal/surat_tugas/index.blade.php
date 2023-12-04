@@ -22,9 +22,17 @@
 @endif
 <div class="row">
     <div class="col-lg-12">
-        @if(is_null($datas) || is_null($datas->acc_revisi))
+        @if(is_null($datas) || is_null($datas->acc_dospem))
         <div class="alert alert-warning" role="alert">
-            Harap mendapatkan acc revisi proposal terlebih dahulu.
+            Harap mendapatkan acc revisi proposal dari dosen pembimbing terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->acc_penguji_1))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc revisi proposal dari dosen penguji 1 terlebih dahulu.
+        </div>
+        @elseif(is_null($datas->acc_penguji_2))
+        <div class="alert alert-warning" role="alert">
+            Harap mendapatkan acc revisi proposal dari dosen penguji 2 terlebih dahulu.
         </div>
         @else
         <div class="card">

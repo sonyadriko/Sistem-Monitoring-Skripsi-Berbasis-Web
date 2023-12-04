@@ -27,10 +27,128 @@ Daftar Seminar Proposal
         <div class="alert alert-warning" role="alert">
             Harap melakukan pengajuan tema terlebih dahulu.
         </div>
-        @elseif(is_null($datas->dosen_pembimbing_ii == 'tidak ada'))
+        @elseif($datas->dosen_pembimbing_ii == 'Tidak Ada')
             @if(is_null($datas->acc_dosen_utama))
             <div class="alert alert-warning" role="alert">
                 Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
+            </div>
+            @else
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Alur Pendaftaran Seminar Proposal Skripsi</h4>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-4">Langkah-langkah yang harus dilalui saat ingin melakukan pengajuan proposal skripsi.</h6>
+
+                    <div id="basic-pills-wizard" class="twitter-bs-wizard">
+                        <ul class="twitter-bs-wizard-nav d-flex justify-content-center">
+                            <li class="nav-item">
+                                <a href="#seller-details" class="nav-link disable-click" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Pertama">
+                                        <i class="bx bx-list-ul"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#bank-detail" class="nav-link disable-click" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Kedua">
+                                        <i class="bx bxs-bank"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- wizard-nav -->
+                        <div class="tab-content twitter-bs-wizard-tab-content">
+                            <div class="tab-pane" id="seller-details">
+                                <div class="text-center mb-4">
+                                    <h5>Step Pertama</h5>
+                                    <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran seminar proposal skripsi terdapat pada gambar dibawah ini.</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                    <li class="next"><a href="javascript: void(0);" class="btn btn-primary" >Next <i
+                                                class="bx bx-chevron-right ms-1"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- tab pane -->
+                            <div class="tab-pane" id="bank-detail">
+                                <div>
+                                    <div class="text-center mb-4">
+                                        <h5>Step Kedua</h5>
+                                        <p class="card-title-desc">Melakukan pengisian form pendaftaran seminar dibawah ini.</p>
+                                    </div>
+                                    <form action="{{route('seminar-proposal.submit')}}" method="POST" enctype="multipart/form-data" id="yourFormId">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="npm" class="form-label">NPM</label>
+                                            <input type="text" class="form-control" id="npm" value="{{Auth::user()->kode_unik}}" name="npm" aria-describedby="defaultFormControlHelp" readonly/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama Mahasiswa</label>
+                                            <input type="text" class="form-control" id="nama" name="nama" value="{{Auth::user()->name}}" aria-describedby="defaultFormControlHelp" readonly/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="dospem1" class="form-label">Dosen Pembimbing 1</label>
+                                            <input type="text" class="form-control" id="dospem1" value="{{$datas->dosen_pembimbing_utama}}" placeholder="Dosen Pembimbing 1" aria-describedby="defaultFormControlHelp" readonly/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
+                                            <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly/>
+                                        </div>
+                                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                        <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
+                                        <div class="mb-3">
+                                            <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
+                                            <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
+                                            <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                            @error('proposal_file')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="slip_file" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
+                                            <input class="form-control" type="file" name="slip_file" id="slip_file" />
+                                            <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                            @error('slip_file')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    {{-- <div class="d-flex justify-content-between mt-4">
+                                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div> --}}
+                                      </form>
+                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                        <li class="previous"><a href="javascript: void(0);" class="btn btn-primary" onclick="nextTab()"><i
+                                                    class="bx bx-chevron-left me-1"></i> Previous</a></li>
+                                        <li class="float-end"><a href="javascript: void(0);" class="btn btn-primary" onclick="showConfirmation()">Save
+                                                Changes</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- tab pane -->
+                        </div>
+                        <!-- end tab content -->
+                    </div>
+                </div>
+                <!-- end card body -->
             </div>
             @endif
         @elseif(is_null($datas->acc_dosen_utama))

@@ -61,7 +61,7 @@ Bimbingan Proposal
                     </div>
                 </div>
             </div>
-            @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
+            @if ($dosens->dosen_pembimbing_ii == 'Tidak Ada')
             <div class="col-xl-6">
                 <div class="card mb-4 ">
                     <h5 class="card-header">Persetujuan Seminar</h5>
@@ -72,7 +72,16 @@ Bimbingan Proposal
                                 <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" {{ $dosens->acc_dosen_utama ? '' : 'disabled' }}>Daftar</button>
+                                @if(is_null($dosens->acc_dosen_utama))
+                                <button type="submit" class="btn btn-secondary" disabled">
+                                    Daftar
+                                </button>
+                                @else
+                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                    Daftar
+                                </button>
+                                @endif
                             </div>
                         </div>
                     </div>

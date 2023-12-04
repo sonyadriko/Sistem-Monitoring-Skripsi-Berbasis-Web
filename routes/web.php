@@ -181,7 +181,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
     Route::group(['prefix' => 'koordinator/berita_acara_skripsi'], function () {
         Route::get('/', [KoordinatorBeritaAcaraSkripsiController::class, 'index'])->name('koor-berita-acara-skripsi.index');
         Route::get('/detail/{id}', [KoordinatorBeritaAcaraSkripsiController::class, 'detail'])->name('koor-berita-acara-skripsi.detail');
-
+        Route::post('/cetak-revisi/{id}', [KoordinatorBeritaAcaraSkripsiController::class, 'cetakrevisi'])->name('koor-berita-acara-s-cetak.detail');
     });
 
 

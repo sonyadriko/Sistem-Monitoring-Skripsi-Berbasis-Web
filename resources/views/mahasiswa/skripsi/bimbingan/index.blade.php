@@ -21,20 +21,6 @@ Bimbingan Skripsi
     <h4 class="mb-3 mb-md-0">Bimbingan Skripsi</h4>
   </div>
 
-  {{-- <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-      <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
-      <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-    </div>
-    <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button>
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-      Download Report
-    </button>
-  </div> --}}
 </div>
 <h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>
 <div class="row">
@@ -110,10 +96,16 @@ Bimbingan Skripsi
                                 <label class="form-check-label" for="defaultCheck6"> Dosen Pembimbing 2 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($bimbingans->acc_dosen_utama && $bimbingans->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                @if(is_null($bimbingans->acc_dosen_utama) || is_null($bimbingans->acc_dosen_ii))
+                                <button type="submit" class="btn btn-secondary" disabled">
+                                    Daftar
+                                </button>
+                                @else
+                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>
+                                @endif
                             </div>
                         </div>
                     </div>

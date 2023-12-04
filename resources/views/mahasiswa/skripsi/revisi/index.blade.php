@@ -26,17 +26,16 @@ Revisi Sidang Skripsi
 
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
-        @if(is_null($revisisk) || is_null($revisisk->id_berita_acara_s))
-    <div class="alert alert-warning" role="alert">
-        Harap mendaftar sidang skripsi terlebih dahulu.
-    </div>
+        @if(is_null($revisisk) || is_null($revisisk->id_berita_acara_s ))
+        <div class="alert alert-warning" role="alert">
+            Harap mendaftar sidang skripsi terlebih dahulu / Revisi belum dicetak oleh koordinator.
+        </div>
     @else
         <div class="card mb-4">
             <h5 class="card-header">Review Sidang Skripsi</h5>
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">Revisi:<br/></span>
-
                     @foreach($revisisk2 as $revisi)
                     <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span>
                     @endforeach
@@ -58,7 +57,10 @@ Revisi Sidang Skripsi
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
+                            {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
+                             --}}
+                            <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_revisi_sidang_skripsi }}" />
+                        {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_revisi_seminar_proposal }}" /> --}}
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                             </div>
@@ -72,20 +74,36 @@ Revisi Sidang Skripsi
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" value="manajemen_kualitas" name="mk_pilihan[]" id="defaultCheck5"/>
-                                <label class="form-check-label" for="defaultCheck5"> Dosen Penguji 1 </label>
+                                <input class="form-check-input" type="checkbox" name="dospem" id="dospem" {{ $revisisk->acc_dospem  ? 'checked disabled' : '' }} disabled/>
+                                <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck6"/>
-                                <label class="form-check-label" for="defaultCheck6"> Dosen Penguji 2 </label>
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisk->acc_penguji_1  ? 'checked disabled' : '' }}/>
+                                <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="model_simulasi" name="mk_pilihan[]" id="defaultCheck7"/>
-                                <label class="form-check-label" for="defaultCheck7"> Dosen Penguji 3 </label>
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisk->acc_penguji_2  ? 'checked disabled' : '' }}/>
+                                <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji3" id="dosenpenguji3" {{ $revisisk->acc_penguji_3  ? 'checked disabled' : '' }}/>
+                                <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 3 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary">Daftar</button>
+                                @if(is_null($revisisk->acc_dospem) || is_null($revisisk->acc_penguji_1) || is_null($revisisk->acc_penguji_2) || is_null($revisisk->acc_penguji_3))
+                                <button type="submit" class="btn btn-inverse-danger" disabled">
+                                    Belum bisa daftar yudisium
+                                </button>
+                                @else
+                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                <button type="submit" class="btn btn-inverse-success" onclick="handleButtonClick()" disabled>
+                                    Sudah bisa daftar yudisium
+                                </button>
+                                @endif
                             </div>
+                            {{-- <div class="d-flex justify-content-between mt-4">
+                                <button type="submit" class="btn btn-primary">Daftar</button>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

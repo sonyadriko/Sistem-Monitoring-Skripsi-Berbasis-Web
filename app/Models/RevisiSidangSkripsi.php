@@ -11,7 +11,6 @@ class RevisiSidangSkripsi extends Model
 
     protected $fillable = [
         'berita_acara_skripsi_id',
-        'file_revisi',
         'updated_at',
         'created_at'
     ];

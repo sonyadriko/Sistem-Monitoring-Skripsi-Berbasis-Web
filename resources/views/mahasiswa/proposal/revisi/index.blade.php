@@ -26,17 +26,16 @@ Revisi Seminar Proposal
 
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
-    @if(is_null($revisisp) || is_null($revisisp->id_berita_acara_p))
-    <div class="alert alert-warning" role="alert">
-        Harap mendaftar seminar proposal terlebih dahulu.
-    </div>
+    @if(is_null($revisisp) || (is_null($revisisp->id_berita_acara_p)) || (is_null($revisisp->id_revisi_seminar_proposal)))
+        <div class="alert alert-warning" role="alert">
+            Harap mendaftar seminar proposal terlebih dahulu. / Revisi belum dicetak oleh koordinator.
+        </div>
     @else
     <div class="card mb-4">
         <h5 class="card-header">Review Seminar Proposal</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
                 <span class="span0-1">Revisi:<br/></span>
-
                 @foreach($revisisp2 as $revisisp2)
                 <span class="span0-1">{{$revisisp2->revisi}} dari {{$revisisp2->name}}</span></br>
                 @endforeach
@@ -74,28 +73,40 @@ Revisi Seminar Proposal
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" name="dospem" id="dospem"/>
+                            <input class="form-check-input" type="checkbox" value="" name="dospem" id="dospem" {{ $revisisp->acc_dospem  ? 'checked disabled' : '' }} disabled/>
                             <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1"/>
+                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisp->acc_penguji_1  ? 'checked disabled' : '' }}/>
                             <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2"/>
+                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisp->acc_penguji_2  ? 'checked disabled' : '' }}/>
                             <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <button type="submit" class="btn btn-primary">Daftar</button>
+                            @if(is_null($revisisp->acc_dospem) || is_null($revisisp->acc_penguji_1) || is_null($revisisp->acc_penguji_2))
+                            <button type="submit" class="btn btn-inverse-danger" disabled">
+                                Belum bisa pengajuan surat tugas
+                            </button>
+                            @else
+                            {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                            <button type="submit" class="btn btn-inverse-success" onclick="handleButtonClick()">
+                                Daftar Surat Tugas
+                            </button>
+                            @endif
                         </div>
+                        {{-- <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-primary">Daftar</button>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <button type="button" class="btn btn-primary">History Revisi</button>
-    </div>
+    </div> --}}
     @endif
 </div>
 </div>
@@ -112,6 +123,12 @@ Revisi Seminar Proposal
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+    function handleButtonClick() {
+        // Check your conditions here
+            // Redirect to the specified route
+            window.location.href = "{{ route('pengajuan-st.index') }}";
+        // }
+    }
     // Pastikan elemen sudah dimuat di dalam DOM
     document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitBtn');
