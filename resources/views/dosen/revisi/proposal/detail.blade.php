@@ -84,8 +84,7 @@ Detail Revisi Seminar Proposal
                         @foreach($detail as $item)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            {{-- <td>{{ $item->revisi }}</td> --}}
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                             <td>
                                 <a href="{{ asset($item->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
                             </td>
@@ -95,9 +94,9 @@ Detail Revisi Seminar Proposal
                                     onclick="prepareModal({{ $item->id_revisi_seminar_proposal }})">
                                     Tambahkan Revisi
                                 </button>
-                                <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_revisi_seminar_proposal }})">
+                                {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_revisi_seminar_proposal }})">
                                     Acc Revisi
-                                </button>
+                                </button> --}}
 
                             </td>
                         </tr>
@@ -202,6 +201,51 @@ Detail Revisi Seminar Proposal
 </script>
 
 <script>
+
+    // Pastikan dokumen telah dimuat sepenuhnya
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil elemen 'revisiForm' jika ada
+        var revisiForm = document.getElementById('revisiForm');
+
+        // Periksa apakah elemen 'revisiForm' ditemukan
+        if (revisiForm) {
+            // Tambahkan event listener untuk saat form di-submit
+            revisiForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                var revisiInput = document.getElementById("revisiInput").value;
+                var idBeritaAcara = document.getElementById('idBeritaAcara').value;
+
+                console.log('Revisi yang dikirim:', revisiInput);
+                console.log('ID Berita Acara:', idBeritaAcara);
+
+                axios.post(`/dosen/revisi_seminar_proposal/accrevisi/${idBeritaAcara}`, {
+                    revisi: revisiInput
+                })
+                .then(function (response) {
+                    console.log('Respon dari server:', response.data);
+                    $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
+
+                    Swal.fire({
+                        title: 'Revisi berhasil dikirim!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Lakukan refresh halaman
+                            location.reload();
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    console.error("Terjadi kesalahan: " + error);
+                });
+            });
+        } else {
+            console.error("Elemen 'revisiForm' tidak ditemukan.");
+        }
+    });
+
         function confirmAccProposal(idBeritaAcara) {
 
         const dospemElement = document.getElementById('dospem');

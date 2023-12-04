@@ -41,6 +41,7 @@ class DosenRevisiSeminarProposal extends Controller
     {
         $data = [
             'data' => DB::table('revisi_seminar_proposal')
+                    // ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
                     ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'revisi_seminar_proposal.berita_acara_proposal_id')
                     ->join('users', 'users.id', 'berita_acara_proposal.users_id')
                     ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
@@ -48,18 +49,15 @@ class DosenRevisiSeminarProposal extends Controller
                     ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
                     ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-
-                    // ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu')
                     ->where('id_revisi_seminar_proposal', '=',$id)
                     ->select('revisi_seminar_proposal.*', 'berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
                     ->first(),
-            'detail' => DB::table('revisi_seminar_proposal')->where('id_revisi_seminar_proposal', '=',$id)->get(),
+            'detail' => DB::table('detail_revisi_seminar_proposal')
+            ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
+            ->where('revisi_seminar_proposal_id', '=',$id)->get(),
         ];
 
         return view('dosen/revisi/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
-        // return view('dosen/revisi/proposal.detail', ['data' => $data['data']]);
-
-
     }
 
     public function accrevisi($id, Request $request)

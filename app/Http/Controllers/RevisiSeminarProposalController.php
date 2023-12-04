@@ -16,9 +16,10 @@ class RevisiSeminarProposalController extends Controller
     {
 
         $revisisp = DB::table('detail_berita_acara_proposal')
-        ->select('detail_berita_acara_proposal.*', 'berita_acara_proposal.id_berita_acara_p', 'users.*')
+        ->select('detail_berita_acara_proposal.*', 'berita_acara_proposal.id_berita_acara_p', 'users.*', 'revisi_seminar_proposal.*')
         ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', '=', 'detail_berita_acara_proposal.berita_acara_proposal_id')
         ->join('users', 'users.id', '=', 'detail_berita_acara_proposal.users_id')
+        ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
         ->where('berita_acara_proposal.users_id', Auth::user()->id)
         ->first();
 
@@ -52,13 +53,8 @@ class RevisiSeminarProposalController extends Controller
             return response()->json(['success' => false, 'message' => 'File proposal tidak valid.']);
         }
 
-        $revisi = new RevisiSeminarProposal();
-        $revisi->berita_acara_proposal_id = $request->input('berita_acara_id'); // Sesuaikan ini dengan input yang benar
-        // $revisi->file_revisi = $fileUrl;
-        $revisi->save();
-
         $detailrevisi = new DetailRevisiSeminarProposal();
-        $detailrevisi->revisi_seminar_proposal_id = $request->input('');
+        $detailrevisi->revisi_seminar_proposal_id = $request->input('berita_acara_id');
         $detailrevisi->file_revisi = $fileUrl;
         $detailrevisi->save();
 
