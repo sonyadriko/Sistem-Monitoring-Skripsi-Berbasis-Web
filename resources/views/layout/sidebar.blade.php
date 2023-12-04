@@ -407,7 +407,7 @@
               <a href="{{ route('bimbingan-dosen.index') }}" class="nav-link">Proposal Skripsi</a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('bimbingan-dosen.index')}}" class="nav-link">Laporan Skripsi</a>
+              <a href="{{ route('bimbingans-dosen.index')}}" class="nav-link">Laporan Skripsi</a>
             </li>
           </ul>
         </div>

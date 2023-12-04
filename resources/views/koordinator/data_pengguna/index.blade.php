@@ -38,57 +38,71 @@ Dashboard
 <h6 class="mb-4">Data pengguna dapat dilihat dibawah ini.</h6>
 
 
-
 <div class="row">
-    <div class="col-md-3">
-        <a href="{{ route('data-pengguna-mhs.index') }}" class="card-link">
-        <div class="card mb-4">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                        <div class="card-title">
-                            <h5 class="text-nowrap mb-2">Mahasiswa</h5>
+    <div class="row flex-grow-1">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('data-pengguna-mhs.index') }}" class="card-link">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0">Mahasiswa</h6>
                         </div>
-                        <iconify-icon icon="solar:book-linear">{{$mahasiswaCount }}</iconify-icon>
-                    </div>
+                        <div class="row">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{ $mahasiswaCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-        </a>
-    </div>
-
-    <div class="col-md-3">
-        <a href="{{ route('data-pengguna-dosen.index') }}" class="card-link">
-        <div class="card mb-4">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                        <div class="card-title">
-                            <h5 class="text-nowrap mb-2">Dosen</h5>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('data-pengguna-dosen.index') }}" class="card-link">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0">Dosen</h6>
                         </div>
-                        <iconify-icon icon="solar:book-linear">{{$dosenCount}}</iconify-icon>
-                    </div>
+                        <div class="row">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{ $dosenCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-        </a>
-    </div>
-
-    <div class="col-md-3">
-        <a href="{{ route('data-pengguna-kajur.index') }}" class="card-link">
-        <div class="card mb-4">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                        <div class="card-title">
-                            <h5 class="text-nowrap mb-2">Ketua Jurusan</h5>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('data-pengguna-kajur.index') }}" class="card-link">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0">Ketua Jurusan</h6>
                         </div>
-                        <iconify-icon icon="solar:book-linear">{{$kajurCount}}</iconify-icon>
-                    </div>
+                        <div class="row">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{ $kajurCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-        </a>
     </div>
 </div>
 

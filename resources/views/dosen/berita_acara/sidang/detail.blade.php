@@ -29,8 +29,8 @@ Detail Berita Acara Sidang Skripsi
                         <tr>
                             <td>NPM</td>
                             <td>{{$data->kode_unik}}</td>
-                            <td>Hari Tanggal</td>
-                            <td>Senin, 7 Agustus 2023</td>
+                            <td>No Ujian</td>
+                            <td>{{$data->id_berita_acara_s}}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
