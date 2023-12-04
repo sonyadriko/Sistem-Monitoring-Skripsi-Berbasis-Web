@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\RevisiSeminarProposal as RevisiSeminarProposal;
+use App\Models\DetailRevisiSeminarProposal as DetailRevisiSeminarProposal;
 
 
 class RevisiSeminarProposalController extends Controller
@@ -53,8 +54,13 @@ class RevisiSeminarProposalController extends Controller
 
         $revisi = new RevisiSeminarProposal();
         $revisi->berita_acara_proposal_id = $request->input('berita_acara_id'); // Sesuaikan ini dengan input yang benar
-        $revisi->file_revisi = $fileUrl;
+        // $revisi->file_revisi = $fileUrl;
         $revisi->save();
+
+        $detailrevisi = new DetailRevisiSeminarProposal();
+        $detailrevisi->revisi_seminar_proposal_id = $request->input('');
+        $detailrevisi->file_revisi = $fileUrl;
+        $detailrevisi->save();
 
         // Return a success response
         return response()->json(['success' => true, 'message' => 'File revisi berhasil diunggah.']);

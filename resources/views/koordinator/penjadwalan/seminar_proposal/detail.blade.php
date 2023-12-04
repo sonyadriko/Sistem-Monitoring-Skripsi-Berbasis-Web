@@ -170,7 +170,6 @@ Seminar Proposal
                 <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                 @if(is_null($data)|| is_null($data->cetak))
                 <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
-
                 @endif
               </div>
 

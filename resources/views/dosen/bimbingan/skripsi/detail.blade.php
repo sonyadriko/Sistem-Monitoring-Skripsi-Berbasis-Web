@@ -97,10 +97,10 @@ Detail Bimbingan Skripsi
                                 @if($item->validasi === 'acc')
                                 Revisi sudah di Acc
                                 @else
-                                    <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
+                                    <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
                                         Tambahkan Revisi
                                     </button>
-                                    <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
+                                    <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_skripsi }})">
                                         Acc Revisi
                                     </button>
                                 @endif
@@ -151,6 +151,8 @@ Detail Bimbingan Skripsi
         <div class="card-body">
             <span class="span0-1">Persetujuan Skripsi :</span>
             @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
+                <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
+                <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
                 @if (Auth::user()->name == $data->dosen_pembimbing_utama)
                 <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
                 Setujui Skripsi

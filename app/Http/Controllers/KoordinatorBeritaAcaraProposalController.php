@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\BeritaAcaraProposal as BeritaAcaraProposal;
+use App\Models\RevisiSeminarProposal as RevisiSeminarProposal;
+
 
 class KoordinatorBeritaAcaraProposalController extends Controller
 {
@@ -45,5 +48,30 @@ class KoordinatorBeritaAcaraProposalController extends Controller
 
         return view('koordinator/berita_acara/seminar.detail', $data, $bad);
 
+    }
+    public function cetakrevisi(Request $request, $id)
+    {
+        try {
+            // Validasi input
+            $request->validate([
+                'berita_acara_proposal_id' => 'required|integer',
+            ]);
+
+            // Periksa apakah SeminarProposal dengan ID yang diberikan ada
+            $data = BeritaAcaraProposal::findOrFail($id);
+
+            // Update data SeminarProposal
+            $data->cetak_revisi = 'sudah';
+            $data->save();
+
+            // Simpan data BeritaAcaraProposal
+            $ba = new RevisiSeminarProposal();
+            $ba->berita_acara_proposal_id = $request->input('berita_acara_proposal_id');
+            $ba->save();
+
+            return redirect()->back()->with('success', 'Data updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update data.');
+        }
     }
 }

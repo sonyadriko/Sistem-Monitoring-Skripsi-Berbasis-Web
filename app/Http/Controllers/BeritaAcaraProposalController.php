@@ -72,4 +72,5 @@ class BeritaAcaraProposalController extends Controller
         }
     }
 
+
 }

@@ -120,7 +120,7 @@ Detail Revisi Seminar Proposal
                                     <div class="modal-body">
                                         <form id="revisiForm">
                                             @csrf
-                                            <input type="hidden" id="idBimbinganProposal" name="id_bimbingan_proposal">
+                                            <input type="hidden" id="idBeritaAcara" name="id_berita_acara_p">
                                             <div class="form-group">
                                                 <label for="revisiInput">Revisi:</label>
                                                 <textarea class="form-control" id="revisiInput" name="revisi"
@@ -142,181 +142,145 @@ Detail Revisi Seminar Proposal
         </div>
     </div>
 </div>
-<div class="mb-3">
-    <div class="card mb-4">
+<div class="row">
+    <div class="mb-3">
+        <div class="card mb-4">
+            <h5 class="card-header">Persetujuan Revisi Seminar Proposal</h5>
+            <div class="card-body">
+                <span class="span0-1">Persetujuan Revisi </span>
+                <input type="hidden" id="dospem" value="{{$data->dosen_pembimbing_utama}}">
+                <input type="hidden" id="penguji1" value="{{$data->nama_penguji_1}}">
+                <input type="hidden" id="penguji2" value="{{$data->nama_penguji_2}}">
+                @if (Auth::user()->name == $data->nama_penguji_1)
+                    @if ($data->acc_penguji_1 == null)
+                        <button type="button" id="penguji1" value="{{ $data->nama_penguji_1 }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
+                            Setujui Proposal
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_1}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->nama_penguji_2)
+                    @if ($data->acc_penguji_2 == null)
+                        <button type="button" id="penguji2" value="{{ $data->nama_penguji_2 }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
+                            Setujui Proposal
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_2}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->dosen_pembimbing_utama)
+                    @if ($data->acc_dospem == null)
+                        <button type="button" id="dospem" value="{{ $data->dosen_pembimbing_utama }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
+                            Setujui Proposal
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dospem}} </span>
+                    @endif
+                @endif
 
+            </div>
+        </div>
     </div>
 </div>
 
-@endsection
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script>
-    function prepareModal(idBimbinganProposal) {
+    function prepareModal(idBeritaAcara) {
         // Reset nilai textarea
         document.getElementById('revisiInput').value = '';
 
         // Mengisi nilai id bimbingan proposal
-        document.getElementById('idBimbinganProposal').value = idBimbinganProposal;
+        document.getElementById('idBeritaAcara').value = idBeritaAcara;
 
         // Tampilkan modal
         $('#revisiModal').modal('show');
     }
 </script>
 
+<script>
+        function confirmAccProposal(idBeritaAcara) {
 
- <script>
-    // Pastikan dokumen telah dimuat sepenuhnya
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ambil elemen 'revisiForm' jika ada
-        var revisiForm = document.getElementById('revisiForm');
+        const dospemElement = document.getElementById('dospem');
+        const penguji1Element = document.getElementById('penguji1');
+        const penguji2Element = document.getElementById('penguji2');
 
-        // Periksa apakah elemen 'revisiForm' ditemukan
-        if (revisiForm) {
-            // Tambahkan event listener untuk saat form di-submit
-            revisiForm.addEventListener('submit', function(event) {
-                event.preventDefault();
+        // Check if elements are found before accessing their values
+        if (dospemElement && penguji1Element && penguji2Element) {
+            dospem = dospemElement.value;
+            penguji1 = penguji1Element.value;
+            penguji2 = penguji2Element.value;
 
-                var revisiInput = document.getElementById("revisiInput").value;
-                var idBimbinganProposal = document.getElementById('idBimbinganProposal').value;
+            // Log the values to the console
+            console.log('dospem:', dospem);
+            console.log('penguji1:', penguji1);
+            console.log('penguji2:', penguji2);
 
-                console.log('Revisi yang dikirim:', revisiInput);
-                console.log('ID Bimbingan Proposal:', idBimbinganProposal);
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin acc revisi ini?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    accProposal(idBeritaAcara, dospem, penguji1, penguji2);
+                }
+            });
+        } else {
+            console.error('Error: One or more elements not found.');
+        }
+    }
 
-                axios.post(`/dosen/bimbingan_proposal/updaterevisi/${idBimbinganProposal}`, {
-                    revisi: revisiInput
-                })
+        function accProposal(idBeritaAcara, dospem, penguji1, penguji2) {
+            const data = {
+                dospem: dospem,
+                penguji1: penguji1,
+                penguji2: penguji2
+            };
+            axios.post(`/dosen/revisi_seminar_proposal/accrevisi/${idBeritaAcara}`, data)
                 .then(function (response) {
-                    console.log('Respon dari server:', response.data);
-                    $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
+                    console.log('Response from the server:', response.data);
 
+                    // Show success message using SweetAlert
                     Swal.fire({
-                        title: 'Revisi berhasil dikirim!',
+                        title: 'Proposal berhasil diacc!',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Lakukan refresh halaman
-                            location.reload();
+                            location.reload();  // Reload the page
                         }
                     });
                 })
                 .catch(function (error) {
-                    console.error("Terjadi kesalahan: " + error);
-                });
-            });
-        } else {
-            console.error("Elemen 'revisiForm' tidak ditemukan.");
-        }
-    });
-
-
-    function confirmAccRevisi(idDetailBimbinganProposal) {
-        Swal.fire({
-            title: 'Apakah Anda yakin ingin acc revisi ini?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                accRevisi(idDetailBimbinganProposal);
-            }
-        });
-    }
-
-    function accRevisi(idDetailBimbinganProposal) {
-        // Lakukan update data ke server menggunakan AJAX
-        axios.post(`/dosen/bimbingan_proposal/accrevisi/${idDetailBimbinganProposal}`)
-            .then(function (response) {
-                console.log('Respon dari server:', response.data);
-
-                // Tampilkan pesan sukses menggunakan SweetAlert
-                Swal.fire({
-                    title: 'Revisi berhasil diacc!',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Lakukan refresh halaman
-                        location.reload();
+                    // Handle JSON response failure
+                    console.error('Terjadi kesalahan:', error);
+                    if (error.response && error.response.data) {
+                        // If the response contains error message
+                        Swal.fire({
+                            title: 'Terjadi kesalahan',
+                            text: error.response.data.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        // If the response does not contain error message
+                        Swal.fire({
+                            title: 'Terjadi kesalahan',
+                            text: 'Gagal memproses permintaan.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
                     }
                 });
-            })
-            .catch(function (error) {
-                console.error("Terjadi kesalahan: " + error);
-            });
-    }
-
-
-    function confirmAccProposal(idBimbinganProposal) {
-    const dospem1 = document.getElementById('dospem1').value;
-    const dospem2 = document.getElementById('dospem2').value;
-
-    Swal.fire({
-        title: 'Apakah Anda yakin ingin acc proposal ini?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Tidak'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            accProposal(idBimbinganProposal, dospem1, dospem2);
         }
-    });
-}
-
-function accProposal(idBimbinganProposal, dospem1, dospem2) {
-    const data = {
-        dospem1: dospem1,
-        dospem2: dospem2
-    };
-
-    axios.post(`/dosen/bimbingan_proposal/accproposal/${idBimbinganProposal}`, data)
-        .then(function (response) {
-            console.log('Response from the server:', response.data);
-
-            // Show success message using SweetAlert
-            Swal.fire({
-                title: 'Proposal berhasil diacc!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    location.reload();  // Reload the page
-                }
-            });
-        })
-        .catch(function (error) {
-            // Handle JSON response failure
-            console.error('Terjadi kesalahan:', error);
-            if (error.response && error.response.data) {
-                // If the response contains error message
-                Swal.fire({
-                    title: 'Terjadi kesalahan',
-                    text: error.response.data.message,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                // If the response does not contain error message
-                Swal.fire({
-                    title: 'Terjadi kesalahan',
-                    text: 'Gagal memproses permintaan.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-}
-
-
 </script>
 
+@endsection
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
@@ -326,3 +290,6 @@ function accProposal(idBimbinganProposal, dospem1, dospem2) {
 @push('custom-scripts')
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
+
+
+
