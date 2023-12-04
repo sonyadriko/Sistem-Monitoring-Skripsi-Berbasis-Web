@@ -10,17 +10,6 @@ class DosenRevisiSeminarProposal extends Controller
 {
     public function index()
     {
-        // $rev = DB::table('revisi_seminar_proposal')
-        // ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'revisi_seminar_proposal.berita_acara_proposal_id')
-        // ->join('users', 'users.id', 'berita_acara_proposal.users_id')
-        // ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
-        // ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
-        // ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-        // ->where(function($query) {
-        //     $query->where('seminar_proposal.dosen_penguji_1', '=', Auth::user()->id)
-        //           ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id);
-        // })
-        // ->get();
         $rev = DB::table('berita_acara_proposal')
             ->join('users', 'users.id', 'berita_acara_proposal.users_id')
             ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')

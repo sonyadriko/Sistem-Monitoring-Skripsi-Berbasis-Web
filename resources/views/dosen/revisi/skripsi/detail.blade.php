@@ -142,8 +142,52 @@ Detail Revisi Sidang Skripsi
         </div>
     </div>
 </div>
-<div class="mb-3">
-    <div class="card mb-4">
+<div class="row">
+    <div class="mb-3">
+        <div class="card mb-4">
+            <h5 class="card-header">Persetujuan Revisi Sidang Skripsi</h5>
+            <div class="card-body">
+                <span class="span0-1">Persetujuan Revisi </span>
+                <input type="hidden" id="dospem" value="{{$data->dosen_pembimbing_utama}}">
+                <input type="hidden" id="penguji1" value="{{$data->nama_penguji_1}}">
+                <input type="hidden" id="penguji2" value="{{$data->nama_penguji_2}}">
+                <input type="hidden" id="penguji3" value="{{$data->nama_penguji_3}}">
+                @if (Auth::user()->name == $data->nama_penguji_1)
+                    @if ($data->acc_penguji_1 == null)
+                        <button type="button" id="penguji1" value="{{ $data->nama_penguji_1 }}" class="btn btn-primary accept-button" onclick="confirmAccSkripsi('{{ $data->id_berita_acara_s }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_1}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->nama_penguji_2)
+                    @if ($data->acc_penguji_2 == null)
+                        <button type="button" id="penguji2" value="{{ $data->nama_penguji_2 }}" class="btn btn-primary accept-button" onclick="confirmAccSkripsi('{{ $data->id_berita_acara_s }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_2}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->nama_penguji_3)
+                    @if ($data->acc_penguji_2 == null)
+                        <button type="button" id="penguji2" value="{{ $data->nama_penguji_3 }}" class="btn btn-primary accept-button" onclick="confirmAccSkripsi('{{ $data->id_berita_acara_s }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_3}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->dosen_pembimbing_utama)
+                    @if ($data->acc_dospem == null)
+                        <button type="button" id="dospem" value="{{ $data->dosen_pembimbing_utama }}" class="btn btn-primary accept-button" onclick="confirmAccSkripsi('{{ $data->id_berita_acara_s }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dospem}} </span>
+                    @endif
+                @endif
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -253,65 +297,145 @@ Detail Revisi Sidang Skripsi
    }
 
 
-   function confirmAccProposal(idBimbinganProposal) {
-   const dospem1 = document.getElementById('dospem1').value;
-   const dospem2 = document.getElementById('dospem2').value;
+//    function confirmAccProposal(idBimbinganProposal) {
+//    const dospem1 = document.getElementById('dospem1').value;
+//    const dospem2 = document.getElementById('dospem2').value;
 
-   Swal.fire({
-       title: 'Apakah Anda yakin ingin acc proposal ini?',
-       icon: 'question',
-       showCancelButton: true,
-       confirmButtonText: 'Ya',
-       cancelButtonText: 'Tidak'
-   }).then((result) => {
-       if (result.isConfirmed) {
-           accProposal(idBimbinganProposal, dospem1, dospem2);
-       }
-   });
+//    Swal.fire({
+//        title: 'Apakah Anda yakin ingin acc proposal ini?',
+//        icon: 'question',
+//        showCancelButton: true,
+//        confirmButtonText: 'Ya',
+//        cancelButtonText: 'Tidak'
+//    }).then((result) => {
+//        if (result.isConfirmed) {
+//            accProposal(idBimbinganProposal, dospem1, dospem2);
+//        }
+//    });
+// }
+
+// function accProposal(idBimbinganProposal, dospem1, dospem2) {
+//    const data = {
+//        dospem1: dospem1,
+//        dospem2: dospem2
+//    };
+
+//    axios.post(`/dosen/bimbingan_proposal/accproposal/${idBimbinganProposal}`, data)
+//        .then(function (response) {
+//            console.log('Response from the server:', response.data);
+
+//            // Show success message using SweetAlert
+//            Swal.fire({
+//                title: 'Proposal berhasil diacc!',
+//                icon: 'success',
+//                confirmButtonText: 'OK'
+//            }).then((result) => {
+//                if (result.isConfirmed) {
+//                    location.reload();  // Reload the page
+//                }
+//            });
+//        })
+//        .catch(function (error) {
+//            // Handle JSON response failure
+//            console.error('Terjadi kesalahan:', error);
+//            if (error.response && error.response.data) {
+//                // If the response contains error message
+//                Swal.fire({
+//                    title: 'Terjadi kesalahan',
+//                    text: error.response.data.message,
+//                    icon: 'error',
+//                    confirmButtonText: 'OK'
+//                });
+//            } else {
+//                // If the response does not contain error message
+//                Swal.fire({
+//                    title: 'Terjadi kesalahan',
+//                    text: 'Gagal memproses permintaan.',
+//                    icon: 'error',
+//                    confirmButtonText: 'OK'
+//                });
+//            }
+//        });
+// }
+function confirmAccSkripsi(idBeritaAcara) {
+
+const dospemElement = document.getElementById('dospem');
+const penguji1Element = document.getElementById('penguji1');
+const penguji2Element = document.getElementById('penguji2');
+const penguji3Element = document.getElementById('penguji3');
+
+// Check if elements are found before accessing their values
+if (dospemElement && penguji1Element && penguji2Element && penguji3Element) {
+    dospem = dospemElement.value;
+    penguji1 = penguji1Element.value;
+    penguji2 = penguji2Element.value;
+    penguji3 = penguji3Element.value;
+
+    // Log the values to the console
+    console.log('dospem:', dospem);
+    console.log('penguji1:', penguji1);
+    console.log('penguji2:', penguji2);
+    console.log('penguji3:', penguji3);
+
+    Swal.fire({
+        title: 'Apakah Anda yakin ingin acc revisi ini?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            accSkripsi(idBeritaAcara, dospem, penguji1, penguji2, penguji3);
+        }
+    });
+} else {
+    console.error('Error: One or more elements not found.');
+}
 }
 
-function accProposal(idBimbinganProposal, dospem1, dospem2) {
-   const data = {
-       dospem1: dospem1,
-       dospem2: dospem2
-   };
+function accSkripsi(idBeritaAcara, dospem, penguji1, penguji2, penguji3) {
+    const data = {
+        dospem: dospem,
+        penguji1: penguji1,
+        penguji2: penguji2,
+        penguji3: penguji3
+    };
+    axios.post(`/dosen/revisi_sidang_skripsi/accrevisi/${idBeritaAcara}`, data)
+        .then(function (response) {
+            console.log('Response from the server:', response.data);
 
-   axios.post(`/dosen/bimbingan_proposal/accproposal/${idBimbinganProposal}`, data)
-       .then(function (response) {
-           console.log('Response from the server:', response.data);
-
-           // Show success message using SweetAlert
-           Swal.fire({
-               title: 'Proposal berhasil diacc!',
-               icon: 'success',
-               confirmButtonText: 'OK'
-           }).then((result) => {
-               if (result.isConfirmed) {
-                   location.reload();  // Reload the page
-               }
-           });
-       })
-       .catch(function (error) {
-           // Handle JSON response failure
-           console.error('Terjadi kesalahan:', error);
-           if (error.response && error.response.data) {
-               // If the response contains error message
-               Swal.fire({
-                   title: 'Terjadi kesalahan',
-                   text: error.response.data.message,
-                   icon: 'error',
-                   confirmButtonText: 'OK'
-               });
-           } else {
-               // If the response does not contain error message
-               Swal.fire({
-                   title: 'Terjadi kesalahan',
-                   text: 'Gagal memproses permintaan.',
-                   icon: 'error',
-                   confirmButtonText: 'OK'
-               });
-           }
-       });
+            // Show success message using SweetAlert
+            Swal.fire({
+                title: 'Skripsi berhasil diacc!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();  // Reload the page
+                }
+            });
+        })
+        .catch(function (error) {
+            // Handle JSON response failure
+            console.error('Terjadi kesalahan:', error);
+            if (error.response && error.response.data) {
+                // If the response contains error message
+                Swal.fire({
+                    title: 'Terjadi kesalahan',
+                    text: error.response.data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                // If the response does not contain error message
+                Swal.fire({
+                    title: 'Terjadi kesalahan',
+                    text: 'Gagal memproses permintaan.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
 }
 
 

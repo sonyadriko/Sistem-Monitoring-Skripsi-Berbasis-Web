@@ -219,7 +219,7 @@ Detail Revisi Seminar Proposal
                 console.log('Revisi yang dikirim:', revisiInput);
                 console.log('ID Berita Acara:', idBeritaAcara);
 
-                axios.post(`/dosen/revisi_seminar_proposal/accrevisi/${idBeritaAcara}`, {
+                axios.post(`/dosen/revisi_seminar_proposal/addrevisi/${idBeritaAcara}`, {
                     revisi: revisiInput
                 })
                 .then(function (response) {

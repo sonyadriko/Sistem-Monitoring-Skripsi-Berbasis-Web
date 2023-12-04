@@ -25,13 +25,16 @@ Topik
 <div class="row">
     <div class="col-md-12 stretch-card">
         <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Tabel List Tema Penelitian</h4>
-                <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
-                <div class="d-flex justify-content-end mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <div class="text-left">
+                    <h5 class="card-title">Tabel List Tema Penelitian</h5>
+                    <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
+                </div>
+                <div class="text-right">
                     <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
                 </div>
             </div>
+
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>

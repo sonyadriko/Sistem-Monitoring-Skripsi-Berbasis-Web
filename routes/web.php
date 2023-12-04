@@ -136,6 +136,7 @@ Route::group(['middleware' => 'auth:dosen'], function() {
     Route::group(['prefix' => 'dosen/revisi_sidang_skripsi'], function () {
         Route::get('/', [DosenRevisiSidangSkripsiController::class, 'index'])->name('dosen-revisi-semhas.index');
         Route::get('/detail/{id}', [DosenRevisiSidangSkripsiController::class, 'detail'])->name('dosen-revisi-semhas.detail');
+        Route::post('/accrevisi/{id}', [DosenRevisiSidangSkripsiController::class, 'accrevisi'])->name('dosen-revisi-semhas.acc');
         // Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');
         // Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
     });
@@ -143,7 +144,8 @@ Route::group(['middleware' => 'auth:dosen'], function() {
     Route::group(['prefix' => 'dosen/revisi_seminar_proposal'], function () {
         Route::get('/', [DosenRevisiSeminarProposal::class, 'index'])->name('dosen-revisi-sempro.index');
         Route::get('/detail/{id}', [DosenRevisiSeminarProposal::class, 'detail'])->name('dosen-revisi-sempro.detail');
-        Route::post('/accrevisi/{id}', [DosenRevisiSeminarProposal::class, 'accrevisi'])->name('dosen-revisi-acc.detail');
+        Route::post('/accrevisi/{id}', [DosenRevisiSeminarProposal::class, 'accrevisi'])->name('dosen-revisi-sempro.acc');
+        Route::post('/addrevisi/{id}', [DosenRevisiSeminarProposal::class, 'addrevisi'])->name('dosen-revisi-add.detail');
     });
 });
 
