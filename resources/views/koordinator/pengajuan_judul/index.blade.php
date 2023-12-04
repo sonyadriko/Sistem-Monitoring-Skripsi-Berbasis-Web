@@ -8,8 +8,8 @@ Pengajuan Tema
 <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-
 @endsection
+
 @section('content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
@@ -32,6 +32,7 @@ Pengajuan Tema
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
+                        <th>Bidang Ilmu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -60,10 +61,6 @@ Pengajuan Tema
 </div> <!-- end row -->
 
 @endsection
-@push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
-@endpush
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>

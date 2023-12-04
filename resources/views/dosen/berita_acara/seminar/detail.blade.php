@@ -29,8 +29,8 @@ Detail Berita Acara Proposal
                         <tr>
                             <td>NPM</td>
                             <td>{{$data->kode_unik}}</td>
-                            <td>Hari Tanggal</td>
-                            <td>Senin, 7 Agustus 2023</td>
+                            <td>No. Ujian</td>
+                            <td>{{$data->id_berita_acara_p}}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
@@ -45,10 +45,10 @@ Detail Berita Acara Proposal
                             <td>{{$formattedDate}}</td>
                         </tr>
                         <tr>
-                            <td>Judul</td>
+                            <td>Tema / Judul</td>
                             <td>{{$data->topik_bidang_ilmu}}</td>
                             <td>Ruang, Waktu</td>
-                            <td>{{$data->ruangan}}, {{$data->jam}}</td>
+                            <td>{{$data->nama_ruangan}}, {{$data->jam}}</td>
                         </tr>
                         <tr>
                             <td>Dosen Pembimbing 1</td>

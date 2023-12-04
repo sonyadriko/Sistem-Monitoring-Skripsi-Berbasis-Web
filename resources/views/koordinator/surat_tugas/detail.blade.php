@@ -51,17 +51,25 @@ Detail Surat Tugas
                   <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
                   <div class="mb-3">
                     <label class="form-label">File Proposal</label>
-                    <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">
+                    <a href="{{asset($data->file_proposal) }}" target="_blank">
+                        {{basename($data->file_proposal)}}
+
+                    </a>
+                    {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">
                         View Proposal
-                    </button>
+                    </button> --}}
                 </div>
 
 
                 <div class="mb-3">
                     <label  class="form-label">Slip Pembayaran Bimbingan</label>
-                    <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">
-                        View Slip Pembayaran
-                    </button>
+                    <a href="{{ asset($data->file_slip_pembayaran) }}" target="_blank">
+                        {{basename($data->file_slip_pembayaran)}}
+
+                    </a>
+                    {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">
+                        {{basename($data->file_slip_pembayaran)}}
+                    </button> --}}
                 </div>
 
 

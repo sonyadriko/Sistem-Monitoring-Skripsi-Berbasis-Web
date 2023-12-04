@@ -25,32 +25,35 @@ Sidang Skripsi
             <div class="card-body">
                 <form action="{{ route('jadwal-sidang-skripsi-update', ['id' => $data->id_sidang_skripsi]) }}" method="POST">
                   @csrf
-                  <div class="mb-3">
-                    <label for="npm" class="form-label">NPM</label>
-                    <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
-                  </div>
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Nama Mahasiswa</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
-                  </div>
-                  <div class="mb-3">
-                    <label for="bidangIlmu" class="form-label">Judul yang diajukan</label>
-                    <input type="text" class="form-control" id="bidangIlmu" name="bidangIlmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
-                  </div>
-                  <div class="mb-3">
-                    <label for="dospemUtama" class="form-label">Dosen Pembimbing 1</label>
-                    <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
-                  </div>
-                  <div class="mb-3">
-                    <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
-                    <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
-                  </div>
-                <div class="mb-3">
-                  <label for="fileSkripsi" class="form-label">File Skripsi</label>
-                  {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
-                  <p> <a href="{{ asset($data->file_skripsi) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
-
-                </div>
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label for="npm" class="form-label">NPM</label>
+                            <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Nama Mahasiswa</label>
+                            <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bidangIlmu" class="form-label">Judul yang diajukan</label>
+                        <input type="text" class="form-control" id="bidangIlmu" name="bidangIlmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label for="dospemUtama" class="form-label">Dosen Pembimbing 1</label>
+                            <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
+                            <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileSkripsi" class="form-label">File Skripsi</label>
+                    {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
+                        <p> <a href="{{ asset($data->file_skripsi) }}" type="application/pdf" target="_blank">Cek File</a>.</p>
+                    </div>
                 <div class="mb-3">
                   <label for="select1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
                   <select class="form-select" id="select1" name="dosenPenguji1" aria-label="Default select example" onchange="updateSelectOptions()">
@@ -117,26 +120,30 @@ Sidang Skripsi
           <div class="card-body">
             <form action="{{ route('cetak-berita-acara-s', ['id' => $data->id_sidang_skripsi]) }}" method="POST" id="cetakForm">
               @csrf
-              <div class="mb-3">
-                <label for="npm" class="form-label">NPM</label>
-                <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
-              </div>
-              <div class="mb-3">
-                <label for="name" class="form-label">Nama Mahasiswa</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
-              </div>
-              <div class="mb-3">
+              <div class="mb-3 row">
+                <div class="col-md-6">
+                    <label for="npm" class="form-label">NPM</label>
+                    <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Nama Mahasiswa</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="bidangIlmu" class="form-label">Judul yang diajukan</label>
                 <input type="text" class="form-control" id="bidangIlmu" name="bidangIlmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
-              </div>
-              <div class="mb-3">
-                <label for="dospemUtama" class="form-label">Dosen Pembimbing 1</label>
-                <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
-              </div>
-              <div class="mb-3">
-                <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
-                <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
-              </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-md-6">
+                    <label for="dospemUtama" class="form-label">Dosen Pembimbing 1</label>
+                    <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
+                    <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
+            </div>
               <div class="mb-3">
                 <label for="defaultFormControlInput" class="form-label">File Skripsi</label>
                   {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
@@ -157,26 +164,20 @@ Sidang Skripsi
               </div>
               <div class="mb-3">
                 <label for="sekretaris" class="form-label">Sekretaris</label>
-                <input type="text" class="form-control" id="sekretaris" name="sekretaris" value="{{$data->sekretaris}}" readonly />
+                <input type="text" class="form-control" id="sekretaris" name="sekretaris" value="{{$data->nama_sekretaris}}" readonly />
               </div>
               <div class="row mb-3">
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <label for="ruanganSeminar" class="form-label">Ruangan Seminar</label>
-                </div>
-                <div class="col">
                   <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <label for="html5-date-input" class="form-label">Date</label>
-                </div>
-                <div class="col">
                   <input class="form-control" name="date" type="date" value="{{$data->tanggal}}" id="html5-date-input" readonly/>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <label for="html5-time-input" class="form-label">Time</label>
-                </div>
-                <div class="col">
                   <input class="form-control" name="time" type="time" value="{{$data->jam}}" id="html5-time-input" readonly />
                 </div>
               </div>
