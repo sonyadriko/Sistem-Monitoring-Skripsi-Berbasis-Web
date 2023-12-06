@@ -40,6 +40,8 @@
                             Dosen
                         @elseif(Auth::user()->role_id == 3)
                             Koordiantor
+                        @elseif(Auth::user()->role_id == 4)
+                            Ketua Jurusan
                         @endif
                     </small>
 

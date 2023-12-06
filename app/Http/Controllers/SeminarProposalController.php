@@ -66,13 +66,13 @@ class SeminarProposalController extends Controller
         // dd($request->all());
         $validatedData = $request->validate([
             'bimbingan_proposal_id' => 'required',
-            'proposal_file' => 'required|mimes:pdf|max:1000',
+            'proposal_file' => 'required|mimes:pdf|max:10000',
             'slip_file' => 'required|mimes:pdf|max:1000',
         ], [
             'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID is required.',
             'proposal_file.required' => 'File proposal is required.',
             'proposal_file.mimes' => 'File proposal must be a PDF.',
-            'proposal_file.max' => 'File proposal may not be greater than 1000 KB.',
+            'proposal_file.max' => 'File proposal may not be greater than 10000 KB.',
             'slip_file.required' => 'File slip pembayaran is required.',
             'slip_file.mimes' => 'File slip pembayaran must be a PDF.',
             'slip_file.max' => 'File slip pembayaran may not be greater than 1000 KB.',

@@ -20,15 +20,14 @@ class SidangSkripsiController extends Controller
     }
     public function store(Request $request)
     {
-
         // dd($request->all());
         $validatedData = $request->validate([
-            'skripsi_file' => 'required|mimes:pdf|max:1000',
+            'skripsi_file' => 'required|mimes:pdf|max:10000',
             'slip_file' => 'required|mimes:pdf|max:1000',
         ], [
             'skripsi_file.required' => 'File skripsi is required.',
             'skripsi_file.mimes' => 'File skripsi must be a PDF.',
-            'skripsi_file.max' => 'File skripsi may not be greater than 1000 KB.',
+            'skripsi_file.max' => 'File skripsi may not be greater than 10000 KB.',
             'slip_file.required' => 'File slip pembayaran is required.',
             'slip_file.mimes' => 'File slip pembayaran must be a PDF.',
             'slip_file.max' => 'File slip pembayaran may not be greater than 1000 KB.',

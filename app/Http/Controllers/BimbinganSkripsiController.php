@@ -26,10 +26,10 @@ class BimbinganSkripsiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_skripsi' => 'required|mimes:pdf|max:1000',
+            'file_skripsi' => 'required|mimes:pdf|max:10000',
             'file_skripsi.required' => 'File Skripsi wajib diunggah.',
             'file_skripsi.mimes' => 'Tipe file harus pdf',
-            'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
+            'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (10000 KB).',
         ]);
 
         if ($request->hasFile('file_skripsi')) {
