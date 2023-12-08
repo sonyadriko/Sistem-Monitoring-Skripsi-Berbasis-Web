@@ -53,11 +53,6 @@ class PengajuanJudulController extends Controller
             // Tambahkan pesan validasi untuk bidang formulir lainnya jika diperlukan
         ]);
 
-        // Perbarui status bidang ilmu
-        $bidangIlmu = BidangIlmu::findOrFail($validatedData['bidang_ilmu']);
-        $bidangIlmu->status = 'tidak';
-        $bidangIlmu->save();
-
         // Simpan pengajuan
         $pengajuan = new Pengajuan();
         $pengajuan->user_id = Auth::user()->id;

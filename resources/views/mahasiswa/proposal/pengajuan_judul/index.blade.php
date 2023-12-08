@@ -2,7 +2,7 @@
 
 @push('plugin-styles')
 <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
-<link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet">
+{{-- <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet"> --}}
 @endpush
 
 @section('title')
@@ -10,10 +10,15 @@ Pengajuan Tema
 @endsection
 
 @section('css')
-<link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet">
+{{-- <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet"> --}}
 @endsection
 
 @section('content')
+<style>
+    .wizard > .content {
+        min-height: 50em; /* Menggunakan auto untuk menghilangkan batasan minimum tinggi */
+    }
+</style>
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -32,20 +37,27 @@ Pengajuan Tema
             <h2>First Step</h2>
             <section>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                    <div class="card-group">
+                        <div class="card">
+                          <img src="{{ url('img/wizard/pengajuan_judul/step1.svg') }}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
+                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                          </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                        <div class="card">
+                          <img src="{{ url('img/wizard/pengajuan_judul/step2.svg') }}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
+                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                          </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
-
+                        <div class="card">
+                          <img src="{{ url('img/wizard/pengajuan_judul/step3.svg') }}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
+                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -72,6 +84,8 @@ Pengajuan Tema
                     <div class="mb-3">
                         <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
                         <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian"></textarea>
+                        <p class="text-danger"> Maksimal 12 kata.</p>
+
                         @error('judul')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -92,8 +106,24 @@ Pengajuan Tema
                             <label class="form-check-label" for="audit_si_ti">Audit SI-TI</label>
                         </div>
                         <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Enterprise Resource Planning" name="mata_kuliah[]" id="erp">
+                            <label class="form-check-label" for="erp">Enterprise Resource Planning</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Framework Tata Kelola IT" name="mata_kuliah[]" id="FTKIT">
+                            <label class="form-check-label" for="FTKIT">Framework Tata Kelola IT</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Inovasi SI dan Teknologi Terbaru" name="mata_kuliah[]" id="ISITT">
+                            <label class="form-check-label" for="ISITT">Inovasi SI dan Teknologi Terbaru</label>
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Recommender System" name="mata_kuliah[]" id="recommender_system">
                             <label class="form-check-label" for="recommender_system">Recommender System</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Teknik Peramalan" name="mata_kuliah[]" id="teknik_peramalan">
+                            <label class="form-check-label" for="teknik_peramalan">Teknik Peramalan</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Business Intelligence" name="mata_kuliah[]" id="business_intelligence">
@@ -103,12 +133,20 @@ Pengajuan Tema
                             <input class="form-check-input" type="checkbox" value="Perencanaan Strategis SI-TI" name="mata_kuliah[]" id="perencanaan_strategis_si_ti">
                             <label class="form-check-label" for="perencanaan_strategis_si_ti">Perencanaan Strategis SI-TI</label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Manajemen Layanan" name="mata_kuliah[]" id="manajemen_layanan_si_ti">
+                            <label class="form-check-label" for="manajemen_layanan_si_ti">Manajemen Layanan SI-TI</label>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mata Kuliah Pilihan Semester VIII</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Manajemen Kualitas SI/TI" name="mata_kuliah[]" id="manajemen_kualitas_si_ti">
                             <label class="form-check-label" for="manajemen_kualitas_si_ti">Manajemen Kualitas SI/TI</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Manajemen Resiko SI/TI" name="mata_kuliah[]" id="manajemen_resiko_si_ti">
+                            <label class="form-check-label" for="manajemen_resiko_si_ti">Manajemen Resiko SI/TI</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Model dan Simulasi Sistem" name="mata_kuliah[]" id="model_dan_simulasi_sistem">
@@ -121,6 +159,10 @@ Pengajuan Tema
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Sistem Informasi Intelegensia" name="mata_kuliah[]" id="sistem_informasi_intelegensia">
                             <label class="form-check-label" for="sistem_informasi_intelegensia">Sistem Informasi Intelegensia</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Testing dan Implementasi SI" name="mata_kuliah[]" id="testing_dan_implementasi_si">
+                            <label class="form-check-label" for="sistem_informasi_intelegensia">Testing dan Implementasi SI</label>
                         </div>
                     </div>
                 </form>
