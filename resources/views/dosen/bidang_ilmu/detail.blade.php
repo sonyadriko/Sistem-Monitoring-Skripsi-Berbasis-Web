@@ -46,21 +46,7 @@ Detail Revisi Seminar Proposal
                             @endif
                         </div>
                     </div>
-
-
                 </div>
-                {{-- <div class="row">
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label class="form-label">Sub Bidang Ilmu </label>
-                            @if ($bidetail)
-                                <input type="text" class="form-control" value="{{$bidetail->sub_bidang_ilmu}}" readonly>
-                            @else
-                                <p>No data found.</p>
-                            @endif
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
@@ -73,6 +59,24 @@ Detail Revisi Seminar Proposal
                         </div>
                     </div>
                 </div>
+
+                {{-- <form action="{{route('dosen-bidang-ilmu.store')}}" method="POST"enctype="multipart/form-data"> --}}
+                <form action="{{ route('dosen-bidang-ilmu.store', ['id' => $bidetail->id_bidang_ilmu]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="file_proposal" class="form-label">Upload File Paper Acuan Referensi</label>
+                            <input class="form-control" type="file" id="paper" name="paper[]" multiple />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -88,6 +92,7 @@ Detail Revisi Seminar Proposal
                         <div class="row">
                             <h5>
                                 <a href="{{ asset($p->file) }}" target="_blank">
+                                    <i data-feather="file-text"></i> <!-- Feather icon for file -->
                                     {{ basename($p->file) }}
                                 </a>
                             </h5>
@@ -100,7 +105,6 @@ Detail Revisi Seminar Proposal
         </div>
     </div>
 </div>
-
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

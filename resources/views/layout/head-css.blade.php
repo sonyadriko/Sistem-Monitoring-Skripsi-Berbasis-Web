@@ -8,4 +8,4 @@
 <!-- Icons Css -->
 <link href="{{ URL::asset('assets2/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
-<link href="{{ URL::asset('assets2/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+{{-- <link href="{{ URL::asset('assets2/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" /> --}}

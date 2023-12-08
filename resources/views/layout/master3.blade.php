@@ -25,6 +25,7 @@
   <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
   <!-- end plugin css -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
   @stack('plugin-styles')
 
@@ -33,7 +34,15 @@
   <!-- end common css -->
 
   @stack('style')
-
+  <style>
+    .text-center {
+      text-align: center !important;
+    }.tx-16 {
+      font-size: 16px;
+    }.fw-bold {
+      font-weight: 500 !important;
+    }
+    </style>
   @include('layout.head-css')
 </head>
 <body data-base-url="{{url('/')}}" class="sidebar-dark">

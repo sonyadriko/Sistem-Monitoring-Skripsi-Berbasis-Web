@@ -41,6 +41,7 @@ use App\Http\Controllers\DataPenggunaController;
 use App\Http\Controllers\KoordinatorLaporanTahunanController;
 use App\Http\Controllers\SuratSurveyController;
 use App\Http\Controllers\MataKuliahPendukungController;
+use App\Http\Controllers\DosenBidangIlmuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,12 +100,13 @@ Route::group(['middleware' => 'auth:dosen,ketuajurusan,koordinator'], function()
     });
 
 
-    // Route::controller(BidangIlmuController::class)->group(function () {
-    //     Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
-    //     Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
-    //     Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
-    //     Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('bidang-ilmu.detail');
-    // });
+    Route::controller(DosenBidangIlmuController::class)->group(function () {
+        Route::get('/dosen/bidang_ilmu', 'index')->name('dosen-bidang-ilmu.index');
+        // Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
+        // Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
+        Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('dosen-bidang-ilmu.detail');
+        Route::post('/dosen/bidang_ilmu/detail/{id}', 'submitpaper')->name('dosen-bidang-ilmu.store');
+    });
 
     Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
         Route::get('/', [DosenBimbinganProposalController::class, 'index'])->name('bimbingan-dosen.index');

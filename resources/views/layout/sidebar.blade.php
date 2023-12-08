@@ -397,13 +397,13 @@
           <span class="link-title">Dashboard</span>
         </a>
     </li>
-    {{-- <li class="nav-item nav-category">Bidang Ilmu</li>
+    <li class="nav-item nav-category">Bidang Ilmu</li>
     <li class="nav-item">
-        <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
+        <a href="{{route('dosen-bidang-ilmu.index')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Tema Penelitian</span>
         </a>
-    </li> --}}
+    </li>
     <li class="nav-item nav-category">Bimbingan & Revisi</li>
     <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#bs" role="button"  aria-controls="email">
