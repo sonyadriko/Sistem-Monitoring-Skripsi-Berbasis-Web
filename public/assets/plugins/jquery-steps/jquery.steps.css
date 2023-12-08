@@ -1,5 +1,5 @@
 ﻿/*
-    Common 
+    Common
 */
 
 .wizard,
@@ -137,12 +137,11 @@
     color: #fff;
 }
 
-.wizard > .content
-{
+.wizard > .content {
     background: #eee;
     display: block;
     margin: 0.5em;
-    min-height: 35em;
+    min-height: 100em; /* Sesuaikan nilai min-height sesuai kebutuhan Anda */
     overflow: hidden;
     position: relative;
     width: auto;
@@ -151,6 +150,7 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
 
 .wizard.vertical > .content
 {

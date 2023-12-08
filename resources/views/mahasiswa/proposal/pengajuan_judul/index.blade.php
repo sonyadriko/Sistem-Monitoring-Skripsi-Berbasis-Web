@@ -1,4 +1,4 @@
-@extends('layout.master3')
+@extends('layout.master')
 
 @push('plugin-styles')
 <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
@@ -22,112 +22,115 @@ Pengajuan Tema
 </nav>
 @if(is_null($temacek) || is_null($temacek->status))
 <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Alur Pengajuan Tema</h4>
-            </div>
-            <div class="card-body">
-                <div id="basic-pills-wizard" class="twitter-bs-wizard">
-                    <ul class="twitter-bs-wizard-nav d-flex justify-content-center">
-                        <li class="nav-item">
-                            <a href="#seller-details" class="nav-link disable-click" data-toggle="tab">
-                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Pertama">
-                                    <i class="bx bx-list-ul"></i>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#bank-detail" class="nav-link disable-click" data-toggle="tab">
-                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Step Kedua">
-                                    <i class="bx bxs-bank"></i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <!-- wizard-nav -->
-                    <div class="tab-content twitter-bs-wizard-tab-content">
-                        <div class="tab-pane" id="seller-details">
-                            <div class="text-center mb-4">
-                                <h5>Step Pertama</h5>
-                                <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pengajuan tema proposal skripsi terdapat pada gambar dibawah ini.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <ul class="pager wizard twitter-bs-wizard-pager-link">
-                                <li class="next"><a href="javascript: void(0);" class="btn btn-primary" >Next <i
-                                            class="bx bx-chevron-right ms-1"></i></a></li>
-                            </ul>
+    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Alur Pengajuan Tema</h4>
+          {{-- <p class="text-muted mb-3">Read the <a href="http://www.jquery-steps.com/GettingStarted" target="_blank"> Official jQuery Steps Documentation </a>for a full list of instructions and other options.</p> --}}
+          <div id="wizard">
+            <h2>First Step</h2>
+            <section>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
                         </div>
-                        <!-- tab pane -->
-                        <div class="tab-pane" id="bank-detail">
-                            <div>
-                                <div class="text-center mb-4">
-                                    <h5>Step Kedua</h5>
-                                    <p class="card-title-desc">Fill all information below</p>
-                                </div>
-                                <form action="{{ route('pengajuan-judul.submit') }}" method="POST" id="yourFormId">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Nama Mahasiswa</label>
-                                        <input class="form-control" type="text" id="name" name="nama" value="{{ Auth::user()->name }}" readonly autocomplete="nama"/>
-                                        @error('nama')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="npm" class="form-label">NPM Mahasiswa</label>
-                                        <input class="form-control" type="text" id="npm" value="{{ Auth::user()->kode_unik }}" name="npm" readonly/>
-                                        @error('npm')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
-                                        <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
-                                            <option value="" selected disabled="">Open this select menu</option>
-                                            @foreach($bidang_ilmu as $bi)
-                                                <option value="{{ $bi->id_bidang_ilmu }}">{{ $bi->topik_bidang_ilmu }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </form>
-                                <ul class="pager wizard twitter-bs-wizard-pager-link">
-                                    <li class="previous"><a href="javascript: void(0);" class="btn btn-primary" onclick="nextTab()"><i
-                                                class="bx bx-chevron-left me-1"></i> Previous</a></li>
-                                    <li class="float-end"><a href="javascript: void(0);" class="btn btn-primary" onclick="showConfirmation()">Save
-                                            Changes</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- tab pane -->
                     </div>
-                    <!-- end tab content -->
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <img src="{{ asset('img/undraw_add_information_j2wg.svg') }}" alt="Additional Information" class="img-fluid mx-auto" style="width: 100%; max-width: 100%; height: auto;">
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- end card body -->
+            </section>
+
+            <h2>Second Step</h2>
+            <section>
+                <form action="{{ route('pengajuan-judul.submit') }}" method="POST" id="yourFormId">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama Mahasiswa</label>
+                        <input class="form-control" type="text" id="name" name="nama" value="{{ Auth::user()->name }}" readonly autocomplete="nama"/>
+                        @error('nama')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="npm" class="form-label">NPM Mahasiswa</label>
+                        <input class="form-control" type="text" id="npm" value="{{ Auth::user()->kode_unik }}" name="npm" readonly/>
+                        @error('npm')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
+                        <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian"></textarea>
+                        @error('judul')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
+                        <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
+                            <option value="" selected disabled="">Pilih Bidang Keilmuan</option>
+                            @foreach($bidang_ilmu as $bi)
+                                <option value="{{ $bi->id_bidang_ilmu }}">{{ $bi->topik_bidang_ilmu }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mata Kuliah Pilihan Semester VII</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Audit SI-TI" name="mata_kuliah[]" id="audit_si_ti">
+                            <label class="form-check-label" for="audit_si_ti">Audit SI-TI</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Recommender System" name="mata_kuliah[]" id="recommender_system">
+                            <label class="form-check-label" for="recommender_system">Recommender System</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Business Intelligence" name="mata_kuliah[]" id="business_intelligence">
+                            <label class="form-check-label" for="business_intelligence">Business Intelligence</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Perencanaan Strategis SI-TI" name="mata_kuliah[]" id="perencanaan_strategis_si_ti">
+                            <label class="form-check-label" for="perencanaan_strategis_si_ti">Perencanaan Strategis SI-TI</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mata Kuliah Pilihan Semester VIII</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Manajemen Kualitas SI/TI" name="mata_kuliah[]" id="manajemen_kualitas_si_ti">
+                            <label class="form-check-label" for="manajemen_kualitas_si_ti">Manajemen Kualitas SI/TI</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Model dan Simulasi Sistem" name="mata_kuliah[]" id="model_dan_simulasi_sistem">
+                            <label class="form-check-label" for="model_dan_simulasi_sistem">Model dan Simulasi Sistem</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Rekayasa Kebutuhan" name="mata_kuliah[]" id="rekayasa_kebutuhan">
+                            <label class="form-check-label" for="rekayasa_kebutuhan">Rekayasa Kebutuhan</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Sistem Informasi Intelegensia" name="mata_kuliah[]" id="sistem_informasi_intelegensia">
+                            <label class="form-check-label" for="sistem_informasi_intelegensia">Sistem Informasi Intelegensia</label>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+          </div>
         </div>
-        <!-- end card -->
+      </div>
     </div>
-    <!-- end col -->
+    </div>
 </div>
 <!-- end row -->
 @else
@@ -184,81 +187,65 @@ Pengajuan Tema
 @endif
 @endsection
 
+
 @section('script')
-    <script src="{{ URL::asset('assets2/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.js') }}"></script>
-    <script src="{{ URL::asset('assets2/js/app.min.js') }}"></script>
+
+
+@endsection
+
+
+@push('plugin-scripts')
+  <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // Your existing nextTab function in the global scope
-        function nextTab() {
-            var nextTab = $('.nav-item.active').next('li.nav-item');
-            if (nextTab.length > 0) {
-                nextTab.find('a.nav-link').click();
-            }
-        }
 
-        // Your existing previousTab function in the global scope
-        function previousTab() {
-            var prevTab = $('.nav-item.active').prev('li.nav-item');
-            if (prevTab.length > 0) {
-                prevTab.find('a.nav-link').click();
-            }
-        }
+@endpush
 
-        function showConfirmation() {
-    // Use SweetAlert to show a simple confirmation message
-    Swal.fire({
+@push('custom-scripts')
+  {{-- <script src="{{ asset('assets/js/wizard.js') }}"></script> --}}
+  <script>
+$(function() {
+    'use strict';
+
+    $("#wizard").steps({
+      headerTag: "h2",
+      bodyTag: "section",
+      transitionEffect: "slideLeft",
+      onStepChanging: function (event, currentIndex, newIndex) {
+        // Validasi data di setiap langkah jika diperlukan
+        return true; // Kembalikan true jika data valid
+      },
+      onFinished: function (event, currentIndex) {
+        // Tampilkan konfirmasi sebelum menyimpan perubahan
+        showConfirmation();
+      }
+    });
+
+    // Fungsi untuk menampilkan konfirmasi menggunakan SweetAlert
+    function showConfirmation() {
+      // Gunakan SweetAlert untuk menampilkan pesan konfirmasi sederhana
+      Swal.fire({
         title: 'Are you sure?',
         text: 'Do you want to save changes?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
-    }).then((result) => {
+      }).then((result) => {
         if (result.isConfirmed) {
-            // If the user clicks "Yes," submit the form
-            saveChanges();
+          // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
+          saveChanges();
         }
-    });
-}
+      });
+    }
 
-function saveChanges() {
-    // Gather form data
-    var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+    // Fungsi untuk menyimpan perubahan
+    function saveChanges() {
+      // Anda dapat menambahkan logika untuk menyimpan perubahan ke server di sini
+      var form = $('#yourFormId')[0]; // Ganti 'yourFormId' dengan ID sebenarnya dari formulir Anda
 
-    // Standard form submission
-    form.submit();
-}
-
-
-
-
-        $(document).ready(function () {
-            // Initialize the wizard
-            $('#basic-pills-wizard').bootstrapWizard({
-                // Options and configurations for the wizard
-                // ...
-
-                onTabClick: function (tab, navigation, index) {
-                    // Handle tab click event if needed
-                    return true;
-                },
-
-                onNext: function (tab, navigation, index) {
-                    // Handle next button click event if needed
-                    return true; // Return false to prevent moving to the next tab
-                },
-
-                onPrevious: function (tab, navigation, index) {
-                    // Handle previous button click event if needed
-                    return true; // Return false to prevent moving to the previous tab
-                },
-
-                onTabShow: function (tab, navigation, index) {
-                    // Handle tab show event if needed
-                }
-            });
-        });
-    </script>
-@endsection
+      // Standard form submission
+      form.submit();
+    }
+  });
+</script>
+@endpush

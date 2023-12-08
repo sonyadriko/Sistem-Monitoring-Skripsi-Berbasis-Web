@@ -31,7 +31,7 @@ Topik
                     <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
                 </div>
                 <div class="text-right">
-                    <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
+                    <a href="{{ url('/koordinator/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@ Topik
                         <td>{{ $no }}</td>
                         <td>{{ $dosen->topik_bidang_ilmu }}</td>
                         {{-- <td>{{ $dosen->keterangan }}</td> --}}
-                        <td><a href="{{ url('/dosen/bidang_ilmu/detail/' . $dosen->id_bidang_ilmu) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ url('/koordinator/bidang_ilmu/detail/' . $dosen->id_bidang_ilmu) }}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @php
                     $no++;

@@ -34,14 +34,22 @@ Detail Revisi Seminar Proposal
                         <div class="mb-3">
                             <label class="form-label">Mata Kuliah Pendukung </label>
                             @if ($bidetail)
-                                <input type="text" class="form-control" value="{{$bidetail->mata_kuliah_pendukung}}" readonly>
+                                @php
+                                    $mataKuliahIDs = explode(',', $bidetail->mata_kuliah_pendukung);
+                                    $mataKuliahs = App\Models\MataKuliahPendukung::whereIn('id_mata_kuliah_pendukung', $mataKuliahIDs)->get();
+                                    $mataKuliahNames = implode(', ', $mataKuliahs->pluck('nama_mata_kuliah')->toArray());
+                                @endphp
+
+                                <input type="text" class="form-control" value="{{ $mataKuliahNames }}" readonly>
                             @else
                                 <p>No data found.</p>
                             @endif
                         </div>
                     </div>
+
+
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label class="form-label">Sub Bidang Ilmu </label>
@@ -52,7 +60,7 @@ Detail Revisi Seminar Proposal
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
@@ -86,7 +94,7 @@ Detail Revisi Seminar Proposal
                         </div>
                     @endforeach
                 @else
-                    <p>No papers found for the specified ID.</p>
+                    <p>Tidak ada paper yang ditemukan untuk bidang ilmu ini.</p>
                 @endif
             </div>
         </div>

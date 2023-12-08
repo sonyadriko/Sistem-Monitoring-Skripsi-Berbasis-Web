@@ -40,6 +40,7 @@ use App\Http\Controllers\KajurDataBidangIlmuController;
 use App\Http\Controllers\DataPenggunaController;
 use App\Http\Controllers\KoordinatorLaporanTahunanController;
 use App\Http\Controllers\SuratSurveyController;
+use App\Http\Controllers\MataKuliahPendukungController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,12 +99,12 @@ Route::group(['middleware' => 'auth:dosen,ketuajurusan,koordinator'], function()
     });
 
 
-    Route::controller(BidangIlmuController::class)->group(function () {
-        Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
-        Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
-        Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
-        Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('bidang-ilmu.detail');
-    });
+    // Route::controller(BidangIlmuController::class)->group(function () {
+    //     Route::get('/dosen/bidang_ilmu', 'index')->name('bidang-ilmu.index');
+    //     Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
+    //     Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
+    //     Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('bidang-ilmu.detail');
+    // });
 
     Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
         Route::get('/', [DosenBimbinganProposalController::class, 'index'])->name('bimbingan-dosen.index');
@@ -155,8 +156,23 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
     });
 
+    Route::group(['prefix' => 'koordinator/mata_kuliah_pendukung'], function () {
+        Route::get('/', [MataKuliahPendukungController::class, 'index'])->name('mata-kuliah.index');
+        Route::get('/create', [MataKuliahPendukungController::class, 'create'])->name('mata-kuliah.create');
+        Route::post('/create', [MataKuliahPendukungController::class, 'store'])->name('mata-kuliah.store');
+        // Route::post('/detail/{id}', [MataKuliahPendukungController::class, 'detail'])->name('mata-kuliah.detail');
+    });
+
     Route::controller(KoordinatorLaporanTahunanController::class)->group(function () {
         Route::get('/koordinator/laporan_tahunan', 'index')->name('lap-tahunan.index');
+    });
+
+
+    Route::controller(BidangIlmuController::class)->group(function () {
+        Route::get('/koordinator/bidang_ilmu', 'index')->name('bidang-ilmu.index');
+        Route::get('/koordinator/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
+        Route::post('/koordinator/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
+        Route::get('/koordinator/bidang_ilmu/detail/{id}', 'detail')->name('bidang-ilmu.detail');
     });
 
     Route::controller(DataPenggunaController::class)->group(function () {

@@ -1,19 +1,45 @@
-// npm package: jquery-steps
-// github link: https://github.com/rstaib/jquery-steps/
-
+// wizard.js
 $(function() {
-  'use strict';
+    'use strict';
 
-  $("#wizard").steps({
-    headerTag: "h2",
-    bodyTag: "section",
-    transitionEffect: "slideLeft"
-  });
+    $("#wizard").steps({
+      headerTag: "h2",
+      bodyTag: "section",
+      transitionEffect: "slideLeft",
+      onStepChanging: function (event, currentIndex, newIndex) {
+        // Validasi data di setiap langkah jika diperlukan
+        return true; // Kembalikan true jika data valid
+      },
+      onFinished: function (event, currentIndex) {
+        // Tampilkan konfirmasi sebelum menyimpan perubahan
+        showConfirmation();
+      }
+    });
 
-  $("#wizardVertical").steps({
-    headerTag: "h2",
-    bodyTag: "section",
-    transitionEffect: "slideLeft",
-    stepsOrientation: 'vertical'
+    // Fungsi untuk menampilkan konfirmasi menggunakan SweetAlert
+    function showConfirmation() {
+      // Gunakan SweetAlert untuk menampilkan pesan konfirmasi sederhana
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save changes?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
+          saveChanges();
+        }
+      });
+    }
+
+    // Fungsi untuk menyimpan perubahan
+    function saveChanges() {
+      // Anda dapat menambahkan logika untuk menyimpan perubahan ke server di sini
+      var form = $('#yourFormId')[0]; // Ganti 'yourFormId' dengan ID sebenarnya dari formulir Anda
+
+      // Standard form submission
+      form.submit();
+    }
   });
-});

@@ -307,6 +307,10 @@
                 <li class="nav-item">
                     <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('bidang-ilmu.index')}}" class="nav-link">Tema Penelitian</a>
+                </li>
+
             </ul>
         </div>
     </li>
@@ -374,6 +378,12 @@
           <span class="link-title">Ruangan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{route('mata-kuliah.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="book"></i>
+          <span class="link-title">Mata Kuliah Pendukung</span>
+        </a>
+      </li>
       {{-- <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="smile"></i>
@@ -387,13 +397,13 @@
           <span class="link-title">Dashboard</span>
         </a>
     </li>
-    <li class="nav-item nav-category">Bidang Ilmu</li>
+    {{-- <li class="nav-item nav-category">Bidang Ilmu</li>
     <li class="nav-item">
         <a href="{{route('bidang-ilmu.index')}}" class="nav-link">
           <i class="link-icon" data-feather="sidebar"></i>
           <span class="link-title">Tema Penelitian</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item nav-category">Bimbingan & Revisi</li>
     <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#bs" role="button"  aria-controls="email">
