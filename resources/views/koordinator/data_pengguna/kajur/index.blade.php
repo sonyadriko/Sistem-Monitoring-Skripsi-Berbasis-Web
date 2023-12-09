@@ -21,7 +21,7 @@ Data Pengguna
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Manajemen Data Ketua Jurusan</h4>
+                <h4 class="card-title" style="font-weight: bold">Manajemen Data Ketua Jurusan</h4>
                 <p class="card-title-desc">Data ketua jurusan dapat dilihat pada tabel dibawah ini.</p>
             </div>
             <div class="card-body">

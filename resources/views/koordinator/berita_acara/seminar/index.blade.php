@@ -21,7 +21,7 @@ Berita Acara Seminar Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Berita Acara Seminar Proposal</h4>
+                <h4 class="card-title" style="font-weight: bold">Berita Acara Seminar Proposal</h4>
                 <p class="card-title-desc">List berita acara seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>

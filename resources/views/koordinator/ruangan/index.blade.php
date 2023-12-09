@@ -21,7 +21,7 @@ Ruangan
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel List Ruangan</h4>
+                <h4 class="card-title" style="font-weight: bold">Tabel List Ruangan</h4>
                 <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.
                 </p>
                 <div class="d-flex justify-content-end mb-3">

@@ -17,8 +17,8 @@ Proposal
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
         {{-- <a href="{{ route('pembagian-dosen.create') }}" class="btn btn-primary">Create</a> --}}
-        <h5 class="card-header">Tabel Pembagian Dosen</h5>
-    
+        <h5 class="card-header" style="font-weight: bold">Tabel Pembagian Dosen</h5>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
@@ -54,13 +54,13 @@ Proposal
 
                             @endif
                     </tr>
-                   
+
                     @endforeach
                      {{-- @php
                     $no++;
                     @endphp --}}
                 </tbody>
-            </table>  
+            </table>
         </div>
     </div>
     </div>
@@ -138,7 +138,7 @@ Proposal
                       />
                     </div>
                   </div>
-              
+
             </div>
             <input type="hidden" name="status" value="acc"/>
             <div class="modal-footer">

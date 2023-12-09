@@ -21,7 +21,7 @@ Data Pengguna
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Manajemen Data Mahasiswa</h4>
+                <h4 class="card-title" style="font-weight: bold">Manajemen Data Mahasiswa</h4>
                 <p class="card-title-desc">Data mahasiswa dapat dilihat pada tabel dibawah ini, terdapat filter mengenai angkatan mahasiswa dan tombol detailnya.</p>
             </div>
             <div class="card-body">

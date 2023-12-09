@@ -27,7 +27,7 @@ Mata Kuliah Pendukung
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="text-left">
-                    <h5 class="card-title">Tabel List Mata Kuliah Pendukung</h5>
+                    <h5 class="card-title" style="font-weight: bold">Tabel List Mata Kuliah Pendukung</h5>
                     <p class="card-title-desc">Berikut merupakan tabel list Mata Kuliah Pendukung.</p>
                 </div>
                 <div class="text-right">

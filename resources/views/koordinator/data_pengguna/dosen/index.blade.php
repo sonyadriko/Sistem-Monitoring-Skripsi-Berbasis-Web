@@ -21,7 +21,7 @@ Data Pengguna
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Manajemen Data Dosen</h4>
+                <h4 class="card-title" style="font-weight: bold">Manajemen Data Dosen</h4>
                 <p class="card-title-desc">Data dosen dapat dilihat pada tabel dibawah ini.</p>
             </div>
             <div class="card-body">

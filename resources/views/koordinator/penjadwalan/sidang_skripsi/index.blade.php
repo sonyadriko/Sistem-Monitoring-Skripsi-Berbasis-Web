@@ -21,7 +21,7 @@ Sidang Skripsi
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pengajuan Sidang Skripsi</h4>
+                <h4 class="card-title" style="font-weight: bold">Pengajuan Sidang Skripsi</h4>
                 <p class="card-title-desc">List pengajuan sidang skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>

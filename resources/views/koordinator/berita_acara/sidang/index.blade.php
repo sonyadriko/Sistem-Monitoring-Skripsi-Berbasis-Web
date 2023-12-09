@@ -21,7 +21,7 @@ Berita Acara Sidang Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Berita Acara Sidang Skripsi</h4>
+                <h4 class="card-title" style="font-weight: bold">Berita Acara Sidang Skripsi</h4>
                 <p class="card-title-desc">List berita acara sidang skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
