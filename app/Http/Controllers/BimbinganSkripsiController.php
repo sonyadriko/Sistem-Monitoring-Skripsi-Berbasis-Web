@@ -15,8 +15,11 @@ class BimbinganSkripsiController extends Controller
     {
         $bimbingans = DB::table('bimbingan_skripsi')
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-        ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
-        ->where('user_id', '=', Auth::user()->id)->first();
+        ->join('detail_bimbingan_skripsi', 'detail_bimbingan_skripsi.bimbingan_skripsi_id', 'bimbingan_skripsi.id_bimbingan_skripsi')
+        ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii', 'detail_bimbingan_skripsi.revisi')
+        ->where('user_id', '=', Auth::user()->id)
+        ->latest('detail_bimbingan_skripsi.created_at') // Order by the creation timestamp in descending order
+        ->first();
         // return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
         return view('mahasiswa/skripsi/bimbingan.index', compact('bimbingans'));
 
@@ -26,10 +29,10 @@ class BimbinganSkripsiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_skripsi' => 'required|mimes:pdf|max:10000',
+            'file_skripsi' => 'required|mimes:pdf|max:1000',
             'file_skripsi.required' => 'File Skripsi wajib diunggah.',
             'file_skripsi.mimes' => 'Tipe file harus pdf',
-            'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (10000 KB).',
+            'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
         ]);
 
         if ($request->hasFile('file_skripsi')) {

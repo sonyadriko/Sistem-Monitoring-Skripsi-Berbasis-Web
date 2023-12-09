@@ -17,7 +17,7 @@ class SeminarProposalController extends Controller
             ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
             ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
             ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*', 'seminar_proposal.file_proposal', 'seminar_proposal.file_slip_pembayaran', 'seminar_proposal.status', 'seminar_proposal.tanggal')
-            ->where('users.id', '=', Auth::user()->id)
+            ->where('users.id', Auth::user()->id)
             ->where('pengajuan_judul.status', 'terima')
             ->latest('seminar_proposal.created_at')
             ->first();

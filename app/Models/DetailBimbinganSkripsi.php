@@ -14,7 +14,7 @@ class DetailBimbinganSkripsi extends Model
         'bimbingan_skripsi_id',
         'file',
         'revisi',
-        'validasi',
+        // 'validasi',
         'updated_at',
         'created_at'
     ];

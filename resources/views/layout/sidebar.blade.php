@@ -60,7 +60,7 @@
         </a>
       </li> --}}
     <li class="nav-item nav-category">Bimbingan & Revisi</li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
           <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan</span>
@@ -71,6 +71,23 @@
           <i class="link-icon" data-feather="book"></i>
           <span class="link-title">Bimbingan Skripsi</span>
         </a>
+    </li> --}}
+    <li class="nav-item ">
+        <a class="nav-link" data-bs-toggle="collapse" href="#bimbingan" role="button"  aria-controls="bimbingan">
+          <i class="link-icon" data-feather="book"></i>
+          <span class="link-title">Bimbingan</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="bimbingan">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ route('bimbingan-mhs.index') }}" class="nav-link">Bimbingan Proposal</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('bimbingans-mhs.index')}}" class="nav-link">Bimbingan Skripsi</a>
+            </li>
+          </ul>
+        </div>
     </li>
     <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#revisi" role="button"  aria-controls="revisi">

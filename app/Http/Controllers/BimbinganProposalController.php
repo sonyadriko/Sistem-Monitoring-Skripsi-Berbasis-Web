@@ -14,12 +14,16 @@ class BimbinganProposalController extends Controller
     public function index()
     {
         $dosens = DB::table('bimbingan_proposal')
-        ->join('detail_bimbingan_proposal', 'detail_bimbingan_proposal.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
         ->where('user_id', Auth::user()->id)
-        ->latest('detail_bimbingan_proposal.created_at') // Order by the creation timestamp in descending order
         ->first();
 
-    return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
+        $detailbim = DB::table('detail_bimbingan_proposal')
+            ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'detail_bimbingan_proposal.bimbingan_proposal_id')
+            ->where('user_id', Auth::user()->id)
+            ->latest('detail_bimbingan_proposal.created_at') // Order by the creation timestamp in descending order
+            ->first();
+
+    return view('mahasiswa/proposal/bimbingan.index', compact('dosens', 'detailbim'));
 
 
     }

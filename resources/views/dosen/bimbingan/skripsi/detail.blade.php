@@ -76,7 +76,7 @@ Detail Bimbingan Skripsi
                             <th>Bimbingan</th>
                             {{-- <th>Revisi Dosen</th> --}}
                             <th>File</th>
-                            <th>Validasi Revisi</th>
+                            {{-- <th>Validasi Revisi</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -92,18 +92,18 @@ Detail Bimbingan Skripsi
                             <td>
                                 <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
                             </td>
-                            <td>{{ $item->validasi }}</td>
+                            {{-- <td>{{ $item->validasi }}</td> --}}
                             <td>
-                                @if($item->validasi === 'acc')
+                                {{-- @if($item->validasi === 'acc')
                                 Revisi sudah di Acc
-                                @else
-                                    <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
-                                        Tambahkan Revisi
-                                    </button>
-                                    <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_skripsi }})">
+                                @else --}}
+                                <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
+                                    Tambahkan Revisi
+                                </button>
+                                    {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_skripsi }})">
                                         Acc Revisi
                                     </button>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
                         @php
@@ -280,7 +280,7 @@ Detail Bimbingan Skripsi
    const dospem2 = document.getElementById('dospem2').value;
 
    Swal.fire({
-       title: 'Apakah Anda yakin ingin acc proposal ini?',
+       title: 'Apakah Anda yakin ingin acc skripsi ini?',
        icon: 'question',
        showCancelButton: true,
        confirmButtonText: 'Ya',
@@ -304,7 +304,7 @@ function accProposal(idBimbinganSkripsi, dospem1, dospem2) {
 
            // Show success message using SweetAlert
            Swal.fire({
-               title: 'Proposal berhasil diacc!',
+               title: 'Skripsi berhasil diacc!',
                icon: 'success',
                confirmButtonText: 'OK'
            }).then((result) => {

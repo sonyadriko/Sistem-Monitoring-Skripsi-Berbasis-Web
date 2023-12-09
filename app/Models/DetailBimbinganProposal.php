@@ -14,7 +14,7 @@ class DetailBimbinganProposal extends Model
         'bimbingan_proposal_id',
         'file',
         'revisi',
-        'validasi',
+        // 'validasi',
         'updated_at',
         'created_at'
     ];

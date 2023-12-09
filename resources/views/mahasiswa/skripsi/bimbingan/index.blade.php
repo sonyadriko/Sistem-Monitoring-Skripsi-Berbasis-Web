@@ -8,7 +8,6 @@
 Bimbingan Skripsi
 @endsection
 
-
 @section('content')
 @if(session('success'))
 <div class="alert alert-success">
@@ -35,8 +34,7 @@ Bimbingan Skripsi
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">Revisi:<br/></span>
-                    <span class="span1-1">Rumusan masalah dan tujuan penelitian harus searah. <br/>Perbaiki alur tahapan penelitian (perlu diberikan informasi mengenai populasi dan sampel). <br/>
-                        Kurangi penggunaan kata "setelah itu".</span>
+                    <span class="span0-1">{{ $bimbingans->revisi }}</span><br>
                 </p>
             </div>
         </div>
@@ -66,12 +64,12 @@ Bimbingan Skripsi
             @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
                 <div class="card mb-4">
-                    <h5 class="card-header">Persetujuan Seminar</h5>
+                    <h5 class="card-header">Persetujuan Sidang</h5>
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-check mt-3">
                                 <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
+                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" {{ $bimbingans->acc_dosen_utama ? '' : 'disabled' }}>Daftar</button>
@@ -84,16 +82,16 @@ Bimbingan Skripsi
             @else
             <div class="col-xl-6">
                 <div class="card mb-4">
-                    <h5 class="card-header">Persetujuan Seminar</h5>
+                    <h5 class="card-header">Persetujuan Sidang</h5>
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-check mt-3">
                                 <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="defaultCheck5"> Dosen Pembimbing 1 </label>
+                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $bimbingans->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
-                                <label class="form-check-label" for="defaultCheck6"> Dosen Pembimbing 2 </label>
+                                <label class="form-check-label" for="persetujuan2"> Dosen Pembimbing 2 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
                                 @if(is_null($bimbingans->acc_dosen_utama) || is_null($bimbingans->acc_dosen_ii))
@@ -114,7 +112,7 @@ Bimbingan Skripsi
             @endif
         </div>
         <div class="mb-3">
-            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
+            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
 
         </div>
         @endif
@@ -133,6 +131,9 @@ Bimbingan Skripsi
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+function handleButtonClick() {
+        window.location.href = "{{ route('sidang_skripsi.index') }}";
+    }
     // Pastikan elemen sudah dimuat di dalam DOM
     document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitBtn');

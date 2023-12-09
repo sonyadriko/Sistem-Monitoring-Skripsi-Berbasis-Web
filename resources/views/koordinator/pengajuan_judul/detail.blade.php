@@ -50,15 +50,13 @@ Detail Pengajuan Tema
                     </div>
                     <div class="mb-3">
                         <label for="dosen_pembimbing_utama" class="form-label">Dosen Pembimbing Utama</label>
-                        {{-- <input class="form-control" type="text" id="dosen_pembimbing_utama" value="{{ $data->nama_dosen }}" name="dosen_pembimbing_utama" readonly /> --}}
                         <select class="form-select" id="select1" name="dosen_pembimbing_utama" aria-label="Default select example">
                             <option value="" selected disabled>Open this select menu</option>
-                            @foreach($dosen2 as $datas)
-                                    <option value="{{ $datas->name }}">{{ $datas->name }}</option>
+                            @foreach($dosen2 as $dosen)
+                                <option value="{{ $dosen->name }}">{{ $dosen->name }}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="dosen_pembimbing_ii" class="form-label">Dosen Pembimbing II</label>
                         <select class="form-select" id="select2" name="dosen_pembimbing_ii" aria-label="Default select example">

@@ -37,7 +37,7 @@ History Bimbingan Skripsi
                   <th>Bimbingan</th>
                   <th>File</th>
                   {{-- <th>Validasi Revisi</th> --}}
-                  <th>Status</th>
+                  {{-- <th>Status</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -47,12 +47,12 @@ History Bimbingan Skripsi
                 @foreach($hisbimmhs as $hbmhs)
                 <tr>
                     <td>{{ $no }}</td>
-                    <td>{{ $hbmhs->created_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
                     <td>{{ $no }}</td>
                     <td>
                         <a href="{{ asset($hbmhs->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
                     </td>
-                    <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td>
+                    {{-- <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td> --}}
 
                     {{-- <td><a href="{{ url('/mahasiswa/history_bimbingan_proposal/detail/' . $hbmhs->id_detail_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td> --}}
                 </tr>

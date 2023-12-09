@@ -14,7 +14,10 @@ class SidangSkripsiController extends Controller
         $datas = DB::table('bimbingan_skripsi')
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
             ->join('users', 'users.id', 'bimbingan_proposal.user_id')
+            ->join('sidang_skripsi', 'sidang_skripsi.users_id', 'users.id')
+            ->select('users.*', 'bimbingan_proposal.*', 'bimbingan_skripsi.*', 'sidang_skripsi.file_skripsi', 'sidang_skripsi.file_slip_pembayaran', 'sidang_skripsi.status', 'sidang_skripsi.tanggal')
             ->where('bimbingan_proposal.user_id', Auth::user()->id)
+            ->latest('sidang_skripsi.created_at')
             ->first();
         return view('mahasiswa/skripsi/sidang_skripsi.index', compact('datas'));
     }

@@ -21,6 +21,7 @@ class SidangSkripsi extends Model
         'ruangan',
         'tanggal',
         'jam',
+        'status',
         'cetak',
         'updated_at',
         'created_at'

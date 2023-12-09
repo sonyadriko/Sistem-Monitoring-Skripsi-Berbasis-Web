@@ -14,7 +14,7 @@ class DOsenBimbinganSkripsiController extends Controller
     {
         $bimbingans = DB::table('bimbingan_skripsi')
                 ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-                ->join('tema', 'tema.id_tema', 'bimbingan_proposal.tema_id')
+                ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('users', 'users.id', 'bimbingan_proposal.user_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->where(function($query) {
