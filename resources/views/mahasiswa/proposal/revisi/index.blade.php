@@ -77,11 +77,11 @@ Revisi Seminar Proposal
                             <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisp->acc_penguji_1  ? 'checked disabled' : '' }}/>
+                            <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisp->acc_penguji_1  ? 'checked disabled' : '' }} disabled/>
                             <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisp->acc_penguji_2  ? 'checked disabled' : '' }}/>
+                            <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisp->acc_penguji_2  ? 'checked disabled' : '' }} disabled/>
                             <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
                         </div>
                         <div class="d-flex justify-content-between mt-4">

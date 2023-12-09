@@ -93,7 +93,7 @@ Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     });
 });
 
-Route::group(['middleware' => 'auth:dosen,ketuajurusan,koordinator'], function() {
+Route::group(['middleware' => 'auth:dosen'], function() {
 
     Route::controller(DosenController::class)->group(function () {
         Route::get('/dosen', 'index')->name('dashboard:dosen');

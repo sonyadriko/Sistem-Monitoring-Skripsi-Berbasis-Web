@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\DetailBeritaAcaraProposal as DetailBeritaAcaraProposal;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class DosenRevisiSeminarProposal extends Controller
 {
@@ -37,6 +39,7 @@ class DosenRevisiSeminarProposal extends Controller
                     ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
                     ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
                     ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+                    ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                     ->where('id_revisi_seminar_proposal', '=',$id)
                     ->select('revisi_seminar_proposal.*', 'berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
@@ -44,9 +47,13 @@ class DosenRevisiSeminarProposal extends Controller
             'detail' => DB::table('detail_revisi_seminar_proposal')
             ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
             ->where('revisi_seminar_proposal_id', '=',$id)->get(),
+            'revisi' => DB::table('detail_berita_acara_proposal')
+                ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'detail_berita_acara_proposal.berita_acara_proposal_id')
+                ->where('detail_berita_acara_proposal.users_id', Auth::User()->id)
+                ->first(),
         ];
 
-        return view('dosen/revisi/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
+        return view('dosen/revisi/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail'], 'revisi' => $data['revisi']]);
     }
 
     public function accrevisi($id, Request $request)
@@ -103,6 +110,29 @@ class DosenRevisiSeminarProposal extends Controller
         } else {
             return response()->json('Sumpah gangerti');
         }
+    }
+
+    public function addrevisi(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'revisi' => 'required|string',
+        ]);
+
+        // Find the record in the database
+        $detail = DetailBeritaAcaraProposal::find($id);
+
+        // If the record doesn't exist, you may want to handle this scenario based on your requirements
+        if (!$detail) {
+            return response()->json(['error' => 'Record not found.'], 404);
+        }
+
+        // Update the revisi column
+        $detail->revisi = $request->revisi;
+        $detail->updated_at = Carbon::now();
+        $detail->save();
+
+        return response()->json(['message' => 'Revisi berhasil disimpan.']);
     }
 
 

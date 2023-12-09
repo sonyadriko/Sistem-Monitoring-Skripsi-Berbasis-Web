@@ -57,6 +57,7 @@ Detail Revisi Seminar Proposal
                             <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly>
                         </div>
                     </div>
+                    <input type="hidden" value="{{$revisi->id_detail_berita_acara_p}}"/>
                 </div>
             </div>
         </div>
@@ -71,10 +72,8 @@ Detail Revisi Seminar Proposal
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            {{-- <th>Revisi Dosen</th> --}}
                             <th>File</th>
-                            {{-- <th>Validasi Revisi</th> --}}
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -88,55 +87,51 @@ Detail Revisi Seminar Proposal
                             <td>
                                 <a href="{{ asset($item->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
                             </td>
-                            {{-- <td>{{ $item->validasi }}</td> --}}
-                            <td>
+                            {{-- <td>
                                 <button type="button" class="btn btn-primary"
                                     onclick="prepareModal({{ $item->id_revisi_seminar_proposal }})">
                                     Tambahkan Revisi
                                 </button>
-                                {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_revisi_seminar_proposal }})">
-                                    Acc Revisi
-                                </button> --}}
-
-                            </td>
+                            </td> --}}
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-
-                        <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="revisiForm">
-                                            @csrf
-                                            <input type="hidden" id="idBeritaAcara" name="id_berita_acara_p">
-                                            <div class="form-group">
-                                                <label for="revisiInput">Revisi:</label>
-                                                <textarea class="form-control" id="revisiInput" name="revisi"
-                                                    rows="4" cols="50"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit Revisi</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="successAlert" class="alert alert-success" style="display: none;">
-                            Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
-                        </div>
-
                     </tbody>
                 </table>
+                <button type="button" class="btn btn-primary" onclick="prepareModal({{ $revisi->id_detail_berita_acara_p }})">
+                    Tambahkan Revisi
+                </button>
+                <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="revisiForm">
+                                    @csrf
+                                    <input type="hidden" id="idBeritaAcara" name="id_berita_acara_p">
+                                    <div class="form-group">
+                                        <label for="revisiInput">Revisi:</label>
+                                        <textarea class="form-control" id="revisiInput" name="revisi"
+                                            rows="4" cols="50"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit Revisi</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="successAlert" class="alert alert-success" style="display: none;">
+                    Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
+                </div>
             </div>
         </div>
     </div>
@@ -199,6 +194,49 @@ Detail Revisi Seminar Proposal
         $('#revisiModal').modal('show');
     }
 </script>
+
+<script>
+    $(document).ready(function () {
+        // Function to prepare the modal
+        function prepareModal(id) {
+            $('#idBeritaAcara').val(id);
+            $('#revisiModal').modal('show');
+        }
+
+        // Function to handle form submission
+        $('#revisiForm').submit(function (e) {
+            e.preventDefault();
+
+            // Perform AJAX submission
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("dosen-revisi-add.detail", $revisi->id_detail_berita_acara_p) }}',
+                data: $('#revisiForm').serialize(),
+                success: function (response) {
+                    // Hide the modal
+                    $('#revisiModal').modal('hide');
+
+                    // Display success message
+                    $('#successAlert').show();
+
+                    // Optionally, you can redirect or perform other actions after a successful submission
+                    Example: window.location.href = '{{ route("dosen-revisi-sempro.index") }}';
+                },
+                error: function (error) {
+                    console.error('Error submitting form:', error);
+                    // Handle error if needed
+                }
+            });
+        });
+
+        // Function to handle OK button click
+        $('#okButton').click(function () {
+            // Hide the success alert
+            $('#successAlert').hide();
+        });
+    });
+</script>
+
 
 <script>
 
