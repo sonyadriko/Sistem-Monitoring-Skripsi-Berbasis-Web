@@ -77,7 +77,7 @@ Detail Pengajuan Tema
 
                         <div style="display: flex; justify-content: flex-end;">
                             @if ($data->status === 'pending')
-                                <button type="submit" class="btn btn-primary" name="action" value="terima">Terima</button>
+                                <button type="submit" class="btn btn-primary" name="action" value="terima" style="margin-right: 10px;">Terima</button>
                                 <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button>
                             @elseif ($data->status === 'terima')
                                 <p>Data ini telah diterima.</p>

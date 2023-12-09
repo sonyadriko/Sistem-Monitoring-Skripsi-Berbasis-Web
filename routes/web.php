@@ -223,6 +223,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/', [KoordinatorSeminarController::class, 'index'])->name('jadwal-seminar-proposal.index');
         Route::get('/detail/{id}', [KoordinatorSeminarController::class, 'detail']);
         Route::post('/update-status/{id}', [KoordinatorSeminarController::class, 'updatejadwal'])->name('jadwal-seminar-proposal-update');
+        Route::post('/tolak/{id}', [KoordinatorSeminarController::class, 'tolakjadwal'])->name('jadwal-seminar-proposal-tolak');
         Route::post('/cetak-berita-acara/{id}', [KoordinatorSeminarController::class, 'createberitaacara'])->name('cetak-berita-acara');
     });
 

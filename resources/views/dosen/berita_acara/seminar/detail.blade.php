@@ -71,28 +71,28 @@ Detail Berita Acara Proposal
             <h5 class="card-header">Review Dosen Pembimbing</h5>
             <form action="{{route('berita-acara-proposal.store')}}" method="POST" id="reviewForm">
                 @csrf
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="revisi" class="form-label">Revisi</label>
-                    <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="revisi" class="form-label">Revisi</label>
+                        <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nilai" class="form-label">Nilai Ujian</label>
+                        <input
+                        type="number"
+                        class="form-control"
+                        name="nilai"
+                        id="nilai"
+                        placeholder="Masukan Nilai Ujian..."
+                        aria-describedby="defaultFormControlHelp"
+                        />
+                    </div>
+                    <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}"/>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="nilai" class="form-label">Nilai Ujian</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="nilai"
-                      id="nilai"
-                      placeholder="Masukan Nilai Ujian..."
-                      aria-describedby="defaultFormControlHelp"
-                    />
-                </div>
-                <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}"/>
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -101,30 +101,6 @@ Detail Berita Acara Proposal
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('reviewForm');
-
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Perform your form submission using AJAX or other methods
-            // For simplicity, let's assume the form submission is successful
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Submit Berhasil!',
-                text: 'Revisi dan nilai ujian telah berhasil disubmit.',
-            }).then((result) => {
-                // Optionally, you can redirect the user or perform other actions after the user clicks "OK"
-                if (result.isConfirmed) {
-                    // Redirect or perform other actions
-                    window.location.href = "{{ route('berita-acara-proposal.index') }}";
-                }
-            });
-        });
-    });
-</script>
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>

@@ -9,7 +9,7 @@ class PenjadwalanKoordinatorController extends Controller
 {
     public function index()
     {
-        $semproCount = DB::table('seminar_proposal')->count();
+        $semproCount = DB::table('seminar_proposal')->whereIn('status', ['pending', 'terima'])->count();
         $semhasCount = DB::table('sidang_skripsi')->count();
         $jadwalCount = $semproCount+$semhasCount;
         // $jadwalCount = DB::table('tema')->where('status', 'pending')->count();

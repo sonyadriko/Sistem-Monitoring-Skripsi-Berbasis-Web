@@ -27,7 +27,7 @@ Topik
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="text-left">
-                    <h5 class="card-title">Tabel List Tema Penelitian</h5>
+                    <h5 class="card-title" style="font-weight: bold">Tabel List Tema Penelitian</h5>
                     <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
                 </div>
                 <div class="text-right">

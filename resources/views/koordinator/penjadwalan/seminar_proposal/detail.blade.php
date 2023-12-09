@@ -55,13 +55,20 @@ Seminar Proposal
                         <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p>
                     </div>
                     <div class="mb-3">
-                    <label for="select1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
-                    <select class="form-select" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
-                        <option value="" selected disabled>Open this select menu</option>
-                        @foreach($baru as $datas)
-                            <option value="{{$datas->id}}">{{$datas->name}}</option>
-                        @endforeach
-                    </select>
+                        <label for="defaultFormControlInput" class="form-label">File Slip Pembayaran</label>
+                          {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
+                          <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
+                      </div>
+                    <div class="mb-3">
+                        <label for="select1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
+                        <select class="form-select" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
+                            <option value="" selected disabled>Open this select menu</option>
+                            @foreach($baru as $datas)
+                                @if($datas->id != $data->dosen_pembimbing_utama)
+                                    <option value="{{$datas->id}}">{{$datas->name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                     <label for="select2" class="form-label">Dosen Penguji 2</label>
@@ -96,10 +103,22 @@ Seminar Proposal
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="submit" class="btn btn-primary">Buat Jadwal</button>
+                            {{-- <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button> --}}
+                        </div>
+                        {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
                     </div>
-            </form>
-          </div>
+                </form>
+
+                <form action="{{ route('jadwal-seminar-proposal-tolak', ['id' => $data->id_seminar_proposal]) }}" method="POST">
+                    @csrf
+                    <!-- ... form fields ... -->
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
+                    </div>
+                </form>
+            </div>
           @else
           <div class="card-body">
             {{-- <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal])}}" method="POST"> --}}
@@ -134,22 +153,27 @@ Seminar Proposal
                   {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                   <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p>
               </div>
+              <div class="mb-3">
+                <label for="defaultFormControlInput" class="form-label">File Slip Pembayaran</label>
+                  {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
+                  <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
+              </div>
               <div class="mb-3 row">
                 <div class="col-md-6">
 
                 <label for="dosen_penguji_1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
-                <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data->nama_penguji_1}}" readonly />
+                <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data2->nama_penguji_1}}" readonly />
               </div>
               <div class="col-md-6">
                 <label for="dosen_penguji_2" class="form-label">Dosen Penguji 2</label>
-                <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data->nama_penguji_2}}" readonly />
+                <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data2->nama_penguji_2}}" readonly />
               </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-4">
                   <label for="ruanganSeminar" class="form-label">Ruangan Seminar</label>
 
-                    <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
+                    <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data2->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
                 </div>
                 <div class="col-md-4">
                   <label for="date" class="form-label">Date</label>

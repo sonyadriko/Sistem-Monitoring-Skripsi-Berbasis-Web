@@ -21,7 +21,7 @@ Surat Tugas
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pengajuan Surat Tugas Bimbingan</h4>
+                <h4 class="card-title" style="font-weight: bold">Pengajuan Surat Tugas Bimbingan</h4>
                 <p class="card-title-desc">Tabel dibawah ini merupakan pengajuan surat tugas bimbingan skripsi yang telah dilakukan mahasiswa.
                 </p>
             </div>

@@ -37,10 +37,86 @@ Daftar Seminar Proposal
                 <div class="alert alert-warning" role="alert">
                     Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
                 </div>
-            @elseif ($datas->file_proposal && $datas->file_slip_pembayaran)
-                <div class="alert alert-info" role="alert">
-                    Tunggu diperiksa koordinator.
+            @elseif ($datas->status == 'pending')
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
                 </div>
+                <div class="card-body">
+                    {{-- <h6 class="card-title">Form Grid</h6> --}}
+                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
+                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
+                    <h6 class="mb-3">Status Pendaftaran :
+                        <div class="alert alert-secondary" role="alert">
+                            Tunggu diperiksa koordinator.
+                        </div>
+                    </h4>
+                </div>
+            </div>
+            @elseif ($datas->status == 'terima')
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
+                </div>
+                <div class="card-body">
+                    {{-- <h6 class="card-title">Form Grid</h6> --}}
+                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
+                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
+                    <h6 class="mb-3">Status Pendaftaran :
+                        <div class="alert alert-success" role="alert">
+                            Selamat.
+                        </div>
+                    </h4>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
+                </div>
+                <div class="card-body">
+                    {{-- <h6 class="card-title">Form Grid</h6> --}}
+                    <table class="table table-borderless datatables-basic"/>
+                            <tbody class="table-border-bottom-0">
+                                <tr>
+                                    <td>NPM</td>
+                                    <td>{{$datas->kode_unik}}</td>
+                                    @php
+                                        $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal);
+                                        $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                                    @endphp
+                                    <td>Hari Tanggal</td>
+                                    <td>{{$formatTanggal}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>{{$datas->name}}</td>
+                                    <td>Waktu</td>
+                                    <td>{{$datas2->jam}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tema / Judul</td>
+                                    <td>{{$datas->judul}}</td>
+                                    <td>Ruang</td>
+                                    <td>{{$datas2->nama_ruangan}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dosen Pembimbing 1</td>
+                                    <td>{{$datas->dosen_pembimbing_utama}}</td>
+                                    <td>Dosen Pembimbing 2</td>
+                                    <td>{{$datas->dosen_pembimbing_ii}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dosen Penguji</td>
+                                    <td>{{$datas2->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                        {{$datas2->nama_penguji_2}} (Dosen Penguji 2)
+                                    </td>
+                                    <td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+
             @else
             <div class="card">
                 <div class="card-body">

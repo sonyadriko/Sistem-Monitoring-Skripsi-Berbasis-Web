@@ -57,22 +57,20 @@ class BeritaAcaraProposalController extends Controller
             'nilai' => 'required|numeric', // Sesuaikan dengan aturan validasi yang sesuai
         ]);
 
-        try {
-            // Gunakan Eloquent untuk memasukkan data
-            DetailBeritaAcaraProposal::create([
-                'users_id' => Auth::user()->id,
-                'berita_acara_proposal_id' => $request->berita_acara_proposal_id,
-                'presensi' => 'hadir',
-                'revisi' => $request->revisi,
-                'nilai' => $request->nilai,
-            ]);
+        $ba = new DetailBeritaAcaraProposal();
+        $ba->users_id = Auth::user()->id;
+        $ba->berita_acara_proposal_id = $request->berita_acara_proposal_id;
+        $ba->presensi = 'hadir';
+        $ba->revisi = $request->revisi;
+        $ba->nilai = $request->nilai;
+        $ba->save();
 
-            return redirect()->back()->with('success', 'Data successfully updated.');
-        } catch (\Exception $e) {
-            // Tangani error jika terjadi
-            return redirect()->back()->with('error', 'Failed to update data.');
-        }
+        return redirect()->route('berita-acara-proposal.index')->with('success', 'Berita Acara Proposal berhasil diisi.');
+        // return redirect()->route('jadwal-seminar-proposal.index')->with('success', 'Jadwal ditolak.');
+
+
     }
+
 
 
 }

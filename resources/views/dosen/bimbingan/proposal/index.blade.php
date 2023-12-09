@@ -26,7 +26,7 @@ Bimbingan Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Mahasiswa Bimbingan Proposal</h4>
+                <h4 class="card-title" style="font-weight: bold">Mahasiswa Bimbingan Proposal</h4>
                 <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</p>
             </div>
             <div class="card-body">

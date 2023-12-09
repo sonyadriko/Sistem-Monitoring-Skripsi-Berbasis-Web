@@ -21,7 +21,7 @@ Seminar Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pengajuan Seminar Proposal</h4>
+                <h4 class="card-title" style="font-weight: bold">Pengajuan Seminar Proposal</h4>
                 <p class="card-title-desc">List pengajuan seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
