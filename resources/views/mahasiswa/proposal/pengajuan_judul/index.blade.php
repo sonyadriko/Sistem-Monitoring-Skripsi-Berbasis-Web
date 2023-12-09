@@ -34,7 +34,7 @@ Pengajuan Tema
           <h4 class="card-title">Alur Pengajuan Tema</h4>
           {{-- <p class="text-muted mb-3">Read the <a href="http://www.jquery-steps.com/GettingStarted" target="_blank"> Official jQuery Steps Documentation </a>for a full list of instructions and other options.</p> --}}
           <div id="wizard">
-            <h2>First Step</h2>
+            <h2>Step Pertama</h2>
             <section>
                 <div class="row">
                     <div class="card-group">
@@ -49,21 +49,21 @@ Pengajuan Tema
                           <img src="{{ url('img/wizard/pengajuan_judul/step2.svg') }}" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                            <p class="card-text text-center">Melakukan pengisian form pengajuan proposal, lalu menunggu konfirmasi koordinator.</p>
                           </div>
                         </div>
                         <div class="card">
                           <img src="{{ url('img/wizard/pengajuan_judul/step3.svg') }}" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                            <p class="card-text text-center">Selamat! Pengajuan yang anda lakukan telah diterima.</p>
                           </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <h2>Second Step</h2>
+            <h2>Step Kedua</h2>
             <section>
                 <form action="{{ route('pengajuan-judul.submit') }}" method="POST" id="yourFormId">
                     @csrf
@@ -237,9 +237,8 @@ Pengajuan Tema
 
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 
 @push('custom-scripts')

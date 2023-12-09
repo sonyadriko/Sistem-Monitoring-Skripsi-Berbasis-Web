@@ -33,8 +33,18 @@ Bimbingan Proposal
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">Revisi:<br/></span>
-                    <span class="span1-1">Rumusan masalah dan tujuan penelitian harus searah. <br/>Perbaiki alur tahapan penelitian (perlu diberikan informasi mengenai populasi dan sampel). <br/>
-                        Kurangi penggunaan kata "setelah itu".</span>
+                    {{-- @foreach($dosens as $dosen)
+                        @if(is_object($dosen)) --}}
+                        <span class="span0-1">{{ $dosens->revisi }}</span><br>
+
+
+                        {{-- @endif
+                @endforeach --}}
+
+                    {{-- <span class="span1-1"> --}}
+                        {{-- Rumusan masalah dan tujuan penelitian harus searah. <br/>Perbaiki alur tahapan penelitian (perlu diberikan informasi mengenai populasi dan sampel). <br/>
+                        Kurangi penggunaan kata "setelah itu". --}}
+                    </span>
                 </p>
             </div>
         </div>
@@ -61,7 +71,7 @@ Bimbingan Proposal
                     </div>
                 </div>
             </div>
-            @if ($dosens->dosen_pembimbing_ii == 'Tidak Ada')
+            @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
                 <div class="card mb-4 ">
                     <h5 class="card-header">Persetujuan Seminar</h5>

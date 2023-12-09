@@ -11,7 +11,7 @@ class BimbinganProposal extends Model
 
     protected $fillable = [
         'user_id',
-        'tema_id',
+        'pengajuan_id',
         'bidang_ilmu_id',
         'dosen_pembimbing_utama',
         'dosen_pembimbing_ii',

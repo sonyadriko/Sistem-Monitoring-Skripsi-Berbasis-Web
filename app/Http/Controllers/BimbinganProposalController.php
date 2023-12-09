@@ -13,19 +13,24 @@ class BimbinganProposalController extends Controller
 {
     public function index()
     {
-        $dosens = DB::table('bimbingan_proposal')->where('user_id', '=', Auth::user()->id)->first();
+        $dosens = DB::table('bimbingan_proposal')
+        ->join('detail_bimbingan_proposal', 'detail_bimbingan_proposal.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
+        ->where('user_id', Auth::user()->id)
+        ->latest('detail_bimbingan_proposal.created_at') // Order by the creation timestamp in descending order
+        ->first();
 
-        return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
+    return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
+
 
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_proposal' => 'required|mimes:pdf|max:10000',
+            'file_proposal' => 'required|mimes:pdf|max:1000',
             'file_proposal.required' => 'File proposal wajib diunggah.',
             'file_proposal.mimes' => 'Tipe file harus pdf.',
-            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (10000 KB).',
+            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
         ]);
 
         if ($request->hasFile('file_proposal')) {

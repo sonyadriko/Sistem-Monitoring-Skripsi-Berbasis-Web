@@ -206,7 +206,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
     Route::group(['prefix' => 'koordinator/pengajuan_judul'], function () {
         Route::get('/', [KoordinatorJudulController::class, 'index'])->name('pengajuan-judul.index');
         Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
-        Route::post('/update-status/{id_tema}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
+        Route::post('/update-status/{id}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
     });
 
     Route::group(['prefix' => 'koordinator/ruangan'], function () {

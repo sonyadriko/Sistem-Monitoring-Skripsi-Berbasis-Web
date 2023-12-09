@@ -46,7 +46,7 @@ Pengajuan Tema
                             <td>{{ $judul->name }}</td>
                             <td>{{ $judul->kode_unik }}</td>
                             <td>{{ $judul->topik_bidang_ilmu }}</td>
-                            <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_tema) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_pengajuan_judul) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;

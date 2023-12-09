@@ -71,7 +71,7 @@ Detail Bimbingan Proposal
                             <th>Bimbingan</th>
                             {{-- <th>Revisi Dosen</th> --}}
                             <th>File</th>
-                            <th>Validasi Revisi</th>
+                            {{-- <th>Validasi Revisi</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -87,18 +87,16 @@ Detail Bimbingan Proposal
                             <td>
                                 <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
                             </td>
-                            <td>{{ $item->validasi }}</td>
+                            {{-- <td>{{ $item->validasi }}</td> --}}
                             <td>
-                                @if($item->validasi === 'acc')
-                                    Revisi sudah di Acc
-                                @else
-                                    <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
-                                        Tambahkan Revisi
-                                    </button>
-                                    <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
+
+                                <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
+                                    Tambahkan Revisi
+                                </button>
+                                    {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
                                         Acc Revisi
-                                    </button>
-                                @endif
+                                    </button> --}}
+
                             </td>
 
                         </tr>
@@ -149,6 +147,8 @@ Detail Bimbingan Proposal
         <div class="card-body">
             <span class="span0-1">Persetujuan Seminar </span>
             @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
+            <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
+            <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
                 @if (Auth::user()->name == $data->dosen_pembimbing_utama)
                 <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
                 Setujui Proposal
@@ -232,61 +232,31 @@ Detail Bimbingan Proposal
    });
 
 
-   function confirmAccRevisi(idDetailBimbinganProposal) {
-       Swal.fire({
-           title: 'Apakah Anda yakin ingin acc revisi ini?',
-           icon: 'question',
-           showCancelButton: true,
-           confirmButtonText: 'Ya',
-           cancelButtonText: 'Tidak'
-       }).then((result) => {
-           if (result.isConfirmed) {
-
-               accRevisi(idDetailBimbinganProposal);
-           }
-       });
-   }
-
-   function accRevisi(idDetailBimbinganProposal) {
-       // Lakukan update data ke server menggunakan AJAX
-       axios.post(`/dosen/bimbingan_proposal/accrevisi/${idDetailBimbinganProposal}`)
-           .then(function (response) {
-               console.log('Respon dari server:', response.data);
-
-               // Tampilkan pesan sukses menggunakan SweetAlert
-               Swal.fire({
-                   title: 'Revisi berhasil diacc!',
-                   icon: 'success',
-                   confirmButtonText: 'OK'
-               }).then((result) => {
-                   if (result.isConfirmed) {
-                       // Lakukan refresh halaman
-                       location.reload();
-                   }
-               });
-           })
-           .catch(function (error) {
-               console.error("Terjadi kesalahan: " + error);
-           });
-   }
-
-
    function confirmAccProposal(idBimbinganProposal) {
-   const dospem1 = document.getElementById('dospem1').value;
-   const dospem2 = document.getElementById('dospem2').value;
+    var dospem1Element = document.getElementById('dospem1');
+    var dospem2Element = document.getElementById('dospem2');
 
-   Swal.fire({
-       title: 'Apakah Anda yakin ingin acc proposal ini?',
-       icon: 'question',
-       showCancelButton: true,
-       confirmButtonText: 'Ya',
-       cancelButtonText: 'Tidak'
-   }).then((result) => {
-       if (result.isConfirmed) {
-           accProposal(idBimbinganProposal, dospem1, dospem2);
-       }
-   });
+    // Check if the elements exist before accessing their values
+    if (dospem1Element && dospem2Element) {
+        const dospem1 = dospem1Element.value;
+        const dospem2 = dospem2Element.value;
+
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin acc proposal ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                accProposal(idBimbinganProposal, dospem1, dospem2);
+            }
+        });
+    } else {
+        console.error("Elemen 'dospem1' or 'dospem2' not found.");
+    }
 }
+
 
 function accProposal(idBimbinganProposal, dospem1, dospem2) {
    const data = {

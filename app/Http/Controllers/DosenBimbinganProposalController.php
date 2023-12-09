@@ -14,7 +14,7 @@ class DosenBimbinganProposalController extends Controller
     public function index()
     {
         $bimbinganp = DB::table('bimbingan_proposal')
-                ->join('tema', 'tema.id_tema', 'bimbingan_proposal.tema_id')
+                ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('users', 'users.id', 'bimbingan_proposal.user_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->where(function($query) {

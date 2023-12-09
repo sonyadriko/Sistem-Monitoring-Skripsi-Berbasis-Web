@@ -17,7 +17,7 @@ class DosenController extends Controller
                   ->orWhere('dosen_pembimbing_ii', $user);
         })
         ->count();
-        $BICount = DB::table('bidang_ilmu')->where('user_id', Auth::user()->id)->count();
+        $BICount = DB::table('detail_bidang_ilmu')->where('users_id', Auth::user()->id)->count();
         $s1 = DB::table('seminar_proposal')->where(function($query2) {
             $user2 = Auth::user()->id;
             $query2->where('dosen_penguji_1', $user2)

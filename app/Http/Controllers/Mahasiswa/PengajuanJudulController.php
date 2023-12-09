@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Pengajuan as Pengajuan;
+use App\Models\PengajuanJudul as PengajuanJudul;
 use App\Models\BidangIlmu as BidangIlmu;
 
 
@@ -19,10 +19,10 @@ class PengajuanJudulController extends Controller
     public function create()
     {
 
-        $temacek = DB::table('tema')
-                ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'tema.bidang_ilmu_id')
-                ->select('tema.*', 'bidang_ilmu.topik_bidang_ilmu')
-                ->where('tema.user_id', Auth::user()->id)
+        $temacek = DB::table('pengajuan_judul')
+                ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
+                ->select('pengajuan_judul.*', 'bidang_ilmu.topik_bidang_ilmu')
+                ->where('pengajuan_judul.user_id', Auth::user()->id)
                 ->first();
 
         $bidang_ilmu = DB::table('bidang_ilmu')
@@ -54,7 +54,7 @@ class PengajuanJudulController extends Controller
         ]);
 
         // Simpan pengajuan
-        $pengajuan = new Pengajuan();
+        $pengajuan = new PengajuanJudul();
         $pengajuan->user_id = Auth::user()->id;
         $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
         $pengajuan->status = 'pending';
