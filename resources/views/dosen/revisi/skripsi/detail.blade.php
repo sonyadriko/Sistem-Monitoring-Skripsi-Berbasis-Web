@@ -73,8 +73,7 @@ Detail Revisi Sidang Skripsi
                             <th>Tanggal</th>
                             {{-- <th>Revisi Dosen</th> --}}
                             <th>File</th>
-                            {{-- <th>Validasi Revisi</th> --}}
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -84,63 +83,52 @@ Detail Revisi Sidang Skripsi
                         @foreach($detail as $item)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            {{-- <td>{{ $item->revisi }}</td> --}}
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                             <td>
                                 <a href="{{ asset($item->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td>
-                            {{-- <td>{{ $item->validasi }}</td> --}}
-                            <td>
-                                <button type="button" class="btn btn-primary"
-                                    onclick="prepareModal({{ $item->id_revisi_sidang_skripsi }})">
-                                    Tambahkan Revisi
-                                </button>
-                                <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_revisi_sidang_skripsi }})">
-                                    Acc Revisi
-                                </button>
-
                             </td>
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-
-                        <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Revisi Skripsi</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="revisiForm">
-                                            @csrf
-                                            <input type="hidden" id="idBimbinganProposal" name="id_bimbingan_proposal">
-                                            <div class="form-group">
-                                                <label for="revisiInput">Revisi:</label>
-                                                <textarea class="form-control" id="revisiInput" name="revisi"
-                                                    rows="4" cols="50"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit Revisi</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="successAlert" class="alert alert-success" style="display: none;">
-                            Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
-                        </div>
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
+<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="prepareModal({{ $revisi->id_detail_berita_acara_s }})">
+    Tambahkan Revisi
+</button>
+<div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Revisi Skripsi</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="revisiForm">
+                    @csrf
+                    <input type="hidden" id="idBeritaAcara" name="id_berita_acara_s">
+                    <div class="form-group">
+                        <label for="revisiInput">Revisi:</label>
+                        <textarea class="form-control" id="revisiInput" name="revisi"
+                            rows="4" cols="50"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Revisi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="successAlert" class="alert alert-success" style="display: none;">
+    Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
 </div>
 <div class="row">
     <div class="mb-3">
@@ -169,7 +157,7 @@ Detail Revisi Sidang Skripsi
                         <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_2}} </span>
                     @endif
                 @elseif (Auth::user()->name == $data->nama_penguji_3)
-                    @if ($data->acc_penguji_2 == null)
+                    @if ($data->acc_penguji_3 == null)
                         <button type="button" id="penguji2" value="{{ $data->nama_penguji_3 }}" class="btn btn-primary accept-button" onclick="confirmAccSkripsi('{{ $data->id_berita_acara_s }}')">
                             Setujui Skripsi
                         </button>
@@ -199,102 +187,143 @@ Detail Revisi Sidang Skripsi
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script>
-   function prepareModal(idBimbinganProposal) {
+   function prepareModal(idBeritaAcara) {
        // Reset nilai textarea
        document.getElementById('revisiInput').value = '';
 
        // Mengisi nilai id bimbingan proposal
-       document.getElementById('idBimbinganProposal').value = idBimbinganProposal;
+       document.getElementById('idBeritaAcara').value = idBeritaAcara;
 
        // Tampilkan modal
        $('#revisiModal').modal('show');
    }
 </script>
 
+<script>
+    $(document).ready(function () {
+        // Function to prepare the modal
+        function prepareModal(id) {
+            $('#idBeritaAcara').val(id);
+            $('#revisiModal').modal('show');
+        }
+
+        // Function to handle form submission
+        $('#revisiForm').submit(function (e) {
+            e.preventDefault();
+
+            // Perform AJAX submission
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("dosen-revisi-semhas.detail", $revisi->id_detail_berita_acara_s) }}',
+                data: $('#revisiForm').serialize(),
+                success: function (response) {
+                    // Hide the modal
+                    $('#revisiModal').modal('hide');
+
+                    // Display success message
+                    $('#successAlert').show();
+
+                    // Optionally, you can redirect or perform other actions after a successful submission
+                    Example: window.location.href = '{{ route("dosen-revisi-semhas.index") }}';
+                },
+                error: function (error) {
+                    console.error('Error submitting form:', error);
+                    // Handle error if needed
+                }
+            });
+        });
+
+        // Function to handle OK button click
+        $('#okButton').click(function () {
+            // Hide the success alert
+            $('#successAlert').hide();
+        });
+    });
+</script>
 
 <script>
    // Pastikan dokumen telah dimuat sepenuhnya
-   document.addEventListener('DOMContentLoaded', function() {
-       // Ambil elemen 'revisiForm' jika ada
-       var revisiForm = document.getElementById('revisiForm');
+//    document.addEventListener('DOMContentLoaded', function() {
+//        // Ambil elemen 'revisiForm' jika ada
+//        var revisiForm = document.getElementById('revisiForm');
 
-       // Periksa apakah elemen 'revisiForm' ditemukan
-       if (revisiForm) {
-           // Tambahkan event listener untuk saat form di-submit
-           revisiForm.addEventListener('submit', function(event) {
-               event.preventDefault();
+//        // Periksa apakah elemen 'revisiForm' ditemukan
+//        if (revisiForm) {
+//            // Tambahkan event listener untuk saat form di-submit
+//            revisiForm.addEventListener('submit', function(event) {
+//                event.preventDefault();
 
-               var revisiInput = document.getElementById("revisiInput").value;
-               var idBimbinganProposal = document.getElementById('idBimbinganProposal').value;
+//                var revisiInput = document.getElementById("revisiInput").value;
+//                var idBimbinganProposal = document.getElementById('idBimbinganProposal').value;
 
-               console.log('Revisi yang dikirim:', revisiInput);
-               console.log('ID Bimbingan Proposal:', idBimbinganProposal);
+//                console.log('Revisi yang dikirim:', revisiInput);
+//                console.log('ID Bimbingan Proposal:', idBimbinganProposal);
 
-               axios.post(`/dosen/bimbingan_proposal/updaterevisi/${idBimbinganProposal}`, {
-                   revisi: revisiInput
-               })
-               .then(function (response) {
-                   console.log('Respon dari server:', response.data);
-                   $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
+//                axios.post(`/dosen/revisi_sidang_skripsi/addrevisi/${idBimbinganProposal}`, {
+//                    revisi: revisiInput
+//                })
+//                .then(function (response) {
+//                    console.log('Respon dari server:', response.data);
+//                    $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
 
-                   Swal.fire({
-                       title: 'Revisi berhasil dikirim!',
-                       icon: 'success',
-                       confirmButtonText: 'OK'
-                   }).then((result) => {
-                       if (result.isConfirmed) {
-                           // Lakukan refresh halaman
-                           location.reload();
-                       }
-                   });
-               })
-               .catch(function (error) {
-                   console.error("Terjadi kesalahan: " + error);
-               });
-           });
-       } else {
-           console.error("Elemen 'revisiForm' tidak ditemukan.");
-       }
-   });
+//                    Swal.fire({
+//                        title: 'Revisi berhasil dikirim!',
+//                        icon: 'success',
+//                        confirmButtonText: 'OK'
+//                    }).then((result) => {
+//                        if (result.isConfirmed) {
+//                            // Lakukan refresh halaman
+//                            location.reload();
+//                        }
+//                    });
+//                })
+//                .catch(function (error) {
+//                    console.error("Terjadi kesalahan: " + error);
+//                });
+//            });
+//        } else {
+//            console.error("Elemen 'revisiForm' tidak ditemukan.");
+//        }
+//    });
 
 
-   function confirmAccRevisi(idDetailBimbinganProposal) {
-       Swal.fire({
-           title: 'Apakah Anda yakin ingin acc revisi ini?',
-           icon: 'question',
-           showCancelButton: true,
-           confirmButtonText: 'Ya',
-           cancelButtonText: 'Tidak'
-       }).then((result) => {
-           if (result.isConfirmed) {
+//    function confirmAccRevisi(idDetailBimbinganProposal) {
+//        Swal.fire({
+//            title: 'Apakah Anda yakin ingin acc revisi ini?',
+//            icon: 'question',
+//            showCancelButton: true,
+//            confirmButtonText: 'Ya',
+//            cancelButtonText: 'Tidak'
+//        }).then((result) => {
+//            if (result.isConfirmed) {
 
-               accRevisi(idDetailBimbinganProposal);
-           }
-       });
-   }
+//                accRevisi(idDetailBimbinganProposal);
+//            }
+//        });
+//    }
 
-   function accRevisi(idDetailBimbinganProposal) {
-       // Lakukan update data ke server menggunakan AJAX
-       axios.post(`/dosen/bimbingan_proposal/accrevisi/${idDetailBimbinganProposal}`)
-           .then(function (response) {
-               console.log('Respon dari server:', response.data);
+//    function accRevisi(idDetailBimbinganProposal) {
+//        // Lakukan update data ke server menggunakan AJAX
+//        axios.post(`/dosen/bimbingan_proposal/accrevisi/${idDetailBimbinganProposal}`)
+//            .then(function (response) {
+//                console.log('Respon dari server:', response.data);
 
-               // Tampilkan pesan sukses menggunakan SweetAlert
-               Swal.fire({
-                   title: 'Revisi berhasil diacc!',
-                   icon: 'success',
-                   confirmButtonText: 'OK'
-               }).then((result) => {
-                   if (result.isConfirmed) {
-                       // Lakukan refresh halaman
-                       location.reload();
-                   }
-               });
-           })
-           .catch(function (error) {
-               console.error("Terjadi kesalahan: " + error);
-           });
-   }
+//                // Tampilkan pesan sukses menggunakan SweetAlert
+//                Swal.fire({
+//                    title: 'Revisi berhasil diacc!',
+//                    icon: 'success',
+//                    confirmButtonText: 'OK'
+//                }).then((result) => {
+//                    if (result.isConfirmed) {
+//                        // Lakukan refresh halaman
+//                        location.reload();
+//                    }
+//                });
+//            })
+//            .catch(function (error) {
+//                console.error("Terjadi kesalahan: " + error);
+//            });
+//    }
 
 
 //    function confirmAccProposal(idBimbinganProposal) {
@@ -406,7 +435,7 @@ function accSkripsi(idBeritaAcara, dospem, penguji1, penguji2, penguji3) {
 
             // Show success message using SweetAlert
             Swal.fire({
-                title: 'Skripsi berhasil diacc!',
+                title: 'Revisi Skripsi berhasil diacc!',
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then((result) => {

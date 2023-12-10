@@ -140,6 +140,7 @@ Route::group(['middleware' => 'auth:dosen'], function() {
         Route::get('/', [DosenRevisiSidangSkripsiController::class, 'index'])->name('dosen-revisi-semhas.index');
         Route::get('/detail/{id}', [DosenRevisiSidangSkripsiController::class, 'detail'])->name('dosen-revisi-semhas.detail');
         Route::post('/accrevisi/{id}', [DosenRevisiSidangSkripsiController::class, 'accrevisi'])->name('dosen-revisi-semhas.acc');
+        Route::post('/addrevisi/{id}', [DosenRevisiSidangSkripsiController::class, 'addrevisi'])->name('dosen-revisi-semhas.detail');
         // Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');
         // Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
     });

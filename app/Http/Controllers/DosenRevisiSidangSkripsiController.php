@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\DetailBeritaAcaraSkripsi as DetailBeritaAcaraSkripsi;
+use Illuminate\Support\Carbon;
 
 class DosenRevisiSidangSkripsiController extends Controller
 {
@@ -24,6 +26,7 @@ class DosenRevisiSidangSkripsiController extends Controller
                   ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', '=', Auth::user()->name);
 
         })
+        ->latest('revisi_sidang_skripsi.created_at')
         ->get();
         return view('dosen/revisi/skripsi.index', compact('rev'));
     }
@@ -43,11 +46,20 @@ class DosenRevisiSidangSkripsiController extends Controller
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                     ->select('revisi_sidang_skripsi.*', 'berita_acara_skripsi.*', 'users.*', 'sidang_skripsi.*', 'bidang_ilmu.*', 'bimbingan_proposal.*','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3')
                     // ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu')
-                    ->where('id_revisi_sidang_skripsi', '=',$id)->first(),
-            'detail' => DB::table('revisi_sidang_skripsi')->where('id_revisi_sidang_skripsi', '=',$id)->get(),
+                    ->where('id_revisi_sidang_skripsi', $id)
+                    ->first(),
+            'detail' => DB::table('detail_revisi_sidang_skripsi')
+                    ->join('revisi_sidang_skripsi', 'revisi_sidang_skripsi.id_revisi_sidang_skripsi', 'detail_revisi_sidang_skripsi.revisi_sidang_skripsi_id')
+                    ->select('detail_revisi_sidang_skripsi.*')
+                    ->where('id_revisi_sidang_skripsi', $id)
+                    ->get(),
+            'revisi' => DB::table('detail_berita_acara_skripsi')
+                    ->join('berita_acara_skripsi', 'berita_acara_skripsi.id_berita_acara_s', 'detail_berita_acara_skripsi.berita_acara_skripsi_id')
+                    ->where('detail_berita_acara_skripsi.users_id', Auth::User()->id)
+                    ->first(),
         ];
 
-        return view('dosen/revisi/skripsi.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
+        return view('dosen/revisi/skripsi.detail', ['data' => $data['data'], 'detail' => $data['detail'], 'revisi' => $data['revisi']]);
         // return view('dosen/revisi/proposal.detail', ['data' => $data['data']]);
 
 
@@ -121,6 +133,28 @@ class DosenRevisiSidangSkripsiController extends Controller
         }else {
             return response()->json('Sumpah gangerti');
         }
+    }
+    public function addrevisi(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'revisi' => 'required|string',
+        ]);
+
+        // Find the record in the database
+        $detail = DetailBeritaAcaraSkripsi::find($id);
+
+        // If the record doesn't exist, you may want to handle this scenario based on your requirements
+        if (!$detail) {
+            return response()->json(['error' => 'Record not found.'], 404);
+        }
+
+        // Update the revisi column
+        $detail->revisi = $request->revisi;
+        $detail->updated_at = Carbon::now();
+        $detail->save();
+
+        return response()->json(['message' => 'Revisi berhasil disimpan.']);
     }
 
 }

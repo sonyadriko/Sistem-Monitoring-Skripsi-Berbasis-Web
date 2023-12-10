@@ -42,12 +42,14 @@ class DosenRevisiSeminarProposal extends Controller
                     ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
                     ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-                    ->where('id_revisi_seminar_proposal', '=',$id)
+                    ->where('id_revisi_seminar_proposal', $id)
                     ->select('revisi_seminar_proposal.*', 'berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
                     ->first(),
             'detail' => DB::table('detail_revisi_seminar_proposal')
-            ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
-            ->where('revisi_seminar_proposal_id', '=',$id)->get(),
+                    ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
+                    ->select('detail_revisi_seminar_proposal.*')
+                    ->where('revisi_seminar_proposal_id', $id)
+                    ->get(),
             'revisi' => DB::table('detail_berita_acara_proposal')
                 ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'detail_berita_acara_proposal.berita_acara_proposal_id')
                 ->where('detail_berita_acara_proposal.users_id', Auth::User()->id)
