@@ -82,6 +82,7 @@ Detail Berita Acara Proposal
                         type="number"
                         class="form-control"
                         name="nilai"
+                        max="100"
                         id="nilai"
                         placeholder="Masukan Nilai Ujian..."
                         aria-describedby="defaultFormControlHelp"

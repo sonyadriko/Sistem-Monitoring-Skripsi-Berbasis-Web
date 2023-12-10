@@ -17,13 +17,14 @@ class BeritaAcaraProposalController extends Controller
         $ba = DB::table('berita_acara_proposal')
         ->join('users', 'users.id', 'berita_acara_proposal.users_id')
         ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
-        ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
-        ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+        ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+        ->leftjoin('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
         ->where(function($query) {
             $query->where('seminar_proposal.dosen_penguji_1', '=', Auth::user()->id)
                   ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id)
                   ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', '=', Auth::user()->name);
         })
+        ->latest('berita_acara_proposal.created_at')
         ->get();
 
         return view('dosen/berita_acara/seminar.index', compact('ba'));

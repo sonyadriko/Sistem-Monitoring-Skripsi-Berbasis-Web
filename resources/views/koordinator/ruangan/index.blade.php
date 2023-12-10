@@ -20,11 +20,12 @@ Ruangan
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Tabel List Ruangan</h4>
-                <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.
-                </p>
-                <div class="d-flex justify-content-end mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <div class="text-left">
+                    <h4 class="card-title" style="font-weight: bold">Tabel List Ruangan</h4>
+                    <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.</p>
+                </div>
+                <div class="text-right">
                     <a href="{{ route('ruangan.create') }}" class="btn btn-success">Tambah Ruangan</a>
                 </div>
             </div>
