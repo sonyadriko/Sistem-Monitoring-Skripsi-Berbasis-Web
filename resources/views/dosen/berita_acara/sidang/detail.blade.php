@@ -58,8 +58,10 @@ Detail Berita Acara Sidang Skripsi
                         </tr>
                         <tr>
                             <td>Dosen Penguji</td>
-                            <td>{{$data->nama_penguji_1}}<br/>
-                                {{$data->nama_penguji_2}}
+                            <td>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                {{$data->nama_penguji_2}} (Dosen Penguji 2)<br/>
+                                {{$data->nama_penguji_3}} (Dosen Penguji 3)<br/>
+                                {{$data->nama_sekre}} (Sekretaris)
                             </td>
                         </tr>
                     </tbody>

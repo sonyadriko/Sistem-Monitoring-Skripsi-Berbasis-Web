@@ -96,7 +96,10 @@ Daftar Sidang Skripsi
                                 <tr>
                                     <td>Dosen Penguji</td>
                                     <td>{{$datas->nama_penguji_1}} (Dosen Penguji 1)<br/>
-                                        {{$datas->nama_penguji_2}} (Dosen Penguji 2)
+                                        {{$datas->nama_penguji_2}} (Dosen Penguji 2)<br/>
+                                        {{$datas->nama_penguji_3}} (Dosen Penguji 3)<br/>
+                                        {{$datas->nama_sekre}} (Sekretaris)
+
                                     </td>
                                     <td>
                                 </tr>
