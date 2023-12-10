@@ -37,7 +37,7 @@ Revisi Sidang Skripsi
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">Revisi:<br/></span>
                     @foreach($revisisk2 as $revisi)
-                    <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span>
+                    <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->name}}</span></br>
                     @endforeach
                 </p>
             </div>
@@ -78,15 +78,15 @@ Revisi Sidang Skripsi
                                 <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisk->acc_penguji_1  ? 'checked disabled' : '' }}/>
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji1" id="dosenpenguji1" {{ $revisisk->acc_penguji_1  ? 'checked disabled' : '' }} disabled/>
                                 <label class="form-check-label" for="dosenpenguji1"> Dosen Penguji 1 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisk->acc_penguji_2  ? 'checked disabled' : '' }}/>
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji2" id="dosenpenguji2" {{ $revisisk->acc_penguji_2  ? 'checked disabled' : '' }} disabled/>
                                 <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 2 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="dosenpenguji3" id="dosenpenguji3" {{ $revisisk->acc_penguji_3  ? 'checked disabled' : '' }}/>
+                                <input class="form-check-input" type="checkbox" name="dosenpenguji3" id="dosenpenguji3" {{ $revisisk->acc_penguji_3  ? 'checked disabled' : '' }} disabled/>
                                 <label class="form-check-label" for="dosenpenguji2"> Dosen Penguji 3 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
@@ -159,7 +159,7 @@ Revisi Sidang Skripsi
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Skripsi Successfully Submitted!',
+                                title: 'File Revisi Skripsi Successfully Submitted!',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500

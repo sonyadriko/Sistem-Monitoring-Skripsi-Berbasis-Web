@@ -97,9 +97,7 @@ Daftar Sidang Skripsi
                                     <td>Dosen Penguji</td>
                                     <td>{{$datas->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                         {{$datas->nama_penguji_2}} (Dosen Penguji 2)<br/>
-                                        {{$datas->nama_penguji_3}} (Dosen Penguji 3)<br/>
-                                        {{$datas->nama_sekre}} (Sekretaris)
-
+                                        {{$datas->nama_penguji_3}} (Dosen Penguji 3)
                                     </td>
                                     <td>
                                 </tr>

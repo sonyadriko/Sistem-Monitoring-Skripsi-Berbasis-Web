@@ -86,12 +86,11 @@ Sidang Skripsi
                             {{-- <option value="" selected disabled>Open this select menu</option> --}}
                         </select>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="select4" class="form-label">Sekretaris</label>
                         <select class="form-select" id="select4" name="sekretaris" aria-label="Default select example">
-                            {{-- <option value="" selected disabled>Open this select menu</option> --}}
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="row mb-3">
                         <div class="col-md-2">
                             <label for="ruanganSeminar" class="form-label">Ruangan Sidang</label>
@@ -186,10 +185,10 @@ Sidang Skripsi
                         <label for="dosenPenguji3" class="form-label">Dosen Penguji 3</label>
                         <input type="text" class="form-control" id="dosenPenguji3" name="dosenPenguji3" value="{{$data2->nama_penguji_3}}" readonly />
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="sekretaris" class="form-label">Sekretaris</label>
                         <input type="text" class="form-control" id="sekretaris" name="sekretaris" value="{{$data2->nama_sekretaris}}" readonly />
-                    </div>
+                    </div> --}}
                     <div class="row mb-3">
                         <div class="col-md-4">
                         <label for="ruanganSeminar" class="form-label">Ruangan Seminar</label>
@@ -243,12 +242,10 @@ Sidang Skripsi
         var select1 = document.getElementById("select1");
         var select2 = document.getElementById("select2");
         var select3 = document.getElementById("select3");
-        var select4 = document.getElementById("select4");
 
         // Clear existing options in select2, select3, and select4
         select2.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
         select3.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
-        select4.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
 
         // Get the selected option from select1
         var selectedOption1 = select1.options[select1.selectedIndex];
@@ -292,23 +289,8 @@ Sidang Skripsi
                     select3.add(option3);
                 }
 
-                var option4 = document.createElement("option");
-                option4.value = select1.options[i].value;
-                option4.text = select1.options[i].text;
 
-                // Check if the option is already present in select4
-                isDuplicate = false;
-                for (var j = 0; j < select4.options.length; j++) {
-                    if (select4.options[j].value === option4.value) {
-                        isDuplicate = true;
-                        break;
-                    }
-                }
 
-                // Add the option to select4 if not a duplicate
-                if (!isDuplicate) {
-                    select4.add(option4);
-                }
             }
         }
 
@@ -336,49 +318,8 @@ Sidang Skripsi
                     select3.add(option3);
                 }
 
-                var option4 = document.createElement("option");
-                option4.value = select2.options[i].value;
-                option4.text = select2.options[i].text;
 
-                // Check if the option is already present in select4
-                isDuplicate = false;
-                for (var j = 0; j < select4.options.length; j++) {
-                    if (select4.options[j].value === option4.value) {
-                        isDuplicate = true;
-                        break;
-                    }
-                }
 
-                // Add the option to select4 if not a duplicate
-                if (!isDuplicate) {
-                    select4.add(option4);
-                }
-            }
-        }
-
-        // Get the selected option from select3
-        var selectedOption3 = select3.options[select3.selectedIndex];
-
-        // Clone the options from select3 to select4, excluding the selected option3
-        for (var i = 0; i < select3.options.length; i++) {
-            if (select3.options[i] !== selectedOption3) {
-                var option4 = document.createElement("option");
-                option4.value = select3.options[i].value;
-                option4.text = select3.options[i].text;
-
-                // Check if the option is already present in select4
-                var isDuplicate = false;
-                for (var j = 0; j < select4.options.length; j++) {
-                    if (select4.options[j].value === option4.value) {
-                        isDuplicate = true;
-                        break;
-                    }
-                }
-
-                // Add the option to select4 if not a duplicate
-                if (!isDuplicate) {
-                    select4.add(option4);
-                }
             }
         }
     }
