@@ -21,6 +21,55 @@ class SidangSkripsiController extends Controller
             ->first();
         return view('mahasiswa/skripsi/sidang_skripsi.index', compact('datas'));
     }
+    public function checkStatus()
+    {
+        $datas = DB::table('users')
+        ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+        ->join('bimbingan_skripsi', 'bimbingan_skripsi.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
+        ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*', 'bimbingan_skripsi.*')
+        ->where('users.id', Auth::user()->id)
+        ->where('pengajuan_judul.status', 'terima')
+        ->first();
+
+        $userData = DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->first();
+
+        $skripsiData = DB::table('pengajuan_judul')
+            ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.user_id', 'pengajuan_judul.user_id')
+            ->leftJoin('bimbingan_skripsi', 'bimbingan_skripsi.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
+            ->leftJoin('sidang_skripsi', 'sidang_skripsi.users_id', 'pengajuan_judul.user_id')
+            ->select('pengajuan_judul.*', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'sidang_skripsi.status as sidang_status', 'bimbingan_proposal.dosen_pembimbing_utama')
+            ->where('pengajuan_judul.user_id', Auth::user()->id)
+            ->latest('sidang_skripsi.created_at')
+            ->first();
+
+        if (is_null($skripsiData) || is_null($skripsiData->id_bimbingan_skripsi)) {
+            return view('mahasiswa/skripsi/sidang_skripsi.no_submission');
+        } elseif (is_null($skripsiData->id_sidang_skripsi)) {
+            return view('mahasiswa/skripsi/sidang_skripsi.submit_form', compact('userData', 'datas'));
+        } else {
+            return redirect()->route('sidang-skripsi.status', $skripsiData->id_sidang_skripsi);
+        }
+    }
+    public function showStatus($id)
+    {
+        $datas = DB::table('sidang_skripsi')
+            ->join('users', 'users.id', 'sidang_skripsi.users_id')
+            ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
+            ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
+            ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            ->leftjoin('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
+            ->leftjoin('users as penguji1', 'penguji1.id', 'sidang_skripsi.dosen_penguji_1')
+            ->leftjoin('users as penguji2', 'penguji2.id', 'sidang_skripsi.dosen_penguji_2')
+            ->select('users.*', 'pengajuan_judul.judul', 'bimbingan_proposal.*', 'sidang_skripsi.file_skripsi', 'sidang_skripsi.file_slip_pembayaran', 'sidang_skripsi.status', 'sidang_skripsi.tanggal',  'sidang_skripsi.jam', 'ruangan.nama_ruangan',  'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
+            ->where('id_sidang_skripsi', $id)
+            ->latest('sidang_skripsi.created_at')
+            ->first();
+        return view('mahasiswa/skripsi/sidang_skripsi.show_status', compact('datas'));
+    }
     public function store(Request $request)
     {
         // dd($request->all());
@@ -50,6 +99,7 @@ class SidangSkripsiController extends Controller
         $SidangSkripsi = new SidangSkripsi();
         $SidangSkripsi->users_id= Auth::user()->id;
         $SidangSkripsi->bimbingan_skripsi_id = $request['id_bimbingan_skripsi'];
+        $SidangSkripsi->status = 'pending';
 
         $SidangSkripsi->file_skripsi = "uploads/{$userFolder}/sidang_skripsi/{$fileSkripsiName}";
         $SidangSkripsi->file_slip_pembayaran = "uploads/{$userFolder}/sidang_skripsi/{$fileSlipPembayaranName}";

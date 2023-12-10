@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Daftar Seminar Proposal
+Daftar Sidang Skripsi
 @endsection
 
 @push('plugin-styles')
@@ -23,7 +23,7 @@ Daftar Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Skripsi</li>
     </ol>
 </nav>
 <div class="row">
@@ -31,10 +31,10 @@ Daftar Seminar Proposal
             @if ($datas->status == 'pending')
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
+                    <h4 class="card-title mb-0">Alur Pengajuan Sidang Skripsi </h4>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title mb-0">Pendaftaran Seminar Proposal Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-0">Pendaftaran Sidang Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-secondary" role="alert">
@@ -46,10 +46,10 @@ Daftar Seminar Proposal
             @elseif ($datas->status == 'terima')
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
+                    <h4 class="card-title mb-0">Alur Pengajuan Sidang Skripsi </h4>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-0">Pendaftaran Sidang Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success" role="alert">
@@ -60,7 +60,7 @@ Daftar Seminar Proposal
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
+                    <h4 class="card-title mb-0">Jadwal Sidang Skripsi.</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-borderless datatables-basic"/>

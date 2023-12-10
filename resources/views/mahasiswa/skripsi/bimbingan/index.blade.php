@@ -32,7 +32,11 @@ Bimbingan Skripsi
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
                     <span class="span0-1">Revisi:<br/></span>
-                    <span class="span0-1">{{ $bimbingans->revisi }}</span><br>
+                    @if (!is_null($detailbim) && !is_null($detailbim->revisi))
+                    <span class="span0-1">{{ $detailbim->revisi }}</span><br>
+                @else
+                    <span class="span0-1 text-danger">Upload file bimbingan terlebih dahulu</span><br>
+                @endif
                 </p>
             </div>
         </div>
@@ -163,7 +167,7 @@ function handleButtonClick() {
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Skripsi Successfully Submitted!',
+                                title: 'File Skripsi Berhasil Disubmit!',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500

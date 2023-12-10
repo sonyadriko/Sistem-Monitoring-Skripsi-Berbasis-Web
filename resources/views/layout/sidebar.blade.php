@@ -39,7 +39,7 @@
               <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('sidang_skripsi.index')}}" class="nav-link">Sidang Skripsi</a>
+                <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>

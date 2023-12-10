@@ -33,8 +33,9 @@ class DosenBimbinganProposalController extends Controller
         $data = [
             'data' => DB::table('bimbingan_proposal')
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+                    ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                     ->join('users', 'users.id', 'bimbingan_proposal.user_id')
-                    ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu')
+                    ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.judul')
                     ->where('id_bimbingan_proposal', '=',$id)->first(),
             'detail' => DB::table('detail_bimbingan_proposal')->where('bimbingan_proposal_id', '=',$id)->get(),
         ];

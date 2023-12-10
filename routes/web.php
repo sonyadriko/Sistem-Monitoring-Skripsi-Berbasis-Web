@@ -333,6 +333,10 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     Route::group(['prefix' => '/sidang_skripsi'], function () {
         Route::get('/', [SidangSkripsiController::class, 'index'])->name('sidang_skripsi.index');
         Route::post('/store', [SidangSkripsiController::class, 'store'])->name('sidang_skripsi.store');
+        Route::get('/check-status', [SidangSkripsiController::class, 'checkStatus'])->name('sidang-skripsi.check');
+        Route::get('/status/{id}', [SidangSkripsiController::class, 'showStatus'])->name('sidang-skripsi.status');
+        Route::get('/submit-form', [SidangSkripsiController::class, 'index'])->name('sidang-skripsi.store');
+        // Route::get('/submit-form', 'create')->name('submit-form');
     });
 
     Route::controller(SuratTugasController::class)->group(function (){

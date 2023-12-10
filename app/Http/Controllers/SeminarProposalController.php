@@ -76,18 +76,6 @@ class SeminarProposalController extends Controller
             ->where('id_seminar_proposal', $id)
             ->latest('seminar_proposal.created_at')
             ->first();
-            // $datas2 = DB::table('users')
-            // ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
-            // ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
-            // ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
-            // ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
-            // ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
-            // ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
-            // ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*', 'seminar_proposal.file_proposal', 'seminar_proposal.file_slip_pembayaran', 'seminar_proposal.status', 'seminar_proposal.tanggal', 'ruangan.nama_ruangan', 'seminar_proposal.jam', 'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
-            // ->where('users.id', '=', Auth::user()->id)
-            // ->where('pengajuan_judul.status', 'terima')
-            // ->first();
-        // dd($datas);
         return view('mahasiswa/proposal/seminar_proposal.show_status', compact('datas'));
     }
 

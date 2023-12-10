@@ -34,7 +34,13 @@ Detail Bimbingan Proposal
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">Judul </label>
+                            <input type="text" class="form-control" value="{{$data->judul}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Bidang Ilmu </label>
                             <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly>

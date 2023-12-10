@@ -39,7 +39,13 @@ Detail Bimbingan Skripsi
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label">Judul </label>
+                            <input type="text" class="form-control" value="{{$data->judul}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Bidang Ilmu </label>
                             <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly>
@@ -55,7 +61,7 @@ Detail Bimbingan Skripsi
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label">Nama </label>
+                            <label class="form-label">Dosen Pembimbing II </label>
                             <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly>
                         </div>
                     </div>
@@ -150,20 +156,25 @@ Detail Bimbingan Skripsi
         <h5 class="card-header">Persetujuan Sidang Skripsi</h5>
         <div class="card-body">
             <span class="span0-1">Persetujuan Skripsi :</span>
-            @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
-                <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
-                <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
-                @if (Auth::user()->name == $data->dosen_pembimbing_utama)
-                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                Setujui Skripsi
-                </button>
-                @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
-                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                Setujui Skripsi
-                </button>
+            <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
+            <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
+
+             @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+                @if ($data->acc_dosen_utama == null)
+                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
+                        Setujui Proposal
+                    </button>
+                @else
+                    <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{$data->tgl_acc_dosen_utama}} </span>
                 @endif
-            @else
-            <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
+            @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+                @if ($data->acc_dosen_ii == null)
+                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
+                        Setujui Proposal
+                    </button>
+                @else
+                    <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{$data->tgl_acc_dosen_ii}} </span>
+                @endif
             @endif
         </div>
     </div>

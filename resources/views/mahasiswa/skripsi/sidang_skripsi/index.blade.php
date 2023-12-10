@@ -24,7 +24,7 @@ Daftar Sidang Skripsi
         @else
             @if($datas->dosen_pembimbing_ii == 'tidak ada' && is_null($datas->acc_dosen_utama))
             <div class="alert alert-warning" role="alert">
-                Harap melakukan pengajuan tema terlebih dahulu.
+                Harap melakukan pengajuan judul terlebih dahulu.
             </div>
             @elseif($datas->status == 'pending')
             <div class="card">
@@ -235,33 +235,10 @@ Daftar Sidang Skripsi
                 });
             }
         }
-
-
-        // function showConfirmation() {
-        //     // Use SweetAlert to show a simple confirmation message
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: 'Do you want to save changes?',
-        //         icon: 'question',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes',
-        //         cancelButtonText: 'No',
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             // If the user clicks "Yes," submit the form
-        //             saveChanges();
-        //         }
-        //     });
-        // }
-
         function saveChanges() {
             // Gather form data
             var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
-
-            // Standard form submission
             form.submit();
-            // window.location.href = "{{ route('bimbingans-mhs.index') }}";
-            // location.reload();
         }
 
 
