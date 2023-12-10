@@ -16,6 +16,7 @@ class SuratTugasController extends Controller
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
         ->join('berita_acara_proposal', 'berita_acara_proposal.users_id', 'users.id')
         ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
+        ->leftjoin('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
         ->where('users.id', Auth::user()->id)
         ->first();
 

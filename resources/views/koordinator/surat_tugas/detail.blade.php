@@ -53,30 +53,23 @@ Detail Surat Tugas
                     <label class="form-label">File Proposal</label>
                     <a href="{{asset($data->file_proposal) }}" target="_blank">
                         {{basename($data->file_proposal)}}
-
                     </a>
                     {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">
                         View Proposal
                     </button> --}}
                 </div>
-
-
                 <div class="mb-3">
                     <label  class="form-label">Slip Pembayaran Bimbingan</label>
                     <a href="{{ asset($data->file_slip_pembayaran) }}" target="_blank">
                         {{basename($data->file_slip_pembayaran)}}
-
                     </a>
                     {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">
                         {{basename($data->file_slip_pembayaran)}}
                     </button> --}}
                 </div>
-
-
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                   <button type="submit" id="submitBtn" class="btn btn-primary">Cetak</button>
-
                 </div>
             </form>
           </div>

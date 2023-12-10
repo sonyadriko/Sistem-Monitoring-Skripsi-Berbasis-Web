@@ -23,6 +23,7 @@ class DosenRevisiSeminarProposal extends Controller
                       ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id)
                       ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', Auth::user()->name);
             })
+            ->latest('berita_acara_proposal.created_at')
             ->get();
         return view('dosen/revisi/proposal.index', compact('rev'));
 

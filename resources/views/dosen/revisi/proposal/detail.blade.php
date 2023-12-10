@@ -148,7 +148,7 @@ Detail Revisi Seminar Proposal
                 @if (Auth::user()->name == $data->nama_penguji_1)
                     @if ($data->acc_penguji_1 == null)
                         <button type="button" id="penguji1" value="{{ $data->nama_penguji_1 }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
-                            Setujui Proposal
+                            Setujui Revisi
                         </button>
                     @else
                         <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_1}} </span>
@@ -156,7 +156,7 @@ Detail Revisi Seminar Proposal
                 @elseif (Auth::user()->name == $data->nama_penguji_2)
                     @if ($data->acc_penguji_2 == null)
                         <button type="button" id="penguji2" value="{{ $data->nama_penguji_2 }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
-                            Setujui Proposal
+                            Setujui Revisi
                         </button>
                     @else
                         <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_penguji_2}} </span>
@@ -164,7 +164,7 @@ Detail Revisi Seminar Proposal
                 @elseif (Auth::user()->name == $data->dosen_pembimbing_utama)
                     @if ($data->acc_dospem == null)
                         <button type="button" id="dospem" value="{{ $data->dosen_pembimbing_utama }}" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_berita_acara_p }}')">
-                            Setujui Proposal
+                            Setujui Revisi
                         </button>
                     @else
                         <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dospem}} </span>
@@ -329,7 +329,7 @@ Detail Revisi Seminar Proposal
 
                     // Show success message using SweetAlert
                     Swal.fire({
-                        title: 'Proposal berhasil diacc!',
+                        title: 'Revisi Proposal berhasil diacc!',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then((result) => {

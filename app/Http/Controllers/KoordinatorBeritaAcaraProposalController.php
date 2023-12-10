@@ -16,6 +16,7 @@ class KoordinatorBeritaAcaraProposalController extends Controller
         ->join('users', 'users.id', 'berita_acara_proposal.users_id')
         ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
         ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+        ->latest('berita_acara_proposal.created_at')
         ->get();
 
     return view('koordinator/berita_acara/seminar.index', compact('ba'));

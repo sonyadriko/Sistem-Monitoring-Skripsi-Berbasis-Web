@@ -82,7 +82,7 @@ Pengajuan Surat Tugas
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="judulskripsi" class="form-label">Judul Skripsi</label>
-                                                <input class="form-control" type="text" id="judulskripsi" value="{{$datas->topik_bidang_ilmu}}" name="judulskripsi" placeholder="Masukan Dosen Pembimbing 1..." readonly />
+                                                <input class="form-control" type="text" id="judulskripsi" value="{{$datas->judul}}" name="judulskripsi" placeholder="Masukan Dosen Pembimbing 1..." readonly />
                                                 @error('judulskripsi')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
