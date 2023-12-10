@@ -11,6 +11,11 @@ Sidang Skripsi
 
 @endsection
 @section('content')
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>

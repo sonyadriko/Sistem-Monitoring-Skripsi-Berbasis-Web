@@ -35,9 +35,15 @@ Seminar Proposal
                             <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="bidang_ilmu" class="form-label">Judul yang diajukan</label>
-                        <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label for="npm" class="form-label">Judul</label>
+                            <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="bidang_ilmu" class="form-label">Bidang Ilmu</label>
+                            <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                        </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
@@ -134,9 +140,15 @@ Seminar Proposal
                     <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="bidang_ilmu" class="form-label">Judul yang diajukan</label>
-                <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+            <div class="mb-3 row">
+                <div class="col-md-6">
+                    <label for="npm" class="form-label">Judul</label>
+                    <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="bidang_ilmu" class="form-label">Bidang Ilmu</label>
+                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">

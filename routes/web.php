@@ -231,6 +231,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/', [KoordinatorSidangSkripsiController::class, 'index'])->name('jadwal-sidang-skripsi.index');
         Route::get('/detail/{id}', [KoordinatorSidangSkripsiController::class, 'detail']);
         Route::post('/detail/{id}', [KoordinatorSidangSkripsiController::class, 'update'])->name('jadwal-sidang-skripsi-update');
+        Route::post('/tolak/{id}', [KoordinatorSidangSkripsiController::class, 'tolakjadwal'])->name('jadwal-sidang-skripsi-tolak');
         Route::post('/cetak-berita-acara/{id}', [KoordinatorSidangSkripsiController::class, 'createberitaacara'])->name('cetak-berita-acara-s');
 
         // Route::post('/cetak-berita-acara/{id}', [KoordinatorSidangSkripsiController::class, 'createberitaacarask'])->name('cetak-berita-acara-sk');
