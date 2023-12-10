@@ -15,6 +15,7 @@ class KoordinatorSeminarController extends Controller
         $sempros = DB::table('seminar_proposal')
             ->join('users', 'users.id', 'seminar_proposal.users_id')
             ->whereIn('status', ['pending', 'terima'])
+            ->latest('seminar_proposal.created_at')
             ->get();
 
         return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros'));

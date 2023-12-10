@@ -299,7 +299,10 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
     {
         Route::get('/seminar_proposal', 'create')->name('seminar-proposal.create');
         Route::post('/seminar_proposal', 'store')->name('seminar-proposal.submit');
-
+        // Route::get('/check-status', 'YourController@checkStatus')->name('check.status');
+        Route::get('/seminar_proposal/check-status', 'checkStatus')->name('seminar-proposal.check');
+        Route::get('/seminar_proposal/status/{id}', 'showStatus')->name('status.show');
+        Route::get('/submit-form', 'create')->name('submit-form');
     });
 
 

@@ -23,7 +23,7 @@ Seminar Proposal
             <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
             @if (is_null($data)||is_null($data->dosen_penguji_1)||is_null($data->dosen_penguji_2))
             <div class="card-body">
-                <form action="{{ route('jadwal-seminar-proposal-update', ['id' => $data->id_seminar_proposal]) }}" method="POST">
+                <form action="{{ route('jadwal-seminar-proposal-update', ['id' => $data->id_seminar_proposal]) }}" method="POST" id="submitForm">
                   @csrf
                     <div class="mb-3 row">
                         <div class="col-md-6">
@@ -92,22 +92,22 @@ Seminar Proposal
                             <label for="html5-date-input" class="form-label">Date</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="date" type="date" value="2021-06-18" id="html5-date-input" />
+                            <input class="form-control" name="date" type="date" id="html5-date-input" />
                         </div>
                         <div class="col-md-2">
                             <label for="html5-time-input" class="form-label">Time</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="time" type="time" value="12:30:00" id="html5-time-input" />
+                            <input class="form-control" name="time" type="time" id="html5-time-input" />
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                         <div style="display: flex; justify-content: flex-end;">
-                            <button type="submit" class="btn btn-primary">Buat Jadwal</button>
+                            {{-- <button type="submit" class="btn btn-primary" onclick="showConfirmation2();">Buat Jadwal</button> --}}
+                            <button type="button" class="btn btn-primary" onclick="showConfirmation2();">Buat Jadwal</button>
                             {{-- <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button> --}}
                         </div>
-                        {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
                     </div>
                 </form>
 
@@ -176,15 +176,20 @@ Seminar Proposal
                     <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data2->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
                 </div>
                 <div class="col-md-4">
-                  <label for="date" class="form-label">Date</label>
-
-                  <input class="form-control" name="date" type="date" value="{{$data->tanggal}}" id="html5-date-input" readonly/>
+                    <label for="date" class="form-label">Date</label>
+                    @php
+                        $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
+                        $formatTanggal = ucfirst($carbonTanggal->formatLocalized('%A, %d %B %Y', strftime('%A')));
+                    @endphp
+                    <input class="form-control" name="date" type="text" value="{{$formatTanggal}}" readonly />
                 </div>
-
                 <div class="col-md-4">
-                  <label for="time" class="form-label">Time</label>
-
-                  <input class="form-control" name="time" type="time" value="{{$data->jam}}" id="html5-time-input" readonly />
+                    <label for="time" class="form-label">Time</label>
+                    @php
+                        $carbonJam = \Carbon\Carbon::parse($data->jam);
+                        $formatJam = $carbonJam->format('H:i');
+                    @endphp
+                    <input class="form-control" name="time" type="text" value="{{$formatJam}}" id="time" readonly />
                 </div>
               </div>
               <input type="hidden" name="user_id" value="{{$data->users_id}}" />
@@ -236,8 +241,26 @@ function updateSelectOptions() {
   }
 }
 </script>
-
 <script>
+
+function showConfirmation2() {
+    Swal.fire({
+        title: 'Apakah Anda yakin ingin submit data?',
+        text: 'Pastikan data sudah benar sebelum submit.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Sumbit!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Submit form only if "Ya" is clicked
+            document.getElementById('submitForm').submit();
+        }
+    });
+}
+
+
   function showConfirmation() {
       Swal.fire({
           title: 'Apakah Anda yakin ingin mencetak?',

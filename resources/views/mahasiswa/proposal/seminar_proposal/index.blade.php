@@ -30,20 +30,19 @@ Daftar Seminar Proposal
     <div class="col-lg-12">
         @if (is_null($datas) || is_null($datas->id_bimbingan_proposal))
         <div class="alert alert-warning" role="alert">
-            Harap melakukan pengajuan tema terlebih dahulu.
+            Harap melakukan pengajuan judul terlebih dahulu.
         </div>
         @else
             @if ($datas->dosen_pembimbing_ii == 'tidak ada' && is_null($datas->acc_dosen_utama))
                 <div class="alert alert-warning" role="alert">
                     Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
                 </div>
-            @elseif ($datas->status == 'pending')
+            {{-- @elseif ($datas->status == 'pending')
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h6 class="card-title">Form Grid</h6> --}}
                     <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
@@ -59,7 +58,6 @@ Daftar Seminar Proposal
                     <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h6 class="card-title">Form Grid</h6> --}}
                     <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
@@ -74,7 +72,6 @@ Daftar Seminar Proposal
                     <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h6 class="card-title">Form Grid</h6> --}}
                     <table class="table table-borderless datatables-basic"/>
                             <tbody class="table-border-bottom-0">
                                 <tr>
@@ -115,7 +112,7 @@ Daftar Seminar Proposal
                             </tbody>
                         </table>
                 </div>
-            </div>
+            </div> --}}
 
             @else
             <div class="card">
