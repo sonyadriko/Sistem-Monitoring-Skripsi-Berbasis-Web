@@ -29,7 +29,7 @@ Dashboard
         <div class="card">
             <div class="card-body">
                 <h6>Progress Skripsi</h6>
-                <div class="progress">
+                <div class="progress mt-4">
                     <div class="progress-bar" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">{{ $progressPercentage }}%</div>
                 </div>
                 {{-- <div class="progress-text">

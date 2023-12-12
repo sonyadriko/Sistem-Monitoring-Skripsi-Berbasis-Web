@@ -162,7 +162,7 @@ Detail Bimbingan Skripsi
              @if (Auth::user()->name == $data->dosen_pembimbing_utama)
                 @if ($data->acc_dosen_utama == null)
                     <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                        Setujui Proposal
+                        Setujui Skripsi
                     </button>
                 @else
                     <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{$data->tgl_acc_dosen_utama}} </span>
@@ -170,7 +170,7 @@ Detail Bimbingan Skripsi
             @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
                 @if ($data->acc_dosen_ii == null)
                     <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                        Setujui Proposal
+                        Setujui Skripsi
                     </button>
                 @else
                     <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{$data->tgl_acc_dosen_ii}} </span>
