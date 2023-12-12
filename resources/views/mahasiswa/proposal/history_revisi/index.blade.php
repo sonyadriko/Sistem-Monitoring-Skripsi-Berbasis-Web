@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-History Bimbingan Skripsi
+History Revisi Seminar
 @endsection
 
 
@@ -17,10 +17,10 @@ History Bimbingan Skripsi
 @endif
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">History Bimbingan Skripsi</h4>
+    <h4 class="mb-3 mb-md-0">History Revisi Seminar Proposal</h4>
   </div>
 </div>
-<h6 class="mb-4">Seluruh informasi mengenai history bimbingan skripsi akan ditampilkan dibawah ini.</h6>
+<h6 class="mb-4">Seluruh informasi mengenai history revisi seminar proposal akan ditampilkan dibawah ini.</h6>
 
 
 <div class="row">
@@ -50,7 +50,7 @@ History Bimbingan Skripsi
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
                     <td>{{ $no }}</td>
                     <td>
-                        <a href="{{ asset($hbmhs->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
+                        <a href="{{ asset($hbmhs->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
                     </td>
                     {{-- <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td> --}}
 

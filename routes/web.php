@@ -42,6 +42,8 @@ use App\Http\Controllers\KoordinatorLaporanTahunanController;
 use App\Http\Controllers\SuratSurveyController;
 use App\Http\Controllers\MataKuliahPendukungController;
 use App\Http\Controllers\DosenBidangIlmuController;
+use App\Http\Controllers\HistoryRevisiSkripsiController;
+use App\Http\Controllers\HistoryRevisiProposalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -254,7 +256,7 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 
 });
 
-Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], function () {
+Route::group(['middleware' => 'auth:mahasiswa'], function () {
 
     Route::get('storage-files/{file}', 'StorageFileController@show')->name('storage-files.show');
 
@@ -283,12 +285,17 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
         Route::post('/', [SuratSurveyController::class, 'store'])->name('surat-survey.store');
     });
 
+    Route::group(['prefix' => 'history_revisi_skripsi'], function () {
+        Route::get('/', [HistoryRevisiSkripsiController::class, 'index'])->name('his-rev-mhs.index');
+    });
+    Route::group(['prefix' => 'history_revisi_seminar'], function () {
+        Route::get('/', [HistoryRevisiProposalController::class, 'index'])->name('his-rev-pro.index');
+    });
 
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'index')->name('profile.index');
         Route::get('/profile/edit/{id}', 'edit');
         Route::post('/profile/update/{id}', 'store')->name('update-profile.store');
-
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
@@ -296,27 +303,19 @@ Route::group(['middleware' => 'auth:mahasiswa,dosen,koordinator,ketuajurusan'], 
         Route::post('/pengajuan_tema', 'store')->name('pengajuan-judul.submit');
     });
 
-
     Route::controller(SeminarProposalController::class)->group(function ()
     {
         Route::get('/seminar_proposal', 'create')->name('seminar-proposal.create');
         Route::post('/seminar_proposal', 'store')->name('seminar-proposal.submit');
-        // Route::get('/check-status', 'YourController@checkStatus')->name('check.status');
         Route::get('/seminar_proposal/check-status', 'checkStatus')->name('seminar-proposal.check');
         Route::get('/seminar_proposal/status/{id}', 'showStatus')->name('status.show');
         Route::get('/submit-form', 'create')->name('submit-form');
     });
 
-
     Route::controller(BimbinganProposalController::class)->group(function (){
         Route::get('/bimbingan_proposal', 'index')->name('bimbingan-mhs.index');
         Route::post('/bimbingan_proposal', 'store')->name('bimbingan-mhs.store');
     });
-
-    // Route::controller(BimbinganSkripsiController::class)->group(function (){
-    //     Route::get('/skripsi/bimbingan', 'index')->name('bimbingans-mhs.index');
-    //     Route::post('/skripsi/bimbingan', 'store')->name('bimbingans-mhs.store');
-    // });
 
     Route::group(['prefix' => '/bimbingan_skripsi'], function() {
         Route::get('/', [BimbinganSkripsiController::class, 'index'])->name('bimbingans-mhs.index');

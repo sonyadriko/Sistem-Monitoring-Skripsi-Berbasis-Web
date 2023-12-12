@@ -101,16 +101,13 @@ Revisi Sidang Skripsi
                                 </button>
                                 @endif
                             </div>
-                            {{-- <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary">Daftar</button>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <button type="button" class="btn btn-primary">History Revisi</button>
+            <a href="{{ route('his-rev-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
         </div>
         @endif
     </div>

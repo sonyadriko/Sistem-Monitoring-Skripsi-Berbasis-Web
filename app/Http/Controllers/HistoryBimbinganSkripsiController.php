@@ -15,8 +15,9 @@ class HistoryBimbinganSkripsiController extends Controller
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
         ->join('users', 'users.id', 'bimbingan_proposal.user_id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-        ->select('detail_bimbingan_skripsi.*', 'users.kode_unik', 'users.name', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.dosen_pembimbing_utama',  'bimbingan_proposal.dosen_pembimbing_ii')
-        ->where('users.id', '=', Auth::user()->id) // Menambahkan kondisi where untuk userID
+        ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+        ->select('detail_bimbingan_skripsi.*', 'users.kode_unik', 'users.name', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.dosen_pembimbing_utama',  'bimbingan_proposal.dosen_pembimbing_ii', 'pengajuan_judul.judul')
+        ->where('users.id', Auth::user()->id) // Menambahkan kondisi where untuk userID
         ->get();
         return view('mahasiswa/skripsi/history_bimbingan.index', compact('hisbimmhs'));
     }

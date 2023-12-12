@@ -81,6 +81,10 @@ History Bimbingan Proposal
                     <td>{{ $hbmhs->name }}</td>
                 </tr>
                 <tr>
+                    <td>Judul</td>
+                    <td>{{ $hbmhs->judul }}</td>
+                </tr>
+                <tr>
                     <td>Bidang Ilmu</td>
                     <td>{{ $hbmhs->topik_bidang_ilmu }}</td>
                 </tr>

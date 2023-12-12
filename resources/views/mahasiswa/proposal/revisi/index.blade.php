@@ -104,9 +104,9 @@ Revisi Seminar Proposal
             </div>
         </div>
     </div>
-    {{-- <div class="mb-3">
-        <button type="button" class="btn btn-primary">History Revisi</button>
-    </div> --}}
+    <div class="mb-3">
+        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
+    </div>
     @endif
 </div>
 </div>
