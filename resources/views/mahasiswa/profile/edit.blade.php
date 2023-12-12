@@ -34,7 +34,7 @@ Edit Profile
               </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">No Telp Mahasiswa</label>
-              <input type="text" class="form-control" id="notelpmhs" name="notelpmhs" value="{{ $data->no_telp_mhs }}" placeholder="no telp mahasiswa">
+              <input type="number" class="form-control" id="notelpmhs" name="notelpmhs" value="{{ $data->no_telp_mhs }}" placeholder="no telp mahasiswa">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Alamat Orang Tua</label>
@@ -42,7 +42,7 @@ Edit Profile
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">No Telp Orang Tua</label>
-                <input type="text" class="form-control" id="notelpot" name="notelpot" autocomplete="off" value="{{ $data->no_telp_orang_tua }}" placeholder="no telp orang tua">
+                <input type="number" class="form-control" id="notelpot" name="notelpot" autocomplete="off" value="{{ $data->no_telp_orang_tua }}" placeholder="no telp orang tua">
               </div>
             {{-- <button type="submit" class="btn btn-primary me-2">Submit</button> --}}
             <button type="submit" class="btn btn-primary">Submit</button>

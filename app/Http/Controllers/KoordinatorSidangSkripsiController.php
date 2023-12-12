@@ -45,7 +45,7 @@ class KoordinatorSidangSkripsiController extends Controller
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
             ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
             ->select('sidang_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii', 'ruangan.nama_ruangan', 'users.*', 'bimbingan_skripsi.*', 'bidang_ilmu.topik_bidang_ilmu', 'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3')
-            ->where('id_sidang_skripsi', '=', $id)
+            ->where('id_sidang_skripsi', $id)
             ->first();
 
 

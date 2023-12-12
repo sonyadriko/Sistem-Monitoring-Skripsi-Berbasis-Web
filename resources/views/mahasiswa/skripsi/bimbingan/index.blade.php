@@ -74,7 +74,9 @@ Bimbingan Skripsi
                                 <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" {{ $bimbingans->acc_dosen_utama ? '' : 'disabled' }}>Daftar</button>
+                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                    Daftar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -133,7 +135,7 @@ Bimbingan Skripsi
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 function handleButtonClick() {
-        window.location.href = "{{ route('sidang_skripsi.index') }}";
+        window.location.href = "{{ route('sidang-skripsi.check') }}";
     }
     // Pastikan elemen sudah dimuat di dalam DOM
     document.addEventListener('DOMContentLoaded', function() {

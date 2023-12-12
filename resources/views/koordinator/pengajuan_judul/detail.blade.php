@@ -122,36 +122,6 @@ Detail Pengajuan Tema
     });
 </script>
 
-<script>
-    function updateSelectOptions() {
-      var select1 = document.getElementById("select1");
-      var select2 = document.getElementById("select2");
-      var select3 = document.getElementById("select3");
-
-      // Clear existing options in select2 and select3
-      select2.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
-      select3.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
-
-      // Get the selected option from select1
-      var selectedOption = select1.options[select1.selectedIndex];
-
-      // Clone the options from select1 to select2 and select3, excluding the selected option
-      for (var i = 0; i < select1.options.length; i++) {
-          if (select1.options[i] !== selectedOption) {
-              var option2 = document.createElement("option");
-              option2.value = select1.options[i].value;
-              option2.text = select1.options[i].text;
-              select2.add(option2);
-
-              var option3 = document.createElement("option");
-              option3.value = select1.options[i].value;
-              option3.text = select1.options[i].text;
-              select3.add(option3);
-          }
-      }
-    }
-    </script>
-
 
 <script>
   function showConfirmation() {

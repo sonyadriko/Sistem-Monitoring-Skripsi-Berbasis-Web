@@ -21,14 +21,14 @@ class BimbinganSkripsiController extends Controller
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
         // ->join('detail_bimbingan_skripsi', 'detail_bimbingan_skripsi.bimbingan_skripsi_id', 'bimbingan_skripsi.id_bimbingan_skripsi')
         ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
-        ->where('users_id', Auth::user()->id)
+        ->where('bimbingan_skripsi.users_id', Auth::user()->id)
         // ->latest('detail_bimbingan_skripsi.created_at') // Order by the creation timestamp in descending order
         ->first();
 
         $detailbim = DB::table('detail_bimbingan_skripsi')
             ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'detail_bimbingan_skripsi.bimbingan_skripsi_id')
             ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-            ->where('users_id', Auth::user()->id)
+            ->where('bimbingan_skripsi.users_id', Auth::user()->id)
             ->latest('detail_bimbingan_skripsi.created_at') // Order by the creation timestamp in descending order
             ->first();
 

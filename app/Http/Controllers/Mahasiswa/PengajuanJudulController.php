@@ -30,8 +30,13 @@ class PengajuanJudulController extends Controller
         ->select('bidang_ilmu.id_bidang_ilmu', 'bidang_ilmu.topik_bidang_ilmu', 'bidang_ilmu.status', 'bidang_ilmu.users_id', 'users.name')
         ->where('bidang_ilmu.status', 'tersedia')
         ->get();
+
+        $cek2 = DB::table('bimbingan_proposal')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            ->where('bimbingan_proposal.users_id', Auth::user()->id)
+            ->first();
         // $bidang_ilmu = DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu', 'status', 'users_id')->where('status', 'tersedia')->get();
-        return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu', 'temacek'));
+        return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu', 'temacek', 'cek2'));
     }
 
     public function store(Request $request)

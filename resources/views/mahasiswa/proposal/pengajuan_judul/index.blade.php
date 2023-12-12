@@ -215,6 +215,20 @@ Pengajuan Tema
                             </div>
                         </div>
                     </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label">Dosen Pembimbing Utama</label>
+                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $cek2->dosen_pembimbing_utama }}" readonly>
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label">Dosen Pembimbing II</label>
+                                <input type="text" class="form-control" value="{{ $cek2->dosen_pembimbing_ii }}" placeholder="Enter last name" readonly>
+                            </div>
+                        </div>
+                    </div><!-- Row -->
                 </form>
                 {{-- <button type="button" class="btn btn-primary submit">Submit form</button> --}}
             </div>
