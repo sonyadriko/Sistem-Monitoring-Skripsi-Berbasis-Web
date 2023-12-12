@@ -211,7 +211,7 @@ Sidang Skripsi
                             <input class="form-control" name="time" type="text" value="{{$formatJam}}" id="time" readonly />
                         </div>
                     </div>
-                    <input type="hidden" name="user_id" value="{{$data->users_id}}" />
+                    <input type="hidden" name="users_id" value="{{$data->users_id}}" />
                     <input type="hidden" name="sidang_skripsi_id" value="{{$data->id_sidang_skripsi}}" />
 
                     <div class="d-flex justify-content-between mt-4">

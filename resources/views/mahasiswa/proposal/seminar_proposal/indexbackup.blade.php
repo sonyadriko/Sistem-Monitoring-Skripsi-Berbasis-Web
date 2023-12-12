@@ -112,7 +112,7 @@ Daftar Seminar Proposal
                                             <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
                                             <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly/>
                                         </div>
-                                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                        <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
                                         <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
                                         <div class="mb-3">
                                             <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
@@ -239,7 +239,7 @@ Daftar Seminar Proposal
                                         <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
                                         <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly/>
                                     </div>
-                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                    <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
                                     <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
                                     <div class="mb-3">
                                         <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>

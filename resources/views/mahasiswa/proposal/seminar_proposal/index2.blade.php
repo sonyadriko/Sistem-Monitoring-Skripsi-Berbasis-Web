@@ -98,7 +98,7 @@ Daftar Seminar Proposal
                   readonly
                 />
             </div>
-            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
             <div class="mb-3">
                 <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>

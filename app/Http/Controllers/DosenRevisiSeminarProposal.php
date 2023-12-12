@@ -52,7 +52,7 @@ class DosenRevisiSeminarProposal extends Controller
                     ->get(),
             'revisi' => DB::table('detail_berita_acara_proposal')
                 ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'detail_berita_acara_proposal.berita_acara_proposal_id')
-                ->where('detail_berita_acara_proposal.users_id', Auth::User()->id)
+                ->where('detail_berita_acara_proposal.users_id', Auth::User()->id   )
                 ->first(),
         ];
 

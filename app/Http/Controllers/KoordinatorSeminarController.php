@@ -24,21 +24,9 @@ class KoordinatorSeminarController extends Controller
     {
         $data = DB::table('seminar_proposal')
             ->join('users', 'users.id', 'seminar_proposal.users_id')
-            // ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
-            // ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
             ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-            // ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
-            // ->select(
-            //     'seminar_proposal.*',
-            //     'bimbingan_proposal.dosen_pembimbing_utama',
-            //     'bimbingan_proposal.dosen_pembimbing_ii',
-            //     'ruangan.nama_ruangan', 'users.*',
-            //     'bidang_ilmu.topik_bidang_ilmu',
-            //     'penguji1.name as nama_penguji_1',
-            //     'penguji2.name as nama_penguji_2'
-            //     )
             ->where('pengajuan_judul.status', 'terima')
             ->where('id_seminar_proposal', $id)
             ->first();
@@ -124,7 +112,7 @@ class KoordinatorSeminarController extends Controller
         try {
             // Validasi input
             $request->validate([
-                'user_id' => 'required|integer',
+                'users_id' => 'required|integer',
                 'seminar_proposal_id' => 'required|integer',
             ]);
 
@@ -137,7 +125,7 @@ class KoordinatorSeminarController extends Controller
 
             // Simpan data BeritaAcaraProposal
             $ba = new BeritaAcaraProposal();
-            $ba->users_id = $request->input('user_id');
+            $ba->users_id = $request->input('users_id');
             $ba->seminar_proposal_id = $request->input('seminar_proposal_id');
             $ba->save();
 

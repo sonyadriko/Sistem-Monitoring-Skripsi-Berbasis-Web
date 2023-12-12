@@ -12,16 +12,16 @@ class SeminarProposalController extends Controller
     public function create()
     {
         $datas = DB::table('users')
-        ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
-        ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+        ->join('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
         ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
         ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*', 'seminar_proposal.file_proposal', 'seminar_proposal.file_slip_pembayaran', 'seminar_proposal.status', 'seminar_proposal.tanggal')
         ->where('users.id', Auth::user()->id)
         ->where('pengajuan_judul.status', 'terima')
         ->first();
             // $datas2 = DB::table('users')
-            // ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
-            // ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+            // ->join('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
+            // ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
             // ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
             // ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
             // ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
@@ -35,8 +35,8 @@ class SeminarProposalController extends Controller
     public function checkStatus()
     {
         $datas = DB::table('users')
-        ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
-        ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+        ->join('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
         ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*')
         ->where('users.id', Auth::user()->id)
         ->where('pengajuan_judul.status', 'terima')
@@ -47,10 +47,10 @@ class SeminarProposalController extends Controller
             ->first();
 
         $proposalData = DB::table('pengajuan_judul')
-            ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.user_id', 'pengajuan_judul.user_id')
-            ->leftJoin('seminar_proposal', 'seminar_proposal.users_id', 'pengajuan_judul.user_id')
+            ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'pengajuan_judul.users_id')
+            ->leftJoin('seminar_proposal', 'seminar_proposal.users_id', 'pengajuan_judul.users_id')
             ->select('pengajuan_judul.*', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.id_seminar_proposal', 'seminar_proposal.status as seminar_status', 'bimbingan_proposal.dosen_pembimbing_utama')
-            ->where('pengajuan_judul.user_id', Auth::user()->id)
+            ->where('pengajuan_judul.users_id', Auth::user()->id)
             ->latest('seminar_proposal.created_at')
             ->first();
 

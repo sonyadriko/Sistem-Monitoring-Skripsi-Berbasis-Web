@@ -17,7 +17,7 @@ class BidangIlmuController extends Controller
     public function index()
     {
         $bi = DB::table('bidang_ilmu')
-            ->join('users', 'users.id', 'bidang_ilmu.user_id')
+            ->join('users', 'users.id', 'bidang_ilmu.users_id')
             ->get();
 
         return view('koordinator/bidang_ilmu.index', compact('bi'));
@@ -52,7 +52,7 @@ class BidangIlmuController extends Controller
         if (!$existingBidangIlmu) {
             // Jika bidang ilmu belum ada, buat baru
             $form = new BidangIlmu();
-            $form->user_id = Auth::user()->id;
+            $form->users_id = Auth::user()->id;
             $form->topik_bidang_ilmu = $validatedData['topik_bidang_ilmu'];
             $form->mata_kuliah_pendukung = implode(',', $validatedData['selected_mkp']);
             $form->status = 'tersedia';

@@ -11,7 +11,7 @@ class PengajuanJudul extends Model
     protected $table = 'pengajuan_judul';
 
     protected $fillable = [
-        'user_id',
+        'users_id',
         'bidang_ilmu_id',
         'mk_pilihan',
         'judul',

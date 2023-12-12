@@ -10,7 +10,7 @@ class DetailRevisiSidangSkripsi extends Model
     protected $table = 'detail_revisi_sidang_skripsi';
 
     protected $fillable = [
-        // 'user_id',
+        // 'users_id',
         'revisi_sidang_skripsi_id',
         'file_revisi',
         'updated_at',

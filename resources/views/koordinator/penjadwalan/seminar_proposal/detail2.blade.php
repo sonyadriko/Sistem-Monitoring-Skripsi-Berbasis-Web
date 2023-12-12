@@ -65,7 +65,7 @@ Proposal
               <div class="col">
                 <input class="form-control" name="date" type="date" value="2021-06-18" id="html5-date-input" />
               </div>
-              
+
               <div class="col-md-2">
                 <label for="html5-time-input" class="form-label">Time</label>
               </div>
@@ -130,7 +130,7 @@ Proposal
             <div class="col">
               <input class="form-control" name="date" type="date" value="{{$data->tanggal}}" id="html5-date-input" readonly/>
             </div>
-            
+
             <div class="col-md-2">
               <label for="html5-time-input" class="form-label">Time</label>
             </div>
@@ -138,9 +138,9 @@ Proposal
               <input class="form-control" name="time" type="time" value="{{$data->jam}}" id="html5-time-input" readonly />
             </div>
           </div>
-          <input type="hidden" name="user_id" value="{{$data->users_id}}" />
+          <input type="hidden" name="users_id" value="{{$data->users_id}}" />
           <input type="hidden" name="seminar_proposal_id" value="{{$data->id_seminar_proposal}}" />
-         
+
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
             @if(is_null($data)|| is_null($data->cetak))
@@ -148,7 +148,7 @@ Proposal
 
             @endif
           </div>
-         
+
       </form>
     </div>
       @endif
@@ -199,4 +199,3 @@ function updateSelectOptions() {
       });
   }
   </script>
-  

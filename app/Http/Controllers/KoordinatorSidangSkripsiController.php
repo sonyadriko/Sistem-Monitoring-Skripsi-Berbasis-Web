@@ -92,7 +92,7 @@ class KoordinatorSidangSkripsiController extends Controller
         try {
             // Validasi input
             $request->validate([
-                'user_id' => 'required|integer',
+                'users_id' => 'required|integer',
                 'sidang_skripsi_id' => 'required|integer',
             ]);
 
@@ -105,7 +105,7 @@ class KoordinatorSidangSkripsiController extends Controller
 
             // Simpan data BeritaAcaraSkripsi
             $ba = new BeritaAcaraSkripsi();
-            $ba->users_id = $request->input('user_id');
+            $ba->users_id = $request->input('users_id');
             $ba->sidang_skripsi_id = $request->input('sidang_skripsi_id');
             $ba->save();
 

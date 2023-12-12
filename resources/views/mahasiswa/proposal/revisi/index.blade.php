@@ -126,7 +126,7 @@ Revisi Seminar Proposal
     function handleButtonClick() {
         // Check your conditions here
             // Redirect to the specified route
-            window.location.href = "{{ route('pengajuan-st.index') }}";
+            window.location.href = "{{ route('pengajuan-st.check') }}";
         // }
     }
     // Pastikan elemen sudah dimuat di dalam DOM

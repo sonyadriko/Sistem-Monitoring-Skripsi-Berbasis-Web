@@ -49,6 +49,7 @@ Detail Surat Tugas
                     <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$data->tanggal}}" aria-describedby="defaultFormControlHelp" readonly />
                   </div>
                   <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
+                  <input type="hidden" value="{{ $data->users_id}}" id="users_id" name="users_id"/>
                   <div class="mb-3">
                     <label class="form-label">File Proposal</label>
                     <a href="{{asset($data->file_proposal) }}" target="_blank">
@@ -70,6 +71,13 @@ Detail Surat Tugas
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                   <button type="submit" id="submitBtn" class="btn btn-primary">Cetak</button>
+                </div>
+            </form>
+            <form action="{{ route('koor-surat-tugas-tolak', ['id' => $data->id_surat_tugas]) }}" method="POST">
+                @csrf
+                <!-- ... form fields ... -->
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
                 </div>
             </form>
           </div>

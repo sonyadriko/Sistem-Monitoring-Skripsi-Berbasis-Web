@@ -13,10 +13,10 @@ class SidangSkripsiController extends Controller
     {
         $datas = DB::table('bimbingan_skripsi')
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-            ->join('users', 'users.id', 'bimbingan_proposal.user_id')
+            ->join('users', 'users.id', 'bimbingan_proposal.users_id')
             ->join('sidang_skripsi', 'sidang_skripsi.users_id', 'users.id')
             ->select('users.*', 'bimbingan_proposal.*', 'bimbingan_skripsi.*', 'sidang_skripsi.file_skripsi', 'sidang_skripsi.file_slip_pembayaran', 'sidang_skripsi.status', 'sidang_skripsi.tanggal')
-            ->where('bimbingan_proposal.user_id', Auth::user()->id)
+            ->where('bimbingan_proposal.users_id', Auth::user()->id)
             ->latest('sidang_skripsi.created_at')
             ->first();
         return view('mahasiswa/skripsi/sidang_skripsi.index', compact('datas'));
@@ -24,8 +24,8 @@ class SidangSkripsiController extends Controller
     public function checkStatus()
     {
         $datas = DB::table('users')
-        ->join('pengajuan_judul', 'pengajuan_judul.user_id', 'users.id')
-        ->join('bimbingan_proposal', 'bimbingan_proposal.user_id', 'users.id')
+        ->join('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
+        ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
         ->join('bimbingan_skripsi', 'bimbingan_skripsi.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
         ->select('users.*', 'pengajuan_judul.*', 'bimbingan_proposal.*', 'bimbingan_skripsi.*')
         ->where('users.id', Auth::user()->id)
@@ -37,11 +37,11 @@ class SidangSkripsiController extends Controller
             ->first();
 
         $skripsiData = DB::table('pengajuan_judul')
-            ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.user_id', 'pengajuan_judul.user_id')
+            ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'pengajuan_judul.users_id')
             ->leftJoin('bimbingan_skripsi', 'bimbingan_skripsi.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
-            ->leftJoin('sidang_skripsi', 'sidang_skripsi.users_id', 'pengajuan_judul.user_id')
+            ->leftJoin('sidang_skripsi', 'sidang_skripsi.users_id', 'pengajuan_judul.users_id')
             ->select('pengajuan_judul.*', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'sidang_skripsi.status as sidang_status', 'bimbingan_proposal.dosen_pembimbing_utama')
-            ->where('pengajuan_judul.user_id', Auth::user()->id)
+            ->where('pengajuan_judul.users_id', Auth::user()->id)
             ->latest('sidang_skripsi.created_at')
             ->first();
 

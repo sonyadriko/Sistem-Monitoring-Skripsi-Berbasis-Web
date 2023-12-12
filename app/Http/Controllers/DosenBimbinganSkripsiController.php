@@ -15,7 +15,7 @@ class DOsenBimbinganSkripsiController extends Controller
         $bimbingans = DB::table('bimbingan_skripsi')
                 ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
                 ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
-                ->join('users', 'users.id', 'bimbingan_proposal.user_id')
+                ->join('users', 'users.id', 'bimbingan_proposal.users_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->where(function($query) {
                     $query->where('dosen_pembimbing_utama', Auth::user()->name)
@@ -32,7 +32,7 @@ class DOsenBimbinganSkripsiController extends Controller
                     ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
                     ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                     ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-                    ->join('users', 'users.id', 'bimbingan_proposal.user_id')
+                    ->join('users', 'users.id', 'bimbingan_proposal.users_id')
                     ->select('bimbingan_skripsi.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii', 'pengajuan_judul.judul')
                     ->where('id_bimbingan_skripsi', '=',$id)->first(),
             'detail' => DB::table('detail_bimbingan_skripsi')->where('bimbingan_skripsi_id', '=',$id)->get(),

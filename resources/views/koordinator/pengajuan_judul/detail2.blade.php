@@ -35,7 +35,7 @@
                     <label for="dosen_pembimbing_utama" class="form-label">Dosen Pembimbing Utama</label>
                     <input class="form-control" type="text" id="dosen_pembimbing_utama" value="{{ $data->nama_dosen }}" name="dosen_pembimbing_utama" readonly />
                 </div>
-                
+
                 <div class="mb-3">
                     <label for="dosen_pembimbing_ii" class="form-label">Dosen Pembimbing II</label>
                     <select class="form-select" id="select1" name="dosen_pembimbing_ii" aria-label="Default select example">
@@ -48,11 +48,11 @@
                         @endforeach
                     </select>
                 </div>
-                
+
 
                 <input type="hidden" name="tema_id" value="{{ $data->id_tema }}" />
                 <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
-                <input type="hidden" name="user_id" value="{{ $data->user_id }}" />
+                <input type="hidden" name="users_id" value="{{ $data->users_id }}" />
 
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>

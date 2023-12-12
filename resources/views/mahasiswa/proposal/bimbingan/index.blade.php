@@ -149,7 +149,7 @@ Bimbingan Proposal
 function handleButtonClick() {
         // Check your conditions here
             // Redirect to the specified route
-            window.location.href = "{{ route('seminar-proposal.create') }}";
+            window.location.href = "{{ route('seminar-proposal.check') }}";
         // }
     }
     // Pastikan elemen sudah dimuat di dalam DOM

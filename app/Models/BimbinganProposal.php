@@ -10,7 +10,7 @@ class BimbinganProposal extends Model
     protected $table = 'bimbingan_proposal';
 
     protected $fillable = [
-        'user_id',
+        'users_id',
         'pengajuan_id',
         'bidang_ilmu_id',
         'dosen_pembimbing_utama',

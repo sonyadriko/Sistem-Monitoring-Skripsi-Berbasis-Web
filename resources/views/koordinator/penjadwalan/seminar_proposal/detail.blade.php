@@ -204,7 +204,7 @@ Seminar Proposal
                     <input class="form-control" name="time" type="text" value="{{$formatJam}}" id="time" readonly />
                 </div>
               </div>
-              <input type="hidden" name="user_id" value="{{$data->users_id}}" />
+              <input type="hidden" name="users_id" value="{{$data2->users_id}}" />
               <input type="hidden" name="seminar_proposal_id" value="{{$data->id_seminar_proposal}}" />
 
               <div class="d-flex justify-content-between mt-4">

@@ -157,7 +157,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                    <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
                                     <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
                                 </form>
                                 <ul class="pager wizard twitter-bs-wizard-pager-link">

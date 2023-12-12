@@ -80,7 +80,7 @@ Surat Tugas
                 <label for="file_slip_pembayaran" class="form-label">Upload File Slip Pembayaran Surat Tugas</label>
                 <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
             </div>
-            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
             {{-- <input type="hidden" name="tema_id" value="{{ $datas->id_tema }}"> --}}
             <div class="d-flex justify-content-between mt-4">

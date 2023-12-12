@@ -34,10 +34,10 @@ Proposal
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
           </div>
-          <input type="hidden" name="user_id" id="user_id" value="{{ $tema->user_id }}">
+          <input type="hidden" name="users_id" id="users_id" value="{{ $tema->users_id }}">
           <input type="hidden" name="tema_id" id="tema_id" value="{{ $tema->id_tema }}">
 
-      
+
           <div class="mb-3">
               <label for="dospem_1" class="form-label">Dosen Pembimbing 1</label>
               <select class="form-select" id="dospem_1" name="dospem_1" aria-label="Default select example">
@@ -46,7 +46,7 @@ Proposal
                 @endforeach
               </select>
           </div>
-      
+
           <div class="mb-3">
               <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
               <select class="form-select" id="dospem_2" name="dospem_2" aria-label="Default select example">
@@ -56,8 +56,8 @@ Proposal
                   @endforeach
               </select>
           </div>
-       
-      
+
+
         <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
             <button type="submit" class="btn btn-primary" name="action" value="sudah">Submit</button>

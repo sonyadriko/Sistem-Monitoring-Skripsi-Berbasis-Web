@@ -45,7 +45,6 @@ Pengajuan Surat Tugas
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Alur Pengajuan Surat Tugas</h4>
-
                                 <div id="wizard">
                                     <h2>Step Pertama</h2>
                                     <section>
@@ -138,7 +137,7 @@ Pengajuan Surat Tugas
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                            <input type="hidden" name="users_id" value="{{Auth::user()->id}}">
                                             <input type="hidden" name="bimbingan_proposal_id" value="{{$datas->id_bimbingan_proposal}}">
                                         </form>
                                     </section>

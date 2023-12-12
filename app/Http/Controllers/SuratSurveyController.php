@@ -14,7 +14,7 @@ class SuratSurveyController extends Controller
     {
         $ss = DB::table('bimbingan_proposal')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-            ->where('bimbingan_proposal.user_id', Auth::user()->id)
+            ->where('bimbingan_proposal.users_id', Auth::user()->id)
             ->first();
 
         return view('mahasiswa/surat_survey.index', compact('ss'));

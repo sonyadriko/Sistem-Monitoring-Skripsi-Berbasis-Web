@@ -10,7 +10,7 @@ class DetailBimbinganSkripsi extends Model
     protected $table = 'detail_bimbingan_skripsi';
 
     protected $fillable = [
-        // 'user_id',
+        // 'users_id',
         'bimbingan_skripsi_id',
         'file',
         'revisi',

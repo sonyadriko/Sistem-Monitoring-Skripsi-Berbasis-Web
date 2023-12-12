@@ -68,7 +68,7 @@ Detail Pengajuan Tema
 
                     <input type="hidden" name="pengajuan_id" value="{{ $data->id_pengajuan_judul }}" />
                     <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
-                    <input type="hidden" name="user_id" value="{{ $data->user_id }}" />
+                    <input type="hidden" name="users_id" value="{{ $data->users_id }}" />
 
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>

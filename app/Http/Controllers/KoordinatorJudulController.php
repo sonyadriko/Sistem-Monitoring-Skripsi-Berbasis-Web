@@ -17,7 +17,7 @@ class KoordinatorJudulController extends Controller
     public function index()
     {
         $juduls = DB::table('pengajuan_judul')
-        ->join('users', 'users.id', 'pengajuan_judul.user_id')
+        ->join('users', 'users.id', 'pengajuan_judul.users_id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
         ->orderBy('pengajuan_judul.created_at', 'desc')->get();
         return view('koordinator/pengajuan_judul.index', compact('juduls'));
@@ -27,9 +27,9 @@ class KoordinatorJudulController extends Controller
     {
         $data = [
             'data' => DB::table('pengajuan_judul')
-                ->join('users', 'users.id', 'pengajuan_judul.user_id')
+                ->join('users', 'users.id', 'pengajuan_judul.users_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
-                ->join('users as dosen', 'dosen.id', 'bidang_ilmu.user_id')
+                ->join('users as dosen', 'dosen.id', 'bidang_ilmu.users_id')
                 ->select('users.name', 'users.kode_unik', 'pengajuan_judul.*', 'bidang_ilmu.topik_bidang_ilmu', 'dosen.name as nama_dosen')
                 ->where('id_pengajuan_judul',$id)->first(),
         ];
@@ -51,7 +51,7 @@ class KoordinatorJudulController extends Controller
     {
         $request->validate([
             'action' => 'required|string|in:terima,tolak',
-            'user_id' => 'required|integer',
+            'users_id' => 'required|integer',
             'pengajuan_id' => 'required|integer',
             'bidang_ilmu_id' => 'required|integer',
             'dosen_pembimbing_utama' => 'required|string',
@@ -69,7 +69,7 @@ class KoordinatorJudulController extends Controller
         if ($action === 'terima') {
             $bp = new BimbinganProposal();
             $bp->fill($request->only([
-                'user_id',
+                'users_id',
                 'pengajuan_id',
                 'bidang_ilmu_id',
                 'dosen_pembimbing_utama',

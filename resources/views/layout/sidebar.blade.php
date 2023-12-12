@@ -36,7 +36,7 @@
               <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Seminar Proposal</a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pengajuan-st.index') }}" class="nav-link">Surat Tugas Bimbingan</a>
+              <a href="{{ route('pengajuan-st.check') }}" class="nav-link">Surat Tugas Bimbingan</a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>

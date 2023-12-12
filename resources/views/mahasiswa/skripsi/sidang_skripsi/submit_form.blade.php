@@ -80,7 +80,7 @@ Daftar Sidang Skripsi
                                 <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
                                 <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
                             </div>
-                            {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}"> --}}
+                            {{-- <input type="hidden" name="users_id" value="{{Auth::user()->id}}"> --}}
                             <input type="hidden" name="id_bimbingan_skripsi" value="{{$datas->id_bimbingan_skripsi}}">
                             <div class="mb-3">
                                 <label for="skripsi_file" class="form-label">Upload File Skripsi</label>

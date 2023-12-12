@@ -11,7 +11,7 @@ class KajurDataBidangIlmuController extends Controller
     {
         // Use get() to execute the query and get the results as an array of objects
         $databi = DB::table('bidang_ilmu')
-        ->join('users', 'users.id', 'bidang_ilmu.user_id')
+        ->join('users', 'users.id', 'bidang_ilmu.users_id')
         ->get();
 
         return view('kajur.bidang_ilmu.index', compact('databi'));

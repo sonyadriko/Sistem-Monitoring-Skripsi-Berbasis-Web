@@ -168,7 +168,7 @@ Detail Pengajuan Sidang Skripsi
               <input class="form-control" name="time" type="time" value="{{$data->jam}}" id="html5-time-input" readonly />
             </div>
           </div>
-          <input type="hidden" name="user_id" value="{{$data->users_id}}" />
+          <input type="hidden" name="users_id" value="{{$data->users_id}}" />
           <input type="hidden" name="sidang_skripsi_id" value="{{$data->id_sidang_skripsi}}" />
 
           <div class="d-flex justify-content-between mt-4">

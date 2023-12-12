@@ -244,6 +244,8 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
         Route::get('/', [KoordinatorSuratTugasController::class, 'index'])->name('koor-surat-tugas.index');
         Route::get('/detail/{id}', [KoordinatorSuratTugasController::class, 'detail'])->name('koor-surat-tugas.detail');
         Route::post('/update/{id}', [KoordinatorSuratTugasController::class, 'update'])->name('koor-surat-tugas.update');
+        Route::post('/tolak/{id}', [KoordinatorSuratTugasController::class, 'tolaksurat'])->name('koor-surat-tugas-tolak');
+
     });
 
     Route::controller(PembagianDosenController::class)->group(function ()
@@ -343,6 +345,9 @@ Route::group(['middleware' => 'auth:mahasiswa'], function () {
     Route::controller(SuratTugasController::class)->group(function (){
         Route::get('/surat_tugas', 'index')->name('pengajuan-st.index');
         Route::post('/surat_tugas', 'store')->name('pengajuan-st.store');
+        Route::get('/surat_tugas/check-status', 'checkStatus')->name('pengajuan-st.check');
+        Route::get('/surat_tugas/status/{id}', 'showStatus')->name('pengajuan-st.show');
+        Route::get('/submit-form', 'create')->name('pengajuan-st.submit-form');
     });
 
     Route::controller(FAQController::class)->group(function () {
