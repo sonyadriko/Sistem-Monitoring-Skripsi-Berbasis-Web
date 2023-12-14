@@ -30,14 +30,11 @@ Daftar Surat Tugas
     <div class="col-lg-12">
             @if ($datas->status == 'pending')
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Surat Tugas  </h4>
-                </div>
                 <div class="card-body">
                     <h4 class="card-title mb-0">Pendaftaran Surat Tugas telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dicetak.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
-                        <div class="alert alert-secondary" role="alert">
+                        <div class="alert alert-secondary mt-3" role="alert">
                             Tunggu diperiksa koordinator.
                         </div>
                     </h4>
@@ -45,54 +42,72 @@ Daftar Surat Tugas
             </div>
             @elseif ($datas->status == 'terima')
             <div class="card mb-3">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Surat Tugas </h4>
-                </div>
                 <div class="card-body">
-                    <h4 class="card-title mb-0">Pendaftaran Surat Tugas telah disubmit.</h4>
+                    <h4 class="card-title mb-3" style="font-weight: bold">Pendaftaran Surat Tugas telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dicetak.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
-                        <div class="alert alert-success" role="alert">
-                            Selamat.
+                        <div class="alert alert-success mt-3" role="alert">
+                            Selamat, Pengajuan surat tugas anda sudah di acc. Surat tugas dapat diambil di CSR Jurusan.
                         </div>
                     </h4>
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
+                    <h4 class="card-title mb-0">Detail Surat Tugas.</h4>
                 </div>
-                <div class="card-body">
-                    <table class="table table-borderless datatables-basic"/>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>NPM</td>
-                                    <td>{{$datas->kode_unik}}</td>
-                                    <td>Nama</td>
-                                    <td>{{$datas->name}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Tema / Judul</td>
-                                    <td>{{$datas->judul}}</td>
-                                    <td>Nomor Surat Tugas</td>
-                                    <td>{{$datas->nomor_surat_tugas}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal Terbit</td>
-                                    @php
-                                        $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal_terbit);
-                                        $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-                                    @endphp
-                                    <td>{{$formatTanggal}}</td>
-                                    <td>Tanggal Kadaluwarsa</td>
-                                    @php
+                <div class="card-body table-responsive">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">NPM</label>
+                                <p><span>{{ $datas->kode_unik }}</span></p>
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">Nama</label>
+                                <p><span>{{ $datas->name }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">Tema / Judul</label>
+                                <p><span>{{ $datas->judul }}</span></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">Nomor Surat Tugas</label>
+
+                                <p><span>{{ $datas->nomor_surat_tugas }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">Tanggal Terbit</label>
+                                @php
+                                    $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal_terbit);
+                                    $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                                @endphp
+                                <p><span>{{ $formatTanggal }}</span></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: bold">Tanggal Kadaluwarsa</label>
+                                @php
                                         $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal_kadaluwarsa);
                                         $formatTanggal2 = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                                     @endphp
-                                    <td>{{$formatTanggal2}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <p><span>{{ $formatTanggal2 }}</span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif

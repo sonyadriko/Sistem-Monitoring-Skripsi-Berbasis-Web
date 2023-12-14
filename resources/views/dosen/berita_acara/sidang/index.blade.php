@@ -30,7 +30,7 @@ Berita Acara Sidang Skripsi
                 <p class="card-title-desc">Jadwal Sidang Skripsi sebagai dosen penguji dapat dilihat pada tabel dibawah ini.</code>.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

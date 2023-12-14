@@ -19,7 +19,7 @@ Bimbingan Proposal
     <h4 class="mb-3 mb-md-0">Bimbingan Proposal</h4>
   </div>
 </div>
-<h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>
+<h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</h6>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         @if(is_null($dosens) || is_null($dosens->id_bimbingan_proposal))

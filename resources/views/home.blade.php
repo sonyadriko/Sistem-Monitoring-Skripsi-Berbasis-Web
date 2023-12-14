@@ -23,7 +23,6 @@ Dashboard
 <h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi</h6>
 
 
-
 <div class="row">
     <div class="col-lg-12 col-xl-12 grid-margin stretch-card">
         <div class="card">
@@ -33,18 +32,17 @@ Dashboard
                     <div class="progress-bar" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">{{ $progressPercentage }}%</div>
                 </div>
                 {{-- <div class="progress-text">
-                    <ul class="list-inline" style="display: flex;width: {{ $progressPercentage }}%;">
+                    <ul class="list-inline" style="display: flex; width: {{ $progressPercentage }}%;">
                         @foreach($tables as $table)
                             <li class="list-inline-item">{{ $table }}</li>
                         @endforeach
                     </ul>
-                </div> --}}
-
-
-
-
-
-
+                </div>
+                @if ($progressPercentage == 12.5)
+                    <div class="additional-text">
+                        Text 1
+                    </div>
+                @endif --}}
             </div>
         </div>
     </div>

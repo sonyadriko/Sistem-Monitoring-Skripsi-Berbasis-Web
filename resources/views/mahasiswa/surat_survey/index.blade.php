@@ -14,6 +14,11 @@ Pengajuan Tema
 @endsection
 
 @section('content')
+<style>
+    .wizard > .content {
+        min-height: 50em; /* Menggunakan auto untuk menghilangkan batasan minimum tinggi */
+    }
+</style>
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>

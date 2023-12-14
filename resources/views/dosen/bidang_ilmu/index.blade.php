@@ -32,8 +32,7 @@ Topik
                     <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
                 </div>
             </div>
-
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

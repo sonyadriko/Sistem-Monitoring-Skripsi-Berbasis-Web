@@ -30,7 +30,7 @@ Bimbingan Skripsi
                 <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</code>.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

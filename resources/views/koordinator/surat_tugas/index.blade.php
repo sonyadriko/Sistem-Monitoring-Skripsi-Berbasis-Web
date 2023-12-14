@@ -25,7 +25,7 @@ Surat Tugas
                 <p class="card-title-desc">Tabel dibawah ini merupakan pengajuan surat tugas bimbingan skripsi yang telah dilakukan mahasiswa.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

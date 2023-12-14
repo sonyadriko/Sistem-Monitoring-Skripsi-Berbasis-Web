@@ -19,7 +19,7 @@ Bimbingan Skripsi
     <h4 class="mb-3 mb-md-0">Bimbingan Skripsi</h4>
   </div>
 </div>
-<h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini, silahkan melaporkan jika terjadi error atau bug pada sistem yang sedang digunakan.</h6>
+<h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</h6>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         @if(is_null($bimbingans) || is_null($bimbingans->id_bimbingan_skripsi))

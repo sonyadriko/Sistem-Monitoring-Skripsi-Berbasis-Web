@@ -7,7 +7,7 @@ Login
 @section('content')
 <div class="page-content d-flex align-items-center justify-content-center">
 
-  <div class="row w-100 mx-0 auth-page">
+  <div class="row w-75 mx-0 auth-page">
     <div class="col-md-8 col-xl-6 mx-auto">
       <div class="card">
         <div class="row">
@@ -53,9 +53,9 @@ Login
                 <div class="row mb-0">
                     <div class="col-md-8 offset-md-4">
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <a href="{{ route('password.request') }}" class="btn btn-link">
+                        {{-- <a href="{{ route('password.request') }}" class="btn btn-link">
                             Forgot Your Password?
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </form>

@@ -29,7 +29,7 @@ Daftar Surat Tugas
 <div class="row">
     <div class="col-lg-12">
         <div class="alert alert-warning" role="alert">
-            Harap melakukan pengajuan judul terlebih dahulu.
+            Selesaikan tahap yang sebelumnya terlebih dahulu.
         </div>
         <!-- end card -->
     </div>

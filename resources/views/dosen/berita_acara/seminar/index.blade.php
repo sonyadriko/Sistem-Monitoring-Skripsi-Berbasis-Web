@@ -30,7 +30,7 @@ Berita Acara Seminar Proposal
                 <p class="card-title-desc">Jadwal Seminar Proposal sebagai dosen penguji dapat dilihat pada tabel dibawah ini.</code>.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

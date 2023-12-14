@@ -29,7 +29,7 @@ Ruangan
                     <a href="{{ route('ruangan.create') }}" class="btn btn-success">Tambah Ruangan</a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

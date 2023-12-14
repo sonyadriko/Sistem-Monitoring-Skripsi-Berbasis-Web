@@ -25,7 +25,7 @@ Pengajuan Tema
                 <p class="card-title-desc">List pengajuan judul dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>

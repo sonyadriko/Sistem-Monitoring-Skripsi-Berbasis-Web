@@ -34,8 +34,7 @@ Topik
                     <a href="{{ url('/koordinator/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
                 </div>
             </div>
-
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
