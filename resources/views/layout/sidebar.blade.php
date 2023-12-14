@@ -41,9 +41,9 @@
             <li class="nav-item">
                 <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </li>
