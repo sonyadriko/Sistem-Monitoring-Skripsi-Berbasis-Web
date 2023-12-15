@@ -25,36 +25,48 @@ Detail Revisi Sidang Skripsi
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label">NPM </label>
-                            <input type="text" class="form-control" value="{{ $data->kode_unik }}" readonly>
+                            <label class="form-label" style="font-weight: bold">NPM </label>
+                            <p><span>{{ $data->kode_unik }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{ $data->kode_unik }}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label">Nama </label>
-                            <input type="text" class="form-control" value="{{ $data->name }}" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label class="form-label">Bidang Ilmu </label>
-                            <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly>
+                            <label class="form-label" style="font-weight: bold">Nama </label>
+                            <p><span>{{ $data->name }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{ $data->name }}" readonly> --}}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label">Dosen Pembimbing Utama </label>
-                            <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_utama }}" readonly>
+                            <label class="form-label" style="font-weight: bold">Bidang Ilmu </label>
+                            <p><span>{{ $data->judul }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label">Nama </label>
-                            <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly>
+                            <label class="form-label" style="font-weight: bold">Bidang Ilmu </label>
+                            <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly> --}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing Utama </label>
+                            <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_utama }}" readonly> --}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing II </label>
+                            <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly> --}}
                         </div>
                     </div>
                 </div>

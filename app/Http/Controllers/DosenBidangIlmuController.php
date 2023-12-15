@@ -16,7 +16,7 @@ class DosenBidangIlmuController extends Controller
         $bi = DB::table('detail_bidang_ilmu')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'detail_bidang_ilmu.bidang_ilmu_id')
         ->join('users', 'users.id', 'detail_bidang_ilmu.users_id')
-        ->where('users_id', Auth::user()->id)
+        ->where('detail_bidang_ilmu.users_id', Auth::user()->id)
         ->get();
         return view('dosen/bidang_ilmu.index', compact('bi'));
     }
