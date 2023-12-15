@@ -132,76 +132,88 @@ Seminar Proposal
               @csrf
               <div class="mb-3 row">
                 <div class="col-md-6">
-                    <label for="npm" class="form-label">NPM</label>
-                    <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="npm" class="form-label" style="font-weight: bold">NPM</label>
+                    <p><span>{{ $data->kode_unik }}</span></p>
+                    {{-- <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
-                    <label for="name" class="form-label">Nama Mahasiswa</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="name" class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
+                    <p><span>{{ $data->name }}</span></p>
+                    {{-- <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
-                    <label for="npm" class="form-label">Judul</label>
-                    <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="npm" class="form-label" style="font-weight: bold">Judul</label>
+                    <p><span>{{ $data->judul }}</span></p>
+                    {{-- <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
-                    <label for="bidang_ilmu" class="form-label">Bidang Ilmu</label>
-                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
+                    <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
+                    {{-- <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
-                    <label for="dospem_utama" class="form-label">Dosen Pembimbing 1</label>
-                    <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="dospem_utama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
+                    <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                    {{-- <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
-                    <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
-                    <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <label for="dospem_2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
+                    <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                    {{-- <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
-              <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">File Proposal</label>
+              <div class="mb-3 row">
+                <div class="col-md-6">
+                <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Proposal</label>
                   {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                   <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p>
-              </div>
-              <div class="mb-3">
-                <label for="defaultFormControlInput" class="form-label">File Slip Pembayaran</label>
+                </div>
+                <div class="col-md-6">
+                <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Slip Pembayaran</label>
                   {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                   <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
-              </div>
+                </div>
+            </div>
               <div class="mb-3 row">
                 <div class="col-md-6">
 
-                <label for="dosen_penguji_1" class="form-label">Ketua Seminar/Dosen Penguji 1</label>
-                <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data2->nama_penguji_1}}" readonly />
+                <label for="dosen_penguji_1" class="form-label" style="font-weight: bold">Ketua Seminar/Dosen Penguji 1</label>
+                <p><span>{{ $data2->nama_penguji_1 }}</span></p>
+                {{-- <input type="text" class="form-control" id="dosen_penguji_1" name="dosen_penguji_1" value="{{$data2->nama_penguji_1}}" readonly /> --}}
               </div>
               <div class="col-md-6">
-                <label for="dosen_penguji_2" class="form-label">Dosen Penguji 2</label>
-                <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data2->nama_penguji_2}}" readonly />
+                <label for="dosen_penguji_2" class="form-label" style="font-weight: bold">Dosen Penguji 2</label>
+                <p><span>{{ $data2->nama_penguji_2 }}</span></p>
+                {{-- <input type="text" class="form-control" id="dosen_penguji_2" name="dosen_penguji_2" value="{{$data2->nama_penguji_2}}" readonly /> --}}
               </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-4">
-                  <label for="ruanganSeminar" class="form-label">Ruangan Seminar</label>
-
-                    <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data2->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/>
+                  <label for="ruanganSeminar" class="form-label" style="font-weight: bold">Ruangan Seminar</label>
+                  <p><span>{{ $data2->nama_ruangan }}</span></p>
+                    {{-- <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data2->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/> --}}
                 </div>
                 <div class="col-md-4">
-                    <label for="date" class="form-label">Date</label>
+                    <label for="date" class="form-label" style="font-weight: bold">Date</label>
                     @php
                         $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
                         $formatTanggal = ucfirst($carbonTanggal->formatLocalized('%A, %d %B %Y', strftime('%A')));
                     @endphp
-                    <input class="form-control" name="date" type="text" value="{{$formatTanggal}}" readonly />
+                    <p><span>{{ $formatTanggal }}</span></p>
+                    {{-- <input class="form-control" name="date" type="text" value="{{$formatTanggal}}" readonly /> --}}
                 </div>
                 <div class="col-md-4">
-                    <label for="time" class="form-label">Time</label>
+                    <label for="time" class="form-label" style="font-weight: bold">Time</label>
                     @php
                         $carbonJam = \Carbon\Carbon::parse($data->jam);
                         $formatJam = $carbonJam->format('H:i');
                     @endphp
-                    <input class="form-control" name="time" type="text" value="{{$formatJam}}" id="time" readonly />
+                    <p><span>{{ $formatJam }}</span></p>
+                    {{-- <input class="form-control" name="time" type="text" value="{{$formatJam}}" id="time" readonly /> --}}
                 </div>
               </div>
               <input type="hidden" name="users_id" value="{{$data2->users_id}}" />
