@@ -70,15 +70,24 @@ Detail Surat Tugas
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                  @if($data->status == 'pending')
                   <button type="submit" id="submitBtn" class="btn btn-primary">Cetak</button>
+                  @elseif($data->status == 'terima')
+                  <p>Data ini telah diterima.</p>
+                  @elseif($data->status == 'tolak')
+                  <p>Data ini telah ditolak.</p>
+                    @endif
                 </div>
             </form>
+
             <form action="{{ route('koor-surat-tugas-tolak', ['id' => $data->id_surat_tugas]) }}" method="POST">
                 @csrf
                 <!-- ... form fields ... -->
+                @if($data->status == 'pending')
                 <div style="display: flex; justify-content: flex-end;">
                     <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
                 </div>
+                @endif
             </form>
           </div>
         </div>

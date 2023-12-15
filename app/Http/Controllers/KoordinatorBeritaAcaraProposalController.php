@@ -32,10 +32,11 @@ class KoordinatorBeritaAcaraProposalController extends Controller
                 ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
                 ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
                 ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+                ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->where('id_berita_acara_p', '=', $id)
-                ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*', 'ruangan.nama_ruangan','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2')
+                ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*', 'ruangan.nama_ruangan','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'pengajuan_judul.judul')
                 ->first(),
         ];
 
