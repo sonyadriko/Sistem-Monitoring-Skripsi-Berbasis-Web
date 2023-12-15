@@ -22,48 +22,75 @@ Detail Berita Acara Proposal
         <div class="card mb-3">
             <h5 class="card-header">Berita Acara Seminar Proposal</h5>
             {{-- <p class="card-header">Dosen penguji dapat mengisi berita acara seminar proposal dibawah ini</p> --}}
-            <div class="card-body">
-                <div class="card-datatable table-responsive  pt-0">
-                <table class="table table-borderless datatables-basicd border-top"/>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>NPM</td>
-                            <td>{{$data->kode_unik}}</td>
-                            <td>No. Ujian</td>
-                            <td>{{$data->id_berita_acara_p}}</td>
-                        </tr>
-                        <tr>
-                            <td>Nama</td>
-                            <td>{{$data->name}}</td>
+            <div class="card-body table-responsive">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">NPM </label>
+                            <p><span>{{ $data->kode_unik }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">No. Ujian </label>
+                            <p><span>{{ $data->id_berita_acara_p }}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Nama </label>
+                            <p><span>{{ $data->name }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Tanggal</label>
                             @php
                             $dateFromDatabase = $data->tanggal;
                             $formattedDate = date('d F Y', strtotime($dateFromDatabase));
-                            // echo $formattedDate; // Hasil: 28 Juni 2021
-
                             @endphp
-                            <td>Hari Tanggal</td>
-                            <td>{{$formattedDate}}</td>
-                        </tr>
-                        <tr>
-                            <td>Tema / Judul</td>
-                            <td>{{$data->topik_bidang_ilmu}}</td>
-                            <td>Ruang, Waktu</td>
-                            <td>{{$data->nama_ruangan}}, {{$data->jam}}</td>
-                        </tr>
-                        <tr>
-                            <td>Dosen Pembimbing 1</td>
-                            <td>{{$data->dosen_pembimbing_utama}}</td>
-                            <td>Dosen Pembimbing 2</td>
-                            <td>{{$data->dosen_pembimbing_ii}}</td>
-                        </tr>
-                        <tr>
-                            <td>Dosen Penguji</td>
-                            <td>{{$data->nama_penguji_1}}<br/>
-                                {{$data->nama_penguji_2}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <p><span>{{ $formattedDate }}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Judul </label>
+                            <p><span>{{ $data->judul }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Ruang, Waktu </label>
+                            <p><span>{{$data->nama_ruangan}}, {{$data->jam}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1 </label>
+                            <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2 </label>
+                            <p><span>{{$data->dosen_pembimbing_ii}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
+                            <p><span>{{$data->nama_penguji_1}}<br/>
+                                {{$data->nama_penguji_2}}</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

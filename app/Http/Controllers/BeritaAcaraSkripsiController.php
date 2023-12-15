@@ -44,8 +44,10 @@ class BeritaAcaraSkripsiController extends Controller
             ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
             ->where('id_berita_acara_s', '=', $id)
-            ->select('berita_acara_skripsi.*', 'users.*', 'sidang_skripsi.*', 'bidang_ilmu.*', 'bimbingan_skripsi.*', 'bimbingan_proposal.*', 'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3')
+            ->select('berita_acara_skripsi.*', 'users.*', 'sidang_skripsi.*', 'bidang_ilmu.*', 'bimbingan_skripsi.*', 'bimbingan_proposal.*', 'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3', 'pengajuan_judul.judul', 'ruangan.nama_ruangan')
             ->first(),
         ];
         return view('dosen/berita_acara/sidang.detail', $data);

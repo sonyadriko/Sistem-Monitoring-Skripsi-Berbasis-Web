@@ -48,7 +48,7 @@ Detail Revisi Seminar Proposal
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Bidang Ilmu </label>
+                            <label class="form-label" style="font-weight: bold">Bidang Ilmu</label>
                             <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
                             {{-- <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly> --}}
                         </div>
