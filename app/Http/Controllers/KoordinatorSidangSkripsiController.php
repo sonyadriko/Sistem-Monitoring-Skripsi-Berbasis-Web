@@ -63,29 +63,40 @@ class KoordinatorSidangSkripsiController extends Controller
             'ruanganSeminar' => 'required',
             'date' => 'required|date',
             'time' => 'required',
+        ], [
+            'required' => 'Field :attribute harus diisi.',
+            'date' => 'Field :attribute harus berupa tanggal yang valid.',
         ]);
 
-        // Temukan data sidang skripsi berdasarkan ID
-        $sidangSkripsi = SidangSkripsi::find($id);
+        try {
+            $sidangSkripsi = SidangSkripsi::find($id);
 
-        if ($sidangSkripsi) {
-            // Update data sidang skripsi
-            $sidangSkripsi->update([
-                'dosen_penguji_1' => $request->input('dosenPenguji1'),
-                'dosen_penguji_2' => $request->input('dosenPenguji2'),
-                'dosen_penguji_3' => $request->input('dosenPenguji3'),
-                'ruangan' => $request->input('ruanganSeminar'),
-                'tanggal' => $request->input('date'),
-                'jam' => $request->input('time'),
-                'status' => 'terima',
-            ]);
+            if ($sidangSkripsi) {
+                // Update data sidang skripsi
+                $sidangSkripsi->update([
+                    'dosen_penguji_1' => $request->input('dosenPenguji1'),
+                    'dosen_penguji_2' => $request->input('dosenPenguji2'),
+                    'dosen_penguji_3' => $request->input('dosenPenguji3'),
+                    'ruangan' => $request->input('ruanganSeminar'),
+                    'tanggal' => $request->input('date'),
+                    'jam' => $request->input('time'),
+                    'status' => 'terima',
+                ]);
 
-            // Redirect dengan pesan sukses
-            return redirect()->route('jadwal-sidang-skripsi.index')->with('success', 'Jadwal Sidang Skripsi berhasil diperbarui.');
-        } else {
-            // Redirect dengan pesan error jika data sidang skripsi tidak ditemukan
-            return redirect()->route('jadwal-sidang-skripsi.index')->with('error', 'Jadwal Sidang Skripsi tidak ditemukan.');
+                // Redirect dengan pesan sukses
+                return redirect()->back()->with('success', 'Berhasil Mengatur Jadwal.');
+                // return redirect()->route('jadwal-sidang-skripsi.index')->with('success', 'Jadwal Sidang Skripsi berhasil diperbarui.');
+            }
+        } catch (\Exception $e) {
+            // Berikan respons JSON dengan informasi kesalahan
+            return redirect()->back()->with('error', 'Terjadi Kesalahan.');
         }
+        // Temukan data sidang skripsi berdasarkan ID
+
+        // } else {
+        //     // Redirect dengan pesan error jika data sidang skripsi tidak ditemukan
+        //     return redirect()->route('jadwal-sidang-skripsi.index')->with('error', 'Jadwal Sidang Skripsi tidak ditemukan.');
+        // }
     }
     public function createberitaacara(Request $request, $id)
     {

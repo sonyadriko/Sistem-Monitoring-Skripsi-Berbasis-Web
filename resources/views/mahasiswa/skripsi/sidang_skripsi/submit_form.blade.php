@@ -85,7 +85,7 @@ Daftar Sidang Skripsi
                             <div class="mb-3">
                                 <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
                                 <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                 @error('skripsi_file')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
