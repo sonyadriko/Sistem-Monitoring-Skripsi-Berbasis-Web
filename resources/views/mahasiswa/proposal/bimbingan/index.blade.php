@@ -50,7 +50,7 @@ Bimbingan Proposal
                             <div class="mb-3">
                                 <label for="file_proposal" class="form-label">Upload File Proposal</label>
                                 <input class="form-control" type="file" id="file_proposal" name="file_proposal" id="slip_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                     @error('file_proposal')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror

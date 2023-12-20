@@ -76,44 +76,54 @@ Seminar Proposal
                     </div>
                     <div class="mb-3">
                         <label for="select1" class="form-label" style="font-weight: bold">Ketua Seminar/Dosen Penguji 1</label>
-                        <select class="form-select" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
-                            <option value="" selected disabled>Open this select menu</option>
+                        <select class="form-select @error('dosen_penguji_1') is-invalid @enderror" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
+                            <option value="" selected disabled>Pilih dosen penguji 1</option>
                             @foreach($baru as $datas)
                                 @if($datas->id != $data->dosen_pembimbing_utama)
                                     <option value="{{$datas->id}}">{{$datas->name}}</option>
                                 @endif
                             @endforeach
                         </select>
+                        @error('dosen_penguji_1')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                    <label for="select2" class="form-label" style="font-weight: bold">Dosen Penguji 2</label>
-                    <select class="form-select" id="select2" name="dosen_penguji_2" aria-label="Default select example">
-                        <option value="" selected disabled>Open this select menu</option>
-                    </select>
+                        <label for="select2" class="form-label" style="font-weight: bold">Dosen Penguji 2</label>
+                        <select class="form-select @error('dosen_penguji_2') is-invalid @enderror" id="select2" name="dosen_penguji_2" aria-label="Default select example">
+                            <option value="" selected disabled>Pilih dosen penguji 2</option>
+                        </select>
+                        @error('dosen_penguji_2')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="ruanganSeminar" class="form-label" style="font-weight: bold">Ruangan Seminar</label>
-                        </div>
-                        <div class="col">
-                            <select class="form-control" id="ruanganSeminar" name="ruanganSeminar">
+
+                            <select class="form-control @error('ruanganSeminar') is-invalid @enderror" id="ruanganSeminar" name="ruanganSeminar">
                                 <option value="" disabled selected>Pilih Ruangan</option>
                                 @foreach($listRuangan as $ruangan)
                                     <option value="{{ $ruangan->id_ruangan }}">{{ $ruangan->nama_ruangan }}</option>
                                 @endforeach
                             </select>
+                            @error('ruanganSeminar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="html5-date-input" class="form-label" style="font-weight: bold">Date</label>
+                            <input class="form-control @error('date') is-invalid @enderror" name="date" type="date" id="html5-date-input" />
+                            @error('date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col">
-                            <input class="form-control" name="date" type="date" id="html5-date-input" />
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="html5-time-input" class="form-label" style="font-weight: bold">Time</label>
-                        </div>
-                        <div class="col">
-                            <input class="form-control" name="time" type="time" id="html5-time-input" />
+                            <input class="form-control @error('time') is-invalid @enderror" name="time" type="time" id="html5-time-input" />
+                            @error('time')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
@@ -258,7 +268,7 @@ function updateSelectOptions() {
   var select2 = document.getElementById("select2");
 
   // Clear existing options in select2
-  select2.innerHTML = '<option value="" selected disabled>Open this select menu</option>';
+  select2.innerHTML = '<option value="" selected disabled>Pilih dosen penguji 2</option>';
 
   // Get the selected option from select1
   var selectedOption = select1.options[select1.selectedIndex];
@@ -284,29 +294,111 @@ function showConfirmation2() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Sumbit!'
+        confirmButtonText: 'Ya, Submit!'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Submit form only if "Ya" is clicked
-            document.getElementById('submitForm').submit();
+            // Perform form validation
+            var formIsValid = true;
+
+            // Validate dosen_penguji_1
+            var dosenPenguji1 = document.getElementById('select1').value;
+            if (!dosenPenguji1) {
+                formIsValid = false;
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Dosen Penguji 1 harus dipilih.',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Validate dosen_penguji_2
+            var dosenPenguji2 = document.getElementById('select2').value;
+            if (!dosenPenguji2) {
+                formIsValid = false;
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Dosen Penguji 2 harus dipilih.',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Validate ruanganSeminar
+            var ruanganSeminar = document.getElementById('ruanganSeminar').value;
+            if (!ruanganSeminar) {
+                formIsValid = false;
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ruangan Seminar harus dipilih.',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Validate date
+            var date = document.getElementById('html5-date-input').value;
+            if (!date) {
+                formIsValid = false;
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Tanggal harus diisi.',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Validate time
+            var time = document.getElementById('html5-time-input').value;
+            if (!time) {
+                formIsValid = false;
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Waktu harus diisi.',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Jika formulir valid, submit formulir
+            if (formIsValid) {
+                // Tampilkan pesan sukses sebelum reload
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Data berhasil disubmit.',
+                    icon: 'success',
+                }).then(() => {
+                    // Submit form
+                    document.getElementById('submitForm').submit();
+                });
+            }
         }
     });
 }
 
 
-  function showConfirmation() {
-      Swal.fire({
-          title: 'Apakah Anda yakin ingin mencetak?',
-          text: 'Pastikan data sudah benar sebelum mencetak.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Cetak!'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              document.getElementById('cetakForm').submit();
-          }
-      });
-  }
+function showConfirmation() {
+    Swal.fire({
+        title: 'Apakah Anda yakin ingin mencetak?',
+        text: 'Pastikan data sudah benar sebelum mencetak.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Cetak!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Tampilkan pesan sukses sebelum reload
+            Swal.fire({
+                title: 'Success',
+                text: 'Data berhasil dicetak.',
+                icon: 'success',
+            }).then(() => {
+                // Submit form cetak
+                document.getElementById('cetakForm').submit();
+            });
+        }
+    });
+}
+
   </script>

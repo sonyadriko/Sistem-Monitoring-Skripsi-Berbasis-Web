@@ -68,7 +68,7 @@
 					</div>
 
 					<p class="text-muted mb-2">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
-					<p>Lihat lebih banyak</p>
+					{{-- <p>Lihat lebih banyak</p> --}}
 				</div>
 			</div>
 		</div>

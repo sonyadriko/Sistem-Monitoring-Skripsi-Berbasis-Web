@@ -68,24 +68,40 @@ class KoordinatorSeminarController extends Controller
 
     public function updatejadwal(Request $request, $id)
     {
-    $data = SeminarProposal::where('id_seminar_proposal', $id)->first();
+        $validatedData = $request->validate([
+            'dosen_penguji_1' => 'required',
+            'dosen_penguji_2' => 'required',
+            'ruanganSeminar' => 'required',
+            'date' => 'required|date',
+            'time' => 'required',
+        ], [
+            'required' => 'Field :attribute harus diisi.',
+            'date' => 'Field :attribute harus berupa tanggal yang valid.',
+        ]);
 
-    if (!$data) {
-        return redirect()->back()->with('error', 'Data not found.');
-    }
+        try {
+            $data = SeminarProposal::where('id_seminar_proposal', $id)->first();
 
-    // Update the fields
-    $data->dosen_penguji_1 = $request->input('dosen_penguji_1');
-    $data->dosen_penguji_2 = $request->input('dosen_penguji_2');
-    $data->ruangan = $request->input('ruanganSeminar');
-    $data->status = 'terima';
-    $data->tanggal = $request->input('date');
-    $data->jam = $request->input('time');
+            if (!$data) {
+                return redirect()->back()->with('error', 'Data not found.');
+            }
 
-    // Save the updated data
-    $data->save();
+            $data->dosen_penguji_1 = $validatedData['dosen_penguji_1'];
+            $data->dosen_penguji_2 = $validatedData['dosen_penguji_2'];
+            $data->ruangan = $validatedData['ruanganSeminar'];
+            $data->status = 'terima';
+            $data->tanggal = $validatedData['date'];
+            $data->jam = $validatedData['time'];
 
-    return redirect()->back()->with('success', 'Data updated successfully.');
+            // Save the updated data
+            $data->save();
+
+            // return redirect()->back()->with('success', 'Data updated successfully.');
+            return redirect()->back()->with('success', 'Operasi berhasil.');
+        } catch (\Exception $e) {
+            // Berikan respons JSON dengan informasi kesalahan
+            return redirect()->back()->with('error', 'Terjadi Kesalahan.');
+        }
     }
 
     public function tolakJadwal(Request $request, $id)

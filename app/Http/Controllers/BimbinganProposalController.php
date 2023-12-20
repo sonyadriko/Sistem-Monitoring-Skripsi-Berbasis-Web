@@ -31,10 +31,10 @@ class BimbinganProposalController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'file_proposal' => 'required|mimes:pdf|max:1000',
+            'file_proposal' => 'required|mimes:pdf|max:5000',
             'file_proposal.required' => 'File proposal wajib diunggah.',
             'file_proposal.mimes' => 'Tipe file harus pdf.',
-            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (1000 KB).',
+            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (5000 KB).',
         ]);
 
         if ($request->hasFile('file_proposal')) {

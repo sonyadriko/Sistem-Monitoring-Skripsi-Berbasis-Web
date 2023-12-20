@@ -85,7 +85,7 @@ Daftar Seminar Proposal
                             <div class="mb-3">
                                 <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
                                 <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                 @error('proposal_file')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -163,12 +163,55 @@ Daftar Seminar Proposal
     }
 
     function saveChanges() {
-        // Gather form data
-        var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+    // Gather form data
+        var form = $('#yourFormId')[0]; // Ganti 'yourFormId' dengan ID sebenarnya formulir Anda
+        var formData = new FormData(form);
 
-        // Standard form submission
-        form.submit();
+        // Menggunakan AJAX untuk mengirim formulir
+        $.ajax({
+            type: 'POST',
+            url: form.action,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+            // Display success message
+                Swal.fire({
+                    title: 'Success',
+                    text: response.message, // Adjust to the actual response message
+                    icon: 'success',
+                }).then((result) => {
+                    // Redirect to /dashboard after pressing "OK"
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.href = '/dashboard';
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                // Tangani kesalahan jika respons dari server mengandung kesalahan
+                var errorResponse = xhr.responseJSON;
+
+                if (errorResponse && errorResponse.errors) {
+                    // Jika terdapat kesalahan validasi dari server, tampilkan pesan kesalahan
+                    var errorMessage = Object.values(errorResponse.errors).flat().join('<br>');
+                    Swal.fire({
+                        title: 'Error',
+                        html: errorMessage,
+                        icon: 'error',
+                    });
+                } else {
+                    // Jika kesalahan bukan karena validasi, tampilkan pesan kesalahan umum
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred while processing your request. Please try again.',
+                        icon: 'error',
+                    });
+                }
+            }
+        });
     }
+
+
 });
 </script>
 @endpush
