@@ -40,13 +40,23 @@ class SidangSkripsiController extends Controller
             ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'pengajuan_judul.users_id')
             ->leftJoin('bimbingan_skripsi', 'bimbingan_skripsi.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
             ->leftJoin('sidang_skripsi', 'sidang_skripsi.users_id', 'pengajuan_judul.users_id')
-            ->select('pengajuan_judul.*', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'sidang_skripsi.status as sidang_status', 'bimbingan_proposal.dosen_pembimbing_utama')
+            ->select('pengajuan_judul.*', 'bimbingan_skripsi.id_bimbingan_skripsi', 'bimbingan_proposal.dosen_pembimbing_ii', 'bimbingan_skripsi.acc_dosen_utama', 'sidang_skripsi.id_sidang_skripsi', 'sidang_skripsi.status as sidang_status', 'bimbingan_proposal.dosen_pembimbing_utama')
             ->where('pengajuan_judul.users_id', Auth::user()->id)
             ->latest('sidang_skripsi.created_at')
             ->first();
 
         if (is_null($skripsiData) || is_null($skripsiData->id_bimbingan_skripsi)) {
             return view('mahasiswa/skripsi/sidang_skripsi.no_submission');
+        } elseif($skripsiData->dosen_pembimbing_ii == 'tidak ada'){
+            if(is_null($skripsiData->acc_dosen_utama)){
+                return view('mahasiswa/skripsi/sidang_skripsi.no_acc');
+            } elseif(is_null($skripsiData->id_sidang_skripsi)){
+                return view('mahasiswa/skripsi/sidang_skripsi.submit_form', compact('userData', 'datas'));
+            } else{
+                return redirect()->route('sidang-skripsi.status', $skripsiData->id_sidang_skripsi);
+            }
+        } elseif(is_null($skripsiData->acc_dosen_utama) || is_null($skripsiData->acc_dosen_ii)){
+            return view('mahasiswa/skripsi/sidang_skripsi.no_acc');
         } elseif (is_null($skripsiData->id_sidang_skripsi)) {
             return view('mahasiswa/skripsi/sidang_skripsi.submit_form', compact('userData', 'datas'));
         } else {

@@ -66,38 +66,28 @@ Pengajuan Surat Tugas
                             @csrf
                             <div class="mb-3">
                                 <label for="judulskripsi" class="form-label">Judul Skripsi</label>
-                                <input class="form-control" type="text" id="judulskripsi" value="{{$datas->judul}}" name="judulskripsi" placeholder="Masukan Dosen Pembimbing 1..." readonly />
-                                @error('judulskripsi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" type="text" id="judulskripsi" value="{{$datas->judul}}" name="judulskripsi" disabled />
+
                             </div>
                             <div class="mb-3">
                                 <label for="dospem1" class="form-label">Dosen Pembimbing 1</label>
-                                <input class="form-control" type="text" id="dospem1" name="dospem1" value="{{$datas->dosen_pembimbing_utama}}" readonly placeholder="Masukan Dosen Pembimbing 1..."/>
-                                @error('dospem1')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" type="text" id="dospem1" name="dospem1" value="{{$datas->dosen_pembimbing_utama}}" disabled />
+
                             </div>
                             <div class="mb-3">
                                 <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
-                                <input class="form-control" type="text" id="dospem2" name="dospem2" value="{{$datas->dosen_pembimbing_ii}}" readonly placeholder="Masukan Dosen Pembimbing 2..." />
-                                @error('dospem2')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" type="text" id="dospem2" name="dospem2" value="{{$datas->dosen_pembimbing_ii}}" disabled  />
+
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Mahasiswa</label>
-                                <input class="form-control" type="text" id="name" name="nama" value="{{Auth::user()->name}}" readonly autocomplete="nama" />
-                                @error('nama')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" type="text" id="name" name="nama" value="{{Auth::user()->name}}" disabled  />
+
                             </div>
                             <div class="mb-3">
                             <label for="npm" class="form-label">NPM Mahasiswa</label>
-                            <input class="form-control" type="text" id="npm" value="{{Auth::user()->kode_unik}}" name="npm" readonly/>
-                                @error('npm')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <input class="form-control" type="text" id="npm" value="{{Auth::user()->kode_unik}}" name="npm" disabled/>
+
                             </div>
                             <div class="mb-3">
                                 <label for="tanggal_sidang_proposal" class="form-label">Tanggal Sidang Proposal Skripsi</label>
@@ -109,7 +99,7 @@ Pengajuan Surat Tugas
                             <div class="mb-3">
                                 <label for="file_proposal" class="form-label">Upload File Proposal Skripsi</label>
                                 <input class="form-control" type="file" name="file_proposal" id="file_proposal" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                 @error('file_proposal')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -177,12 +167,60 @@ Pengajuan Surat Tugas
     }
 
 
-    function saveChanges() {
-        // Gather form data
-        var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+    // function saveChanges() {
+    //     // Gather form data
+    //     var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
 
-        // Standard form submission
-        form.submit();
+    //     // Standard form submission
+    //     form.submit();
+    // }
+    function saveChanges() {
+    // Gather form data
+        var form = $('#yourFormId')[0]; // Ganti 'yourFormId' dengan ID sebenarnya formulir Anda
+        var formData = new FormData(form);
+
+        // Menggunakan AJAX untuk mengirim formulir
+        $.ajax({
+            type: 'POST',
+            url: form.action,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+            // Display success message
+                Swal.fire({
+                    title: 'Success',
+                    text: response.message, // Adjust to the actual response message
+                    icon: 'success',
+                }).then((result) => {
+                    // Redirect to /dashboard after pressing "OK"
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.href = '/dashboard';
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                // Tangani kesalahan jika respons dari server mengandung kesalahan
+                var errorResponse = xhr.responseJSON;
+
+                if (errorResponse && errorResponse.errors) {
+                    // Jika terdapat kesalahan validasi dari server, tampilkan pesan kesalahan
+                    var errorMessage = Object.values(errorResponse.errors).flat().join('<br>');
+                    Swal.fire({
+                        title: 'Error',
+                        html: errorMessage,
+                        icon: 'error',
+                    });
+                } else {
+                    // Jika kesalahan bukan karena validasi, tampilkan pesan kesalahan umum
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred while processing your request. Please try again.',
+                        icon: 'error',
+                    });
+                }
+            }
+        });
     }
 });
 </script>

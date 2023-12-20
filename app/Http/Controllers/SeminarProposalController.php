@@ -49,13 +49,23 @@ class SeminarProposalController extends Controller
         $proposalData = DB::table('pengajuan_judul')
             ->leftJoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'pengajuan_judul.users_id')
             ->leftJoin('seminar_proposal', 'seminar_proposal.users_id', 'pengajuan_judul.users_id')
-            ->select('pengajuan_judul.*', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.id_seminar_proposal', 'seminar_proposal.status as seminar_status', 'bimbingan_proposal.dosen_pembimbing_utama')
+            ->select('pengajuan_judul.*', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_proposal.dosen_pembimbing_ii', 'bimbingan_proposal.acc_dosen_utama', 'bimbingan_proposal.acc_dosen_ii', 'seminar_proposal.id_seminar_proposal', 'seminar_proposal.status as seminar_status', 'bimbingan_proposal.dosen_pembimbing_utama')
             ->where('pengajuan_judul.users_id', Auth::user()->id)
             ->latest('seminar_proposal.created_at')
             ->first();
 
         if (is_null($proposalData) || is_null($proposalData->id_bimbingan_proposal)) {
             return view('mahasiswa/proposal/seminar_proposal.no_submission');
+        } elseif($proposalData->dosen_pembimbing_ii == 'tidak ada'){
+            if(is_null($proposalData->acc_dosen_utama)) {
+                return view('mahasiswa/proposal/seminar_proposal.no_acc');
+            }elseif (is_null($proposalData->id_seminar_proposal)) {
+                return view('mahasiswa/proposal/seminar_proposal.submit_form', compact('userData', 'datas'));
+            } else {
+                return redirect()->route('status.show', $proposalData->id_seminar_proposal);
+            }
+        } elseif(is_null($proposalData->acc_dosen_utama) || is_null($proposalData->acc_dosen_ii)){
+            return view('mahasiswa/proposal/seminar_proposal.no_acc');
         } elseif (is_null($proposalData->id_seminar_proposal)) {
             return view('mahasiswa/proposal/seminar_proposal.submit_form', compact('userData', 'datas'));
         } else {

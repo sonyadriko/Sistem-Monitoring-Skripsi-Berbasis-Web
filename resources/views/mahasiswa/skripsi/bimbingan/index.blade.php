@@ -50,7 +50,7 @@ Bimbingan Skripsi
                             <div class="mb-3">
                                 <label for="file_skripsi" class="form-label">Upload File Skripsi</label>
                                 <input class="form-control" type="file" id="file_skripsi" name="file_skripsi"  />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                     @error('file_skripsi')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -74,9 +74,16 @@ Bimbingan Skripsi
                                 <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
+                                @if(is_null($bimbingans->acc_dosen_utama))
+                                <button type="submit" class="btn btn-secondary" disabled">
+                                    Daftar
+                                </button>
+                                @else
+                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>
+                                @endif
                             </div>
                         </div>
                     </div>

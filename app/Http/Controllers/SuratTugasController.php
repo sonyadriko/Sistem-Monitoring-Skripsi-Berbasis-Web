@@ -92,43 +92,49 @@ class SuratTugasController extends Controller
             'users_id' => 'required|numeric',
             'bimbingan_proposal_id' => 'required|numeric',
             'tanggal_sidang_proposal' => 'required|date',
-            'file_proposal' => 'required|mimes:pdf|max:1000',
+            'file_proposal' => 'required|mimes:pdf|max:5000',
             'file_slip_pembayaran' => 'required|mimes:pdf|max:1000',
         ], [
-            'users_id.required' => 'User ID is required.',
-            'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID is required.',
-            'file_proposal.required' => 'File proposal is required.',
-            'file_proposal.mimes' => 'File proposal must be a PDF.',
-            'file_proposal.max' => 'File proposal may not be greater than 1000 KB.',
-            'file_slip_pembayaran.required' => 'File slip pembayaran is required.',
-            'file_slip_pembayaran.mimes' => 'File slip pembayaran must be a PDF.',
-            'file_slip_pembayaran.max' => 'File slip pembayaran may not be greater than 1000 KB.',
-
+            'users_id.required' => 'User ID wajib diisi.',
+            'bimbingan_proposal_id.required' => 'ID Bimbingan Proposal wajib diisi.',
+            'file_proposal.required' => 'File proposal wajib diunggah.',
+            'file_proposal.mimes' => 'File proposal harus berupa PDF.',
+            'file_proposal.max' => 'Ukuran file proposal tidak boleh lebih dari 5000 KB.',
+            'file_slip_pembayaran.required' => 'File slip pembayaran wajib diunggah.',
+            'file_slip_pembayaran.mimes' => 'File slip pembayaran harus berupa PDF.',
+            'file_slip_pembayaran.max' => 'Ukuran file slip pembayaran tidak boleh lebih dari 1000 KB.',
         ]);
 
-        // Generate unique file names
-        // $fileProposalName = uniqid() . '.' . $request->file('file_proposal')->getClientOriginalExtension();
-        $fileProposalName = $request->file('file_proposal')->getClientOriginalName();
-        $fileSlipPembayaranName = $request->file('file_slip_pembayaran')->getClientOriginalName();
-        // $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();
+        try {
+            // Generate unique file names
+            // $fileProposalName = uniqid() . '.' . $request->file('file_proposal')->getClientOriginalExtension();
+            $fileProposalName = $request->file('file_proposal')->getClientOriginalName();
+            $fileSlipPembayaranName = $request->file('file_slip_pembayaran')->getClientOriginalName();
+            // $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();
 
-        // Move the files to the appropriate directory
-        $userFolder = Auth::user()->name;
-        $request->file('file_proposal')->move(public_path("uploads/{$userFolder}/surat_tugas/"), $fileProposalName);
-        $request->file('file_slip_pembayaran')->move(public_path("uploads/{$userFolder}/surat_tugas/"), $fileSlipPembayaranName);
+            // Move the files to the appropriate directory
+            $userFolder = Auth::user()->name;
+            $request->file('file_proposal')->move(public_path("uploads/{$userFolder}/surat_tugas/"), $fileProposalName);
+            $request->file('file_slip_pembayaran')->move(public_path("uploads/{$userFolder}/surat_tugas/"), $fileSlipPembayaranName);
 
-        // Create a new SuratTugas instance
-        $suratTugas = new SuratTugas();
-        $suratTugas->users_id = $validatedData['users_id'];
-        $suratTugas->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
-        $suratTugas->tanggal_sidang_proposal = $validatedData['tanggal_sidang_proposal'];
-        $suratTugas->file_proposal = "uploads/{$userFolder}/surat_tugas/{$fileProposalName}";
-        $suratTugas->file_slip_pembayaran = "uploads/{$userFolder}/surat_tugas/{$fileSlipPembayaranName}";
-        $suratTugas->status = 'pending';
+            // Create a new SuratTugas instance
+            $suratTugas = new SuratTugas();
+            $suratTugas->users_id = $validatedData['users_id'];
+            $suratTugas->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
+            $suratTugas->tanggal_sidang_proposal = $validatedData['tanggal_sidang_proposal'];
+            $suratTugas->file_proposal = "uploads/{$userFolder}/surat_tugas/{$fileProposalName}";
+            $suratTugas->file_slip_pembayaran = "uploads/{$userFolder}/surat_tugas/{$fileSlipPembayaranName}";
+            $suratTugas->status = 'pending';
 
-        // Save to the database
-        $suratTugas->save();
+            // Save to the database
+            $suratTugas->save();
 
-        return redirect('/dashboard')->with('success', 'Pengajuan Surat Tugas Berhasil.');
+            return redirect('/dashboard')->with('success', 'Pengajuan Surat Tugas Berhasil.');
+        }catch (\Exception $e) {
+            // Tangani kesalahan jika ada
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
+
     }
 }

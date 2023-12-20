@@ -46,7 +46,7 @@ Detail Surat Tugas
                   </div>
                   <div class="mb-3">
                     <label for="dospem_2" class="form-label">Tanggal Seminar Proposal</label>
-                    <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$data->tanggal}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$data->tanggal_sidang_proposal}}" aria-describedby="defaultFormControlHelp" readonly />
                   </div>
                   <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
                   <input type="hidden" value="{{ $data->users_id}}" id="users_id" name="users_id"/>
@@ -85,7 +85,7 @@ Detail Surat Tugas
                 <!-- ... form fields ... -->
                 @if($data->status == 'pending')
                 <div style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
+                    <button type="submit" class="btn btn-danger mt-4" name="action" value="tolak">Tolak</button>
                 </div>
                 @endif
             </form>

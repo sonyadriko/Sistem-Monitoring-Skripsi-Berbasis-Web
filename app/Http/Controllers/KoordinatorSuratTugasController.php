@@ -32,6 +32,7 @@ class KoordinatorSuratTugasController extends Controller
                 ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'surat_tugas.bimbingan_proposal_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->join('seminar_proposal', 'seminar_proposal.bimbingan_proposal_id', 'bimbingan_proposal.id_bimbingan_proposal')
+                ->select('surat_tugas.*', 'users.kode_unik', 'users.name', 'users.alamat_mhs', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
                 ->where('id_surat_tugas', $id)
                 ->first(),
         ];
