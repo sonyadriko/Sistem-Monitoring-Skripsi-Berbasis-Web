@@ -52,7 +52,7 @@ Revisi Sidang Skripsi
                             <div class="mb-3">
                                 <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
                                 <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                                 @error('file_revisi_skripsi')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -60,7 +60,6 @@ Revisi Sidang Skripsi
                             {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
                              --}}
                             <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_revisi_sidang_skripsi }}" />
-                        {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_revisi_seminar_proposal }}" /> --}}
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                             </div>
@@ -95,7 +94,6 @@ Revisi Sidang Skripsi
                                     Belum bisa daftar yudisium
                                 </button>
                                 @else
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-inverse-success" onclick="handleButtonClick()" disabled>
                                     Sudah bisa daftar yudisium
                                 </button>
@@ -107,7 +105,7 @@ Revisi Sidang Skripsi
             </div>
         </div>
         <div class="mb-3">
-            <a href="{{ route('his-rev-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
+            <a href="{{ route('his-rev-mhs.index') }}" class="btn btn-primary mt-4">History Revisi Sidang Skripsi</a>
         </div>
         @endif
     </div>
@@ -126,6 +124,8 @@ Revisi Sidang Skripsi
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     // Pastikan elemen sudah dimuat di dalam DOM
+
+
     document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitBtn');
 
@@ -156,19 +156,31 @@ Revisi Sidang Skripsi
                         if (data.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'File Revisi Skripsi Successfully Submitted!',
+                                title: 'File Revisi Skripsi Berhasil disubmit.',
                                 text: data.message,
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                location.reload();
+                                // location.reload();
+                                window.location.href = "{{ route('revisi_sk.index') }}";
                             });
                         } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: data.message
-                            });
+                            // Handle validation errors or other errors
+                            if (data.errors) {
+                                // Display validation errors in the form
+                                Object.keys(data.errors).forEach(field => {
+                                    const errorElement = document.getElementById(field + '-error');
+                                    if (errorElement) {
+                                        errorElement.innerHTML = data.errors[field][0];
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: data.message
+                                });
+                            }
                         }
                     })
                     .catch(error => {

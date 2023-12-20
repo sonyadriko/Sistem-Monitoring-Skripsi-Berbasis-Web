@@ -28,7 +28,7 @@
 				<div class="card-body">
 					<h6>Progress Skripsi</h6>
 					<div class="progress mt-4">
-						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
+						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
 					</div>
 					{{-- <div class="progress-text">
 						<ul class="list-inline" style="display: flex; width: {{ $progressPercentage }}%;">
