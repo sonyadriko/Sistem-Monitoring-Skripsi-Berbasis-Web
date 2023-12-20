@@ -97,7 +97,7 @@ class KoordinatorSeminarController extends Controller
             $data->save();
 
             // return redirect()->back()->with('success', 'Data updated successfully.');
-            return redirect()->back()->with('success', 'Operasi berhasil.');
+            return redirect()->back()->with('success', 'Berhasil Mengatur Jadwal.');
         } catch (\Exception $e) {
             // Berikan respons JSON dengan informasi kesalahan
             return redirect()->back()->with('error', 'Terjadi Kesalahan.');

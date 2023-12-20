@@ -52,7 +52,7 @@ Revisi Seminar Proposal
                         <div class="mb-3">
                             <label for="file_revisi_proposal" class="form-label">Upload File Revisi Proposal</label>
                             <input class="form-control" type="file" id="file_revisi_proposal" name="file_revisi_proposal" />
-                            <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                            <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
                             @error('file_revisi_proposal')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -105,7 +105,7 @@ Revisi Seminar Proposal
         </div>
     </div>
     <div class="mb-3">
-        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
+        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Revisi Seminar Proposal</a>
     </div>
     @endif
 </div>
@@ -165,14 +165,26 @@ Revisi Seminar Proposal
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                location.reload();
+                                // location.reload();
+                                window.location.href = "{{ route('revisi_sp.index') }}";
                             });
                         } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: data.message
-                            });
+                            // Handle validation errors or other errors
+                            if (data.errors) {
+                                // Display validation errors in the form
+                                Object.keys(data.errors).forEach(field => {
+                                    const errorElement = document.getElementById(field + '-error');
+                                    if (errorElement) {
+                                        errorElement.innerHTML = data.errors[field][0];
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: data.message
+                                });
+                            }
                         }
                     })
                     .catch(error => {
@@ -195,4 +207,5 @@ Revisi Seminar Proposal
             console.error('Element with ID "submitBtn" not found.');
         }
     });
+
 </script>

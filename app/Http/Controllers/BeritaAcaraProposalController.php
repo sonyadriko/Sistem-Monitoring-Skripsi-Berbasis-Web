@@ -53,23 +53,35 @@ class BeritaAcaraProposalController extends Controller
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
-            'berita_acara_proposal_id' => 'required|integer', // Sesuaikan dengan aturan validasi yang sesuai
-            'revisi' => 'required|string', // Sesuaikan dengan aturan validasi yang sesuai
-            'nilai' => 'required|numeric', // Sesuaikan dengan aturan validasi yang sesuai
+        $validatedData = $request->validate([
+            'berita_acara_proposal_id' => 'required|integer',
+            'revisi' => 'required|string',
+            'nilai' => 'required|numeric',
+        ], [
+            'required' => 'Field :attribute harus diisi.',
+            'integer' => 'Field :attribute harus berupa angka.',
+            'string' => 'Field :attribute harus berupa teks.',
+            'numeric' => 'Field :attribute harus berupa angka.',
         ]);
+        // $request->validate([
+        //     'berita_acara_proposal_id' => 'required|integer', // Sesuaikan dengan aturan validasi yang sesuai
+        //     'revisi' => 'required|string', // Sesuaikan dengan aturan validasi yang sesuai
+        //     'nilai' => 'required|numeric', // Sesuaikan dengan aturan validasi yang sesuai
+        // ]);
 
-        $ba = new DetailBeritaAcaraProposal();
-        $ba->users_id = Auth::user()->id;
-        $ba->berita_acara_proposal_id = $request->berita_acara_proposal_id;
-        $ba->presensi = 'hadir';
-        $ba->revisi = $request->revisi;
-        $ba->nilai = $request->nilai;
-        $ba->save();
-
-        return redirect()->route('berita-acara-proposal.index')->with('success', 'Berita Acara Proposal berhasil diisi.');
-        // return redirect()->route('jadwal-seminar-proposal.index')->with('success', 'Jadwal ditolak.');
-
+        try {
+            $ba = new DetailBeritaAcaraProposal();
+            $ba->users_id = Auth::user()->id;
+            $ba->berita_acara_proposal_id = $request->berita_acara_proposal_id;
+            $ba->presensi = 'hadir';
+            $ba->revisi = $request->revisi;
+            $ba->nilai = $request->nilai;
+            $ba->save();
+            return redirect()->route('berita-acara-proposal.index')->with('success', 'Berita Acara Proposal berhasil diisi.');
+        } catch (\Exception $e) {
+            // Tanggapi kesalahan penyimpanan data
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data. Pesan Kesalahan: ' . $e->getMessage())->withInput();
+        }
 
     }
 

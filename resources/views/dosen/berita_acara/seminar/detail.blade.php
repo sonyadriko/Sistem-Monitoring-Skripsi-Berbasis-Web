@@ -102,23 +102,21 @@ Detail Berita Acara Proposal
                     <div class="mb-3">
                         <label for="revisi" class="form-label">Revisi</label>
                         <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
+                        @error('revisi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="nilai" class="form-label">Nilai Ujian</label>
-                        <input
-                        type="number"
-                        class="form-control"
-                        name="nilai"
-                        max="100"
-                        id="nilai"
-                        placeholder="Masukan Nilai Ujian..."
-                        aria-describedby="defaultFormControlHelp"
-                        />
+                        <input type="number" class="form-control" name="nilai" max="100" id="nilai" placeholder="Masukan Nilai Ujian..." aria-describedby="defaultFormControlHelp"/>
+                        @error('nilai')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}"/>
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm();">Submit</button>
                     </div>
                 </div>
             </form>
@@ -127,7 +125,6 @@ Detail Berita Acara Proposal
 </div>
 
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
@@ -135,5 +132,46 @@ Detail Berita Acara Proposal
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    function submitForm() {
+        // Validasi revisi dan nilai
+        var revisi = document.getElementById('revisi').value;
+        var nilai = document.getElementById('nilai').value;
+
+        if (!revisi.trim() || !nilai.trim()) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Revisi dan nilai harus diisi.',
+                icon: 'error',
+            });
+        } else {
+            showConfirmation();
+        }
+    }
+
+    function showConfirmation() {
+        Swal.fire({
+            title: 'Konfirmasi Submit',
+            text: 'Apakah Anda yakin ingin submit data?',
+            icon: 'warning',
+            showCancelButton: false, // Set to false to hide the "Cancel" button
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Submit!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Data berhasil disubmit.',
+                    icon: 'success',
+                }).then(() => {
+                    // Submit form
+                    document.getElementById('reviewForm').submit();
+                });
+            }
+        });
+    }
+</script>

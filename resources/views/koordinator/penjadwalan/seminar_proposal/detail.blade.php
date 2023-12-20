@@ -29,48 +29,40 @@ Seminar Proposal
                         <div class="col-md-6">
                             <label for="npm" class="form-label" style="font-weight: bold">NPM</label>
                             <p><span>{{ $data->kode_unik }}</span></p>
-                            {{-- <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="name" class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
                             <p><span>{{ $data->name }}</span></p>
-                            {{-- <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="npm" class="form-label"style="font-weight: bold" >Judul</label>
                             <p><span>{{ $data->judul }}</span></p>
-                            {{-- <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
                             <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
-                            {{-- <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="dospem_utama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
                             <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
-                            {{-- <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="dospem_2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
                             <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
-                            {{-- <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Proposal</label>
-                            {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                             <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p>
                         </div>
                         <div class="col-md-6">
 
                             <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Slip Pembayaran</label>
-                            {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                             <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
                         </div>
                     </div>
@@ -129,9 +121,7 @@ Seminar Proposal
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                         <div style="display: flex; justify-content: flex-end;">
-                            {{-- <button type="submit" class="btn btn-primary" onclick="showConfirmation2();">Buat Jadwal</button> --}}
                             <button type="button" class="btn btn-primary" onclick="showConfirmation2();">Buat Jadwal</button>
-                            {{-- <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button> --}}
                         </div>
                     </div>
                 </form>
@@ -146,54 +136,45 @@ Seminar Proposal
             </div>
           @else
           <div class="card-body">
-            {{-- <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal])}}" method="POST"> --}}
             <form action="{{ route('cetak-berita-acara', ['id' => $data->id_seminar_proposal]) }}" method="POST" id="cetakForm">
               @csrf
               <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="npm" class="form-label" style="font-weight: bold">NPM</label>
                     <p><span>{{ $data->kode_unik }}</span></p>
-                    {{-- <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
                     <label for="name" class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
                     <p><span>{{ $data->name }}</span></p>
-                    {{-- <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="npm" class="form-label" style="font-weight: bold">Judul</label>
                     <p><span>{{ $data->judul }}</span></p>
-                    {{-- <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
                     <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
                     <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
-                    {{-- <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="dospem_utama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
                     <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
-                    {{-- <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
                 <div class="col-md-6">
                     <label for="dospem_2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
                     <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
-                    {{-- <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                 </div>
             </div>
               <div class="mb-3 row">
                 <div class="col-md-6">
                 <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Proposal</label>
-                  {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                   <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p>
                 </div>
                 <div class="col-md-6">
                 <label for="defaultFormControlInput" class="form-label" style="font-weight: bold">File Slip Pembayaran</label>
-                  {{-- <iframe src="{{ route('storage-files.show', ['file' => 'path/to/your/file.pdf']) }}" width="100%" height="500px"></iframe> --}}
                   <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
                 </div>
             </div>
