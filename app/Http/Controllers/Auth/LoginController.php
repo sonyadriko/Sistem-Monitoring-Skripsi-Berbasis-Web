@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -85,6 +86,19 @@ class LoginController extends Controller
 
         if ($login) {
             // Authentication successful
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                DB::table('histories')->insert([
+                    'name_history' => 'Login', // Nama Aksi
+                    'content_history' => 'Login berhasil', // Isi deskripsi dari aksi
+                    'alert_history' => 'success', // kalau berhasil, maka success, kalau gagal maka warning atau danger (BS4)
+                    'action_history' => 'user-add', // icon, tergantung dari pakainya apa
+                    'status' => 1,
+                    'created_by' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                    'updated_by' => Auth::user()->id,
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
             if ($role === 'koordinator') {
                 return redirect('/koordinator');
             } elseif ($role === 'dosen') {
@@ -101,14 +115,26 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
+        $historyLogout = DB::table('histories')->insert([
+            'name_history' => 'Logout', // Nama Aksi
+            'content_history' => 'Logout berhasil', // Isi deskripsi dari aksi
+            'alert_history' => 'success', // kalau berhasil, maka success, kalau gagal maka warning atau danger (BS4)
+            'action_history' => 'user-remove', // icon, tergantung dari pakainya apa
+            'status' => 1,
+            'created_by' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ]);
         $request->session()->forget('key');
         $request->session()->flush();
         auth()->guard('mahasiswa')->logout();
-           auth()->guard('dosen')->logout();
-           auth()->guard('koordinator')->logout();
-           auth()->guard('ketuajurusan')->logout();
-            return redirect('/');
-        }
+        auth()->guard('dosen')->logout();
+        auth()->guard('koordinator')->logout();
+        auth()->guard('ketuajurusan')->logout();
+        return redirect('/login');
+    }
+
 
 
 

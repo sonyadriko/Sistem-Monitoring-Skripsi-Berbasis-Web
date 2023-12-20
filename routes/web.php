@@ -44,6 +44,7 @@ use App\Http\Controllers\MataKuliahPendukungController;
 use App\Http\Controllers\DosenBidangIlmuController;
 use App\Http\Controllers\HistoryRevisiSkripsiController;
 use App\Http\Controllers\HistoryRevisiProposalController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,9 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 Route::group(['middleware' => 'auth:ketuajurusan'], function() {
+    Route::controller(HistoryController::class)->group(function () {
+        Route::get('/notifications', 'notifications')->name('notifications');
+    });
     Route::controller(KajurController::class)->group(function () {
         Route::get('/ketua_jurusan', 'index')->name('dashboard:kajur');
     });
@@ -96,11 +100,13 @@ Route::group(['middleware' => 'auth:ketuajurusan'], function() {
 });
 
 Route::group(['middleware' => 'auth:dosen'], function() {
+    Route::controller(HistoryController::class)->group(function () {
+        Route::get('/notifications', 'notifications')->name('notifications');
+    });
 
     Route::controller(DosenController::class)->group(function () {
         Route::get('/dosen', 'index')->name('dashboard:dosen');
     });
-
 
     Route::controller(DosenBidangIlmuController::class)->group(function () {
         Route::get('/dosen/bidang_ilmu', 'index')->name('dosen-bidang-ilmu.index');
@@ -156,6 +162,9 @@ Route::group(['middleware' => 'auth:dosen'], function() {
 });
 
 Route::group(['middleware' => 'auth:koordinator'], function() {
+    Route::controller(HistoryController::class)->group(function () {
+        Route::get('/notifications', 'notifications')->name('notifications');
+    });
 
     Route::controller(KoordinatorController::class)->group(function () {
         Route::get('/koordinator', 'index')->name('dashboard:koordinator');
@@ -259,6 +268,9 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
 });
 
 Route::group(['middleware' => 'auth:mahasiswa'], function () {
+    Route::controller(HistoryController::class)->group(function () {
+        Route::get('/notifications', 'notifications')->name('notifications');
+    });
 
     Route::get('storage-files/{file}', 'StorageFileController@show')->name('storage-files.show');
 
@@ -353,8 +365,6 @@ Route::group(['middleware' => 'auth:mahasiswa'], function () {
     Route::controller(FAQController::class)->group(function () {
         Route::get('/faq', 'index')->name('faq');
     });
-
-
 
 });
 

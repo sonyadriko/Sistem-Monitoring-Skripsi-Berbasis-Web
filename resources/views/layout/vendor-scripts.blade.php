@@ -9,4 +9,3 @@
 {{-- <script src="{{ URL::asset('assets2/libs/pace-js/pace-js.min.js') }}"></script> --}}
 @yield('script')
 @yield('script-bottom')
-

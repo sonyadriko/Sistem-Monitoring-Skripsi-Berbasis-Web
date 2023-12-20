@@ -1,7 +1,7 @@
 @yield('css')
 
 <!-- preloader css -->
-<link rel="stylesheet" href="{{ URL::asset('assets2/css/preloader.min.css') }}" type="text/css" />
+<link href="{{ URL::asset('assets2/css/preloader.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- Bootstrap Css -->
 <link href="{{ URL::asset('assets2/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />

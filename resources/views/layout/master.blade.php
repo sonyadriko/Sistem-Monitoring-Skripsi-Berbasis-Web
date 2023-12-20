@@ -1,75 +1,101 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="NobleUI">
-	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<meta content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5" name="description">
+	<meta content="NobleUI" name="author">
+	<meta content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web" name="keywords">
 
-    <title>@yield('title')</title>
+	<title>@yield('title')</title>
 
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+	<!-- End fonts -->
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <!-- End fonts -->
+	<!-- CSRF Token -->
+	<meta content="{{ csrf_token() }}" name="_token">
 
-  <!-- CSRF Token -->
-  <meta name="_token" content="{{ csrf_token() }}">
+	<link href="{{ asset('/favicon.ico') }}" rel="shortcut icon">
 
-  <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+	<!-- plugin css -->
+	<link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
+	<link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
+	<!-- end plugin css -->
+	<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-  <!-- plugin css -->
-  <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
-  <!-- end plugin css -->
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+	@stack('plugin-styles')
 
-  @stack('plugin-styles')
+	<!-- common css -->
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+	<!-- end common css -->
 
-  <!-- common css -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-  <!-- end common css -->
+	@stack('style')
 
-  @stack('style')
-
-  {{-- @include('layout.head-css') --}}
+	{{-- @include('layout.head-css') --}}
 </head>
-<body data-base-url="{{url('/')}}" class="sidebar-dark">
 
-  <script src="{{ asset('assets/js/spinner.js') }}"></script>
+<body class="sidebar-dark" data-base-url="{{ url('/') }}">
 
-  <div class="main-wrapper" id="app">
-    @include('layout.sidebar')
-    <div class="page-wrapper">
-      @include('layout.header')
-      <div class="page-content">
-        @yield('content')
-      </div>
-      @include('layout.footer')
-    </div>
-  </div>
+	<script src="{{ asset('assets/js/spinner.js') }}"></script>
 
-    <!-- base js -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <!-- end base js -->
+	<div class="main-wrapper" id="app">
+		@include('layout.sidebar')
+		<div class="page-wrapper">
+			@include('layout.header')
+			<div class="page-content">
+				@yield('content')
+			</div>
+			@include('layout.footer')
+		</div>
+	</div>
 
-    <!-- plugin js -->
-    @stack('plugin-scripts')
-    <!-- end plugin js -->
+	<!-- base js -->
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
+	<script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+	<!-- end base js -->
 
-    <!-- common js -->
-    <script src="{{ asset('assets/js/template.js') }}"></script>
-    <!-- end common js -->
+	<!-- plugin js -->
+	@stack('plugin-scripts')
+	<!-- end plugin js -->
 
-    @stack('custom-scripts')
+	<!-- common js -->
+	<script src="{{ asset('assets/js/template.js') }}"></script>
+	<!-- end common js -->
 
-  <!-- JAVASCRIPT -->
-  {{-- @include('layout.vendor-scripts') --}}
+	@stack('custom-scripts')
+	<script>
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					'csrftoken': '{{ csrf_token() }}'
+				}
+			});
+			var token = '{{ Session::token() }}';
+			$('.notifications').on('click', function() {
+				$.ajax({
+					url: '{{ route('notifications') }}',
+					method: 'GET',
+					_token: token,
+					data: {},
+					async: true,
+					dataType: 'json',
+					beforeSend: function() {},
+					success: function(data) {
+						$('.nk-notification').html(data.notifications);
+					}
+				});
+			});
+		});
+	</script>
+
+	<!-- JAVASCRIPT -->
+	{{-- @include('layout.vendor-scripts') --}}
 </body>
+
 </html>
