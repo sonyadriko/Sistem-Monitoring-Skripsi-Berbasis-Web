@@ -111,7 +111,7 @@ Detail Berita Acara Sidang Skripsi
                 <input type="hidden" name="berita_acara_skripsi_id" value="{{$data->id_berita_acara_s}}"/>
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm();">Submit</button>
                 </div>
             </div>
             </form>
@@ -120,40 +120,6 @@ Detail Berita Acara Sidang Skripsi
 </div>
 
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('reviewForm');
-
-        if (form) {
-            console.log('Form found:', form);
-
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                // Perform your form submission using AJAX or other methods
-                // For simplicity, let's assume the form submission is successful
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Submit Berhasil!',
-                    text: 'Revisi dan nilai ujian telah berhasil disubmit.',
-                }).then((result) => {
-                    console.log('SweetAlert callback executed');
-
-                    // Optionally, you can redirect the user or perform other actions after the user clicks "OK"
-                    if (result.isConfirmed) {
-                        // Redirect using Laravel's redirection
-                        window.location.replace("{{ route('berita-acara-skripsi.index') }}");
-                    }
-                });
-            });
-        } else {
-            console.error('Form not found.');
-        }
-    });
-</script> --}}
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
@@ -163,3 +129,44 @@ Detail Berita Acara Sidang Skripsi
 @push('custom-scripts')
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    function submitForm() {
+        // Validasi revisi dan nilai
+        var revisi = document.getElementById('revisi').value;
+        var nilai = document.getElementById('nilai').value;
+
+        if (!revisi.trim() || !nilai.trim()) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Revisi dan nilai harus diisi.',
+                icon: 'error',
+            });
+        } else {
+            showConfirmation();
+        }
+    }
+
+    function showConfirmation() {
+        Swal.fire({
+            title: 'Konfirmasi Submit',
+            text: 'Apakah Anda yakin ingin submit data?',
+            icon: 'warning',
+            showCancelButton: false, // Set to false to hide the "Cancel" button
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Submit!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Data berhasil disubmit.',
+                    icon: 'success',
+                }).then(() => {
+                    // Submit form
+                    document.getElementById('reviewForm').submit();
+                });
+            }
+        });
+    }
+</script>
