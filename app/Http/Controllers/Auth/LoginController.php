@@ -10,40 +10,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User as MUser;
+use App\Models\User;
 
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    // use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
-
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('guest')->except('logout');
-    // }
 
     public function showLoginForm()
     {
@@ -52,27 +24,24 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $user = MUser::where('email', $request->email)->first();
-
-        if ($user === null) {
-            return 'Email tidak ditemukan';
-        }
-
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
-
-        $role = null;
-
-        if ($user->role_id == 1) {
-            $role = 'mahasiswa';
-        } elseif ($user->role_id == 2) {
-            $role = 'dosen';
-        } elseif ($user->role_id == 3) {
-            $role = 'koordinator';
-        } elseif ($user->role_id == 4) {
-            $role = 'ketuajurusan';
+        $remember = $request->has('remember') ? true : false;
+        $credentials = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $email = DB::table('users')
+            ->where('email', $credentials['email'])
+            ->pluck('email')
+            ->first();
+        $password = DB::table('users')
+            ->where('email', $credentials['email'])
+            ->pluck('password')
+            ->first();
+        $passwordCheck = Hash::check($request->password, $password);
+        if ($credentials['email'] != $email) {
+            return redirect()
+                ->route('auth-login')
+                ->with('danger', 'Your Email is wrong.');
         } else {
             return 'Role tidak diizinkan';
         }
@@ -86,7 +55,6 @@ class LoginController extends Controller
 
         if ($login) {
             // Authentication successful
-
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 DB::table('histories')->insert([
                     'name_history' => 'Login', // Nama Aksi
@@ -135,31 +103,4 @@ class LoginController extends Controller
         auth()->guard('ketuajurusan')->logout();
         return redirect('/login');
     }
-
-
-
-
-    // public function logout(Request $request)
-    // {
-    //     if (! Auth::user()) {
-    //         return redirect()
-    //             ->route('auth-login')
-    //             ->with('success', 'Terima kasih telah menggunakan aplikasi ini!');
-    //     } else {
-    //         if ($request->ajax()) {
-    //             Auth::Logout();
-
-    //             return redirect()
-    //                 ->route('auth-login')
-    //                 ->with('success', 'Mohon Login dengan password baru Anda.');
-    //         } else {
-    //             Auth::Logout();
-
-    //             return redirect()
-    //                 ->route('auth-login')
-    //                 ->with('success', 'Terima kasih telah menggunakan aplikasi ini!');
-    //         }
-    //     }
-    // }
-
 }

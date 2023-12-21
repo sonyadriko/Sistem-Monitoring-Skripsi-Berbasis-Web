@@ -45,7 +45,7 @@ class HistoryController extends Controller
             }
             $data = [
                 'notifications' => $notificationLists,
-                'code' => 1,
+                'status' => 200,
             ];
 
             return json_encode($data);
