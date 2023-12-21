@@ -86,6 +86,7 @@ class LoginController extends Controller
 
         if ($login) {
             // Authentication successful
+
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 DB::table('histories')->insert([
                     'name_history' => 'Login', // Nama Aksi
