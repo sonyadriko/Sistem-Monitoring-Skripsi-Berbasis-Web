@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     });
     Route::controller(KajurDataDosenController::class)->group(function () {
         Route::get('/ketua_jurusan/data_dosen', 'index')->name('data-dsn');
+        Route::get('/ketua_jurusan/data_dosen/detail{id}', 'detail')->name('data-dsn-detail');
     });
     Route::controller(KajurDataBidangIlmuController::class)->group(function () {
         Route::get('/ketua_jurusan/data_bidang_ilmu', 'index')->name('data-bi');

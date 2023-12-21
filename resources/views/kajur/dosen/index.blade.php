@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Berita Acara Seminar Proposal
+Data Dosen
 @endsection
 
 @section('css')
@@ -21,11 +21,8 @@ Berita Acara Seminar Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Data Dosen</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
-                </p>
+                <h4 class="card-title" style="font-weight: bold">Data Dosen</h4>
+                <p class="card-title-desc">Data dosen yang aktif dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.</p>
             </div>
             <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
@@ -34,23 +31,47 @@ Berita Acara Seminar Proposal
                         <th>No</th>
                         <th>Nama</th>
                         <th>NIP</th>
-                        {{-- <th>Action</th> --}}
+                        <th>Bidang Ilmu</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @php
-                        $no=1;
-                        @endphp
-                        @foreach($datadsn as $data)
+                        $no = 1;
+                        $groupedData = [];
+
+                        foreach ($datadsn as $data) {
+                            $dosenName = $data->name;
+
+                            if (!array_key_exists($dosenName, $groupedData)) {
+                                $groupedData[$dosenName] = [
+                                    'no' => $no,
+                                    'name' => $dosenName,
+                                    'kode_unik' => $data->kode_unik,
+                                    'topik_bidang_ilmu' => $data->topik_bidang_ilmu,
+                                    'id' => $data->id,
+                                ];
+                                $no++;
+                            } else {
+                                // Jika dosen sudah ada, tambahkan topik_bidang_ilmu ke array yang sudah ada
+                                $groupedData[$dosenName]['topik_bidang_ilmu'] .= ', ' . $data->topik_bidang_ilmu;
+                            }
+                        }
+                    @endphp
+
+                    @foreach($groupedData as $data)
                         <tr>
-                            <td>{{ $no }}</td>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->kode_unik }}</td>
+                            <td>{{ $data['no'] }}</td>
+                            <td>{{ $data['name'] }}</td>
+                            <td>{{ $data['kode_unik'] }}</td>
+                            <td>{{ $data['topik_bidang_ilmu'] ?? 'Tidak ada' }}</td>
+                            <td><a href="{{ route('data-dsn-detail', ['id' => $data['id']]) }}" class="btn btn-primary">Detail</a></td>
+
+                            {{-- <td><a href="{{ url('/ketua_jurusan/data_dosen/detail/' . $data['id']) }}" class="btn btn-primary">Detail</a></td> --}}
+
                         </tr>
-                        @php
-                        $no++;
-                        @endphp
                     @endforeach
+
                     </tbody>
                 </table>
 

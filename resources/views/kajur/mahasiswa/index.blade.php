@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Berita Acara Seminar Proposal
+Data Mahasiswa
 @endsection
 
 @section('css')
@@ -21,19 +21,18 @@ Berita Acara Seminar Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Data Mahasiswa</h4>
-                <p class="card-title-desc">DataTables has most features enabled by
-                    default, so all you need to do to use it with your own tables is to call
-                    the construction function: <code>$().DataTable();</code>.
-                </p>
+                <h4 class="card-title" style="font-weight: bold">Data Mahasiswa</h4>
+                <p class="card-title-desc">Data mahasiswa dapat dilihat pada tabel dibawah ini, terdapat filter mengenai angkatan mahasiswa dan tombol detailnya.</p>
             </div>
             <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
                         <th>NPM</th>
+                        <th>Nama</th>
+                        <th>Dosen Pembimbing</th>
+                        <th>Bidang Ilmu</th>
                         {{-- <th>Action</th> --}}
                     </tr>
                     </thead>
@@ -44,8 +43,11 @@ Berita Acara Seminar Proposal
                         @foreach($datamhs as $data)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $data->name }}</td>
                             <td>{{ $data->kode_unik }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->dosen_pembimbing_utama ?? 'Tidak Ada' }}</td>
+                            <td>{{ $data->topik_bidang_ilmu ?? 'Tidak Ada' }}</td>
+
                         </tr>
                         @php
                         $no++;

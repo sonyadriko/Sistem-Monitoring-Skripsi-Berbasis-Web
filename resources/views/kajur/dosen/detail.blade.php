@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Data Bidang Ilmu
+Data Detail Dosen
 @endsection
 
 @section('css')
@@ -14,57 +14,41 @@ Data Bidang Ilmu
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Data</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Bidang Ilmu</li>
+      <li class="breadcrumb-item active" aria-current="page">Dosen</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Data Bidang Ilmu</h4>
-                <p class="card-title-desc">Data bidang ilmu yang ada dapat dilihat pada tabel dibawah ini.</p>
+                <h4 class="card-title" style="font-weight: bold">Mahasiswa Bimbingan</h4>
+                <p class="card-title-desc">Berikut merupakan tabel list mahasiswa bimbingan dosen <b>{{$user->name}}</b>.</p>
             </div>
             <div class="card-body table-responsive">
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Topik Skripsi</th>
-                        <th>Dosen Pengampu</th>
-                        <th>Mata Kuliah Pendukung</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Bidang Ilmu</th>
                         {{-- <th>Action</th> --}}
                     </tr>
                     </thead>
                     <tbody>
                         @php
-                        $no = 1;
-                        $groupedData = [];
-
-                        foreach ($databi as $data) {
-                            $topikBidangIlmu = $data->topik_bidang_ilmu;
-
-                            if (!array_key_exists($topikBidangIlmu, $groupedData)) {
-                                $groupedData[$topikBidangIlmu] = [
-                                    'no' => $no++,
-                                    'topik_bidang_ilmu' => $topikBidangIlmu,
-                                    'name' => $data->name,
-                                    'nama_mata_kuliah' => $data->nama_mata_kuliah,
-                                ];
-                            } else {
-                                // Jika topik bidang ilmu sudah ada, tambahkan name dan nama_mata_kuliah ke array yang sudah ada
-                                $groupedData[$topikBidangIlmu]['name'] .= ', ' . $data->name;
-                                $groupedData[$topikBidangIlmu]['nama_mata_kuliah'] .= ', ' . $data->nama_mata_kuliah;
-                            }
-                        }
-                    @endphp
-
-                    @foreach($groupedData as $data)
+                        $no=1;
+                        @endphp
+                    @foreach($datadsn as $data)
                         <tr>
-                            <td>{{ $data['no'] }}</td>
-                            <td>{{ $data['topik_bidang_ilmu'] }}</td>
-                            <td>{{ $data['name'] }}</td>
-                            <td>{{ $data['nama_mata_kuliah'] }}</td>
+                            <td>{{ $no }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->kode_unik }}</td>
+                            <td>{{ $data->topik_bidang_ilmu }}</td>
                         </tr>
+                        @php
+                        $no++;
+                        @endphp
                     @endforeach
 
                     </tbody>
