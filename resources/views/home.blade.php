@@ -26,7 +26,7 @@
 		<div class="col-lg-12 col-xl-12 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h6>Progress Skripsi</h6>
+					<h6 style="font-weight: bold">Progress Skripsi</h6>
 					<div class="progress mt-4">
 						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
 					</div>
@@ -39,7 +39,7 @@
 					</div> --}}
 					<div class="row mt-1">
 						@foreach ($tables as $table)
-							<div class="col text-center">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
+							<div class="col text-center" style="font-weight: bold">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
 						@endforeach
 					</div>
 					{{-- @if ($progressPercentage == 12.5)

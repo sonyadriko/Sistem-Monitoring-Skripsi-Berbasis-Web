@@ -47,7 +47,7 @@ Daftar Sidang Skripsi
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success mt-3" role="alert">
-                            Selamat.
+                            Selamat, Pendaftaran anda telah dibuatkan jadwal!
                         </div>
                     </h4>
                 </div>

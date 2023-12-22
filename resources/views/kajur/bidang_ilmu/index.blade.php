@@ -35,39 +35,49 @@ Data Bidang Ilmu
                         {{-- <th>Action</th> --}}
                     </tr>
                     </thead>
-                    <tbody>
-                        @php
-                        $no = 1;
-                        $groupedData = [];
+                    <!-- Bagian Kode -->
+<!-- Bagian Kode -->
+<!-- Bagian Kode -->
+<tbody>
+    @php
+    $no = 1;
+    $groupedData = [];
 
-                        foreach ($databi as $data) {
-                            $topikBidangIlmu = $data->topik_bidang_ilmu;
+    foreach ($databi as $data) {
+        $topikBidangIlmu = $data->topik_bidang_ilmu;
 
-                            if (!array_key_exists($topikBidangIlmu, $groupedData)) {
-                                $groupedData[$topikBidangIlmu] = [
-                                    'no' => $no++,
-                                    'topik_bidang_ilmu' => $topikBidangIlmu,
-                                    'name' => $data->name,
-                                    'nama_mata_kuliah' => $data->nama_mata_kuliah,
-                                ];
-                            } else {
-                                // Jika topik bidang ilmu sudah ada, tambahkan name dan nama_mata_kuliah ke array yang sudah ada
-                                $groupedData[$topikBidangIlmu]['name'] .= ', ' . $data->name;
-                                $groupedData[$topikBidangIlmu]['nama_mata_kuliah'] .= ', ' . $data->nama_mata_kuliah;
-                            }
-                        }
-                    @endphp
+        if (!array_key_exists($topikBidangIlmu, $groupedData)) {
+            $groupedData[$topikBidangIlmu] = [
+                'no' => $no++,
+                'topik_bidang_ilmu' => $topikBidangIlmu,
+                'name' => $data->name,
+                'nama_mata_kuliah' => explode(',', $data->nama_mata_kuliah),
+            ];
+        } else {
+            // Jika topik bidang ilmu sudah ada, tambahkan name dan mata_kuliah_pendukung ke array yang sudah ada
+            $groupedData[$topikBidangIlmu]['name'] .= ', ' . $data->name;
 
-                    @foreach($groupedData as $data)
-                        <tr>
-                            <td>{{ $data['no'] }}</td>
-                            <td>{{ $data['topik_bidang_ilmu'] }}</td>
-                            <td>{{ $data['name'] }}</td>
-                            <td>{{ $data['nama_mata_kuliah'] }}</td>
-                        </tr>
-                    @endforeach
+            // Pecah string mata kuliah_pendukung menjadi array dan tambahkan ke array yang sudah ada
+            $mataKuliahPendukung = explode(',', $data->nama_mata_kuliah);
+            $groupedData[$topikBidangIlmu]['nama_mata_kuliah'] = array_merge(
+                $groupedData[$topikBidangIlmu]['nama_mata_kuliah'],
+                array_diff($mataKuliahPendukung, $groupedData[$topikBidangIlmu]['nama_mata_kuliah'])
+            );
+        }
+    }
+    @endphp
 
-                    </tbody>
+    @foreach($groupedData as $data)
+        <tr>
+            <td>{{ $data['no'] }}</td>
+            <td>{{ $data['topik_bidang_ilmu'] }}</td>
+            <td>{{ $data['name'] }}</td>
+            <td>{{ implode(', ', $data['nama_mata_kuliah']) }}</td> <!-- Gabungkan array mata kuliah_pendukung menjadi string -->
+        </tr>
+    @endforeach
+</tbody>
+
+
                 </table>
 
             </div>
