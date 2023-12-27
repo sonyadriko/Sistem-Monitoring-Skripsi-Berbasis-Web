@@ -61,24 +61,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
 
 // Route::controller
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/auth-login', 'showLoginForm')
-        ->name('auth-login')
+    Route::get('/login', 'showLoginForm')
+        ->name('login')
         ->middleware('guest');
-    Route::post('/auth-login', 'login')->name('auth');
-    Route::get('/auth-logout', 'logout')->name('auth-logout');
+    Route::post('/login', 'login')->name('auth');
+    Route::post('/auth-logout', 'logout')->name('auth-logout');
     // Route::get('/reset-auth-logout', 'password_reset_logout')->name('reset-auth-logout');
 });
 
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegisterForm')
-    ->name('register')
+    ->name('register-form')
     ->middleware('guest');
-    // Route::post('/register', 'create')->name('regist');
-
+    Route::post('/register', 'registerus')->name('register');
 });
 
 Route::group(['middleware' => 'auth:ketuajurusan'], function() {

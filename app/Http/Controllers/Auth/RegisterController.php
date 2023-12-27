@@ -52,30 +52,63 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'npm' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+    // }
+
+    // /**
+    //  * Create a new user instance after a valid registration.
+    //  *
+    //  * @param  array  $data
+    //  * @return \App\Models\User
+    //  */
+    // protected function create(array $data)
+    // {
+    //     $user = User::create([
+    //         'name' => $data['name'],
+    //         'kode_unik' => $data['npm'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //         'role_id' => 1,
+    //         'status' => 'pending',
+    //     ]);
+
+    //     // Redirect ke halaman tunggu konfirmasi setelah registrasi
+    //     return redirect()->route('waiting_confirmation')->with('success', 'Pendaftaran berhasil. Tunggu konfirmasi dari admin.');
+    // }
+
+    protected function registerus(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'npm' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
+        if ($validator->fails()) {
+            return redirect('register')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User::create([
             'name' => $data['name'],
             'kode_unik' => $data['npm'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => "1",
+            'role_id' => 1,
+            'status' => 'pending',
         ]);
+
+        return redirect()->route('waiting_confirmation')->with('success', 'Pendaftaran berhasil. Tunggu konfirmasi dari admin.');
     }
+
+
 }

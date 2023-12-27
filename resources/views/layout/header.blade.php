@@ -159,12 +159,12 @@
               </a>
             </li> --}}
 						<li class="dropdown-item py-2">
-							<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+							<a href="{{ route('auth-logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 								<i class="icon-md me-2" data-feather="log-out"></i>
 								<span>Log Out</span>
 							</a>
 
-							<form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
+							<form action="{{ route('auth-logout') }}" id="logout-form" method="POST" style="display: none;">
 								@csrf
 							</form>
 						</li>
