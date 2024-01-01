@@ -97,7 +97,14 @@ Route::controller(RegisterController::class)->group(function () {
     Route::controller(KajurDataBidangIlmuController::class)->group(function () {
         Route::get('/ketua_jurusan/data_bidang_ilmu', 'index')->name('data-bi');
     });
+    Route::controller(KajurJadwalController::class)->group(function () {
+        Route::get('/ketua_jurusan/jadwal', 'index')->name('data-jadwal');
+    });
+    Route::controller(KajurSeminarController::class)->group(function () {
+        Route::get('/ketua_jurusan/seminar', 'index')->name('data-seminar');
+    });
 // });
+
 
 // Route::group(['middleware' => 'auth:dosen'], function() {
     Route::controller(HistoryController::class)->group(function () {
