@@ -3,26 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+// use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
-    use RegistersUsers;
+
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -83,32 +75,75 @@ class RegisterController extends Controller
     //     return redirect()->route('waiting_confirmation')->with('success', 'Pendaftaran berhasil. Tunggu konfirmasi dari admin.');
     // }
 
-    protected function registerus(array $data)
+    // protected function registerus(array $data)
+    // {
+    //     $validator = Validator::make($data, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'npm' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect('register')
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     $user = User::create([
+    //         'name' => $data['name'],
+    //         'kode_unik' => $data['npm'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //         'role_id' => 1,
+    //         'status' => 'pending',
+    //     ]);
+
+    //     return redirect()->route('waiting_confirmation')->with('success', 'Pendaftaran berhasil. Tunggu konfirmasi dari admin.');
+    // }
+
+    public function register(Request $request)
     {
-        $validator = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'npm' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'kode_unik' => 'required|unique:users',
+            'name' => 'required',
+            'password' => 'required|confirmed|min:6',
         ]);
 
         if ($validator->fails()) {
-            return redirect('register')
-                ->withErrors($validator)
-                ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = User::create([
-            'name' => $data['name'],
-            'kode_unik' => $data['npm'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role_id' => 1,
-            'status' => 'pending',
-        ]);
+          // Debug: Dump data setelah validasi
+        dd($request->all());
 
-        return redirect()->route('waiting_confirmation')->with('success', 'Pendaftaran berhasil. Tunggu konfirmasi dari admin.');
+        try {
+            // Buat pengguna baru
+            $user = User::create([
+                'email' => $request->input('email'),
+                'kode_unik' => $request->input('kode_unik'),
+                'name' => $request->input('name'),
+                'password' => bcrypt($request->input('password')),
+                'role_id' => 1,
+                'status' => 'pending',
+            ]);
+
+            // Kirim notifikasi ke email pengguna
+            // Implementasikan notifikasi email menggunakan Laravel Notifications
+
+            return redirect()->back()->with('success', 'Pendaftaran berhasil. Tunggu persetujuan admin.');
+        } catch (QueryException $e) {
+            // Tangani kesalahan saat menyimpan ke database
+            $errorCode = $e->errorInfo[1];
+
+            if ($errorCode == 1062) {
+                return redirect()->back()->with('error', 'Gagal membuat pengguna. Email atau kode unik sudah digunakan.');
+            } else {
+                return redirect()->back()->with('error', 'Gagal membuat pengguna. Terjadi kesalahan internal.');
+            }
+        }
     }
-
 
 }

@@ -15,7 +15,24 @@
 
       {{-- <li class="nav-item nav-category">Main</li> --}}
       <li class="nav-item">
-        <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
+        @php
+            $dashboardUrl = '';
+            switch (auth()->user()->role_id) {
+                case 2:
+                    $dashboardUrl = url('/dosen');
+                    break;
+                case 3:
+                    $dashboardUrl = url('/koordinator');
+                    break;
+                case 4:
+                    $dashboardUrl = url('/ketua_jurusan');
+                    break;
+                default:
+                    $dashboardUrl = url('/dashboard');
+            }
+        @endphp
+        <a href="{{ $dashboardUrl }}" class="nav-link">
+        {{-- <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : auth()->user()->role_id === 3 ? url('/koordinator') : auth()->user()->role_id === 4 ? url('/ketua_jurusan') : url('/dashboard')) }}" class="nav-link"> --}}
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>

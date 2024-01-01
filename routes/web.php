@@ -77,10 +77,10 @@ Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegisterForm')
     ->name('register-form')
     ->middleware('guest');
-    Route::post('/register', 'registerus')->name('register');
+    Route::post('/register', 'register')->name('register');
 });
 
-Route::group(['middleware' => 'auth:ketuajurusan'], function() {
+// Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     Route::controller(HistoryController::class)->group(function () {
         Route::get('/notifications', 'notifications')->name('notifications');
     });
@@ -97,9 +97,9 @@ Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     Route::controller(KajurDataBidangIlmuController::class)->group(function () {
         Route::get('/ketua_jurusan/data_bidang_ilmu', 'index')->name('data-bi');
     });
-});
+// });
 
-Route::group(['middleware' => 'auth:dosen'], function() {
+// Route::group(['middleware' => 'auth:dosen'], function() {
     Route::controller(HistoryController::class)->group(function () {
         Route::get('/notifications', 'notifications')->name('notifications');
     });
@@ -159,9 +159,9 @@ Route::group(['middleware' => 'auth:dosen'], function() {
         Route::post('/accrevisi/{id}', [DosenRevisiSeminarProposal::class, 'accrevisi'])->name('dosen-revisi-sempro.acc');
         Route::post('/addrevisi/{id}', [DosenRevisiSeminarProposal::class, 'addrevisi'])->name('dosen-revisi-add.detail');
     });
-});
+// });
 
-Route::group(['middleware' => 'auth:koordinator'], function() {
+// Route::group(['middleware' => 'auth:koordinator'], function() {
     Route::controller(HistoryController::class)->group(function () {
         Route::get('/notifications', 'notifications')->name('notifications');
     });
@@ -265,9 +265,9 @@ Route::group(['middleware' => 'auth:koordinator'], function() {
     });
 
 
-});
+// });
 
-Route::group(['middleware' => 'auth:mahasiswa'], function () {
+// Route::group(['middleware' => 'auth:mahasiswa'], function () {
     Route::controller(HistoryController::class)->group(function () {
         Route::get('/notifications', 'notifications')->name('notifications');
     });
@@ -366,5 +366,5 @@ Route::group(['middleware' => 'auth:mahasiswa'], function () {
         Route::get('/faq', 'index')->name('faq');
     });
 
-});
+// });
 

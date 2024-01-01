@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SeminarProposal as SeminarProposal;
 use App\Models\BeritaAcaraProposal as BeritaAcaraProposal;
-
 use Illuminate\Support\Facades\DB;
 
 class KoordinatorSeminarController extends Controller
