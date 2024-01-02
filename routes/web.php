@@ -49,6 +49,7 @@ use App\Http\Controllers\KajurJadwalController;
 use App\Http\Controllers\KajurSeminarController;
 use App\Http\Controllers\KajurSidangController;
 use App\Http\Controllers\YudisiumController;
+use App\Http\Controllers\KoordinatorYudisiumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -274,12 +275,21 @@ Route::controller(RegisterController::class)->group(function () {
 
     });
 
+    Route::group(['prefix' => 'koordinator/yudisium'], function () {
+        Route::get('/', [KoordinatorYudisiumController::class, 'index'])->name('koor-yudisium.index');
+        Route::get('/detail/{id}', [KoordinatorYudisiumController::class, 'detail'])->name('koor-yudisium.detail');
+        Route::post('/update/{id}', [KoordinatorYudisiumController::class, 'update'])->name('koor-yudisium.update');
+        Route::post('/tolak/{id}', [KoordinatorYudisiumController::class, 'tolak'])->name('koor-yudisium-tolak');
+
+    });
+
     Route::controller(PembagianDosenController::class)->group(function ()
     {
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
         Route::get('/koordinator/pembagian_dosen/edit/{id}', 'edit');
         Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
     });
+
 
 
 // });
