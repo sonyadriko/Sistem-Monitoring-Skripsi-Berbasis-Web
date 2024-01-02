@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Seminar Proposal
+Sidang Skripsi
 @endsection
 
 @section('css')
@@ -18,16 +18,16 @@ Seminar Proposal
 @endif
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Daftar Jadwal</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Seminar Proposal</li>
+        <li class="breadcrumb-item"><a href="#">Daftar Jadwal</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sidang Skripsi</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Data Seminar Proposal</h4>
-                <p class="card-title-desc">List pengajuan seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
+                <h4 class="card-title" style="font-weight: bold">Data Sidang Skripsi</h4>
+                <p class="card-title-desc">List pengajuan sidang skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body table-responsive">
@@ -36,6 +36,7 @@ Seminar Proposal
                     <tr>
                         <th>No</th>
                         <th>NPM</th>
+                        {{-- <th>Nama</th> --}}
                         <th>Mahasiswa</th>
                         <th>Dosen Penguji</th>
                         <th>Ruangan</th>
@@ -47,29 +48,27 @@ Seminar Proposal
                         @php
                         $no=1;
                         @endphp
-                        @foreach($sempros as $semp)
+                        @foreach($semhas as $semh)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $semp->kode_unik }}</td>
-                            <td>{{ $semp->name }}</td>
-                            <td>{{ $semp->nama_penguji_1 ?? 'Belum diatur' }}</td>
-                            <td>{{ $semp->nama_ruangan ?? 'Belum diatur' }}</td>
+                            <td>{{ $semh->kode_unik }}</td>
+                            <td>{{ $semh->name }}</td>
+                            <td>{{ $semh->nama_penguji_1 ?? 'Belum diatur' }}</td>
+                            <td>{{ $semh->nama_ruangan ?? 'Belum diatur' }}</td>
                             @php
                                 $formatTanggal = null;
-                                if(!is_null($semp->tanggal)) {
-                                    $carbonTanggal = \Carbon\Carbon::parse($semp->tanggal);
+                                if(!is_null($semh->tanggal)) {
+                                    $carbonTanggal = \Carbon\Carbon::parse($semh->tanggal);
                                     $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                                 }
                             @endphp
                             <td>{{ $formatTanggal ?? 'Belum diatur' }}</td>
-                            {{-- <td>{{ $semp->tanggal ?? 'Belum diatur' }}</td> --}}
-                            <td><a href="{{ url('/ketua_jurusan/seminar/detail/' . $semp->id_seminar_proposal) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/ketua_jurusan/sidang/detail/' . $semh->id_sidang_skripsi) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-
                     </tbody>
                 </table>
 

@@ -35,8 +35,11 @@ Seminar Proposal
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
                         <th>NPM</th>
+                        <th>Nama</th>
+                        <th>Penguji</th>
+                        <th>Ruang</th>
+                        <th>Hari</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -47,8 +50,18 @@ Seminar Proposal
                         @foreach($sempros as $semp)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $semp->name }}</td>
                             <td>{{ $semp->kode_unik }}</td>
+                            <td>{{ $semp->name }}</td>
+                            <td>{{ $semp->nama_penguji_1 ?? 'Belum diatur' }}</td>
+                            <td>{{ $semp->nama_ruangan ?? 'Belum diatur' }}</td>
+                            @php
+                                $formatTanggal = null;
+                                if(!is_null($semp->tanggal)) {
+                                    $carbonTanggal = \Carbon\Carbon::parse($semp->tanggal);
+                                    $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                                }
+                            @endphp
+                            <td>{{ $formatTanggal ?? 'Belum diatur' }}</td>
                             <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id_seminar_proposal) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php

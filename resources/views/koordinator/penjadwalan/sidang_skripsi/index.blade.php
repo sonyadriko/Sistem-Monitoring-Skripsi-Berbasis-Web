@@ -35,8 +35,11 @@ Sidang Skripsi
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
                         <th>NPM</th>
+                        <th>Nama</th>
+                        <th>Dosen Penguji</th>
+                        <th>Ruangan</th>
+                        <th>Hari</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -49,6 +52,16 @@ Sidang Skripsi
                             <td>{{ $no }}</td>
                             <td>{{ $semh->name }}</td>
                             <td>{{ $semh->kode_unik }}</td>
+                            <td>{{ $semh->nama_penguji_1 ?? 'Belum diatur' }}</td>
+                            <td>{{ $semh->nama_ruangan ?? 'Belum diatur' }}</td>
+                            @php
+                                $formatTanggal = null;
+                                if(!is_null($semh->tanggal)) {
+                                    $carbonTanggal = \Carbon\Carbon::parse($semh->tanggal);
+                                    $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                                }
+                            @endphp
+                            <td>{{ $formatTanggal ?? 'Belum diatur' }}</td>
                             <td><a href="{{ url('/koordinator/jadwal_sidang_skripsi/detail/' . $semh->id_sidang_skripsi) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php

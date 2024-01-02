@@ -13,7 +13,10 @@ class KoordinatorSidangSkripsiController extends Controller
     {
         $semhas = DB::table('sidang_skripsi')
             ->join('users', 'users.id', 'sidang_skripsi.users_id')
-            ->whereIn('status', ['pending', 'terima'])
+            ->leftjoin('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
+            ->leftjoin('users as penguji1', 'penguji1.id', 'sidang_skripsi.dosen_penguji_1')
+            ->select('sidang_skripsi.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1')
+            ->whereIn('sidang_skripsi.status', ['pending', 'terima'])
             ->latest('sidang_skripsi.created_at')
             ->get();
         return view('koordinator/penjadwalan/sidang_skripsi.index', compact('semhas'));

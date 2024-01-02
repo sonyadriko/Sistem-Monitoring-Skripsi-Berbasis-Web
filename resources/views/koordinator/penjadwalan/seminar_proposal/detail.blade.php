@@ -104,14 +104,14 @@ Seminar Proposal
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="html5-date-input" class="form-label" style="font-weight: bold">Date</label>
+                            <label for="html5-date-input" class="form-label" style="font-weight: bold">Tanggal</label>
                             <input class="form-control @error('date') is-invalid @enderror" name="date" type="date" id="html5-date-input" />
                             @error('date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="html5-time-input" class="form-label" style="font-weight: bold">Time</label>
+                            <label for="html5-time-input" class="form-label" style="font-weight: bold">Jam</label>
                             <input class="form-control @error('time') is-invalid @enderror" name="time" type="time" id="html5-time-input" />
                             @error('time')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -198,7 +198,7 @@ Seminar Proposal
                     {{-- <input type="text" class="form-control" name="ruanganSeminar" id="ruanganSeminar" value="{{$data2->nama_ruangan}}" placeholder="A-204" aria-describedby="ruanganSeminarHelp" readonly/> --}}
                 </div>
                 <div class="col-md-4">
-                    <label for="date" class="form-label" style="font-weight: bold">Date</label>
+                    <label for="date" class="form-label" style="font-weight: bold">Tanggal</label>
                     @php
                         $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
                         $formatTanggal = ucfirst($carbonTanggal->formatLocalized('%A, %d %B %Y', strftime('%A')));
@@ -207,7 +207,7 @@ Seminar Proposal
                     {{-- <input class="form-control" name="date" type="text" value="{{$formatTanggal}}" readonly /> --}}
                 </div>
                 <div class="col-md-4">
-                    <label for="time" class="form-label" style="font-weight: bold">Time</label>
+                    <label for="time" class="form-label" style="font-weight: bold">Jam</label>
                     @php
                         $carbonJam = \Carbon\Carbon::parse($data->jam);
                         $formatJam = $carbonJam->format('H:i');

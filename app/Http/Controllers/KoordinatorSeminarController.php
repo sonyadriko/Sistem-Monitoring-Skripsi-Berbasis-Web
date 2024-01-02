@@ -12,8 +12,11 @@ class KoordinatorSeminarController extends Controller
     public function index()
     {
         $sempros = DB::table('seminar_proposal')
-            ->join('users', 'users.id', 'seminar_proposal.users_id')
-            ->whereIn('status', ['pending', 'terima'])
+            ->leftjoin('users', 'users.id', 'seminar_proposal.users_id')
+            ->leftjoin('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+            ->leftjoin('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
+            ->select('seminar_proposal.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1')
+            ->whereIn('seminar_proposal.status', ['pending', 'terima'])
             ->latest('seminar_proposal.created_at')
             ->get();
 

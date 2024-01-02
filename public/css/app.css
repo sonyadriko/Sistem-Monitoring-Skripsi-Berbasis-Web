@@ -28,7 +28,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #212a3a;
   --bs-gray-900: #060c17;
-  --bs-primary: #6571ff;
+  --bs-primary: #1c84ee;
   --bs-secondary: #7987a1;
   --bs-success: #05a34a;
   --bs-info: #66d1d1;
@@ -36,7 +36,7 @@
   --bs-danger: #ff3366;
   --bs-light: #e9ecef;
   --bs-dark: #060c17;
-  --bs-primary-rgb: 101, 113, 255;
+  --bs-primary-rgb: #1C84EE;
   --bs-secondary-rgb: 121, 135, 161;
   --bs-success-rgb: 5, 163, 74;
   --bs-info-rgb: 102, 209, 209;
@@ -67,8 +67,8 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #6571ff;
-  --bs-link-hover-color: #515acc;
+  --bs-link-color: #1c84ee;
+  --bs-link-hover-color: #1c84ee;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -6319,7 +6319,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   color: #6571ff !important;
 }
 .link-primary:hover, .link-primary:focus {
-  color: #515acc !important;
+  color: #1C84EE !important;
 }
 
 .link-secondary {

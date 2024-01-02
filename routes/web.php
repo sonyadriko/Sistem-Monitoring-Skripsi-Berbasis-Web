@@ -45,6 +45,9 @@ use App\Http\Controllers\DosenBidangIlmuController;
 use App\Http\Controllers\HistoryRevisiSkripsiController;
 use App\Http\Controllers\HistoryRevisiProposalController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\KajurJadwalController;
+use App\Http\Controllers\KajurSeminarController;
+use App\Http\Controllers\KajurSidangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,7 +105,13 @@ Route::controller(RegisterController::class)->group(function () {
     });
     Route::controller(KajurSeminarController::class)->group(function () {
         Route::get('/ketua_jurusan/seminar', 'index')->name('data-seminar');
+        Route::get('/ketua_jurusan/seminar/detail/{id}', 'detail')->name('data-seminar.detail');
     });
+    Route::controller(KajurSidangController::class)->group(function () {
+        Route::get('/ketua_jurusan/sidang', 'index')->name('data-sidang');
+        Route::get('/ketua_jurusan/sidang/detail/{id}', 'detail')->name('data-sidang.detail');
+    });
+
 // });
 
 

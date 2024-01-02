@@ -134,12 +134,14 @@
 						</div>
 					</div>
 					<ul class="list-unstyled p-1">
+                        @if(Auth::user()->role_id == 1)
 						<li class="dropdown-item py-2">
 							<a class="text-body ms-0" href="{{ route('profile.index') }}">
 								<i class="icon-md me-2" data-feather="user"></i>
 								<span>Profile</span>
 							</a>
 						</li>
+                        @endif
 						{{-- <li class="dropdown-item py-2">
               <a href="javascript:;" class="text-body ms-0">
                 <i class="me-2 icon-md" data-feather="edit"></i>
