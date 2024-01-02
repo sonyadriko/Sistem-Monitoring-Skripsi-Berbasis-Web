@@ -48,6 +48,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KajurJadwalController;
 use App\Http\Controllers\KajurSeminarController;
 use App\Http\Controllers\KajurSidangController;
+use App\Http\Controllers\YudisiumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -380,6 +381,15 @@ Route::controller(RegisterController::class)->group(function () {
 
     Route::controller(FAQController::class)->group(function () {
         Route::get('/faq', 'index')->name('faq');
+    });
+
+    Route::group(['prefix' => '/yudisium'], function () {
+        Route::get('/', [YudisiumController::class, 'index'])->name('yudisium.index');
+        Route::post('/store', [YudisiumController::class, 'store'])->name('yudisium-store');
+        Route::get('/check-status', [YudisiumController::class, 'checkStatus'])->name('yudisium.check');
+        Route::get('/status/{id}', [YudisiumController::class, 'showStatus'])->name('yudisium.status');
+        Route::get('/submit-form', [YudisiumController::class, 'index'])->name('yudisium.store');
+        // Route::get('/submit-form', 'create')->name('submit-form');
     });
 
 // });
