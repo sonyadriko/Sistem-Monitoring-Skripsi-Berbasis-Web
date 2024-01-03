@@ -98,13 +98,28 @@
         </div>
     </div>
     <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Registrasi Berhasil',
+                text: 'Registrasi berhasil dilakukan. Tunggu pengecekan data dari koordinator skripsi untuk bisa login sebagai mahasiswa.',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route("login") }}'; // Ganti dengan URL halaman login yang sesuai
+                }
+            });
+        @endif
+    </script>
+    {{-- <script>
         @if(isset($script))
             {!! $script !!}
         @endif
-    </script>
+    </script> --}}
 </div>
 
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     // Fungsi untuk menampilkan alert dan mengarahkan ke halaman login
     function showSuccessAlert() {

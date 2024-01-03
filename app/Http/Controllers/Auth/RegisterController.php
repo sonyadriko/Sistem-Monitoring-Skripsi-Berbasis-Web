@@ -80,10 +80,10 @@ class RegisterController extends Controller
             // Kirim notifikasi ke email pengguna
             // Implementasikan notifikasi email menggunakan Laravel Notifications
 
-            return view('auth/register')->with('script', 'showSuccessAlert();');
+            // return view('auth/register')->with('script', 'showSuccessAlert();');
             // return redirect()->back()->with('script', 'showSuccessAlert();');
 
-            // return redirect()->back()->with('success', 'Pendaftaran berhasil. Tunggu persetujuan admin.');
+            return redirect()->back()->with('success', 'Pendaftaran berhasil. Tunggu persetujuan admin.');
         } catch (QueryException $e) {
             // Tangani kesalahan saat menyimpan ke database
             $errorCode = $e->errorInfo[1];
