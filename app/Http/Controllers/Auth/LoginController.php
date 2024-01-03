@@ -55,7 +55,9 @@ class LoginController extends Controller
         $user = MUser::where('email', $request->email)->first();
 
         if ($user === null) {
-            return 'Email tidak ditemukan';
+            // return 'Email tidak ditemukan';
+            return redirect('/login')->withErrors(['error' => 'Email tidak ditemukan.']);
+
         }
 
         $credentials = [
@@ -80,39 +82,64 @@ class LoginController extends Controller
         if ($role !== null) {
             // Pengguna memiliki peran yang sesuai dengan guards yang didefinisikan
             $login = \Auth::guard($role)->attempt($credentials);
-        } else {
-            return 'Role tidak diizinkan';
-        }
 
-        if ($login) {
-            // Authentication successful
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                DB::table('histories')->insert([
-                    'name_history' => 'Login', // Nama Aksi
-                    'content_history' => 'Login berhasil', // Isi deskripsi dari aksi
-                    'alert_history' => 'success', // kalau berhasil, maka success, kalau gagal maka warning atau danger (BS4)
-                    'action_history' => 'user-add', // icon, tergantung dari pakainya apa
-                    'status' => 1,
-                    'created_by' => Auth::user()->id,
-                    'created_at' => Carbon::now(),
-                    'updated_by' => Auth::user()->id,
-                    'updated_at' => Carbon::now(),
-                ]);
-            }
-            if ($role === 'koordinator') {
-                return redirect('/koordinator');
-            } elseif ($role === 'dosen') {
-                return redirect('/dosen');
-            } elseif ($role == 'mahasiswa') {
-                return redirect('/dashboard'); // Atau sesuaikan dengan halaman dashboard yang sesuai dengan peran
-            } elseif ($role = 'ketuajurusan') {
-                return redirect('/ketua_jurusan');
+            if ($login) {
+                // Authentication successful
+                if ($user->status == 'aktif') {
+                    // Cek status aktif
+                    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                        DB::table('histories')->insert([
+                            'name_history' => 'Login', // Nama Aksi
+                            'content_history' => 'Login berhasil', // Isi deskripsi dari aksi
+                            'alert_history' => 'success', // kalau berhasil, maka success, kalau gagal maka warning atau danger (BS4)
+                            'action_history' => 'user-add', // icon, tergantung dari pakainya apa
+                            'status' => 1,
+                            'created_by' => Auth::user()->id,
+                            'created_at' => Carbon::now(),
+                            'updated_by' => Auth::user()->id,
+                            'updated_at' => Carbon::now(),
+                        ]);
+                    }
+                    // DB::table('histories')->insert([
+                    //     'name_history' => 'Login',
+                    //     'content_history' => 'Login berhasil',
+                    //     'alert_history' => 'success',
+                    //     'action_history' => 'user-add',
+                    //     'status' => 1,
+                    //     'created_by' => Auth::user()->id,
+                    //     'created_at' => Carbon::now(),
+                    //     'updated_by' => Auth::user()->id,
+                    //     'updated_at' => Carbon::now(),
+                    // ]);
+
+                    if ($role === 'koordinator') {
+                        return redirect('/koordinator')->with('success', 'Login berhasil. Selamat datang koordinator!');
+                    } elseif ($role === 'dosen') {
+                        return redirect('/dosen')->with('success', 'Login berhasil. Selamat datang dosen!');
+                    } elseif ($role === 'mahasiswa') {
+                        return redirect('/dashboard')->with('success', 'Login berhasil. Selamat datang Mahasiswa!');
+                    } elseif ($role === 'ketuajurusan') {
+                        return redirect('/ketua_jurusan')->with('success', 'Login berhasil. Selamat datang Ketua Jurusan!');
+                    }
+                } else {
+                    // Jika status tidak aktif, tambahkan handling di sini
+                    // return redirect('/login')->with('error', 'Akun tidak aktif.');
+                    return redirect('/login')->withErrors(['error' => 'Akun tidak aktif.']);
+
+                }
+            } else {
+                // Authentication failed
+                // return redirect('/login')->with('error', 'Invalid email or password. Please try again.');
+                return redirect('/login')->withErrors(['error' => 'email atau kata sandi salah. Silakan coba lagi.']);
             }
         } else {
-            // Authentication failed
-            return redirect('/login')->with('error', 'Invalid email or password. Please try again.');
+            // Role tidak diizinkan
+            return redirect('/login')->withErrors(['error' => 'Role tidak diizinkan.']);
+
+            // return 'Role tidak diizinkan';
         }
     }
+
 
     public function logout(Request $request){
         $historyLogout = DB::table('histories')->insert([

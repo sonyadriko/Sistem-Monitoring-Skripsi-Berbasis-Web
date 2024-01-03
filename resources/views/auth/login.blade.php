@@ -6,7 +6,6 @@ Login
 
 @section('content')
 <div class="page-content d-flex align-items-center justify-content-center">
-
   <div class="row w-75 mx-0 auth-page">
     <div class="col-md-8 col-xl-6 mx-auto">
       <div class="card">
@@ -16,6 +15,18 @@ Login
             <div class="auth-form-wrapper px-4 py-5">
               <a href="#" class="noble-ui-logo d-block mb-2">Login<span></span></a>
               <h5 class="text-muted fw-normal mb-4">Izinkan Sistem mengenali anda.</h5>
+              {{-- Tambahkan kode untuk menampilkan pesan error --}}
+              <script>
+                @if($errors->any())
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '{{ $errors->first() }}',
+                    });
+                @endif
+            </script>
+
+
               <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="row mb-3">
@@ -69,3 +80,4 @@ Login
 
 </div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

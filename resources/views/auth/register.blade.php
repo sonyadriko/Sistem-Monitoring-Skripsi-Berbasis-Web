@@ -8,11 +8,11 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama Lengkap') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,12 +26,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="npm" class="col-md-4 col-form-label text-md-end">{{ __('Npm') }}</label>
+                            <label for="kode_unik" class="col-md-4 col-form-label text-md-end">{{ __('Npm') }}</label>
 
                             <div class="col-md-6">
-                                <input id="npm" type="text" class="form-control @error('npm') is-invalid @enderror" name="npm" value="{{ old('npm') }}" required autocomplete="npm" autofocus>
+                                <input id="kode_unik" type="text" class="form-control @error('kode_unik') is-invalid @enderror" name="kode_unik" value="{{ old('kode_unik') }}" required autocomplete="kode_unik" autofocus>
 
-                                @error('npm')
+                                @error('kode_unik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Kata Sandi') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -66,13 +66,23 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Ulang Kata Sandi') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="ktm" class="col-md-4 col-form-label text-md-end">Upload KTM (Kartu Tanda Mahasiswa)</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="file" name="ktm" id="ktm" />
+                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                            </div>
+                            @error('ktm')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="row mb-0">
@@ -87,5 +97,18 @@
             </div>
         </div>
     </div>
+    <script>
+        @if(isset($script))
+            {!! $script !!}
+        @endif
+    </script>
 </div>
+
 @endsection
+<script>
+    // Fungsi untuk menampilkan alert dan mengarahkan ke halaman login
+    function showSuccessAlert() {
+        alert('Selamat!\nRegistrasi berhasil dilakukan, selanjutnya cukup menunggu pengecekan data dari koordinator skripsi untuk bisa login sebagai mahasiswa');
+        window.location.href = '/login'; // Ganti '/login' dengan URL halaman login yang sesuai
+    }
+</script>

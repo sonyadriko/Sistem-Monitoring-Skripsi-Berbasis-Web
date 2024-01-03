@@ -22,7 +22,7 @@ Yudisium
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title" style="font-weight: bold">Status Kelulusan Mahasiswa</h4>
-                <p class="card-title-desc">Tabel dibawah ini merupakan pendaftaran yudisium dilakukan mahasiswa.
+                <p class="card-title-desc">Tabel ini menampilkan list mahasiswa yang sudah daftar yudisium, dan juga terdapat tombol detail untuk menginputkan statusnya.
                 </p>
             </div>
             <div class="card-body table-responsive">
@@ -40,14 +40,44 @@ Yudisium
                         @php
                         $no=1;
                         @endphp
-                        @foreach($surattugas as $st)
+                        @foreach($yudisium as $yudisium)
+
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $st->name }}</td>
-                            <td>{{ $st->kode_unik }}</td>
-                            <td>{{ $st->topik_bidang_ilmu }}</td>
-                            <td><a href="{{ url('/koordinator/surat_tugas/detail/' . $st->id_surat_tugas) }}" class="btn btn-primary">Detail</a></td>
+                            <td>{{ $yudisium->name }}</td>
+                            <td>{{ $yudisium->kode_unik }}</td>
+                            <td>{{ $yudisium->topik_bidang_ilmu }}</td>
+                            {{-- <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#statusModal{{ $yudisium->id_yudisium }}">
+                                    Status
+                                </button>
+                            </td> --}}
+                            <td><a href="{{ url('/koordinator/yudisium/detail/' . $yudisium->id_yudisium) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
+                        {{-- <div class="modal fade" id="statusModal{{ $yudisium->id_yudisium }}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel{{ $yudisium->id_yudisium }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="statusModalLabel{{ $yudisium->id_yudisium }}">Ubah Status</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form status di sini -->
+                                        <form action="{{ url('/koordinator/surat_tugas/update-status/' . $yudisium->id_yudisium) }}" method="post">
+                                            @csrf
+                                            <label for="status">Pilih Status:</label>
+                                            <select name="status" class="form-control">
+                                                <option value="terima">Terima</option>
+                                                <option value="tolak">Tolak</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
                         @php
                         $no++;
                         @endphp

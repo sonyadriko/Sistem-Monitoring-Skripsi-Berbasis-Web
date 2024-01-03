@@ -103,6 +103,27 @@ Dashboard
                 </div>
             </div>
         </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('data-pengguna-penggunabaru.index') }}" class="card-link">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0">Pengguna Baru</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{ $newUserCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

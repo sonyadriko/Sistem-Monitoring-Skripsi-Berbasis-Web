@@ -78,12 +78,13 @@ Route::controller(LoginController::class)->group(function () {
     // Route::get('/reset-auth-logout', 'password_reset_logout')->name('reset-auth-logout');
 });
 
-Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegisterForm')
+
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])
     ->name('register-form')
     ->middleware('guest');
-    Route::post('/register', 'register')->name('register');
-});
+
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
 
 // Route::group(['middleware' => 'auth:ketuajurusan'], function() {
     Route::controller(HistoryController::class)->group(function () {
@@ -212,6 +213,9 @@ Route::controller(RegisterController::class)->group(function () {
         Route::get('/koordinator/data_pengguna/mahasiswa', 'mhs')->name('data-pengguna-mhs.index');
         Route::get('/koordinator/data_pengguna/dosen', 'dosen')->name('data-pengguna-dosen.index');
         Route::get('/koordinator/data_pengguna/ketua_jurusan', 'kajur')->name('data-pengguna-kajur.index');
+        Route::get('/koordinator/data_pengguna/pengguna_baru', 'newuser')->name('data-pengguna-penggunabaru.index');
+        Route::post('/koordinator/data_pengguna/pengguna_baru/terima/{id}', 'terima')->name('terima-pengguna');
+        Route::post('/koordinator/data_pengguna/pengguna_baru/tolak/{id}', 'tolak')->name('tolak-pengguna');
     });
 
     Route::controller(PenjadwalanKoordinatorController::class)->group(function () {
