@@ -113,13 +113,13 @@ class LoginController extends Controller
                     // ]);
 
                     if ($role === 'koordinator') {
-                        return redirect('/koordinator')->with('success', 'Login berhasil. Selamat datang koordinator!');
+                        return redirect('/koordinator')->with('success', 'Login berhasil. Selamat datang! '.Auth::user()->name);
                     } elseif ($role === 'dosen') {
-                        return redirect('/dosen')->with('success', 'Login berhasil. Selamat datang dosen!');
+                        return redirect('/dosen')->with('success', 'Login berhasil. Selamat datang dosen! '.Auth::user()->name);
                     } elseif ($role === 'mahasiswa') {
-                        return redirect('/dashboard')->with('success', 'Login berhasil. Selamat datang Mahasiswa!');
+                        return redirect('/dashboard')->with('success', 'Login berhasil. Selamat datang Mahasiswa! '.Auth::user()->name);
                     } elseif ($role === 'ketuajurusan') {
-                        return redirect('/ketua_jurusan')->with('success', 'Login berhasil. Selamat datang Ketua Jurusan!');
+                        return redirect('/ketua_jurusan')->with('success', 'Login berhasil. Selamat datang Ketua Jurusan! '.Auth::user()->name);
                     }
                 } else {
                     // Jika status tidak aktif, tambahkan handling di sini
