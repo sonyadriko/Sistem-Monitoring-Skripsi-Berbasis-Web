@@ -52,32 +52,8 @@ Yudisium
                                     Status
                                 </button>
                             </td> --}}
-                            <td><a href="{{ url('/koordinator/yudisium/detail/' . $yudisium->id_yudisium) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/koordinator/yudisium/detail/' . $yudisium->id_yudisium) }}" class="btn btn-primary">Status</a></td>
                         </tr>
-                        {{-- <div class="modal fade" id="statusModal{{ $yudisium->id_yudisium }}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel{{ $yudisium->id_yudisium }}" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="statusModalLabel{{ $yudisium->id_yudisium }}">Ubah Status</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Form status di sini -->
-                                        <form action="{{ url('/koordinator/surat_tugas/update-status/' . $yudisium->id_yudisium) }}" method="post">
-                                            @csrf
-                                            <label for="status">Pilih Status:</label>
-                                            <select name="status" class="form-control">
-                                                <option value="terima">Terima</option>
-                                                <option value="tolak">Tolak</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         @php
                         $no++;
                         @endphp

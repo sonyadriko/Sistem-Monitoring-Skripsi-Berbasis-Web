@@ -14,7 +14,9 @@ class KajurDataMahasiswaController extends Controller
             ->leftjoin('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
             ->leftjoin('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
             ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
-            ->where('role_id', 1)->get();
+            ->where('role_id', 1)
+            ->where('users.status', 'aktif')
+            ->get();
 
         return view('kajur.mahasiswa.index', compact('datamhs'));
     }

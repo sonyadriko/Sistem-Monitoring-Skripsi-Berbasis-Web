@@ -1,83 +1,88 @@
 @extends('layout.master2')
 
 @section('title')
-Login
+    Login
 @endsection
 
 @section('content')
-<div class="page-content d-flex align-items-center justify-content-center">
-  <div class="row w-75 mx-0 auth-page">
-    <div class="col-md-8 col-xl-6 mx-auto">
-      <div class="card">
-        <div class="row">
-          </div>
-          <div class="col-md-8 ps-md-0 mx-auto">
-            <div class="auth-form-wrapper px-4 py-5">
-              <a href="#" class="noble-ui-logo d-block mb-2">Login<span></span></a>
-              <h5 class="text-muted fw-normal mb-4">Izinkan Sistem mengenali anda.</h5>
-              {{-- Tambahkan kode untuk menampilkan pesan error --}}
-              <script>
-                @if($errors->any())
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: '{{ $errors->first() }}',
-                    });
-                @endif
-            </script>
 
+<!-- Section: Design Block -->
+<section class="h-100 d-flex justify-content-center align-items-center" style="background: linear-gradient(to bottom, #1D4ED8 50%, #3B82F6);">
+    <!-- Jumbotron -->
+    <div class="container-fluid px-4 py-5 text-center text-lg-start">
+        <div class="row justify-content-center align-items-start"> <!-- Updated to align-items-start -->
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center"> <!-- Removed text-lg-start -->
+                <h1 class="my-5 display-3 fw-bold ls-tight text-white">
+                    SM SKRIPSI <br />
+                    {{-- <span class="text-primary">Sistem Monitoring Skripsi</span> --}}
+                </h1>
+                <img src="{{ asset('img/User_Mahasiswa.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+            </div>
 
-              <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="row mb-3">
-                    <label for="email" class="col-md-4 col-form-label text-md-end">Email address</label>
-                    <div class="col-md-6">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" required autocomplete="current-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">
-                                Remember me
-                            </label>
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card mx-auto" style="max-width: 500px;">
+                    <div class="card-body py-5 px-md-5">
+                        <h2 class="text-primary text-center mb-4">Login</h2>
+                        <p class="text-muted text-center mb-4">Izinkan Sistem mengenali anda.</p>
+                        <!-- Display error message -->
+
+                        <script>
+                            @if($errors->any())
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: '{{ $errors->first() }}',
+                                });
+                            @endif
+                        </script>
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-dark">Email address</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror text-dark" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label text-dark">Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror text-dark" name="password" id="password" placeholder="Password" required autocomplete="current-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label class="form-check-label text-dark" for="remember">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div class="mb-0">
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </div>
+                        </form>
+
+                        <!-- Registration link -->
+                        <div class="mt-3 text-center">
+                            <p class="text-muted">Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Register</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-0">
-                    <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        {{-- <a href="{{ route('password.request') }}" class="btn btn-link">
-                            Forgot Your Password?
-                        </a> --}}
-                    </div>
-                </div>
-            </form>
-
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-
-</div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
 @endsection
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

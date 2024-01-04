@@ -4,7 +4,7 @@ $(function() {
 
 
   var colors = {
-    primary        : "#6571ff",
+    primary        : "#1c84ee",
     secondary      : "#7987a1",
     success        : "#05a34a",
     info           : "#66d1d1",
@@ -180,7 +180,7 @@ $(function() {
     "Apr 01 2023", "Apr 02 2023", "Apr 03 2023", "Apr 04 2023", "Apr 05 2023", "Apr 06 2023", "Apr 07 2023", "Apr 08 2023", "Apr 09 2023", "Apr 10 2023", "Apr 11 2023", "Apr 12 2023", "Apr 13 2023", "Apr 14 2023", "Apr 15 2023", "Apr 16 2023", "Apr 17 2023", "Apr 18 2023", "Apr 19 2023", "Apr 20 2023","Apr 21 2023", "Apr 22 2023", "Apr 23 2023", "Apr 24 2023", "Apr 25 2023", "Apr 26 2023", "Apr 27 2023", "Apr 28 2023", "Apr 29 2023", "Apr 30 2023",
     "May 01 2023", "May 02 2023", "May 03 2023", "May 04 2023", "May 05 2023", "May 06 2023", "May 07 2023", "May 08 2023", "May 09 2023", "May 10 2023", "May 11 2023", "May 12 2023", "May 13 2023", "May 14 2023", "May 15 2023", "May 16 2023", "May 17 2023", "May 18 2023", "May 19 2023", "May 20 2023","May 21 2023", "May 22 2023", "May 23 2023", "May 24 2023", "May 25 2023", "May 26 2023", "May 27 2023", "May 28 2023", "May 29 2023", "May 30 2023",
   ]
-  
+
 
 
 
@@ -410,10 +410,10 @@ $(function() {
       tooltip: {
         theme: 'light'
       },
-      colors: [colors.primary],  
+      colors: [colors.primary],
       fill: {
         opacity: .9
-      } , 
+      } ,
       grid: {
         padding: {
           bottom: -4
@@ -480,7 +480,7 @@ $(function() {
         },
       },
     }
-    
+
     var apexBarChart = new ApexCharts(document.querySelector("#monthlySalesChart"), options);
     apexBarChart.render();
   }
@@ -510,7 +510,7 @@ $(function() {
             background: colors.light,
             strokeWidth: '100%',
             opacity: 1,
-            margin: 5, 
+            margin: 5,
           },
           dataLabels: {
             showOn: "always",
@@ -536,9 +536,9 @@ $(function() {
       },
       labels: ["Storage Used"]
     };
-    
+
     var chart = new ApexCharts(document.querySelector("#storageChart"), options);
-    chart.render();    
+    chart.render();
   }
   // Cloud Storage Chart - END
 

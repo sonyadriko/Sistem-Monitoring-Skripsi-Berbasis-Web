@@ -1,6 +1,23 @@
 <nav class="sidebar">
   <div class="sidebar-header">
-    <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="sidebar-brand">
+    @php
+    $dashboardUrl = '';
+    switch (auth()->user()->role_id) {
+        case 2:
+            $dashboardUrl = url('/dosen');
+            break;
+        case 3:
+            $dashboardUrl = url('/koordinator');
+            break;
+        case 4:
+            $dashboardUrl = url('/ketua_jurusan');
+            break;
+        default:
+            $dashboardUrl = url('/dashboard');
+    }
+@endphp
+<a href="{{ $dashboardUrl }}" class="sidebar-brand">
+    {{-- <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="sidebar-brand"> --}}
       SM<span> SKRIPSI</span>
     </a>
     <div class="sidebar-toggler not-active">
@@ -346,6 +363,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('bidang-ilmu.index')}}" class="nav-link">Tema Penelitian</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('koor-yudisium.index')}}" class="nav-link">Yudisium</a>
                 </li>
 
             </ul>
