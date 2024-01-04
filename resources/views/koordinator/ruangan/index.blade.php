@@ -26,7 +26,7 @@ Ruangan
                     <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.</p>
                 </div>
                 <div class="text-right">
-                    <a href="{{ route('ruangan.create') }}" class="btn btn-success">Tambah Ruangan</a>
+                    <a href="{{ route('ruangan.create') }}" class="btn btn-primary">Tambah Ruangan</a>
                 </div>
             </div>
             <div class="card-body table-responsive">

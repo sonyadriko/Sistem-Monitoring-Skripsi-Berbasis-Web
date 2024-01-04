@@ -31,7 +31,7 @@ Mata Kuliah Pendukung
                     <p class="card-title-desc">Berikut merupakan tabel list Mata Kuliah Pendukung.</p>
                 </div>
                 <div class="text-right">
-                    <a href="{{ url('/koordinator/mata_kuliah_pendukung/create') }}" class="btn btn-success">Tambah Mata Kuliah</a>
+                    <a href="{{ url('/koordinator/mata_kuliah_pendukung/create') }}" class="btn btn-primary">Tambah Mata Kuliah</a>
                 </div>
             </div>
 

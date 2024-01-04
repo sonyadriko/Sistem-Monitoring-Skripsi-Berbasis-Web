@@ -11,12 +11,14 @@
     <!-- Jumbotron -->
     <div class="container-fluid px-4 py-5 text-center text-lg-start">
         <div class="row justify-content-center align-items-start"> <!-- Updated to align-items-start -->
-            <div class="col-lg-6 mb-5 mb-lg-0 text-center"> <!-- Removed text-lg-start -->
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center d-none d-md-block"> <!-- Removed text-lg-start -->
                 <h1 class="my-5 display-3 fw-bold ls-tight text-white">
                     SM SKRIPSI <br />
                     {{-- <span class="text-primary">Sistem Monitoring Skripsi</span> --}}
                 </h1>
                 <img src="{{ asset('img/User_Mahasiswa.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+
+                <p class="text-white">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0">
@@ -73,7 +75,7 @@
 
                         <!-- Registration link -->
                         <div class="mt-3 text-center">
-                            <p class="text-muted">Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Register</a></p>
+                            <p class="text-muted">Belum punya akun? <a href="{{ route('register') }}" class="text-dark">Register</a></p>
                         </div>
                     </div>
                 </div>

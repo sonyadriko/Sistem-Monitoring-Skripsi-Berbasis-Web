@@ -9,7 +9,7 @@ Bidang Ilmu
     <div class="card mb-4">
         <h5 class="card-header">Table Bidang Ilmu</h5>
     <div class="card-body">
-      <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-success mb-3">Tambah Data</a>
+      <a href="{{ url('/dosen/bidang_ilmu/create') }}" class="btn btn-primary mb-3">Tambah Data</a>
       <div class=" table-responsive  pt-0">
         <table class="table">
                 <thead>

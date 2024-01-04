@@ -282,6 +282,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     Route::group(['prefix' => 'koordinator/yudisium'], function () {
         Route::get('/', [KoordinatorYudisiumController::class, 'index'])->name('koor-yudisium.index');
         Route::get('/detail/{id}', [KoordinatorYudisiumController::class, 'detail'])->name('koor-yudisium.detail');
+        // Route::[pst]('/detail/{id}', [KoordinatorYudisiumController::class, 'detail'])->name('koor-yudisium.detail');
         Route::post('/update/{id}', [KoordinatorYudisiumController::class, 'update'])->name('koor-yudisium.update');
         Route::post('/tolak/{id}', [KoordinatorYudisiumController::class, 'tolak'])->name('koor-yudisium-tolak');
 

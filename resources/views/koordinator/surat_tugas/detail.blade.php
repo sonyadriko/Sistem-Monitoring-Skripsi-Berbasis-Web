@@ -26,27 +26,32 @@ Detail Surat Tugas
                   @csrf
                   <div class="mb-3">
                     <label for="npm" class="form-label">NPM</label>
-                    <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" class="form-control" id="npm" name="npm" value="{{$data->kode_unik}}" aria-describedby="defaultFormControlHelp" readonly  disabled/>
                   </div>
                   <div class="mb-3">
                     <label for="name" class="form-label">Nama Mahasiswa</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                   </div>
                   <div class="mb-3">
                     <label for="bidang_ilmu" class="form-label">Alamat Mahasiswa</label>
-                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->alamat_mhs}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->alamat_mhs}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                   </div>
                   <div class="mb-3">
                     <label for="dospem_utama" class="form-label">Dosen Pembimbing 1</label>
-                    <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" class="form-control" id="dospem_utama" name="dospem_utama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                   </div>
                   <div class="mb-3">
                     <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
-                    <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
+                    <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                   </div>
                   <div class="mb-3">
                     <label for="dospem_2" class="form-label">Tanggal Seminar Proposal</label>
-                    <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$data->tanggal_sidang_proposal}}" aria-describedby="defaultFormControlHelp" readonly />
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($data->tanggal_sidang_proposal);
+                                $formatTanggal = $carbonTanggal->formatLocalized(' %d %B %Y', 'id');
+                            @endphp
+                        {{-- <p><span>{{ $formatTanggal }}</span></p> --}}
+                    <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar" value="{{$formatTanggal}}" aria-describedby="defaultFormControlHelp" readonly disabled/>
                   </div>
                   <input type="hidden" value="{{ $data->bimbingan_proposal_id}}" id="bimproid" name="bimproid"/>
                   <input type="hidden" value="{{ $data->users_id}}" id="users_id" name="users_id"/>

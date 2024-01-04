@@ -40,14 +40,26 @@ Daftar Yudisium
                     </h4>
                 </div>
             </div>
-            @elseif ($datas->status == 'terima')
+            @elseif ($datas->status == 'sidang ulang')
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Pendaftaran Yudisium telah disubmit.</h4>
+                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator.</h4>
+                    <h6 class="mb-3">Status Pendaftaran :
+                        <div class="alert alert-danger mt-3" role="alert">
+                            Anda harus sidang ulang.
+                        </div>
+                    </h4>
+                </div>
+            </div>
+            @else
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Yudisium telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success mt-3" role="alert">
-                            Selamat, Pendaftaran Yudisium telah disetujui.
+                            Selamat, Pendaftaran Yudisium telah disetujui. Anda {{$datas->status}}
                         </div>
                     </h4>
                 </div>
@@ -66,9 +78,9 @@ Daftar Yudisium
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Tanggal</label>
+                                <label class="form-label" style="font-weight: bold">Tanggal Sidang Skripsi</label>
                                 @php
-                                    $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal);
+                                    $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal_sidang_skripsi);
                                     $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                                 @endphp
                                 <p><span>{{ $formatTanggal }}</span></p>
@@ -84,18 +96,18 @@ Daftar Yudisium
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Waktu</label>
-                                <p><span>{{ $datas->jam }}</span></p>
+                                <label class="form-label" style="font-weight: bold">Skor TEFL</label>
+                                <p><span>{{ $datas->skor_tefl }}</span></p>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Tema / Judul</label>
                                 <p><span>{{ $datas->judul }}</span></p>
                             </div>
-                        </div><!-- Col -->
+                        </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Ruang</label>
@@ -109,7 +121,7 @@ Daftar Yudisium
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
                                 <p><span>{{ $datas->dosen_pembimbing_utama }}</span></p>
                             </div>
-                        </div><!-- Col -->
+                        </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
@@ -126,7 +138,7 @@ Daftar Yudisium
                                     {{$datas->nama_penguji_3}} (Dosen Penguji 3)</span></p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         @endif

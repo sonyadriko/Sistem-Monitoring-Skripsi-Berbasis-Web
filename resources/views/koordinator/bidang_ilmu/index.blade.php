@@ -31,7 +31,7 @@ Topik
                     <p class="card-title-desc">Berikut merupakan tabel list topik atau tema penelitian yang dapat diambil oleh mahasiswa.</p>
                 </div>
                 <div class="text-right">
-                    <a href="{{ url('/koordinator/bidang_ilmu/create') }}" class="btn btn-success">Tambah Topik</a>
+                    <a href="{{ url('/koordinator/bidang_ilmu/create') }}" class="btn btn-primary">Tambah Topik</a>
                 </div>
             </div>
             <div class="card-body table-responsive">

@@ -8,6 +8,8 @@ Detail Pengajuan Tema
 <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 @endsection
 @section('content')
@@ -23,30 +25,32 @@ Detail Pengajuan Tema
         <div class="card mb-4">
             <h5 class="card-header">Form Pengajuan</h5>
             <div class="card-body">
+                @if ($data->status === 'pending')
                 <form action="{{ route('update_status', ['id' => $data->id_pengajuan_judul]) }}" method="POST">
+                    {{-- <form action="{{ route('update_status', ['id' => $data->id_pengajuan_judul]) }}" method="POST" id="form-id"> --}}
                     @csrf
-
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Mahasiswa</label>
-                        <input class="form-control" type="text" id="name" name="nama" value="{{ $data->name }}" readonly />
+                        <input class="form-control" type="text" id="name" name="nama" value="{{ $data->name }}" readonly disabled/>
                     </div>
 
                     <div class="mb-3">
                         <label for="npm" class="form-label">NPM Mahasiswa</label>
-                        <input class="form-control" type="text" id="npm" value="{{ $data->kode_unik }}" name="npm" placeholder="13.2019.1.00819" readonly />
+                        <input class="form-control" type="text" id="npm" value="{{ $data->kode_unik }}" name="npm" placeholder="13.2019.1.00819" readonly disabled />
                     </div>
                     <div class="mb-3">
                         <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
-                        <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian">{{$data->judul}}</textarea>
+                        <input class="form-control" type="text" id="judul" value="{{ $data->judul }}" name="judul" placeholder="13.2019.1.00819" readonly disabled/>
+                        {{-- <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian">{{$data->judul}}</textarea> --}}
                         {{-- <p class="text-danger"> Maksimal 12 kata.</p> --}}
                     </div>
                     <div class="mb-3">
                         <label for="tbi" class="form-label">Topik Bidang Ilmu</label>
-                        <input class="form-control" type="text" id="tbi" value="{{ $data->topik_bidang_ilmu }}" name="tbi" readonly />
+                        <input class="form-control" type="text" id="tbi" value="{{ $data->topik_bidang_ilmu }}" name="tbi" readonly disabled/>
                     </div>
                     <div class="mb-3">
                         <label for="tbi" class="form-label">Mata Kuliah Pilihan Semester VIII dan VII</label>
-                        <input class="form-control" type="text" id="tbi" value="{{ $data->mk_pilihan }}" name="tbi" readonly />
+                        <input class="form-control" type="text" id="tbi" value="{{ $data->mk_pilihan }}" name="tbi" readonly disabled/>
                     </div>
                     <div class="mb-3">
                         <label for="dosen_pembimbing_utama" class="form-label">Dosen Pembimbing Utama</label>
@@ -64,27 +68,59 @@ Detail Pengajuan Tema
                             <option value="Tidak Ada">Tidak Ada</option>
                         </select>
                     </div>
-
-
                     <input type="hidden" name="pengajuan_id" value="{{ $data->id_pengajuan_judul }}" />
                     <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
                     <input type="hidden" name="users_id" value="{{ $data->users_id }}" />
 
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-
                         <div style="display: flex; justify-content: flex-end;">
-                            @if ($data->status === 'pending')
                                 <button type="submit" class="btn btn-primary" name="action" value="terima" style="margin-right: 10px;">Terima</button>
                                 <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button>
-                            @elseif ($data->status === 'terima')
-                                <p>Data ini telah diterima.</p>
-                            @elseif ($data->status === 'tolak')
-                                <p>Data ini telah ditolak.</p>
-                            @endif
                         </div>
                     </div>
                 </form>
+                @else
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nama Mahasiswa</label>
+                    <input class="form-control" type="text" id="name" name="nama" value="{{ $data->name }}" readonly disabled/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="npm" class="form-label">NPM Mahasiswa</label>
+                    <input class="form-control" type="text" id="npm" value="{{ $data->kode_unik }}" name="npm" placeholder="13.2019.1.00819" readonly disabled />
+                </div>
+                <div class="mb-3">
+                    <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
+                    <input class="form-control" type="text" id="judul" value="{{ $data->judul }}" name="judul" placeholder="13.2019.1.00819" readonly disabled/>
+                    {{-- <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian">{{$data->judul}}</textarea> --}}
+                    {{-- <p class="text-danger"> Maksimal 12 kata.</p> --}}
+                </div>
+                <div class="mb-3">
+                    <label for="tbi" class="form-label">Topik Bidang Ilmu</label>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data->topik_bidang_ilmu }}" name="tbi" readonly disabled/>
+                </div>
+                <div class="mb-3">
+                    <label for="tbi" class="form-label">Mata Kuliah Pilihan Semester VIII dan VII</label>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data->mk_pilihan }}" name="tbi" readonly disabled/>
+                </div>
+                <div class="mb-3">
+                    <label for="tbi" class="form-label">Dosen Pembimbing Utama</label>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_utama }}" name="tbi" readonly disabled/>
+                </div>
+                <div class="mb-3">
+                    <label for="tbi" class="form-label">Dosen Pembimbing II</label>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_ii }}" name="tbi" readonly disabled/>
+                </div>
+                <input type="hidden" name="pengajuan_id" value="{{ $data->id_pengajuan_judul }}" />
+                <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
+                <input type="hidden" name="users_id" value="{{ $data->users_id }}" />
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -121,22 +157,61 @@ Detail Pengajuan Tema
         });
     });
 </script>
-
+<!-- ... Your HTML and other scripts ... -->
 
 <script>
-  function showConfirmation() {
-      Swal.fire({
-          title: 'Apakah Anda yakin ingin mencetak?',
-          text: 'Pastikan data sudah benar sebelum mencetak.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Cetak!'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              document.getElementById('cetakForm').submit();
-          }
-      });
-  }
-  </script>
+    $(document).ready(function () {
+        // Add SweetAlert confirmation when submitting the form
+        $('#form-id').submit(function (e) {
+            e.preventDefault(); // Prevent the form from submitting
+
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin menerima pengajuan ini?',
+                text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Terima!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user clicks 'Ya, Terima!', proceed with form submission
+                    $.ajax({
+                        type: 'POST',
+                        url: $('#form-id').attr('action'),
+                        data: $('#form-id').serialize(),
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            // Handle success (if needed)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Pengajuan diterima.',
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Optionally redirect to another page or perform other actions
+                                    window.location.href = '{{ route('pengajuan-judul.index') }}';
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            // Handle error (if needed)
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Terjadi kesalahan. Silakan coba lagi.',
+                                icon: 'error',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
