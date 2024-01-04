@@ -7,7 +7,7 @@
 	<meta content="ie=edge" http-equiv="X-UA-Compatible">
 	<meta content="Sistem Manajemen Skripsi" name="description">
 	<meta content="ITATS" name="author">
-	<meta content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web" name="keywords">
+	<meta content="bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web" name="keywords">
 
 	<title>@yield('title')</title>
 
