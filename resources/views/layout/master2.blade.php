@@ -14,8 +14,8 @@ License: For each use you must have a valid license purchased only from above li
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="ie=edge" http-equiv="X-UA-Compatible">
-	<meta content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5" name="description">
-	<meta content="NobleUI" name="author">
+	<meta content="Sistem Manajemen Skripsi" name="description">
+    <meta content="ITATS" name="author">
 	<meta content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web" name="keywords">
 
 	<title>@yield('title')</title>
