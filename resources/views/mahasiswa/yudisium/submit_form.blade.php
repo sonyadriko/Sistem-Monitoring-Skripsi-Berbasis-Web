@@ -72,15 +72,15 @@ Daftar Yudisium
                                 <label for="nama" class="form-label">Nama Mahasiswa</label>
                                 <input type="text" class="form-control" id="nama" name="nama" value="{{Auth::user()->name}}" aria-describedby="defaultFormControlHelp" readonly />
                             </div>
-                            <div class="col-md-3">
-                                <label for="tanggal_surat_tugas" class="form-label" style="font-weight: bold">Tanggal Surat Tugas Awal</label>
+                             <div class="mb-3">
+                                <label for="tanggal_surat_tugas" class="form-label">Tanggal Surat Tugas Awal</label>
                                 <input class="form-control @error('tanggal_surat_tugas') is-invalid @enderror" name="tanggal_surat_tugas" type="date" id="tanggal_surat_tugas" />
-                                @error('tgl-st')
+                                @error('tanggal_surat_tugas')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-3">
-                                <label for="tanggal_sidang_skripsi" class="form-label" style="font-weight: bold">Tanggal Sidang Skripsi</label>
+                            <div class="mb-3">
+                                <label for="tanggal_sidang_skripsi" class="form-label">Tanggal Sidang Skripsi</label>
                                 <input class="form-control @error('tanggal_sidang_skripsi') is-invalid @enderror" name="tanggal_sidang_skripsi" type="date" id="tanggal_sidang_skripsi" />
                                 @error('tanggal_sidang_skripsi')
                                     <div class="invalid-feedback">{{ $message }}</div>
