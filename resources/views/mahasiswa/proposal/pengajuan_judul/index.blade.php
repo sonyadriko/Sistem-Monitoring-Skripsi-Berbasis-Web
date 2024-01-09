@@ -48,14 +48,14 @@ Pengajuan Judul
                         <div class="card">
                           <img src="{{ url('img/wizard/pengajuan_judul/step2.svg') }}" class="card-img-top" alt="...">
                           <div class="card-body">
-                            <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
+                            <h5 class="card-title text-center">mengisi Form Pengajuan</h5>
                             <p class="card-text text-center">Melakukan pengisian form pengajuan proposal, lalu menunggu konfirmasi koordinator.</p>
                           </div>
                         </div>
                         <div class="card">
                           <img src="{{ url('img/wizard/pengajuan_judul/step3.svg') }}" class="card-img-top" alt="...">
                           <div class="card-body">
-                            <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
+                            <h5 class="card-title text-center">Bimbingan Proposal</h5>
                             <p class="card-text text-center">Selamat! Pengajuan yang anda lakukan telah diterima.</p>
                           </div>
                         </div>
