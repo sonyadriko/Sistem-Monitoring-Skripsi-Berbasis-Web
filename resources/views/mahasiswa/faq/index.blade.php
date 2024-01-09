@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Profile
+Info Penting
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@ Profile
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Bagaimana alur yang harus dilalui untuk melakukan pengajuan tema proposal skripsi?
+                  Bagaimana alur yang harus dilalui untuk melakukan pengajuan judul proposal skripsi?
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#FaqAccordion">

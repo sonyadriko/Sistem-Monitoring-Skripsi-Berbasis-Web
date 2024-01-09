@@ -36,7 +36,9 @@ Revisi Seminar Proposal
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Tema</th>
+                        <th>NPM</th>
+                        <th>Judul</th>
+                        <th>Bidang Ilmu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -48,6 +50,8 @@ Revisi Seminar Proposal
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ $dosen->name }}</td>
+                            <td>{{ $dosen->kode_unik }}</td>
+                            <td>{{ $dosen->judul }}</td>
                             <td>{{ $dosen->topik_bidang_ilmu }}</td>
                             <td><a href="{{ url('/dosen/revisi_seminar_proposal/detail/' . $dosen->id_revisi_seminar_proposal) }}" class="btn btn-primary">Cek Revisi</a></td>
                         </tr>

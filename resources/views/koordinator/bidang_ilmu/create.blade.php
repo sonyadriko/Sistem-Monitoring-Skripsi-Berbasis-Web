@@ -64,7 +64,7 @@ Tambah Topik
                     <div class="row">
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Keterangan Singkat</label>
-                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Masukan keterangan singkat mengenai tema/judul penelitian"></textarea>
+                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Masukan keterangan singkat mengenai bidang ilmu penelitian"></textarea>
                         </div>
                     </div>
                     {{-- <div class="row">

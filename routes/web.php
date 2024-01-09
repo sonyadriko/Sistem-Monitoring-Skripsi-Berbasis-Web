@@ -63,7 +63,7 @@ use App\Http\Controllers\KoordinatorYudisiumController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 // Auth::routes();
@@ -345,8 +345,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
-        Route::get('/pengajuan_tema', 'create')->name('pengajuan-judul.create');
-        Route::post('/pengajuan_tema', 'store')->name('pengajuan-judul.submit');
+        Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
+        Route::post('/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
     });
 
     Route::controller(SeminarProposalController::class)->group(function ()

@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Pengajuan Tema
+Pengajuan Judul
 @endsection
 
 @section('css')
@@ -25,14 +25,16 @@ Pengajuan Tema
                 <p class="card-title-desc">List pengajuan judul dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
-            <div class="card-body table-responsive">
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
                         <th>Bidang Ilmu</th>
+                        <th>Judul</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -46,6 +48,8 @@ Pengajuan Tema
                             <td>{{ $judul->name }}</td>
                             <td>{{ $judul->kode_unik }}</td>
                             <td>{{ $judul->topik_bidang_ilmu }}</td>
+                            <td>{{ $judul->judul }}</td>
+                            <td>{{ $judul->status }}</td>
                             <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_pengajuan_judul) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php

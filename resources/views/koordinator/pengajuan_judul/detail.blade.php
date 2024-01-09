@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Detail Pengajuan Tema
+Detail Pengajuan Judul
 @endsection
 
 @section('css')
@@ -39,10 +39,8 @@ Detail Pengajuan Tema
                         <input class="form-control" type="text" id="npm" value="{{ $data->kode_unik }}" name="npm" placeholder="13.2019.1.00819" readonly disabled />
                     </div>
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
+                        <label for="judul" class="form-label">Rencana Judul Proposal Skripsi</label>
                         <input class="form-control" type="text" id="judul" value="{{ $data->judul }}" name="judul" placeholder="13.2019.1.00819" readonly disabled/>
-                        {{-- <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian">{{$data->judul}}</textarea> --}}
-                        {{-- <p class="text-danger"> Maksimal 12 kata.</p> --}}
                     </div>
                     <div class="mb-3">
                         <label for="tbi" class="form-label">Topik Bidang Ilmu</label>
@@ -91,10 +89,8 @@ Detail Pengajuan Tema
                     <input class="form-control" type="text" id="npm" value="{{ $data->kode_unik }}" name="npm" placeholder="13.2019.1.00819" readonly disabled />
                 </div>
                 <div class="mb-3">
-                    <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
+                    <label for="judul" class="form-label">Rencana Judul Proposal Skripsi</label>
                     <input class="form-control" type="text" id="judul" value="{{ $data->judul }}" name="judul" placeholder="13.2019.1.00819" readonly disabled/>
-                    {{-- <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian">{{$data->judul}}</textarea> --}}
-                    {{-- <p class="text-danger"> Maksimal 12 kata.</p> --}}
                 </div>
                 <div class="mb-3">
                     <label for="tbi" class="form-label">Topik Bidang Ilmu</label>

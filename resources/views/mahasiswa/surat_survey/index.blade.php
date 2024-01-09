@@ -6,7 +6,7 @@
 @endpush
 
 @section('title')
-Pengajuan Tema
+Pengajuan Surat Survey
 @endsection
 
 @section('css')
@@ -30,7 +30,7 @@ Pengajuan Tema
     <div class="col-lg-12">
         @if(is_null($ss) || is_null($ss->id_bimbingan_proposal))
         <div class="alert alert-warning" role="alert">
-            Harap melakukan pengajuan tema terlebih dahulu.
+            Harap melakukan pengajuan judul terlebih dahulu.
         </div>
         @else
         <div class="card">
@@ -114,7 +114,7 @@ Pengajuan Tema
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tema" class="form-label">Judul / Tema</label>
+                                        <label for="tema" class="form-label">Judul</label>
                                         <input class="form-control" type="text" id="tema" value="{{ $ss->topik_bidang_ilmu }}" name="tema" readonly/>
                                         @error('tema')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -186,57 +186,7 @@ Pengajuan Tema
     </div>
     <!-- end col -->
 </div>
-<!-- end row -->
-{{-- @else --}}
-{{-- <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Alur Pengajuan Tema</h4>
-            </div>
-            <div class="card-body">
-                <h4 class="card-title mb-0">Selamat! Pengajuan Tema Proposal Skripsimu Sudah disubmit.</h4>
-                <h6 class="mb-3">Selanjutnya menunggu konfirmasi dan pembagian dosen dari koordinator, berikut isi dari pengajuan yang anda lakukan.</h4>
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ Auth::user()->name }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">NPM</label>
-                                <input type="text" class="form-control" placeholder="Enter last name" value="{{ Auth::user()->kode_unik }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                    </div><!-- Row -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Bidang Ilmu</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $temacek->topik_bidang_ilmu }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <input type="text" class="form-control @if($temacek->status == 'pending') bg-warning @elseif($temacek->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $temacek->status }}" readonly>
-                            </div>
-                        </div>
-                    </div><!-- Row -->
-                </form>
-            </div>
 
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div> --}}
-<!-- end row -->
-{{-- @endif --}}
 @endsection
 
 @section('script')

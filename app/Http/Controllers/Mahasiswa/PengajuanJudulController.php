@@ -19,7 +19,7 @@ class PengajuanJudulController extends Controller
     public function create()
     {
 
-        $temacek = DB::table('pengajuan_judul')
+        $judul = DB::table('pengajuan_judul')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
                 ->select('pengajuan_judul.*', 'bidang_ilmu.topik_bidang_ilmu')
                 ->where('pengajuan_judul.users_id', Auth::user()->id)
@@ -35,8 +35,7 @@ class PengajuanJudulController extends Controller
             ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
             ->where('bimbingan_proposal.users_id', Auth::user()->id)
             ->first();
-        // $bidang_ilmu = DB::table('bidang_ilmu')->select('id_bidang_ilmu', 'topik_bidang_ilmu', 'status', 'users_id')->where('status', 'tersedia')->get();
-        return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu', 'temacek', 'cek2'));
+        return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu', 'judul', 'cek2'));
     }
 
     public function store(Request $request)

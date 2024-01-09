@@ -74,7 +74,7 @@ Daftar Surat Tugas
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Tema / Judul</label>
+                                <label class="form-label" style="font-weight: bold">Judul</label>
                                 <p><span>{{ $datas->judul }}</span></p>
                             </div>
                         </div>

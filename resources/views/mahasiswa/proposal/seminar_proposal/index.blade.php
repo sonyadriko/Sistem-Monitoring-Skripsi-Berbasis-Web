@@ -37,88 +37,10 @@ Daftar Seminar Proposal
                 <div class="alert alert-warning" role="alert">
                     Harap mendapatkan acc dari dosen pembimbing terlebih dahulu.
                 </div>
-            {{-- @elseif ($datas->status == 'pending')
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
-                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
-                    <h6 class="mb-3">Status Pendaftaran :
-                        <div class="alert alert-secondary" role="alert">
-                            Tunggu diperiksa koordinator.
-                        </div>
-                    </h4>
-                </div>
-            </div>
-            @elseif ($datas->status == 'terima')
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
-                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
-                    <h6 class="mb-3">Status Pendaftaran :
-                        <div class="alert alert-success" role="alert">
-                            Selamat.
-                        </div>
-                    </h4>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-borderless datatables-basic"/>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>NPM</td>
-                                    <td>{{$datas->kode_unik}}</td>
-                                    @php
-                                        $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal);
-                                        $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-                                    @endphp
-                                    <td>Hari Tanggal</td>
-                                    <td>{{$formatTanggal}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Nama</td>
-                                    <td>{{$datas->name}}</td>
-                                    <td>Waktu</td>
-                                    <td>{{$datas2->jam}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Tema / Judul</td>
-                                    <td>{{$datas->judul}}</td>
-                                    <td>Ruang</td>
-                                    <td>{{$datas2->nama_ruangan}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Dosen Pembimbing 1</td>
-                                    <td>{{$datas->dosen_pembimbing_utama}}</td>
-                                    <td>Dosen Pembimbing 2</td>
-                                    <td>{{$datas->dosen_pembimbing_ii}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Dosen Penguji</td>
-                                    <td>{{$datas2->nama_penguji_1}} (Dosen Penguji 1)<br/>
-                                        {{$datas2->nama_penguji_2}} (Dosen Penguji 2)
-                                    </td>
-                                    <td>
-                                </tr>
-                            </tbody>
-                        </table>
-                </div>
-            </div> --}}
-
             @else
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Alur Pendaftaran Seminar Proposal Skripsi</h4>
-                    {{-- <p class="text-muted mb-3">Read the <a href="http://www.jquery-steps.com/GettingStarted" target="_blank"> Official jQuery Steps Documentation </a>for a full list of instructions and other options.</p> --}}
                     <div id="wizard">
                         <h2>Step Pertama</h2>
                         <section>
@@ -127,22 +49,22 @@ Daftar Seminar Proposal
                                     <div class="card">
                                     <img src="{{ url('img/wizard/seminar/step1.svg') }}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                        <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                                        <h5 class="card-title text-center">Mempersiapkan File</h5>
+                                        <p class="card-text text-center">File Proposal yang sudah di acc, slip asli pembayaran bimbingan skripsi.</p>
                                     </div>
                                     </div>
                                     <div class="card">
                                     <img src="{{ url('img/wizard/seminar/step2.svg') }}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                        <p class="card-text text-center">Melakukan pengisian form pengajuan proposal, lalu menunggu konfirmasi koordinator.</p>
+                                        <h5 class="card-title text-center">Mengisi Form Daftar Seminar</h5>
+                                        <p class="card-text text-center">Melakukan pengisian form pendaftaran seminar.</p>
                                     </div>
                                     </div>
                                     <div class="card">
                                     <img src="{{ url('img/wizard/seminar/step3.svg') }}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                        <p class="card-text text-center">Selamat! Pengajuan yang anda lakukan telah diterima.</p>
+                                        <h5 class="card-title text-center">Menunggu Jadwal</h5>
+                                    <p class="card-text text-center">Menunggu jadwal seminar dari koordinator skripsi</p>
                                     </div>
                                     </div>
                                 </div>

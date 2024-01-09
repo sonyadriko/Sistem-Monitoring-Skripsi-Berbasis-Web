@@ -18,6 +18,7 @@ class DosenRevisiSeminarProposal extends Controller
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
             ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
             ->where(function($query) {
                 $query->where('seminar_proposal.dosen_penguji_1', Auth::user()->id)
                       ->orWhere('seminar_proposal.dosen_penguji_2', Auth::user()->id)

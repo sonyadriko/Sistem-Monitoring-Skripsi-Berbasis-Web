@@ -17,11 +17,6 @@ class PembagianDosenController extends Controller
     public function index()
     {
 
-        // $dosens = DB::table('dosen')
-        // ->join('tema', 'tema.id_tema', 'dosen.tema_id')
-        // ->select('dosen.*', 'tema.*')
-        // ->orderBy('dosen.created_at', 'desc')
-        // ->get();
 
         $temas = DB::table('tema')->where('status', '=', 'terima')->get();
 
@@ -29,17 +24,7 @@ class PembagianDosenController extends Controller
 
     }
 
-    // public function create()
-    // {
-    //     $juduls = DB::table('tema')->where('status', '=', 'terima')->where('dosen', '=', null)->get();
-    //     $tema = DB::table('tema')->where('status', '=', 'terima')->where('dosen', '=', 'belum')->get();
 
-    //     $users = DB::table('users')->where('role_id', '=', '2')->get();
-    //     // $dosens = Dosen::all();
-
-    //     return view('koordinator/pembagian_dosen.create', compact('juduls', 'users', 'tema'));
-
-    // }
 
     public function edit($id)
     {

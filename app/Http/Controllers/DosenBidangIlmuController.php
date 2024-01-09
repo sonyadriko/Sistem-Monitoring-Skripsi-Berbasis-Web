@@ -62,7 +62,5 @@ class DosenBidangIlmuController extends Controller
         }
         return redirect()->back()->with('success', 'Paper Berhasil Diupload.');
 
-            // Flash success message to the session
-            // Session::flash('success', 'Tema Penelitian berhasil ditambahkan');
     }
 }

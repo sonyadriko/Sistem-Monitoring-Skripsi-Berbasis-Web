@@ -44,7 +44,6 @@ Data Pengguna
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->email }}</td>
-                            {{-- <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id_tema) }}" class="btn btn-primary">Detail</a></td> --}}
                         </tr>
                         @php
                         $no++;

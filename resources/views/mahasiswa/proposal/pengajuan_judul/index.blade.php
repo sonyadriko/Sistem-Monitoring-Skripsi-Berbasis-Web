@@ -6,7 +6,7 @@
 @endpush
 
 @section('title')
-Pengajuan Tema
+Pengajuan Judul
 @endsection
 
 @section('css')
@@ -22,16 +22,16 @@ Pengajuan Tema
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Tema</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Judul</li>
     </ol>
 </nav>
-@if(is_null($temacek) || is_null($temacek->status))
+@if(is_null($judul) || is_null($judul->status))
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Alur Pengajuan Tema</h4>
+          <h4 class="card-title">Alur Pengajuan Judul</h4>
           {{-- <p class="text-muted mb-3">Read the <a href="http://www.jquery-steps.com/GettingStarted" target="_blank"> Official jQuery Steps Documentation </a>for a full list of instructions and other options.</p> --}}
           <div id="wizard">
             <h2>Step Pertama</h2>
@@ -42,7 +42,7 @@ Pengajuan Tema
                           <img src="{{ url('img/wizard/pengajuan_judul/step1.svg') }}" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                            <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                            <p class="card-text text-center">Mahasiswa dapat memilih judul sesuai dengan bidang ilmu yang tersedia.</p>
                           </div>
                         </div>
                         <div class="card">
@@ -82,8 +82,8 @@ Pengajuan Tema
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Rencana Tema Proposal Skripsi</label>
-                        <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana tema/judul penelitian"></textarea>
+                        <label for="judul" class="form-label">Rencana Judul Proposal Skripsi</label>
+                        <textarea class="form-control" id="judul" name="judul" rows="3" placeholder="Masukan rencana judul penelitian"></textarea>
                         <p class="text-danger"> Maksimal 12 kata.</p>
 
                         @error('judul')
@@ -180,11 +180,11 @@ Pengajuan Tema
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Alur Pengajuan Tema</h4>
+                <h4 class="card-title mb-0">Alur Pengajuan Judul</h4>
             </div>
             <div class="card-body">
                 {{-- <h6 class="card-title">Form Grid</h6> --}}
-                <h4 class="card-title mb-0">Selamat! Pengajuan Tema Proposal Skripsimu Sudah disubmit.</h4>
+                <h4 class="card-title mb-0">Selamat! Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>
                 <h6 class="mb-3">Selanjutnya menunggu konfirmasi dan pembagian dosen dari koordinator, berikut isi dari pengajuan yang anda lakukan.</h4>
                 <form>
                     <div class="row">
@@ -205,13 +205,13 @@ Pengajuan Tema
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Bidang Ilmu</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $temacek->topik_bidang_ilmu }}" readonly>
+                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $judul->topik_bidang_ilmu }}" readonly>
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <input type="text" class="form-control @if($temacek->status == 'pending') bg-warning @elseif($temacek->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $temacek->status }}" readonly>
+                                <input type="text" class="form-control @if($judul->status == 'pending') bg-warning @elseif($judul->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $judul->status }}" readonly>
                             </div>
                         </div>
                     </div><!-- Row -->
@@ -219,13 +219,13 @@ Pengajuan Tema
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Dosen Pembimbing Utama</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $cek2->dosen_pembimbing_utama }}" readonly>
+                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $cek2->dosen_pembimbing_utama ?? 'Belum diatur' }}" readonly>
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Dosen Pembimbing II</label>
-                                <input type="text" class="form-control" value="{{ $cek2->dosen_pembimbing_ii }}" placeholder="Enter last name" readonly>
+                                <input type="text" class="form-control" value="{{ $cek2->dosen_pembimbing_ii ?? 'Belum diatur' }}" placeholder="Enter last name" readonly>
                             </div>
                         </div>
                     </div><!-- Row -->

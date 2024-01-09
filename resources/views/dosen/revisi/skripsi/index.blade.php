@@ -36,7 +36,9 @@ Revisi Sidang Skripsi
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Tema</th>
+                        <th>NPM</th>
+                        <th>Judul</th>
+                        <th>Bidang Ilmu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -48,6 +50,19 @@ Revisi Sidang Skripsi
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ $dosen->name }}</td>
+                            <td>{{ $dosen->kode_unik }}</td>
+                            <td style="word-wrap: break-word;">{{ $dosen->judul }}</td>
+                            {{-- <td style="word-wrap: break-word;">{{ implode(' ', array_slice(str_word_count($dosen->judul, 1), 0, 8)) }}...</td> --}}
+                            {{-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                @php
+                                    $judulWords = str_word_count($dosen->judul, 1);
+                                    $chunks = array_chunk($judulWords, 6);
+                                @endphp
+                                @foreach ($chunks as $chunk)
+                                    <div>{{ implode(' ', $chunk) }}</div>
+                                @endforeach
+                            </td> --}}
+
                             <td>{{ $dosen->topik_bidang_ilmu }}</td>
                             <td><a href="{{ url('/dosen/revisi_sidang_skripsi/detail/' . $dosen->id_revisi_sidang_skripsi) }}" class="btn btn-primary">Cek Revisi</a></td>
                         </tr>

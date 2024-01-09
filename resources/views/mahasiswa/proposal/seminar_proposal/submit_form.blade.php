@@ -39,22 +39,22 @@ Daftar Seminar Proposal
                                 <div class="card">
                                 <img src="{{ url('img/wizard/seminar/step1.svg') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                    <p class="card-text text-center">Mahasiswa dapat memilih tema / judul sesuai dengan bidang ilmu yang tersedia.</p>
+                                    <h5 class="card-title text-center">Mempersiapkan File</h5>
+                                    <p class="card-text text-center">File Proposal yang sudah di acc, slip asli pembayaran bimbingan skripsi.</p>
                                 </div>
                                 </div>
                                 <div class="card">
                                 <img src="{{ url('img/wizard/seminar/step2.svg') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                    <p class="card-text text-center">Melakukan pengisian form pengajuan proposal, lalu menunggu konfirmasi koordinator.</p>
+                                    <h5 class="card-title text-center">Mengisi Form Daftar Seminar</h5>
+                                    <p class="card-text text-center">Melakukan pengisian form pendaftaran seminar.</p>
                                 </div>
                                 </div>
                                 <div class="card">
                                 <img src="{{ url('img/wizard/seminar/step3.svg') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Memilih Bidang Ilmu</h5>
-                                    <p class="card-text text-center">Selamat! Pengajuan yang anda lakukan telah diterima.</p>
+                                    <h5 class="card-title text-center">Menunggu Jadwal</h5>
+                                    <p class="card-text text-center">Menunggu jadwal seminar dari koordinator skripsi</p>
                                 </div>
                                 </div>
                             </div>

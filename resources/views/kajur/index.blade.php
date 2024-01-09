@@ -106,23 +106,6 @@ Dashboard
 
 
 
-{{--
-  <div class="row">
-    <div class="col-xl">
-      <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Info Penting</h5>
-        </div>
-        <div class="card-body text-center">
-          <img src="img/illustrations/info_img.png" alt="Gambar Info Penting" class="img-fluid">
-          <p>Dosen Pembimbing dapat melakukan input Topik/Tema penelitian, yang nantinya dapat diambil oleh calon mahasiswa bimbingan untuk diajukan sebagai proposal skripsi.</p>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-
-
-{{-- !-- row --> --}}
 @endsection
 
 @push('plugin-scripts')

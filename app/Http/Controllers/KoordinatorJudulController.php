@@ -19,6 +19,7 @@ class KoordinatorJudulController extends Controller
         $juduls = DB::table('pengajuan_judul')
         ->join('users', 'users.id', 'pengajuan_judul.users_id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
+        ->select('users.kode_unik', 'users.name', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.*')
         ->orderBy('pengajuan_judul.created_at', 'desc')->get();
         return view('koordinator/pengajuan_judul.index', compact('juduls'));
 

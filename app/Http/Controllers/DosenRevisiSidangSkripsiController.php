@@ -19,6 +19,7 @@ class DosenRevisiSidangSkripsiController extends Controller
         ->join('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+        ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
         ->where(function($query) {
             $query->where('sidang_skripsi.dosen_penguji_1', '=', Auth::user()->id)
                   ->orWhere('sidang_skripsi.dosen_penguji_2', '=', Auth::user()->id)

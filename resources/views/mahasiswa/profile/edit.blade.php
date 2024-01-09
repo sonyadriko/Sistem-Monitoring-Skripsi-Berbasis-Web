@@ -21,30 +21,29 @@ Edit Profile
           <form action="{{ route('update-profile.store', ['id' => Auth::user()->id]) }}" method="POST">
             @csrf
             <div class="mb-3">
-              <label for="exampleInputUsername1" class="form-label">NPM</label>
-              <input type="text" class="form-control" id="exampleInputUsername1" value="{{ Auth::user()->kode_unik}}" autocomplete="off" placeholder="Username" readonly>
+              <label for="npm" class="form-label">NPM</label>
+              <input type="text" class="form-control" id="npm" value="{{ Auth::user()->kode_unik}}" autocomplete="off" placeholder="Username" readonly>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" value="{{ $data->name}}" placeholder="text" readonly>
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" value="{{ $data->name}}" placeholder="text" readonly>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Alamat Mahasiswa</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" value=" {{ $data->alamat_mhs }}" placeholder="alamat mahasiswa">
+                <label for="alamat" class="form-label">Alamat Mahasiswa</label>
+                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $data->alamat_mhs }}" placeholder="alamat mahasiswa">
               </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">No Telp Mahasiswa</label>
+              <label for="notelpmhs" class="form-label">No Telp Mahasiswa</label>
               <input type="number" class="form-control" id="notelpmhs" name="notelpmhs" value="{{ $data->no_telp_mhs }}" placeholder="no telp mahasiswa">
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Alamat Orang Tua</label>
+              <label for="alamat_orang_tua" class="form-label">Alamat Orang Tua</label>
               <input type="text" class="form-control" id="alamat_orang_tua" name="alamat_orang_tua" value="{{ $data->alamat_orang_tua }}" autocomplete="off" placeholder="alamat orang tua">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">No Telp Orang Tua</label>
+                <label for="notelpot" class="form-label">No Telp Orang Tua</label>
                 <input type="number" class="form-control" id="notelpot" name="notelpot" autocomplete="off" value="{{ $data->no_telp_orang_tua }}" placeholder="no telp orang tua">
               </div>
-            {{-- <button type="submit" class="btn btn-primary me-2">Submit</button> --}}
             <button type="submit" class="btn btn-primary">Submit</button>
 
             {{-- <button class="btn btn-secondary">Cancel</button> --}}
