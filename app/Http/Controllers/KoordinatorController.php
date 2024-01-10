@@ -12,7 +12,7 @@ class KoordinatorController extends Controller
     //
     public function index()
     {
-        $mahasiswaCount = DB::table('users')->where('role_id', '1')->count();
+        $mahasiswaCount = DB::table('users')->where('role_id', '1')->where('status', 'aktif')->count();
         $dosenCount = DB::table('users')->where('role_id', '2')->count();
         $pengajuanCount = DB::table('pengajuan_judul')->where('status', 'pending')->count();
 

@@ -22,7 +22,8 @@ class DataPenggunaController extends Controller
     {
         // $datas = DB::table('users')->where('role_id', '1')->get();
         $datas = DB::table('users')->where('role_id', '1')->where('status', 'aktif')->get();
-        return view('koordinator/data_pengguna/mahasiswa.index', compact('datas'));
+        $angkatan = DB::table('angkatan')->get();
+        return view('koordinator/data_pengguna/mahasiswa.index', compact('datas', 'angkatan'));
     }
     public function dosen()
     {
@@ -38,7 +39,9 @@ class DataPenggunaController extends Controller
     {
         // $datas = DB::table('users')->where('role_id', '1')->get();
         $datas = DB::table('users')->where('role_id', '1')->where('status', 'pending')->get();
-        return view('koordinator/data_pengguna/pengguna_baru.index', compact('datas'));
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/data_pengguna/pengguna_baru.index', compact('datas', 'angkatan'));
     }
     public function terima($id)
     {

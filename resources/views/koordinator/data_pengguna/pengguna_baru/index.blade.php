@@ -14,23 +14,34 @@ Data Pengguna
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Manajemen</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
+      <li class="breadcrumb-item active" aria-current="page">Registrasi User</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Manajemen Data Pengguna Baru</h4>
-                <p class="card-title-desc">Data pengguna baru yang baru melakukan registrasi akan dapat dilihat pada tabel dibawah ini.</p>
+                <h4 class="card-title" style="font-weight: bold">Manajemen Data registrasi user</h4>
+                <p class="card-title-desc">Data registrasi user akan dapat dilihat pada tabel dibawah ini.</p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NPM</th>
                             <th>Nama</th>
+                            <th>NPM</th>
                             <th>Email</th>
                             <th>File KTM</th>
                             <th>Action</th>
@@ -43,8 +54,8 @@ Data Pengguna
                         @foreach($datas as $data)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
+                            <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->email }}</td>
                             <td>
                                 @if($data->ktm)
@@ -99,4 +110,29 @@ Data Pengguna
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+        if ($.fn.DataTable.isDataTable('#datatable')) {
+            // Hancurkan DataTable sebelum menginisialisasi ulang
+            $('#datatable').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTable
+        var table = $('#datatable').DataTable({
+            // ... (pengaturan DataTable lainnya) ...
+        });
+
+        // Handle perubahan filter status
+        $('#statusFilter').change(function() {
+            var status = $(this).val();
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+        });
+
+        $('#tahunFilter').change(function() {
+            var tahun = $(this).val();
+            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+        });
+    });
+</script>
 @endsection
