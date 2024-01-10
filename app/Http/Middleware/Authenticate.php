@@ -12,13 +12,13 @@ class Authenticate extends Middleware
      * Get the path the user should be redirected to when they are not authenticated.
      */
 
-    // public function handle($request, Closure $next, ... $guards)
-    // {
-    //     $this->guards = $guards;
-    //     $this->authenticate($request,$guards);
+    public function handle($request, Closure $next, ... $guards)
+    {
+        $this->guards = $guards;
+        $this->authenticate($request,$guards);
 
-    //     return $next($request);
-    // }
+        return $next($request);
+    }
 
     protected function redirectTo($request)
     {
@@ -38,6 +38,7 @@ class Authenticate extends Middleware
         // return redirect()->route('auth-login');
         if (! $request->expectsJson()) {
             return redirect()->route('auth-login');
+            // return redirect()->route('reig');
         }
     }
 }

@@ -25,15 +25,36 @@ Pengajuan Judul
                 <p class="card-title-desc">List pengajuan judul dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="statusFilter">Filter Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="tolak">Tolak</option>
+                            <option value="pending">Pending</option>
+                            <option value="terima">Terima</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                {{-- <div class="table-responsive"> --}}
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
-                        <th>Bidang Ilmu</th>
                         <th>Judul</th>
+                        <th>Bidang Ilmu</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -47,9 +68,10 @@ Pengajuan Judul
                             <td>{{ $no }}</td>
                             <td>{{ $judul->name }}</td>
                             <td>{{ $judul->kode_unik }}</td>
+                            {{-- <td>{{ $judul->judul }}</td> --}}
+                            <td>{{ implode(' ', array_slice(str_word_count($judul->judul, 1), 0, 6)) }}...</td>
                             <td>{{ $judul->topik_bidang_ilmu }}</td>
-                            <td>{{ $judul->judul }}</td>
-                            <td>{{ $judul->status }}</td>
+                            <td style="text-transform: capitalize;">{{ $judul->status }}</td>
                             <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $judul->id_pengajuan_judul) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
@@ -58,6 +80,7 @@ Pengajuan Judul
                         @endforeach
                     </tbody>
                 </table>
+                {{-- </div> --}}
 
             </div>
         </div>
@@ -81,4 +104,29 @@ Pengajuan Judul
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+  <script>
+        $(document).ready(function() {
+            // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+            if ($.fn.DataTable.isDataTable('#datatable')) {
+                // Hancurkan DataTable sebelum menginisialisasi ulang
+                $('#datatable').DataTable().destroy();
+            }
+
+            // Inisialisasi DataTable
+            var table = $('#datatable').DataTable({
+                // ... (pengaturan DataTable lainnya) ...
+            });
+
+            // Handle perubahan filter status
+            $('#statusFilter').change(function() {
+                var status = $(this).val();
+                table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+            });
+
+            $('#tahunFilter').change(function() {
+                var tahun = $(this).val();
+                table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+            });
+        });
+    </script>
 @endsection

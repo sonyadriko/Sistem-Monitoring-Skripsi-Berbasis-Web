@@ -16,10 +16,14 @@ class KoordinatorYudisiumController extends Controller
         ->join('users', 'users.id', 'yudisium.users_id')
         ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+        ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+        ->select('users.name', 'users.kode_unik', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.judul', 'yudisium.*')
         ->latest('yudisium.created_at')
         ->get();
 
-        return view('koordinator/yudisium.index', compact('yudisium'));
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/yudisium.index', compact('yudisium', 'angkatan'));
     }
 
     public function detail($id)

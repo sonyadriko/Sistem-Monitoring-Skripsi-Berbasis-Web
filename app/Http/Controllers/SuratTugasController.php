@@ -10,24 +10,24 @@ use App\Models\SuratTugas as SuratTugas;
 class SuratTugasController extends Controller
 {
     public function index()
-{
-    $datas = DB::table('users')
-        ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
-        ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-        ->join('berita_acara_proposal', 'berita_acara_proposal.users_id', 'users.id')
-        ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
-        ->leftjoin('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
-        // ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
-        ->where('users.id', Auth::user()->id)
-        ->first();
+    {
+        $datas = DB::table('users')
+            ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
+            ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+            ->join('berita_acara_proposal', 'berita_acara_proposal.users_id', 'users.id')
+            ->join('detail_berita_acara_proposal', 'detail_berita_acara_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
+            ->leftjoin('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            // ->join('seminar_proposal', 'seminar_proposal.users_id', 'users.id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
 
-    // Check if $datas is null before passing it to the view
-    if (!$datas) {
-        // Handle the case where data is not found
-        return view('mahasiswa/proposal/surat_tugas.index')->with('datas', null);
-    }
+        // Check if $datas is null before passing it to the view
+        if (!$datas) {
+            // Handle the case where data is not found
+            return view('mahasiswa/proposal/surat_tugas.index')->with('datas', null);
+        }
 
-    return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
+        return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
     }
 
     public function checkStatus()
@@ -55,13 +55,6 @@ class SuratTugasController extends Controller
             ->latest('seminar_proposal.created_at')
             ->first();
 
-        // if (is_null($proposalData) || is_null($proposalData->id_seminar_proposal)) {
-        //     return view('mahasiswa/proposal/surat_tugas.no_submission');
-        // } elseif (is_null($proposalData->id_seminar_proposal)) {
-        //     return view('mahasiswa/proposal/surat_tugas.submit_form', compact('userData', 'datas'));
-        // } else {
-        //     return redirect()->route('pengajuan-st.show', $proposalData->id_surat_tugas);
-        // }
         if (is_null($proposalData) || is_null($proposalData->id_seminar_proposal)) {
             return view('mahasiswa/proposal/surat_tugas.no_submission');
         } elseif (is_null($proposalData->alamat_mhs)) {
@@ -108,7 +101,6 @@ class SuratTugasController extends Controller
 
         try {
             // Generate unique file names
-            // $fileProposalName = uniqid() . '.' . $request->file('file_proposal')->getClientOriginalExtension();
             $fileProposalName = $request->file('file_proposal')->getClientOriginalName();
             $fileSlipPembayaranName = $request->file('file_slip_pembayaran')->getClientOriginalName();
             // $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();

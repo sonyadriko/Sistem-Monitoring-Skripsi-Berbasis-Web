@@ -31,15 +31,38 @@ Seminar Proposal
                 </p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="statusFilter">Filter Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="tolak">Tolak</option>
+                            <option value="pending">Pending</option>
+                            <option value="terima">Terima</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>NPM</th>
                         <th>Nama</th>
-                        <th>Penguji</th>
+                        <th>NPM</th>
+                        <th>Judul</th>
+                        <th>Bidang Ilmu</th>
+                        <th>Status</th>
+                        {{-- <th>Penguji</th>
                         <th>Ruang</th>
-                        <th>Hari</th>
+                        <th>Hari</th> --}}
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -50,9 +73,13 @@ Seminar Proposal
                         @foreach($sempros as $semp)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $semp->kode_unik }}</td>
                             <td>{{ $semp->name }}</td>
-                            <td>{{ $semp->nama_penguji_1 ?? 'Belum diatur' }}</td>
+                            <td>{{ $semp->kode_unik }}</td>
+                            {{-- <td>{{ $semp->judul }}</td> --}}
+                            <td>{{ implode(' ', array_slice(str_word_count($semp->judul, 1), 0, 6)) }}...</td>
+                            <td>{{ $semp->topik_bidang_ilmu }}</td>
+                            <td>{{ $semp->status }}</td>
+                            {{-- <td>{{ $semp->nama_penguji_1 ?? 'Belum diatur' }}</td>
                             <td>{{ $semp->nama_ruangan ?? 'Belum diatur' }}</td>
                             @php
                                 $formatTanggal = null;
@@ -61,7 +88,7 @@ Seminar Proposal
                                     $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                                 }
                             @endphp
-                            <td>{{ $formatTanggal ?? 'Belum diatur' }}</td>
+                            <td>{{ $formatTanggal ?? 'Belum diatur' }}</td> --}}
                             <td><a href="{{ url('/koordinator/jadwal_seminar_proposal/detail/' . $semp->id_seminar_proposal) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
@@ -98,4 +125,29 @@ Seminar Proposal
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+        if ($.fn.DataTable.isDataTable('#datatable')) {
+            // Hancurkan DataTable sebelum menginisialisasi ulang
+            $('#datatable').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTable
+        var table = $('#datatable').DataTable({
+            // ... (pengaturan DataTable lainnya) ...
+        });
+
+        // Handle perubahan filter status
+        $('#statusFilter').change(function() {
+            var status = $(this).val();
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+        });
+
+        $('#tahunFilter').change(function() {
+            var tahun = $(this).val();
+            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+        });
+    });
+</script>
 @endsection

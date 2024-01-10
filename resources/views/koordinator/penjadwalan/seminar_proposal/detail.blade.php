@@ -21,7 +21,7 @@ Seminar Proposal
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-4">
             <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
-            @if (is_null($data)||is_null($data->dosen_penguji_1)||is_null($data->dosen_penguji_2))
+            @if (is_null($data)||is_null($data->dosen_penguji_1)||is_null($data->dosen_penguji_2)||is_null($data->status))
             <div class="card-body">
                 <form action="{{ route('jadwal-seminar-proposal-update', ['id' => $data->id_seminar_proposal]) }}" method="POST" id="submitForm">
                   @csrf
@@ -66,6 +66,9 @@ Seminar Proposal
                             <p> <a href="{{ asset($data->file_slip_pembayaran) }}" type="application/pdf" target="_blank">{{basename($data->file_slip_pembayaran)}}</a>.</p>
                         </div>
                     </div>
+                    @if($data->status == 'tolak')
+                    {{-- <p>wle</p> --}}
+                    @else
                     <div class="mb-3">
                         <label for="select1" class="form-label" style="font-weight: bold">Ketua Seminar/Dosen Penguji 1</label>
                         <select class="form-select @error('dosen_penguji_1') is-invalid @enderror" id="select1" name="dosen_penguji_1" aria-label="Default select example" onchange="updateSelectOptions()">
@@ -118,13 +121,22 @@ Seminar Proposal
                             @enderror
                         </div>
                     </div>
+                    @endif
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                        @if($data->status == 'tolak')
+
+                        @else
                         <div style="display: flex; justify-content: flex-end;">
                             <button type="button" class="btn btn-primary" onclick="showConfirmation2();">Buat Jadwal</button>
                         </div>
+                        @endif
                     </div>
                 </form>
+
+                @if($data->status == 'tolak')
+
+                @else
 
                 <form action="{{ route('jadwal-seminar-proposal-tolak', ['id' => $data->id_seminar_proposal]) }}" method="POST">
                     @csrf
@@ -133,6 +145,7 @@ Seminar Proposal
                         <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
                     </div>
                 </form>
+                @endif
             </div>
           @else
           <div class="card-body">

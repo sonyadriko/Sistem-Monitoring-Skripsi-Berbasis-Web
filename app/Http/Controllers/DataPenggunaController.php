@@ -57,8 +57,8 @@ class DataPenggunaController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            $user->status = 'nonaktif'; // Gantilah 'nonaktif' sesuai dengan nilai yang sesuai di model Anda
-            $user->save();
+            // $user->status = 'nonaktif'; // Gantilah 'nonaktif' sesuai dengan nilai yang sesuai di model Anda
+            $user->delete();
 
             return redirect()->back()->with('success', 'Pengguna ditolak');
         } catch (\Exception $e) {

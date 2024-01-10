@@ -15,12 +15,17 @@ class KoordinatorSeminarController extends Controller
             ->leftjoin('users', 'users.id', 'seminar_proposal.users_id')
             ->leftjoin('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
             ->leftjoin('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
-            ->select('seminar_proposal.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1')
-            ->whereIn('seminar_proposal.status', ['pending', 'terima'])
+            ->leftjoin('bimbingan_proposal as bp', 'bp.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+            ->leftjoin('bidang_ilmu as bi', 'bi.id_bidang_ilmu', 'bp.bidang_ilmu_id')
+            ->leftjoin('pengajuan_judul as pj', 'pj.id_pengajuan_judul', 'bp.pengajuan_id')
+            ->select('seminar_proposal.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1', 'bi.topik_bidang_ilmu' ,'pj.judul')
+            // ->whereIn('seminar_proposal.status', ['pending', 'terima'])
             ->latest('seminar_proposal.created_at')
             ->get();
 
-        return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros'));
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/penjadwalan/seminar_proposal.index', compact('sempros', 'angkatan'));
     }
     public function detail($id)
     {
@@ -29,6 +34,7 @@ class KoordinatorSeminarController extends Controller
             ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
             ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+            ->select('users.name', 'users.kode_unik', 'pengajuan_judul.judul', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii', 'seminar_proposal.*')
             ->where('pengajuan_judul.status', 'terima')
             ->where('id_seminar_proposal', $id)
             ->first();

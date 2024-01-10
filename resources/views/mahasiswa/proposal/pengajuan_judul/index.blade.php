@@ -211,7 +211,7 @@ Pengajuan Judul
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <input type="text" class="form-control @if($judul->status == 'pending') bg-warning @elseif($judul->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $judul->status }}" readonly>
+                                <input type="text" class="form-control @if($judul->status == 'pending') bg-warning @elseif($judul->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $judul->status }}" readonly style="text-transform: capitalize;">
                             </div>
                         </div>
                     </div><!-- Row -->

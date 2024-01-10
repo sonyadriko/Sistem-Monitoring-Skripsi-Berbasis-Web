@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 // use App\Models\PengajuanJudul as PengajuanJudul;
 use App\Models\BimbinganProposal as BimbinganProposal;
 use App\Models\PengajuanJudul as PengajuanJudul;
+use App\Models\User as User;
 
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +22,15 @@ class KoordinatorJudulController extends Controller
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
         ->select('users.kode_unik', 'users.name', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.*')
         ->orderBy('pengajuan_judul.created_at', 'desc')->get();
-        return view('koordinator/pengajuan_judul.index', compact('juduls'));
+
+       // Contoh pengambilan tahun dari NPM dalam controller
+        $uniqueYears = User::distinct()->get(['kode_unik'])->pluck('kode_unik')->map(function ($npm) {
+            return substr($npm, 3, 4); // Mengambil 4 karakter mulai dari indeks 3
+        })->unique();
+
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/pengajuan_judul.index', compact('juduls', 'angkatan'));
 
     }
     public function detail($id)

@@ -15,11 +15,18 @@ class KoordinatorSidangSkripsiController extends Controller
             ->join('users', 'users.id', 'sidang_skripsi.users_id')
             ->leftjoin('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
             ->leftjoin('users as penguji1', 'penguji1.id', 'sidang_skripsi.dosen_penguji_1')
-            ->select('sidang_skripsi.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1')
+            ->leftjoin('bimbingan_skripsi as bs', 'bs.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
+            ->leftjoin('bimbingan_proposal as bp', 'bp.id_bimbingan_proposal', 'bs.bimbingan_proposal_id')
+            ->leftjoin('pengajuan_judul as pj', 'pj.id_pengajuan_judul', 'bp.pengajuan_id')
+            ->leftjoin('bidang_ilmu as bi', 'bi.id_bidang_ilmu', 'bp.bidang_ilmu_id')
+            ->select('sidang_skripsi.*', 'users.kode_unik', 'users.name', 'ruangan.nama_ruangan', 'penguji1.name as nama_penguji_1', 'pj.judul', 'bi.topik_bidang_ilmu')
             ->whereIn('sidang_skripsi.status', ['pending', 'terima'])
             ->latest('sidang_skripsi.created_at')
             ->get();
-        return view('koordinator/penjadwalan/sidang_skripsi.index', compact('semhas'));
+
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/penjadwalan/sidang_skripsi.index', compact('semhas', 'angkatan'));
     }
     public function detail($id)
     {

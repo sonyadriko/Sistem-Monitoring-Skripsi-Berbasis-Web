@@ -19,10 +19,14 @@ class KoordinatorSuratTugasController extends Controller
         ->join('users', 'users.id', 'surat_tugas.users_id')
         ->join('bimbingan_proposal', 'bimbingan_proposal.users_id', 'surat_tugas.users_id')
         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+        ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+        ->select('users.name', 'users.kode_unik', 'pengajuan_judul.judul', 'bidang_ilmu.topik_bidang_ilmu', 'surat_tugas.*')
         ->latest('surat_tugas.created_at')
         ->get();
 
-        return view('koordinator/surat_tugas.index', compact('surattugas'));
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('koordinator/surat_tugas.index', compact('surattugas', 'angkatan'));
     }
     public function detail($id)
     {
@@ -45,10 +49,8 @@ class KoordinatorSuratTugasController extends Controller
         if (!$data) {
             return redirect()->back()->with('error', 'Data not found.');
         }
-
         // Update the status to 'tolak'
         $data->status = 'tolak';
-
         // Save the updated data
         $data->save();
 

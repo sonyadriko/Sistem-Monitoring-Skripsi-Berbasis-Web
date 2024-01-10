@@ -28,13 +28,36 @@ Yudisium
                 </p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="statusFilter">Filter Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="tolak">Tolak</option>
+                            <option value="pending">Pending</option>
+                            <option value="lulus dengan revisi">Lulus dengan revisi</option>
+                            <option value="lulus tanpa revisi">Lulus tanpa revisi</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
                         <th>NPM</th>
+                        <th>Judul</th>
                         <th>Bidang Ilmu</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -48,7 +71,10 @@ Yudisium
                             <td>{{ $no }}</td>
                             <td>{{ $yudisium->name }}</td>
                             <td>{{ $yudisium->kode_unik }}</td>
+                            {{-- <td>{{ $yudisium->judul }}</td> --}}
+                            <td>{{ implode(' ', array_slice(str_word_count($yudisium->judul, 1), 0, 6)) }}...</td>
                             <td>{{ $yudisium->topik_bidang_ilmu }}</td>
+                            <td>{{ $yudisium->status }}</td>
                             {{-- <td><button type="button" class="btn btn-primary status-button">Status</button></td> --}}
 
                             <td><a href="{{ url('/koordinator/yudisium/detail/' . $yudisium->id_yudisium) }}" class="btn btn-primary">Detail</a></td>
@@ -133,6 +159,30 @@ Yudisium
             }
         });
     </script> --}}
+    <script>
+        $(document).ready(function() {
+            // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+            if ($.fn.DataTable.isDataTable('#datatable')) {
+                // Hancurkan DataTable sebelum menginisialisasi ulang
+                $('#datatable').DataTable().destroy();
+            }
 
+            // Inisialisasi DataTable
+            var table = $('#datatable').DataTable({
+                // ... (pengaturan DataTable lainnya) ...
+            });
+
+            // Handle perubahan filter status
+            $('#statusFilter').change(function() {
+                var status = $(this).val();
+                table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+            });
+
+            $('#tahunFilter').change(function() {
+                var tahun = $(this).val();
+                table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+            });
+        });
+    </script>
 @endsection
 
