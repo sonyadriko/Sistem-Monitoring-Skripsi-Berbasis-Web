@@ -27,21 +27,21 @@ Seminar Proposal
                   @csrf
                     <div class="mb-3 row">
                         <div class="col-md-6">
-                            <label for="npm" class="form-label" style="font-weight: bold">NPM</label>
+                            <label class="form-label" style="font-weight: bold">NPM</label>
                             <p><span>{{ $data->kode_unik }}</span></p>
                         </div>
                         <div class="col-md-6">
-                            <label for="name" class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
+                            <label class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
                             <p><span>{{ $data->name }}</span></p>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
-                            <label for="npm" class="form-label"style="font-weight: bold" >Judul</label>
+                            <label class="form-label"style="font-weight: bold" >Judul</label>
                             <p><span>{{ $data->judul }}</span></p>
                         </div>
                         <div class="col-md-6">
-                            <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
+                            <label class="form-label" style="font-weight: bold">Bidang Ilmu</label>
                             <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
                         </div>
                     </div>
@@ -123,7 +123,9 @@ Seminar Proposal
                     </div>
                     @endif
                     <div class="d-flex justify-content-between mt-4">
-                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                        {{-- <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button> --}}
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('jadwal-seminar-proposal.index') }}';">Kembali</button>
+
                         @if($data->status == 'tolak')
 
                         @else
@@ -142,7 +144,10 @@ Seminar Proposal
                     @csrf
                     <!-- ... form fields ... -->
                     <div style="display: flex; justify-content: flex-end;">
-                        <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
+                        <button type="button" class="btn btn-danger" id="rejectBtn">Tolak</button>
+                        {{-- <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button> --}}
+                        {{-- <button type="button" class="btn btn-danger" id="rejectBtn">Tolak</button> --}}
+
                     </div>
                 </form>
                 @endif
@@ -233,7 +238,9 @@ Seminar Proposal
               <input type="hidden" name="seminar_proposal_id" value="{{$data->id_seminar_proposal}}" />
 
               <div class="d-flex justify-content-between mt-4">
-                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                {{-- <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button> --}}
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('jadwal-seminar-proposal.index') }}';">Kembali</button>
+
                 @if(is_null($data)|| is_null($data->cetak))
                 <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
                 @endif
@@ -243,6 +250,26 @@ Seminar Proposal
         </div>
           @endif
         </div>
+    </div>
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rejectModalLabel">Tolak Pengajuan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="rejectReason" class="form-label">Alasan Penolakan:</label>
+          <textarea class="form-control" id="rejectReason" name="rejectReason" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-danger" id="rejectSubmitBtn">Tolak</button>
+        </div>
+      </div>
     </div>
 </div>
 @endsection
@@ -255,29 +282,30 @@ Seminar Proposal
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-function updateSelectOptions() {
-  var select1 = document.getElementById("select1");
-  var select2 = document.getElementById("select2");
+    function updateSelectOptions() {
+        var select1 = document.getElementById("select1");
+        var select2 = document.getElementById("select2");
 
-  // Clear existing options in select2
-  select2.innerHTML = '<option value="" selected disabled>Pilih dosen penguji 2</option>';
+        // Clear existing options in select2
+        select2.innerHTML = '<option value="" selected disabled>Pilih dosen penguji 2</option>';
 
-  // Get the selected option from select1
-  var selectedOption = select1.options[select1.selectedIndex];
+        // Get the selected option from select1
+        var selectedOption = select1.options[select1.selectedIndex];
 
-  // Clone the options from select1 to select2, excluding the selected option
-  for (var i = 0; i < select1.options.length; i++) {
-      if (select1.options[i] !== selectedOption) {
-          var option = document.createElement("option");
-          option.value = select1.options[i].value;
-          option.text = select1.options[i].text;
-          select2.add(option);
-      }
-  }
-}
-</script>
+        // Clone the options from select1 to select2, excluding the selected option
+        for (var i = 0; i < select1.options.length; i++) {
+            if (select1.options[i] !== selectedOption) {
+                var option = document.createElement("option");
+                option.value = select1.options[i].value;
+                option.text = select1.options[i].text;
+                select2.add(option);
+            }
+        }
+    }
+    </script>
 <script>
 
 function showConfirmation2() {
@@ -358,8 +386,8 @@ function showConfirmation2() {
             if (formIsValid) {
                 // Tampilkan pesan sukses sebelum reload
                 Swal.fire({
-                    title: 'Success',
-                    text: 'Data berhasil disubmit.',
+                    title: 'Pembaruan Jadwal Berhasil',
+                    text: 'Jadwal seminar berhasil diperbarui.',
                     icon: 'success',
                 }).then(() => {
                     // Submit form
@@ -384,8 +412,8 @@ function showConfirmation() {
         if (result.isConfirmed) {
             // Tampilkan pesan sukses sebelum reload
             Swal.fire({
-                title: 'Success',
-                text: 'Data berhasil dicetak.',
+                title: 'Berita Acara Dicetak',
+                text: 'Berita Acara Seminar Proposal berhasil dicetak.',
                 icon: 'success',
             }).then(() => {
                 // Submit form cetak
@@ -396,3 +424,88 @@ function showConfirmation() {
 }
 
   </script>
+ <script>
+    $(document).ready(function () {
+        // Handle SweetAlert confirmation when submitting the form
+        $('#submitForm').submit(function (e) {
+            e.preventDefault(); // Prevent the form from submitting
+
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin menerima atau menolak pengajuan ini?',
+                text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Terima!',
+                cancelButtonText: 'Tolak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user clicks 'Ya, Terima!', proceed with form submission
+                    // ... your existing code for accepting
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // If user clicks 'Tolak', show reject modal
+                    $('#rejectModal').modal('show');
+                }
+            });
+        });
+
+        // Handle reject confirmation when modal is opened
+        $('#rejectBtn').on('click', function () {
+            $('#rejectModal').modal('show');
+        });
+
+        // Handle reject confirmation
+        $('#rejectSubmitBtn').on('click', function () {
+            var rejectReason = $('#rejectReason').val();
+
+            // Check if rejectReason is empty
+            if (rejectReason.trim() === '') {
+                Swal.fire({
+                    title: 'Peringatan!',
+                    text: 'Mohon masukkan alasan penolakan.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+                return; // Stop further processing if rejectReason is empty
+            }
+
+            // Perform AJAX request to submit rejection with reason
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('jadwal-seminar-proposal-tolak', ['id' => $data->id_seminar_proposal]) }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    action: 'tolak',
+                    rejectReason: rejectReason
+                },
+                success: function (response) {
+                    // Handle success (if needed)
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Pengajuan ditolak.',
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Optionally redirect to another page or perform other actions
+                            window.location.href = '{{ route('jadwal-seminar-proposal.index') }}';
+                        }
+                    });
+                },
+                error: function (error) {
+                    // Handle error (if needed)
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan. Silakan coba lagi.',
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+    });
+</script>

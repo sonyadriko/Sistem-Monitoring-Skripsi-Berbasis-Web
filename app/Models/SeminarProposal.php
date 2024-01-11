@@ -20,6 +20,7 @@ class SeminarProposal extends Model
         'tanggal',
         'jam',
         'status',
+        'alasan',
         'cetak',
         'updated_at',
         'created_at'

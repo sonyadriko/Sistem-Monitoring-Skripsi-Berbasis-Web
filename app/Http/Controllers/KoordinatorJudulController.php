@@ -112,12 +112,6 @@ class KoordinatorJudulController extends Controller
             return redirect()->back()->with('error', 'Data not found.');
         }
 
-        // Update the status to 'tolak'
-        // $data->status = 'tolak';
-
-        // // Save the updated data
-        // $data->save();
-
         if ($request->has('rejectReason')) {
             // Debug: Dump the request data using var_dump or print_r
             var_dump($request->all());
@@ -129,8 +123,6 @@ class KoordinatorJudulController extends Controller
             $data->alasan = $request->input('rejectReason');
             $data->save();
         }
-
-
 
         return redirect()->route('pengajuan-judul.index')->with('success', 'Jadwal ditolak.');
 

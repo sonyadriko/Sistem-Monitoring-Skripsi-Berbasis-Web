@@ -31,13 +31,20 @@ Bimbingan Proposal
             <h5 class="card-header">Review Bimbingan Proposal</h5>
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
-                    <span class="span0-1">Revisi:<br/></span>
-                    @if (!is_null($detailbim) && !is_null($detailbim->revisi))
-                        <span class="span0-1">{{ $detailbim->revisi }}</span><br>
+                    <span class="span0-1 mt-4 mb-4">Revisi:</span>
+                    @if (!is_null($detailbim))
+                        @if (is_null($detailbim->revisi))
+                            {{-- <span class="span0-1 alert alert-info">Menunggu review dari dosen pembimbing</span><br> --}}
+                            <span class="span0-1 alert alert-warning">Menunggu review dari dosen pembimbing</span><br>
+                            {{-- <span class="span0-1 alert alert-fill-info">Menunggu review dari dosen pembimbing</span><br> --}}
+                        @else
+                            <span class="span0-1">{{ $detailbim->revisi }}</span><br>
+                        @endif
                     @else
-                        <span class="span0-1 text-danger">Upload file bimbingan terlebih dahulu</span><br>
+                        <span class="span0-1 alert alert-danger">Upload file bimbingan terlebih dahulu</span><br>
                     @endif
                 </p>
+
             </div>
         </div>
         <div class="row">

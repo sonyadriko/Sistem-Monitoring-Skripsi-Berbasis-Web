@@ -124,15 +124,48 @@ class KoordinatorSeminarController extends Controller
             return redirect()->back()->with('error', 'Data not found.');
         }
 
-        // Update the status to 'tolak'
-        $data->status = 'tolak';
+        if ($request->has('rejectReason')) {
+            // Debug: Dump the request data using var_dump or print_r
+            // var_dump($request->all());
+            // // or
+            // print_r($request->all());
 
-        // Save the updated data
-        $data->save();
+              // Hapus file proposal dan slip pembayaran
+            unlink(public_path($data->file_proposal));
+            unlink(public_path($data->file_slip_pembayaran));
+
+            // Save the reject reason to the database
+            $data->status = 'tolak';
+            $data->alasan = $request->input('rejectReason');
+            $data->save();
+        }
 
         return redirect()->route('jadwal-seminar-proposal.index')->with('success', 'Jadwal ditolak.');
 
     }
+    // public function tolakpengajuan(Request $request, $id)
+    // {
+    //     $data = PengajuanJudul::where('id_pengajuan_judul', $id)->first();
+
+    //     if (!$data) {
+    //         return redirect()->back()->with('error', 'Data not found.');
+    //     }
+
+    //     if ($request->has('rejectReason')) {
+    //         // Debug: Dump the request data using var_dump or print_r
+    //         var_dump($request->all());
+    //         // or
+    //         print_r($request->all());
+
+    //         // Save the reject reason to the database
+    //         $data->status = 'tolak';
+    //         $data->alasan = $request->input('rejectReason');
+    //         $data->save();
+    //     }
+
+    //     return redirect()->route('pengajuan-judul.index')->with('success', 'Jadwal ditolak.');
+
+    // }
 
 
     public function createberitaacara(Request $request, $id)

@@ -26,6 +26,13 @@ Daftar Seminar Proposal
       <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
     </ol>
 </nav>
+
+@if ($proposalData->seminar_status == 'tolak')
+    <div class="alert alert-danger" role="alert">
+        <strong>Pengajuan ditolak!</strong><br>
+        Alasan Penolakan: {{ $proposalData->alasan_penolakan }}
+    </div>
+@endif
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -177,9 +184,9 @@ Daftar Seminar Proposal
             success: function (response) {
             // Display success message
                 Swal.fire({
-                    title: 'Success',
-                    text: response.message, // Adjust to the actual response message
-                    icon: 'success',
+                    title: 'Pendaftaran Sukses!',
+                        text: 'Pendaftaran seminar proposal berhasil!',
+                        icon: 'success',
                 }).then((result) => {
                     // Redirect to /dashboard after pressing "OK"
                     if (result.isConfirmed || result.isDismissed) {
