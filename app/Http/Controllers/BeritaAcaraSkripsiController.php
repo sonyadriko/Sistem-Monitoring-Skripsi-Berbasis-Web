@@ -10,6 +10,10 @@ use App\Models\DetailBeritaAcaraSkripsi as DetailBeritaAcaraSkripsi;
 
 class BeritaAcaraSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkDosen');
+    }
     public function index()
     {
 

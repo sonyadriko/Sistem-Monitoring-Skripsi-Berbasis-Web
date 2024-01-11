@@ -14,6 +14,10 @@ use App\Models\MataKuliahPendukung as MataKuliahPendukung;
 
 class BidangIlmuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $bi = DB::table('bidang_ilmu')

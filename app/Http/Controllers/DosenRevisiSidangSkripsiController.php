@@ -10,6 +10,10 @@ use Illuminate\Support\Carbon;
 
 class DosenRevisiSidangSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkDosen');
+    }
     public function index()
     {
         $rev = DB::table('revisi_sidang_skripsi')

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BeritaAcaraProposalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkDosen');
+    }
     //
     public function index()
     {

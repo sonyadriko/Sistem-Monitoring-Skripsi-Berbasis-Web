@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class DOsenBimbinganSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkDosen');
+    }
     public function index()
     {
         $bimbingans = DB::table('bimbingan_skripsi')

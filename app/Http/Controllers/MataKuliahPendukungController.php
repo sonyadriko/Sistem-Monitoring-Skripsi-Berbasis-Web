@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class MataKuliahPendukungController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
 
     public function index()
     {
