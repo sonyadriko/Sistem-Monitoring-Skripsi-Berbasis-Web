@@ -101,15 +101,11 @@ Detail Bimbingan Proposal
                             <td>
                                 <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
                             </td>
-                            {{-- <td>{{ $item->validasi }}</td> --}}
                             <td>
 
                                 <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
                                     Tambahkan Revisi
                                 </button>
-                                    {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_proposal }})">
-                                        Acc Revisi
-                                    </button> --}}
 
                             </td>
 
