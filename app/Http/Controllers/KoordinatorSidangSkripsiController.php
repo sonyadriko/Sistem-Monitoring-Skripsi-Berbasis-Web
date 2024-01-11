@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class KoordinatorSidangSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $semhas = DB::table('sidang_skripsi')

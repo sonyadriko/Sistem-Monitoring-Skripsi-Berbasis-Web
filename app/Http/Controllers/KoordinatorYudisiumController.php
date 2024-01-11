@@ -10,6 +10,10 @@ use App\Models\Yudisium as Yudisium;
 
 class KoordinatorYudisiumController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $yudisium = DB::table('yudisium')

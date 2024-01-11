@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class MataKuliahPendukungController extends Controller
 {
     //
+
     public function index()
     {
         $mk = DB::table('mata_kuliah_pendukung')->get();

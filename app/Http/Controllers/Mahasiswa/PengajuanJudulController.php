@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PengajuanJudul as PengajuanJudul;
 use App\Models\BidangIlmu as BidangIlmu;
+use Illuminate\Support\Facades\Log;
 
 
 class PengajuanJudulController extends Controller
 {
     //
 
-
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
 
     public function create()
     {
@@ -38,40 +42,124 @@ class PengajuanJudulController extends Controller
         return view('mahasiswa/proposal/pengajuan_judul.index', compact('bidang_ilmu', 'judul', 'cek2'));
     }
 
-    public function store(Request $request)
-    {
-        // Validasi data formulir
-        $validatedData = $request->validate([
-            'bidang_ilmu' => 'required|exists:bidang_ilmu,id_bidang_ilmu',
-            'judul' => 'required|string',  // Sesuaikan dengan atribut formulir Anda
-            // 'mata_kuliah' => 'required|array',  // Sesuaikan dengan atribut formulir Anda
-            'mata_kuliah' => 'required|array|min:1',  // Minimal satu checkbox dipilih
-            'mata_kuliah.*' => 'string',  // Sesuaikan dengan atribut formulir Anda
-            // Tambahkan validasi untuk data formulir lainnya jika ada
-        ], [
-            'bidang_ilmu.required' => 'Bidang Ilmu is required.',
-            'bidang_ilmu.exists' => 'Invalid Bidang Ilmu selected.',
-            'judul.required' => 'Judul is required.',
-            'mata_kuliah.required' => 'Pilih setidaknya satu mata kuliah.',
-            'mata_kuliah.min' => 'Pilih setidaknya satu mata kuliah.',
-            // Tambahkan pesan validasi untuk bidang formulir lainnya jika diperlukan
-        ]);
+    public function showFormPengajuan() {
+        // Logika lain yang mungkin dibutuhkan
 
-        // Simpan pengajuan
-        $pengajuan = new PengajuanJudul();
-        $pengajuan->users_id = Auth::user()->id;
-        $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
-        $pengajuan->status = 'pending';
-        $pengajuan->judul = $validatedData['judul'];
-        $pengajuan->mk_pilihan = implode(', ', $validatedData['mata_kuliah']);
-        $pengajuan->save();
+        // Cek status pengajuan
+        $pengajuan = PengajuanJudul::where('users_id', auth()->user()->id)->first();
 
-        // Tambahan logika untuk menyimpan data formulir lainnya (jika ada)
-        // Contoh: Simpan data mahasiswa, judul, dll.
+        if (!$pengajuan) {
+            // Jika belum pernah submit pengajuan, tampilkan formulir kosong
+            return view('mahasiswa/proposal/pengajuan_judul.index');
+        }
 
-        return redirect('/dashboard')->with('success', 'Pengajuan berhasil dilakukan.');
+        // Jika status pengajuan 'tolak', kirim alasan penolakan ke formulir
+        if ($pengajuan->status == 'tolak') {
+            $bidang_ilmu = DB::table('bidang_ilmu')
+            ->join('users', 'bidang_ilmu.users_id', '=', 'users.id')
+            ->select('bidang_ilmu.id_bidang_ilmu', 'bidang_ilmu.topik_bidang_ilmu', 'bidang_ilmu.status', 'bidang_ilmu.users_id', 'users.name')
+            ->where('bidang_ilmu.status', 'tersedia')
+            ->get();
+            return view('mahasiswa/proposal/pengajuan_judul.index', ['alasanPenolakan' => $pengajuan->alasan, 'status' => 'tolak', 'bidang_ilmu' => $bidang_ilmu]);
+        }
+
+        // Jika status pengajuan 'pending' atau 'terima', arahkan ke show_status
+        if ($pengajuan->status == 'pending' || $pengajuan->status == 'terima') {
+            $datas = DB::table('bimbingan_proposal')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            ->join('users', 'users.id', 'bimbingan_proposal.users_id')
+            ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+            ->where('bimbingan_proposal.users_id', Auth::user()->id)
+            ->first();
+            return view('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => $pengajuan->id, 'status' => $pengajuan->status, 'datas' => $datas]);
+        }
+
+        // Jika tidak ada kondisi khusus, tampilkan formulir pengajuan tanpa alasan penolakan
+        return view('mahasiswa/proposal/pengajuan_judul.index');
     }
 
+
+
+
+    // public function store(Request $request)
+    // {
+    //     // Validasi data formulir
+    //     $validatedData = $request->validate([
+    //         'bidang_ilmu' => 'required|exists:bidang_ilmu,id_bidang_ilmu',
+    //         'judul' => 'required|string',  // Sesuaikan dengan atribut formulir Anda
+    //         // 'mata_kuliah' => 'required|array',  // Sesuaikan dengan atribut formulir Anda
+    //         'mata_kuliah' => 'required|array|min:1',  // Minimal satu checkbox dipilih
+    //         'mata_kuliah.*' => 'string',  // Sesuaikan dengan atribut formulir Anda
+    //         // Tambahkan validasi untuk data formulir lainnya jika ada
+    //     ], [
+    //         'bidang_ilmu.required' => 'Bidang Ilmu is required.',
+    //         'bidang_ilmu.exists' => 'Invalid Bidang Ilmu selected.',
+    //         'judul.required' => 'Judul is required.',
+    //         'mata_kuliah.required' => 'Pilih setidaknya satu mata kuliah.',
+    //         'mata_kuliah.min' => 'Pilih setidaknya satu mata kuliah.',
+    //         // Tambahkan pesan validasi untuk bidang formulir lainnya jika diperlukan
+    //     ]);
+
+    //     // Simpan pengajuan
+    //     $pengajuan = new PengajuanJudul();
+    //     $pengajuan->users_id = Auth::user()->id;
+    //     $pengajuan->bidang_ilmu_id = $validatedData['bidang_ilmu'];
+    //     $pengajuan->status = 'pending';
+    //     $pengajuan->judul = $validatedData['judul'];
+    //     $pengajuan->mk_pilihan = implode(', ', $validatedData['mata_kuliah']);
+    //     $pengajuan->save();
+
+    //     // Tambahan logika untuk menyimpan data formulir lainnya (jika ada)
+    //     // Contoh: Simpan data mahasiswa, judul, dll.
+
+    //     return redirect('/dashboard')->with('success', 'Pengajuan berhasil dilakukan.');
+    // }
+
+    public function store(Request $request) {
+        // Validasi input form
+        try {
+            $request->validate([
+                // Sesuaikan dengan aturan validasi Anda
+                'judul' => 'required|max:255',
+                'bidang_ilmu_id' => 'required',
+                'mata_kuliah' => 'required|array',
+                'mata_kuliah.*' => 'required|string',
+            ]);
+
+            // Cek apakah mahasiswa sudah pernah mengajukan
+            $pengajuanExist = PengajuanJudul::where('users_id', auth()->user()->id)->first();
+
+            if ($pengajuanExist) {
+                // Jika sudah pernah mengajukan, update data pengajuan yang ada
+                $pengajuanExist->update([
+                    'users_id' => Auth::user()->id,
+                    'bidang_ilmu_id' => $request->bidang_ilmu_id,
+                    'judul' => $request->judul,
+                    'mk_pilihan' => implode(', ', $request->mata_kuliah),
+                    'status' => 'pending', // Atur status ke 'pending' karena pengajuan baru
+                    'alasan' => null, // Reset alasan penolakan jika ada
+                ]);
+
+                return redirect()->route('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => $pengajuanExist->id, 'status' => 'pending']);
+            } else {
+                // Jika belum pernah mengajukan, buat data pengajuan baru
+                PengajuanJudul::create([
+                    'users_id' => auth()->user()->id,
+                    'judul' => $request->judul,
+                    'bidang_ilmu_id' => $request->bidang_ilmu_id,
+                    'mk_pilihan' => implode(', ', $request->mata_kuliah),
+                    'status' => 'pending', // Set status ke 'pending'
+                ]);
+
+                return redirect()->route('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => auth()->user()->id, 'status' => 'pending']);
+            }
+        } catch (\Exception $e) {
+            // Tampilkan pesan kesalahan atau log ke file log
+            Log::error('Error while processing form submission: ' . $e->getMessage());
+            // Tampilkan pesan kesalahan kepada pengguna
+            return redirect()->back()->with('error', 'An error occurred while processing your request.');
+        }
+    }
 
 
 }

@@ -241,6 +241,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::get('/', [KoordinatorJudulController::class, 'index'])->name('pengajuan-judul.index');
         Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
         Route::post('/update-status/{id}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
+        Route::post('/tolak/{id}', [KoordinatorJudulController::class, 'tolakpengajuan'])->name('pengajuan-judul-tolak');
     });
 
     Route::group(['prefix' => 'koordinator/ruangan'], function () {
@@ -345,8 +346,9 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
-        Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
+        // Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
         Route::post('/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
+        Route::get('/pengajuan_judul', 'showFormPengajuan')->name('pengajuan-judul.form');
     });
 
     Route::controller(SeminarProposalController::class)->group(function ()

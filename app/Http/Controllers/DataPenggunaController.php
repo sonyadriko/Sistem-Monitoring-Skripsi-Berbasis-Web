@@ -9,6 +9,10 @@ use App\Models\User;
 
 class DataPenggunaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         // $datas = DB::table('users')->where('role_id', '1')->get();

@@ -9,6 +9,10 @@ use App\Models\Ruangan as Ruangan;
 class RuanganController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
             $ruangan = DB::table('ruangan')->get();

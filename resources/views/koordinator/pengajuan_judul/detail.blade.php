@@ -26,8 +26,7 @@ Detail Pengajuan Judul
             <h5 class="card-header">Form Pengajuan</h5>
             <div class="card-body">
                 @if ($data->status === 'pending')
-                <form action="{{ route('update_status', ['id' => $data->id_pengajuan_judul]) }}" method="POST">
-                    {{-- <form action="{{ route('update_status', ['id' => $data->id_pengajuan_judul]) }}" method="POST" id="form-id"> --}}
+                <form action="{{ route('update_status', ['id' => $data->id_pengajuan_judul]) }}" method="POST" id="form-id">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Mahasiswa</label>
@@ -73,11 +72,28 @@ Detail Pengajuan Judul
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                         <div style="display: flex; justify-content: flex-end;">
-                                <button type="submit" class="btn btn-primary" name="action" value="terima" style="margin-right: 10px;">Terima</button>
-                                <button type="submit" class="btn btn-primary" name="action" value="tolak">Tolak</button>
+                            @if($data->status == 'tolak')
+
+                            @else
+                                <button type="button" class="btn btn-primary" id="btn-terima">Terima</button>
+
+                                @endif
                         </div>
                     </div>
                 </form>
+                    @if($data->status == 'tolak')
+
+                    @else
+
+                    <form action="{{ route('pengajuan-judul-tolak', ['id' => $data->id_pengajuan_judul]) }}" method="POST">
+                        @csrf
+                        <!-- ... form fields ... -->
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="button" class="btn btn-danger" id="rejectBtn">Tolak</button>
+
+                        </div>
+                    </form>
+                    @endif
                 @else
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Mahasiswa</label>
@@ -102,11 +118,11 @@ Detail Pengajuan Judul
                 </div>
                 <div class="mb-3">
                     <label for="tbi" class="form-label">Dosen Pembimbing Utama</label>
-                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_utama }}" name="tbi" readonly disabled/>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_utama ?? 'Pengajuan ditolak' }}" name="tbi" readonly disabled/>
                 </div>
                 <div class="mb-3">
                     <label for="tbi" class="form-label">Dosen Pembimbing II</label>
-                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_ii }}" name="tbi" readonly disabled/>
+                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_ii ?? 'Pengajuan ditolak' }}" name="tbi" readonly disabled/>
                 </div>
                 <input type="hidden" name="pengajuan_id" value="{{ $data->id_pengajuan_judul }}" />
                 <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />
@@ -121,6 +137,26 @@ Detail Pengajuan Judul
         </div>
     </div>
 </div>
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rejectModalLabel">Tolak Pengajuan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="rejectReason" class="form-label">Alasan Penolakan:</label>
+          <textarea class="form-control" id="rejectReason" name="rejectReason" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-danger" id="rejectSubmitBtn">Tolak</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
@@ -156,11 +192,15 @@ Detail Pengajuan Judul
 <!-- ... Your HTML and other scripts ... -->
 
 <script>
-    $(document).ready(function () {
-        // Add SweetAlert confirmation when submitting the form
-        $('#form-id').submit(function (e) {
-            e.preventDefault(); // Prevent the form from submitting
+$(document).ready(function () {
+    // Add SweetAlert confirmation when submitting the form
+    $('#btn-terima').click(function () {
+        // Get the selected values from the form
+        var selectedDosenUtama = $('#select1').val();
+        var selectedDosenII = $('#select2').val();
 
+        // Check if the required fields are filled
+        if (selectedDosenUtama && selectedDosenII) {
             Swal.fire({
                 title: 'Apakah Anda yakin ingin menerima pengajuan ini?',
                 text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
@@ -175,7 +215,7 @@ Detail Pengajuan Judul
                     $.ajax({
                         type: 'POST',
                         url: $('#form-id').attr('action'),
-                        data: $('#form-id').serialize(),
+                        data: $('#form-id').serialize(),  // Serialize the form data
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -207,7 +247,104 @@ Detail Pengajuan Judul
                     });
                 }
             });
+        } else {
+            // Display SweetAlert for validation error
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Pastikan semua bidang terisi.',
+                icon: 'error',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+});
+
+
+</script>
+<script>
+    $(document).ready(function () {
+    // Add SweetAlert confirmation when submitting the form
+    $('#form-id').submit(function (e) {
+        e.preventDefault(); // Prevent the form from submitting
+
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin menerima atau menolak pengajuan ini?',
+            text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Terima!',
+            cancelButtonText: 'Tolak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user clicks 'Ya, Terima!', proceed with form submission
+                // ... your existing code for accepting
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // If user clicks 'Tolak', show reject modal
+                $('#rejectModal').modal('show');
+            }
         });
     });
-</script>
 
+    // Handle reject confirmation when modal is opened
+    $('#rejectBtn').on('click', function () {
+        $('#rejectModal').modal('show');
+    });
+
+    // Handle reject confirmation
+    $('#rejectSubmitBtn').on('click', function () {
+        var rejectReason = $('#rejectReason').val();
+
+        // Check if rejectReason is empty
+        if (rejectReason.trim() === '') {
+            Swal.fire({
+                title: 'Peringatan!',
+                text: 'Mohon masukkan alasan penolakan.',
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+            return; // Stop further processing if rejectReason is empty
+        }
+
+        // Perform AJAX request to submit rejection with reason
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('pengajuan-judul-tolak', ['id' => $data->id_pengajuan_judul]) }}',
+            data: {
+                _token: '{{ csrf_token() }}',
+                action: 'tolak',
+                rejectReason: rejectReason
+            },
+            success: function (response) {
+                // Handle success (if needed)
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Pengajuan ditolak.',
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Optionally redirect to another page or perform other actions
+                        window.location.href = '{{ route('pengajuan-judul.index') }}';
+                    }
+                });
+            },
+            error: function (error) {
+                // Handle error (if needed)
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Terjadi kesalahan. Silakan coba lagi.',
+                    icon: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    });
+});
+
+    </script>

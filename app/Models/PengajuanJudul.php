@@ -16,7 +16,7 @@ class PengajuanJudul extends Model
         'mk_pilihan',
         'judul',
         'status',
-        'tolak',
+        'alasan',
         'updated_at',
         'created_at'
     ];

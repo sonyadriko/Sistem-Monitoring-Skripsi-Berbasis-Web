@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 class KoordinatorLaporanTahunanController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $semproCount = DB::table('seminar_proposal')->count();

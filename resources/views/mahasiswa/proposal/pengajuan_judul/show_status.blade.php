@@ -28,7 +28,7 @@ Daftar Seminar Proposal
 </nav>
 <div class="row">
     <div class="col-lg-12">
-            @if ($datas->status == 'pending')
+            @if ($status == 'pending')
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3" style="font-weight: bold;">Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>
@@ -40,7 +40,7 @@ Daftar Seminar Proposal
                     </h4>
                 </div>
             </div>
-            @elseif ($datas->status == 'terima')
+            @elseif ($status == 'terima')
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title mb-3" style="font-weight: bold;">Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>

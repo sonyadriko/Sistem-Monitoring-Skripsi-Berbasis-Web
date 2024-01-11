@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\DB;
 class KoordinatorJudulController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $juduls = DB::table('pengajuan_judul')
@@ -71,24 +75,11 @@ class KoordinatorJudulController extends Controller
     public function updatestatus2(Request $request, $id_tema)
     {
         try {
-            // Validate the request data
-            $request->validate([
-                'action' => 'required|string|in:terima,tolak',
-                'users_id' => 'required|integer',
-                'pengajuan_id' => 'required|integer',
-                'bidang_ilmu_id' => 'required|integer',
-                'dosen_pembimbing_utama' => 'required|string',
-                'dosen_pembimbing_ii' => 'required|string',
-            ]);
-
-            // Debugging: Dump the request data
-            // dd($request->all());
-
             // Find the PengajuanJudul record
             $pengajuan = PengajuanJudul::findOrFail($id_tema);
 
-            // Update the status of the pengajuan
-            $pengajuan->status = $request->input('action');
+            // Update the status of the pengajuan to 'terima'
+            $pengajuan->status = 'terima';
             $pengajuan->save();
 
             // Conditionally create BimbinganProposal only when the action is 'terima'
@@ -104,12 +95,45 @@ class KoordinatorJudulController extends Controller
                 $bp->save();
             }
 
-            return redirect()->route('pengajuan-judul.index')->with('success', 'Status pengajuan diperbarui' . ($pengajuan->status === 'terima' ? ' dan Bimbingan Proposal dibuat.' : '.'));
+            return redirect()->route('pengajuan-judul.index')->with('success', 'Status pengajuan diperbarui dan Bimbingan Proposal dibuat.');
         } catch (\Exception $e) {
             // Handle the exception, log it, and return a response
             \Log::error($e->getMessage());
             return response()->json(['error' => 'Terjadi kesalahan. Silakan coba lagi.'], 500);
         }
+    }
+
+
+    public function tolakpengajuan(Request $request, $id)
+    {
+        $data = PengajuanJudul::where('id_pengajuan_judul', $id)->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data not found.');
+        }
+
+        // Update the status to 'tolak'
+        // $data->status = 'tolak';
+
+        // // Save the updated data
+        // $data->save();
+
+        if ($request->has('rejectReason')) {
+            // Debug: Dump the request data using var_dump or print_r
+            var_dump($request->all());
+            // or
+            print_r($request->all());
+
+            // Save the reject reason to the database
+            $data->status = 'tolak';
+            $data->alasan = $request->input('rejectReason');
+            $data->save();
+        }
+
+
+
+        return redirect()->route('pengajuan-judul.index')->with('success', 'Jadwal ditolak.');
+
     }
 
 

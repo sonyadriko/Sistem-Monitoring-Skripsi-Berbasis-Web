@@ -9,6 +9,10 @@ use App\Models\RevisiSidangSkripsi as RevisiSidangSkripsi;
 
 class KoordinatorBeritaAcaraSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $baskripsi = DB::table('berita_acara_skripsi')

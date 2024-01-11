@@ -13,6 +13,10 @@ use App\Models\BimbinganSkripsi as BimbinganSkripsi;
 
 class KoordinatorSuratTugasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $surattugas = DB::table('surat_tugas')

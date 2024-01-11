@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class KoordinatorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
+
     //
     public function index()
     {

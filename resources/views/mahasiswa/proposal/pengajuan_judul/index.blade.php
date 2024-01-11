@@ -25,7 +25,14 @@ Pengajuan Judul
       <li class="breadcrumb-item active" aria-current="page">Pengajuan Judul</li>
     </ol>
 </nav>
-@if(is_null($judul) || is_null($judul->status))
+{{-- @if(is_null($judul) || is_null($judul->status)) --}}
+
+@if($status === 'tolak')
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Pengajuan Ditolak!</h4>
+        <p>Alasan Penolakan: {{ $alasanPenolakan }}</p>
+    </div>
+@endif
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12 grid-margin stretch-card">
@@ -92,7 +99,7 @@ Pengajuan Judul
                     </div>
                     <div class="mb-3">
                         <label for="bidang_ilmu" class="form-label">Bidang Keilmuan</label>
-                        <select class="form-select" id="bidang_ilmu" name="bidang_ilmu" aria-label="Default select example">
+                        <select class="form-select" id="bidang_ilmu_id" name="bidang_ilmu_id" aria-label="Default select example">
                             <option value="" selected disabled="">Pilih Bidang Keilmuan</option>
                             @foreach($bidang_ilmu as $bi)
                                 <option value="{{ $bi->id_bidang_ilmu }}">{{ $bi->topik_bidang_ilmu }}</option>
@@ -175,72 +182,10 @@ Pengajuan Judul
     </div>
 </div>
 <!-- end row -->
-@else
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Alur Pengajuan Judul</h4>
-            </div>
-            <div class="card-body">
-                {{-- <h6 class="card-title">Form Grid</h6> --}}
-                <h4 class="card-title mb-0">Selamat! Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>
-                <h6 class="mb-3">Selanjutnya menunggu konfirmasi dan pembagian dosen dari koordinator, berikut isi dari pengajuan yang anda lakukan.</h4>
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ Auth::user()->name }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">NPM</label>
-                                <input type="text" class="form-control" placeholder="Enter last name" value="{{ Auth::user()->kode_unik }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                    </div><!-- Row -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Bidang Ilmu</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $judul->topik_bidang_ilmu }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <input type="text" class="form-control @if($judul->status == 'pending') bg-warning @elseif($judul->status == 'terima') bg-success @endif" placeholder="Enter last name" value="{{ $judul->status }}" readonly style="text-transform: capitalize;">
-                            </div>
-                        </div>
-                    </div><!-- Row -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Dosen Pembimbing Utama</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" value="{{ $cek2->dosen_pembimbing_utama ?? 'Belum diatur' }}" readonly>
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Dosen Pembimbing II</label>
-                                <input type="text" class="form-control" value="{{ $cek2->dosen_pembimbing_ii ?? 'Belum diatur' }}" placeholder="Enter last name" readonly>
-                            </div>
-                        </div>
-                    </div><!-- Row -->
-                </form>
-                {{-- <button type="button" class="btn btn-primary submit">Submit form</button> --}}
-            </div>
+{{-- @else --}}
 
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
 <!-- end row -->
-@endif
+{{-- @endif --}}
 @endsection
 
 

@@ -10,6 +10,10 @@ use App\Models\RevisiSeminarProposal as RevisiSeminarProposal;
 
 class KoordinatorBeritaAcaraProposalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKoordinator');
+    }
     public function index()
     {
         $ba = DB::table('berita_acara_proposal')
