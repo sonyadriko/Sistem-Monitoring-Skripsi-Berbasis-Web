@@ -31,12 +31,23 @@ Berita Acara Seminar Proposal
                 </p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama</th>
                         <th>NPM</th>
-                        <th>Mahasiswa</th>
                         <th>Ruang</th>
                         <th>Hari</th>
                         <th>Action</th>
@@ -49,8 +60,8 @@ Berita Acara Seminar Proposal
                         @foreach($ba as $ba)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $ba->kode_unik }}</td>
                             <td>{{ $ba->name }}</td>
+                            <td>{{ $ba->kode_unik }}</td>
                             <td>{{ $ba->nama_ruangan }}</td>
                             @php
                                 $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
@@ -92,4 +103,29 @@ Berita Acara Seminar Proposal
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+        if ($.fn.DataTable.isDataTable('#datatable')) {
+            // Hancurkan DataTable sebelum menginisialisasi ulang
+            $('#datatable').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTable
+        var table = $('#datatable').DataTable({
+            // ... (pengaturan DataTable lainnya) ...
+        });
+
+        // Handle perubahan filter status
+        $('#statusFilter').change(function() {
+            var status = $(this).val();
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+        });
+
+        $('#tahunFilter').change(function() {
+            var tahun = $(this).val();
+            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+        });
+    });
+</script>
 @endsection

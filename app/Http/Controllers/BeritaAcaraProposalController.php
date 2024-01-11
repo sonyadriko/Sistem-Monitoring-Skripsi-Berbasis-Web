@@ -27,7 +27,10 @@ class BeritaAcaraProposalController extends Controller
         ->latest('berita_acara_proposal.created_at')
         ->get();
 
-        return view('dosen/berita_acara/seminar.index', compact('ba'));
+        $angkatan = DB::table('angkatan')->get();
+
+
+        return view('dosen/berita_acara/seminar.index', compact('ba', 'angkatan'));
 
     }
     public function detail($id)

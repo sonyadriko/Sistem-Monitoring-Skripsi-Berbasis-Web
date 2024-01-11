@@ -43,7 +43,7 @@ Data Pengguna
                             <th>Nama</th>
                             <th>NPM</th>
                             <th>Email</th>
-                            <th>Detail</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,7 @@ Data Pengguna
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->email }}</td>
-                            <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id) }}" class="btn btn-primary">Detail</a></td>
+                            {{-- <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id) }}" class="btn btn-primary">Detail</a></td> --}}
 
                         </tr>
                         @php

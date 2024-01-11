@@ -19,6 +19,7 @@ class DosenRevisiSeminarProposal extends Controller
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
             ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.berita_acara_proposal_id', 'berita_acara_proposal.id_berita_acara_p')
             ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+            ->select('users.name', 'users.kode_unik', 'pengajuan_judul.judul', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.dosen_pembimbing_utama', 'seminar_proposal.dosen_penguji_1', 'seminar_proposal.dosen_penguji_2', 'revisi_seminar_proposal.id_revisi_seminar_proposal')
             ->where(function($query) {
                 $query->where('seminar_proposal.dosen_penguji_1', Auth::user()->id)
                       ->orWhere('seminar_proposal.dosen_penguji_2', Auth::user()->id)
@@ -26,7 +27,10 @@ class DosenRevisiSeminarProposal extends Controller
             })
             ->latest('berita_acara_proposal.created_at')
             ->get();
-        return view('dosen/revisi/proposal.index', compact('rev'));
+
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('dosen/revisi/proposal.index', compact('rev', 'angkatan'));
 
     }
 

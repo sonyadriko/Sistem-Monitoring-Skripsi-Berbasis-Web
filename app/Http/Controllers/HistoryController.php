@@ -27,7 +27,7 @@ class HistoryController extends Controller
                     'histories.created_at'
                 )
                 ->orderBy('histories.created_at', 'DESC')
-                ->paginate(10);
+                ->paginate(5);
             $notificationLists = '';
             foreach ($allActivityNotifBar as $key => $allActivityNotifBar) {
                 $diffTime = Carbon::parse($allActivityNotifBar->created_at)->diffForHumans();

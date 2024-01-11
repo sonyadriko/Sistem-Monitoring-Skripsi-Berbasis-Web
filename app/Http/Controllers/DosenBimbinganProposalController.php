@@ -17,13 +17,16 @@ class DosenBimbinganProposalController extends Controller
                 ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('users', 'users.id', 'bimbingan_proposal.users_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+                ->select('users.name', 'users.kode_unik', 'pengajuan_judul.judul', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_proposal.*')
                 ->where(function($query) {
                     $query->where('dosen_pembimbing_utama', Auth::user()->name)
                           ->orWhere('dosen_pembimbing_ii', Auth::user()->name);
                 })
                 ->orderBy('bimbingan_proposal.created_at', 'desc')
                 ->get();
-        return view('dosen/bimbingan/proposal.index', compact('bimbinganp'));
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('dosen/bimbingan/proposal.index', compact('bimbinganp', 'angkatan'));
 
 
     }

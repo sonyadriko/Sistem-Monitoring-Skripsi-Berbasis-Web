@@ -17,13 +17,17 @@ class DOsenBimbinganSkripsiController extends Controller
                 ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('users', 'users.id', 'bimbingan_proposal.users_id')
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+                ->select('users.name', 'users.kode_unik', 'pengajuan_judul.judul', 'bidang_ilmu.topik_bidang_ilmu', 'bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
                 ->where(function($query) {
                     $query->where('dosen_pembimbing_utama', Auth::user()->name)
                           ->orWhere('dosen_pembimbing_ii', Auth::user()->name);
                 })
                 ->orderBy('bimbingan_skripsi.created_at', 'desc')
                 ->get();
-        return view('dosen/bimbingan/skripsi.index', compact('bimbingans'));
+
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('dosen/bimbingan/skripsi.index', compact('bimbingans', 'angkatan'));
     }
     public function detail($id)
     {

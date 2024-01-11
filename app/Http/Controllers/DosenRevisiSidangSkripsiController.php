@@ -29,7 +29,10 @@ class DosenRevisiSidangSkripsiController extends Controller
         })
         ->latest('revisi_sidang_skripsi.created_at')
         ->get();
-        return view('dosen/revisi/skripsi.index', compact('rev'));
+
+        $angkatan = DB::table('angkatan')->get();
+
+        return view('dosen/revisi/skripsi.index', compact('rev', 'angkatan'));
     }
     public function detail($id)
     {

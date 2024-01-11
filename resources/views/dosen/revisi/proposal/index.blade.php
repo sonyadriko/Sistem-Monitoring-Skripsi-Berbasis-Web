@@ -31,6 +31,26 @@ Revisi Seminar Proposal
                 </p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="statusFilter">Filter Sebagai:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="Dosen Penguji 1">Dosen Penguji 1</option>
+                            <option value="Dosen Penguji 2">Dosen Penguji 2</option>
+                            <option value="Dosen Pembimbing">Dosen Pembimbing</option>
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
@@ -39,6 +59,7 @@ Revisi Seminar Proposal
                         <th>NPM</th>
                         <th>Judul</th>
                         <th>Bidang Ilmu</th>
+                        <th>Sebagai</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -51,8 +72,20 @@ Revisi Seminar Proposal
                             <td>{{ $no }}</td>
                             <td>{{ $dosen->name }}</td>
                             <td>{{ $dosen->kode_unik }}</td>
-                            <td>{{ $dosen->judul }}</td>
+                            {{-- <td>{{ $dosen->judul }}</td> --}}
+                            <td>{{ implode(' ', array_slice(str_word_count($dosen->judul, 1), 0, 6)) }}...</td>
                             <td>{{ $dosen->topik_bidang_ilmu }}</td>
+                            <td>
+                                @if($dosen->dosen_pembimbing_utama == Auth::user()->name)
+                                    Dosen Pembimbing
+                                @elseif($dosen->dosen_penguji_1 == Auth::user()->id)
+                                    Dosen Penguji 1
+                                @elseif($dosen->dosen_penguji_2 == Auth::user()->id)
+                                    Dosen Penguji 2
+                                @else
+                                    Tidak Diketahui
+                                @endif
+                            </td>
                             <td><a href="{{ url('/dosen/revisi_seminar_proposal/detail/' . $dosen->id_revisi_seminar_proposal) }}" class="btn btn-primary">Cek Revisi</a></td>
                         </tr>
                         @php
@@ -88,4 +121,29 @@ Revisi Seminar Proposal
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+        if ($.fn.DataTable.isDataTable('#datatable')) {
+            // Hancurkan DataTable sebelum menginisialisasi ulang
+            $('#datatable').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTable
+        var table = $('#datatable').DataTable({
+            // ... (pengaturan DataTable lainnya) ...
+        });
+
+        // Handle perubahan filter status
+        $('#statusFilter').change(function() {
+            var status = $(this).val();
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+        });
+
+        $('#tahunFilter').change(function() {
+            var tahun = $(this).val();
+            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+        });
+    });
+</script>
 @endsection

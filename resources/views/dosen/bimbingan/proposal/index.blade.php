@@ -30,13 +30,26 @@ Bimbingan Proposal
                 <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</p>
             </div>
             <div class="card-body table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
+                            <option value="">Semua</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Judul</th>
                         <th>Bidang Ilmu</th>
-                        {{-- <th>Topik/Tema</th> --}}
+                        <th>Sebagai</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -48,8 +61,19 @@ Bimbingan Proposal
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ $dosen->name }}</td>
+                            <td>{{ $dosen->kode_unik }}</td>
+                            {{-- <td>{{ $dosen->judul }}</td> --}}
+                            <td>{{ implode(' ', array_slice(str_word_count($dosen->judul, 1), 0, 6)) }}...</td>
                             <td>{{ $dosen->topik_bidang_ilmu }}</td>
-                            {{-- <td>{{ $dosen->topik_bidang_ilmu }}</td> --}}
+                            <td>
+                                @if($dosen->dosen_pembimbing_utama == Auth::user()->name)
+                                    Dosen Pembimbing Utama
+                                @elseif($dosen->dosen_pembimbing_ii == Auth::user()->name)
+                                    Dosen Pembimbing II
+                                @else
+                                    Tidak Diketahui
+                                @endif
+                            </td>
                             <td><a href="{{ url('/dosen/bimbingan_proposal/detail/' . $dosen->id_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
@@ -85,4 +109,29 @@ Bimbingan Proposal
 <script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+        if ($.fn.DataTable.isDataTable('#datatable')) {
+            // Hancurkan DataTable sebelum menginisialisasi ulang
+            $('#datatable').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTable
+        var table = $('#datatable').DataTable({
+            // ... (pengaturan DataTable lainnya) ...
+        });
+
+        // Handle perubahan filter status
+        $('#statusFilter').change(function() {
+            var status = $(this).val();
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+        });
+
+        $('#tahunFilter').change(function() {
+            var tahun = $(this).val();
+            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+        });
+    });
+</script>
 @endsection

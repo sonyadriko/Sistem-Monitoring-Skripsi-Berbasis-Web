@@ -28,7 +28,11 @@ class BeritaAcaraSkripsiController extends Controller
         })
         ->latest('berita_acara_skripsi.created_at')
         ->get();
-        return view('dosen/berita_acara/sidang.index', compact('baskripsi'));
+
+        $angkatan = DB::table('angkatan')->get();
+
+
+        return view('dosen/berita_acara/sidang.index', compact('baskripsi', 'angkatan'));
 
     }
     public function detail($id)
