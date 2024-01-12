@@ -12,6 +12,9 @@ class Authenticate extends Middleware
      * Get the path the user should be redirected to when they are not authenticated.
      */
 
+     protected $guards;
+
+
     public function handle($request, Closure $next, ... $guards)
     {
         $this->guards = $guards;
@@ -36,9 +39,20 @@ class Authenticate extends Middleware
         // }
         // // Tidak ada peran yang sesuai, arahkan ke 'login'
         // return redirect()->route('auth-login');
-        if (! $request->expectsJson()) {
-            return redirect()->route('auth-login');
-            // return redirect()->route('reig');
+
+        // if (!$request->expectsJson()) {
+        //     return redirect()->route('login');
+        //     // return redirect()->route('reig');
+        // }
+
+        if (!$request->expectsJson()) {
+            foreach ($this->guards as $guard) {
+                if (in_array($guard, ['mahasiswa', 'dosen', 'koordinator', 'ketuajurusan']) && auth()->guard($guard)->check()) {
+                    return redirect()->route('dashboard');
+                }
+            }
+        // If no specific guard conditions are met, redirect to the default login route
+            return redirect()->route('login');
         }
     }
 }
