@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Daftar Seminar Proposal
+Pengajuan Judul
 @endsection
 
 @push('plugin-styles')

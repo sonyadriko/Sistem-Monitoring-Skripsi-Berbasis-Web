@@ -136,13 +136,13 @@ Sidang Skripsi
                         <button type="button" class="btn btn-primary" onclick="showConfirmation2();">Submit</button>
                     </div>
                 </form>
-                <form action="{{ route('jadwal-sidang-skripsi-tolak', ['id' => $data->id_sidang_skripsi]) }}" method="POST">
+                {{-- <form action="{{ route('jadwal-sidang-skripsi-tolak', ['id' => $data->id_sidang_skripsi]) }}" method="POST">
                     @csrf
                     <!-- ... form fields ... -->
                     <div style="display: flex; justify-content: flex-end;">
                         <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button>
                     </div>
-                </form>
+                </form> --}}
             </div>
             @else
             <div class="card-body">

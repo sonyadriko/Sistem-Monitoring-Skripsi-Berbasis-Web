@@ -85,7 +85,7 @@ Detail Surat Tugas
                 </div>
             </form>
 
-            <form action="{{ route('koor-surat-tugas-tolak', ['id' => $data->id_surat_tugas]) }}" method="POST">
+            {{-- <form action="{{ route('koor-surat-tugas-tolak', ['id' => $data->id_surat_tugas]) }}" method="POST">
                 @csrf
                 <!-- ... form fields ... -->
                 @if($data->status == 'pending')
@@ -93,7 +93,7 @@ Detail Surat Tugas
                     <button type="submit" class="btn btn-danger mt-4" name="action" value="tolak">Tolak</button>
                 </div>
                 @endif
-            </form>
+            </form> --}}
           </div>
         </div>
     </div>
