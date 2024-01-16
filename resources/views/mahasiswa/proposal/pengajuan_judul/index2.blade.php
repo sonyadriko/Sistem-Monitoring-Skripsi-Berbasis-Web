@@ -25,14 +25,6 @@ Pengajuan Judul
       <li class="breadcrumb-item active" aria-current="page">Pengajuan Judul</li>
     </ol>
 </nav>
-{{-- @if(is_null($judul) || is_null($judul->status)) --}}
-
-@if($status === 'tolak')
-    <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Pengajuan Ditolak!</h4>
-        <p>Alasan Penolakan: {{ $alasanPenolakan }}</p>
-    </div>
-@endif
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12 grid-margin stretch-card">

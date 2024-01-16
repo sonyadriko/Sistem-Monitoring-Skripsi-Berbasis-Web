@@ -50,7 +50,12 @@ class PengajuanJudulController extends Controller
 
         if (!$pengajuan) {
             // Jika belum pernah submit pengajuan, tampilkan formulir kosong
-            return view('mahasiswa/proposal/pengajuan_judul.index');
+            $bidang_ilmu = DB::table('bidang_ilmu')
+            ->join('users', 'bidang_ilmu.users_id', '=', 'users.id')
+            ->select('bidang_ilmu.id_bidang_ilmu', 'bidang_ilmu.topik_bidang_ilmu', 'bidang_ilmu.status', 'bidang_ilmu.users_id', 'users.name')
+            ->where('bidang_ilmu.status', 'tersedia')
+            ->get();
+            return view('mahasiswa/proposal/pengajuan_judul.index2', compact('bidang_ilmu'));
         }
 
         // Jika status pengajuan 'tolak', kirim alasan penolakan ke formulir
@@ -73,7 +78,6 @@ class PengajuanJudulController extends Controller
             ->first();
             return view('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => $pengajuan->id, 'status' => $pengajuan->status, 'datas' => $datas]);
         }
-
         // Jika tidak ada kondisi khusus, tampilkan formulir pengajuan tanpa alasan penolakan
         return view('mahasiswa/proposal/pengajuan_judul.index');
     }
