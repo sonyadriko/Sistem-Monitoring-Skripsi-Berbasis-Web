@@ -136,7 +136,7 @@ Seminar Proposal
                     </div>
                 </form>
 
-                @if($data->status == 'tolak')
+                {{-- @if($data->status == 'tolak')
 
                 @else
 
@@ -145,12 +145,10 @@ Seminar Proposal
                     <!-- ... form fields ... -->
                     <div style="display: flex; justify-content: flex-end;">
                         <button type="button" class="btn btn-danger" id="rejectBtn">Tolak</button>
-                        {{-- <button type="submit" class="btn btn-danger" name="action" value="tolak">Tolak</button> --}}
-                        {{-- <button type="button" class="btn btn-danger" id="rejectBtn">Tolak</button> --}}
 
                     </div>
                 </form>
-                @endif
+                @endif --}}
             </div>
           @else
           <div class="card-body">
