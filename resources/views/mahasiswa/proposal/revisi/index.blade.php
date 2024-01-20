@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-Revisi Seminar Proposal
+Revisi Sidang Proposal
 @endsection
 
 
@@ -18,7 +18,7 @@ Revisi Seminar Proposal
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
 
   <div>
-    <h4 class="mb-3 mb-md-0">Revisi Seminar Proposal</h4>
+    <h4 class="mb-3 mb-md-0">Revisi Sidang Proposal</h4>
   </div>
 
 </div>
@@ -28,11 +28,11 @@ Revisi Seminar Proposal
     <div class="container-xxl flex-grow-1 container-p-y">
     @if(is_null($revisisp) || (is_null($revisisp->id_berita_acara_p)) || (is_null($revisisp->id_revisi_seminar_proposal)))
         <div class="alert alert-warning" role="alert">
-            Harap mendaftar seminar proposal terlebih dahulu. / Revisi belum dicetak oleh koordinator.
+            Harap mendaftar sidang proposal terlebih dahulu. / Revisi belum dicetak oleh koordinator.
         </div>
     @else
     <div class="card mb-4">
-        <h5 class="card-header">Review Seminar Proposal</h5>
+        <h5 class="card-header">Review Sidang Proposal</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
                 <span class="span0-1">Revisi:<br/></span>
@@ -69,7 +69,7 @@ Revisi Seminar Proposal
         </div>
         <div class="col-xl-6">
             <div class="card mb-4">
-                <h5 class="card-header">Acc Revisi Seminar Proposal</h5>
+                <h5 class="card-header">Acc Revisi Sidang Proposal</h5>
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-check mt-3">
@@ -105,7 +105,7 @@ Revisi Seminar Proposal
         </div>
     </div>
     <div class="mb-3">
-        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Revisi Seminar Proposal</a>
+        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Revisi Sidang Proposal</a>
     </div>
     @endif
 </div>

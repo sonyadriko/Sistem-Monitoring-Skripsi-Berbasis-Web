@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Detail Revisi Seminar Proposal
+Detail Revisi Sidang Proposal
 @endsection
 
 @section('css')
@@ -14,13 +14,13 @@ Detail Revisi Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Revisi Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Revisi Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-md-12 stretch-card">
         <div class="card mb-4">
-            <h5 class="card-header">Revisi Seminar Proposal</h5>
+            <h5 class="card-header">Revisi Sidang Proposal</h5>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
@@ -151,7 +151,7 @@ Detail Revisi Seminar Proposal
 <div class="row">
     <div class="mb-3">
         <div class="card mb-4">
-            <h5 class="card-header">Persetujuan Revisi Seminar Proposal</h5>
+            <h5 class="card-header">Persetujuan Revisi Sidang Proposal</h5>
             <div class="card-body">
                 <span class="span0-1">Persetujuan Revisi </span>
                 <input type="hidden" id="dospem" value="{{$data->dosen_pembimbing_utama}}">

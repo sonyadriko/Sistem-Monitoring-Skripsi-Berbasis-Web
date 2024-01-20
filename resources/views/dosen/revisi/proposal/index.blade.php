@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Revisi Seminar Proposal
+Revisi Sidang Proposal
 @endsection
 
 @section('css')
@@ -19,15 +19,15 @@ Revisi Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Revisi Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Revisi Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Revisi Mahasiswa Seminar Proposal</h4>
-                <p class="card-title-desc">Tabel berikut merupakan list mahasiswa yang telah melakukan seminar dan masih memerlukan revisi pada proposalnya.</code>.
+                <h4 class="card-title" style="font-weight: bold">Revisi Mahasiswa Sidang Proposal</h4>
+                <p class="card-title-desc">Tabel berikut merupakan list mahasiswa yang telah melakukan sidang dan masih memerlukan revisi pada proposalnya.</code>.
                 </p>
             </div>
             <div class="card-body table-responsive">

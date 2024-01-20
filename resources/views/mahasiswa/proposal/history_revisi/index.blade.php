@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-History Revisi Seminar
+History Revisi Sidang Proposal
 @endsection
 
 
@@ -17,10 +17,10 @@ History Revisi Seminar
 @endif
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">History Revisi Seminar Proposal</h4>
+    <h4 class="mb-3 mb-md-0">History Revisi Sidang Proposal</h4>
   </div>
 </div>
-<h6 class="mb-4">Seluruh informasi mengenai history revisi seminar proposal akan ditampilkan dibawah ini.</h6>
+<h6 class="mb-4">Seluruh informasi mengenai history revisi sidang proposal akan ditampilkan dibawah ini.</h6>
 
 
 <div class="row">

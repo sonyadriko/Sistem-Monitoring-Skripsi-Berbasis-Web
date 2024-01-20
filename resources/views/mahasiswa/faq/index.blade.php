@@ -69,7 +69,7 @@ Info Penting
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingFive">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                  Apa yang harus dipersiapkan untuk melakukan pendaftaran seminar, sidang, surat survey atau surat tugas?
+                  Apa yang harus dipersiapkan untuk melakukan pendaftaran sidang proposal, sidang skripsi, surat survey atau surat tugas?
                 </button>
               </h2>
               <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#FaqAccordion">
@@ -81,7 +81,7 @@ Info Penting
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingSix">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                  Berapa jumlah nominal yang harus dibayarkan pada setiap pendaftaran seminar proposal, pengajuan surat tugas, pendaftaran sidang skripsi dan lain-lain?
+                  Berapa jumlah nominal yang harus dibayarkan pada setiap pendaftaran sidang proposal, pengajuan surat tugas, pendaftaran sidang skripsi dan lain-lain?
                 </button>
               </h2>
               <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#FaqAccordion">

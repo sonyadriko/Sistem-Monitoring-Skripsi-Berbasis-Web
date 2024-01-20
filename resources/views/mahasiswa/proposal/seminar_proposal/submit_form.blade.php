@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Daftar Seminar Proposal
+Daftar Sidang Proposal
 @endsection
 
 @push('plugin-styles')
@@ -23,7 +23,7 @@ Daftar Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Proposal Skripsi</li>
     </ol>
 </nav>
 
@@ -37,7 +37,7 @@ Daftar Seminar Proposal
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Alur Pendaftaran Seminar Proposal Skripsi</h4>
+                <h4 class="card-title">Alur Pendaftaran Sidang Proposal Skripsi</h4>
                 <div id="wizard">
                     <h2>Step Pertama</h2>
                     <section>
@@ -98,7 +98,7 @@ Daftar Seminar Proposal
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Seminar Proposal</label>
+                                <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Proposal</label>
                                 <input class="form-control" type="file" name="slip_file" id="slip_file" />
                                 <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
                                 @error('slip_file')
@@ -185,7 +185,7 @@ Daftar Seminar Proposal
             // Display success message
                 Swal.fire({
                     title: 'Pendaftaran Sukses!',
-                        text: 'Pendaftaran seminar proposal berhasil!',
+                        text: 'Pendaftaran sidang proposal berhasil!',
                         icon: 'success',
                 }).then((result) => {
                     // Redirect to /dashboard after pressing "OK"

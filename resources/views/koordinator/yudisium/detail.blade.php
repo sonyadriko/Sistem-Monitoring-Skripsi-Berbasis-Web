@@ -42,7 +42,7 @@ Detail Yudisium
                     <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                   </div>
                   <div class="mb-3">
-                    <label for="dospem_2" class="form-label">Tanggal Seminar Proposal</label>
+                    <label for="dospem_2" class="form-label">Tanggal Sidang Proposal</label>
                     @php
                         $carbonTanggal = \Carbon\Carbon::parse($data->tanggal_sidang_skripsi);
                         $formatTanggal = $carbonTanggal->formatLocalized(' %d %B %Y', 'id');
@@ -104,7 +104,7 @@ Detail Yudisium
                     <input type="text" class="form-control" name="dospem_2" id="dospem_2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly disabled />
                 </div>
                 <div class="mb-3">
-                    <label for="dospem_2" class="form-label">Tanggal Seminar Proposal</label>
+                    <label for="dospem_2" class="form-label">Tanggal Sidang Proposal</label>
                     @php
                         $carbonTanggal = \Carbon\Carbon::parse($data->tanggal_sidang_skripsi);
                         $formatTanggal = $carbonTanggal->formatLocalized(' %d %B %Y', 'id');

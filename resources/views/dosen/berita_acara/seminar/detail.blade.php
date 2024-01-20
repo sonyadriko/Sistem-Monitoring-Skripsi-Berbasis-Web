@@ -14,14 +14,13 @@ Detail Berita Acara Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">BA Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-3">
-            <h5 class="card-header">Berita Acara Seminar Proposal</h5>
-            {{-- <p class="card-header">Dosen penguji dapat mengisi berita acara seminar proposal dibawah ini</p> --}}
+            <h5 class="card-header">Berita Acara Sidang Proposal</h5>
             <div class="card-body table-responsive">
                 <div class="row">
                     <div class="col-sm-6">

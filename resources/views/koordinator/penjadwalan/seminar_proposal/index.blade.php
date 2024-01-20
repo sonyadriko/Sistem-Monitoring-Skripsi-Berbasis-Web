@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Seminar Proposal
+Sidang Proposal
 @endsection
 
 @section('css')
@@ -19,15 +19,15 @@ Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Pengajuan Seminar Proposal</h4>
-                <p class="card-title-desc">List pengajuan seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
+                <h4 class="card-title" style="font-weight: bold">Pengajuan Sidang Proposal</h4>
+                <p class="card-title-desc">List pengajuan sidang proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body table-responsive">

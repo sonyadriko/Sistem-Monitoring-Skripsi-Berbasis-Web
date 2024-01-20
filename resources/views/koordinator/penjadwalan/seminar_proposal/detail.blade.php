@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Seminar Proposal
+Sidang Proposal
 @endsection
 
 @section('css')
@@ -14,13 +14,13 @@ Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-4">
-            <h5 class="card-header">Penjadwalan Seminar Proposal</h5>
+            <h5 class="card-header">Penjadwalan Sidang Proposal</h5>
             @if (is_null($data)||is_null($data->dosen_penguji_1)||is_null($data->dosen_penguji_2)||is_null($data->status))
             <div class="card-body">
                 <form action="{{ route('jadwal-seminar-proposal-update', ['id' => $data->id_seminar_proposal]) }}" method="POST" id="submitForm">
@@ -411,7 +411,7 @@ function showConfirmation() {
             // Tampilkan pesan sukses sebelum reload
             Swal.fire({
                 title: 'Berita Acara Dicetak',
-                text: 'Berita Acara Seminar Proposal berhasil dicetak.',
+                text: 'Berita Acara Sidang Proposal berhasil dicetak.',
                 icon: 'success',
             }).then(() => {
                 // Submit form cetak

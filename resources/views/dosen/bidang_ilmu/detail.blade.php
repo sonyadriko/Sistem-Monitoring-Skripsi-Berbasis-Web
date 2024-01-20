@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Detail Revisi Seminar Proposal
+Detail Revisi Sidang Proposal
 @endsection
 
 @section('css')

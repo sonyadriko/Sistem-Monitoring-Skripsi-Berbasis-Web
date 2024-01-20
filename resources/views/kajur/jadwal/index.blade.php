@@ -19,7 +19,7 @@ Penjadwalan
         <h4 class="mb-3 mb-md-0">Daftar Jadwal</h4>
     </div>
 </div>
-<h6 class="mb-4">Silahkan memilih tombol dibawah ini untuk melihat data seminar proposal atau sidang skripsi, anda juga dapat melihat jadwal yang telah dibuat sebelumnya.</h6>
+<h6 class="mb-4">Silahkan memilih tombol dibawah ini untuk melihat data sidang proposal atau sidang skripsi, anda juga dapat melihat jadwal yang telah dibuat sebelumnya.</h6>
 
 <div class="row">
     <div class="row flex-grow-1">
@@ -28,7 +28,7 @@ Penjadwalan
                 <div class="card-body">
                     <a href="{{ route('data-seminar') }}" class="text-decoration-none">
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <h6 class="card-title mb-0">Seminar Proposal</h6>
+                            <h6 class="card-title mb-0">Sidang Proposal</h6>
                         </div>
                         <div class="row">
                             <div class="col-6 col-md-12 col-xl-7">

@@ -69,7 +69,7 @@
 
             </li>
             <li class="nav-item">
-              <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Seminar Proposal</a>
+              <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Sidang Proposal</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('pengajuan-st.check') }}" class="nav-link">Surat Tugas Bimbingan</a>
@@ -137,7 +137,7 @@
         <div class="collapse" id="revisi">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ route('revisi_sp.index') }}" class="nav-link">Seminar Proposal Skripsi</a>
+              <a href="{{ route('revisi_sp.index') }}" class="nav-link">Sidang Proposal Skripsi</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('revisi_sk.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
@@ -410,7 +410,7 @@
         <div class="collapse" id="ba">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ route('koor-berita-acara-proposal.index') }}" class="nav-link">BA Seminar Proposal</a>
+              <a href="{{ route('koor-berita-acara-proposal.index') }}" class="nav-link">BA Sidang Proposal</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('koor-berita-acara-skripsi.index') }}" class="nav-link">BA Sidang Skripsi</a>
@@ -491,7 +491,7 @@
         <div class="collapse" id="rev">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ route('dosen-revisi-sempro.index') }}" class="nav-link">Seminar Proposal Skripsi</a>
+              <a href="{{ route('dosen-revisi-sempro.index') }}" class="nav-link">Sidang Proposal Skripsi</a>
             </li>
             <li class="nav-item">
               <a href="{{ route('dosen-revisi-semhas.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
@@ -504,7 +504,7 @@
     <li class="nav-item">
         <a href="{{route('berita-acara-proposal.index')}}" class="nav-link">
           <i class="link-icon" data-feather="book-open"></i>
-          <span class="link-title">Seminar Proposal</span>
+          <span class="link-title">Sidang Proposal</span>
         </a>
     </li>
     <li class="nav-item">

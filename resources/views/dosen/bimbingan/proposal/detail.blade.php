@@ -153,9 +153,9 @@ Detail Bimbingan Proposal
 </div>
 <div class="mb-3">
     <div class="card mb-4">
-        <h5 class="card-header">Persetujuan Seminar Proposal</h5>
+        <h5 class="card-header">Persetujuan Sidang Proposal</h5>
         <div class="card-body">
-            <span class="span0-1">Persetujuan Seminar </span>
+            <span class="span0-1">Persetujuan Sidang </span>
             {{-- @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
 
                 @if (Auth::user()->name == $data->dosen_pembimbing_utama)

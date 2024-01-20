@@ -94,52 +94,6 @@ class SeminarProposalController extends Controller
         return view('mahasiswa/proposal/seminar_proposal.show_status', compact('datas'));
     }
 
-
-    // public function store(Request $request)
-    // {
-    //     // dd($request->all());
-    //     $validatedData = $request->validate([
-    //         'bimbingan_proposal_id' => 'required',
-    //         'proposal_file' => 'required|mimes:pdf|max:5000',
-    //         'slip_file' => 'required|mimes:pdf|max:1000',
-    //     ], [
-    //         'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID diperlukan.',
-    //         'proposal_file.required' => 'File proposal diperlukan.',
-    //         'proposal_file.mimes' => 'File proposal harus berformat PDF.',
-    //         'proposal_file.max' => 'File proposal tidak boleh lebih dari 5000 KB.',
-    //         'slip_file.required' => 'File slip pembayaran diperlukan.',
-    //         'slip_file.mimes' => 'File slip pembayaran harus berformat PDF.',
-    //         'slip_file.max' => 'File slip pembayaran tidak boleh lebih dari 1000 KB.',
-    //     ]);
-
-    //     try {
-    //         $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
-    //         // $fileProposalName = uniqid() . '.' . $request->file('proposal_file')->getClientOriginalExtension();
-    //         $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
-    //         // $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
-
-    //         // Move the files to the appropriate directory
-    //         $userFolder = Auth::user()->name;
-    //         $request->file('proposal_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileProposalName);
-    //         $request->file('slip_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileSlipPembayaranName);
-
-    //         $seminarProposal = new SeminarProposal();
-    //         $seminarProposal->users_id= Auth::user()->id;
-    //         $seminarProposal->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
-    //         $seminarProposal->status = 'pending';
-
-    //         $seminarProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
-    //         $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
-    //         $seminarProposal->save();
-
-    //         return redirect('/dashboard')->with('success', 'Berhasil Daftar Seminar Proposal.');
-    //     } catch (\Exception $e) {
-    //         // Tangani kesalahan jika ada
-    //         return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-    //     }
-
-    // }
-
     public function store(Request $request)
 {
     $validatedData = $request->validate([
@@ -201,7 +155,7 @@ class SeminarProposalController extends Controller
             $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
             $seminarProposal->save();
 
-            return redirect('/dashboard')->with('success', 'Berhasil Daftar Seminar Proposal.');
+            return redirect('/dashboard')->with('success', 'Berhasil Daftar Sidang Proposal.');
         }
     } catch (\Exception $e) {
         // Tangani kesalahan jika ada

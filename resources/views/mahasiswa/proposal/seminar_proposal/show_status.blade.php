@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Daftar Seminar Proposal
+Daftar Sidang Proposal
 @endsection
 
 @push('plugin-styles')
@@ -23,7 +23,7 @@ Daftar Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Proposal Skripsi</li>
     </ol>
 </nav>
 <div class="row">
@@ -31,7 +31,7 @@ Daftar Seminar Proposal
             @if ($datas->status == 'pending')
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Seminar Proposal Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Sidang Proposal Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-secondary mt-3" role="alert">
@@ -43,7 +43,7 @@ Daftar Seminar Proposal
             @elseif ($datas->status == 'terima')
             <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Sidang Propoasl Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success mt-3" role="alert">
@@ -54,7 +54,7 @@ Daftar Seminar Proposal
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Jadwal Seminar Proposal Skripsi.</h4>
+                    <h4 class="card-title mb-0">Jadwal Sidang Proposal Skripsi.</h4>
                 </div>
                 <div class="card-body table-responsive">
                     <div class="row">

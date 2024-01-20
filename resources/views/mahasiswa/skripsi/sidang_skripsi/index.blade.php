@@ -29,11 +29,11 @@ Daftar Sidang Skripsi
             @elseif($datas->status == 'pending')
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
+                    <h4 class="card-title mb-0">Alur Pengajuan Sidang Proposal </h4>
                 </div>
                 <div class="card-body">
                     {{-- <h6 class="card-title">Form Grid</h6> --}}
-                    <h4 class="card-title mb-0">Pendaftaran Seminar Propoasl Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-0">Pendaftaran Sidang Propoasl Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-secondary" role="alert">
@@ -45,7 +45,7 @@ Daftar Sidang Skripsi
             @elseif($datas->status == 'terima')
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Alur Pengajuan Seminar Proposal </h4>
+                    <h4 class="card-title mb-0">Alur Pengajuan Sidang Proposal </h4>
                 </div>
                 <div class="card-body">
                     {{-- <h6 class="card-title">Form Grid</h6> --}}

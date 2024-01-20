@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Detail Berita Acara Seminar Proposal
+Detail Berita Acara Sidang Proposal
 @endsection
 
 @section('css')
@@ -14,13 +14,13 @@ Detail Berita Acara Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">BA Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-3">
-            <h5 class="card-header">Berita Acara Seminar Proposal</h5>
+            <h5 class="card-header">Berita Acara Sidang Proposal</h5>
             <form action="{{ route('koor-berita-acara-cetak.detail', ['id' => $data->id_berita_acara_p]) }}" method="POST" id="cetakForm">
                 @csrf
                 <div class="card-body">

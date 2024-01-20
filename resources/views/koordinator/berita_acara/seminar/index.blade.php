@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Berita Acara Seminar Proposal
+Berita Acara Sidang Proposal
 @endsection
 
 @section('css')
@@ -14,15 +14,15 @@ Berita Acara Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">BA Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Berita Acara Seminar Proposal</h4>
-                <p class="card-title-desc">List berita acara seminar proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
+                <h4 class="card-title" style="font-weight: bold">Berita Acara Sidang Proposal</h4>
+                <p class="card-title-desc">List berita acara sidang proposal dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
             <div class="card-body table-responsive">

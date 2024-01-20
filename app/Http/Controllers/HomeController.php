@@ -38,32 +38,12 @@ class HomeController extends Controller
         return 0;
     }
 
-    // public function index()
-    // {
-    //     $tables = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "berita_acara_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "berita_acara_skripsi", "yudisium" /* ... */];
-    //     $tables_text = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "revisi_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "revisi_skripsi", "yudisium" /* ... */];
-    //     $totalTables = count($tables);
-    //     $completedTables = 0;
-
-    //     foreach ($tables as $table) {
-    //         $count = \DB::table($table)->where('users_id', Auth::user()->id)->count();
-
-    //         if ($count > 0) {
-    //             $completedTables++;
-    //         }
-    //     }
-
-    //     $progressPercentage = ($completedTables / $totalTables) * 100;
-    //     $hasilprogress = number_format($progressPercentage, 2);
-
-    //     return view('home', ['progressPercentage' => $hasilprogress, 'tables' => $tables_text]);
-    // }
     public function index()
     {
         $tablesPart1 = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "berita_acara_proposal", "surat_tugas"];
         $tablesPart2 = ["bimbingan_skripsi", "sidang_skripsi", "berita_acara_skripsi", "yudisium"];
 
-        $tables_text = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "revisi_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "revisi_skripsi", "yudisium"];
+        $tables_text = ["pengajuan_judul", "bimbingan_proposal", "sidang_proposal", "revisi_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "revisi_skripsi", "yudisium"];
 
         // Menghitung persentase untuk bagian pertama (pengajuan judul sampai surat tugas)
         $totalTablesPart1 = count($tablesPart1);

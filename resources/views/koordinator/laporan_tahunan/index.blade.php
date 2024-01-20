@@ -32,7 +32,7 @@ Laporan Tahunan
                 <div class="d-flex justify-content-between flex-row flex-sm-column gap-3">
                     <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                         <div class="card-title">
-                            <h5 class="text-nowrap mb-2">Seminar Proposal</h5>
+                            <h5 class="text-nowrap mb-2">Sidang Proposal</h5>
                         </div>
                         <iconify-icon icon="solar:book-linear">{{$semproCount }}</iconify-icon>
                     </div>

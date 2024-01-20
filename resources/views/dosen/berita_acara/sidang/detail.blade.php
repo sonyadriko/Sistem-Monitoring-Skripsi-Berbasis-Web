@@ -21,7 +21,6 @@ Detail Berita Acara Sidang Skripsi
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-3">
             <h5 class="card-header">Berita Acara Sidang Skripsi</h5>
-            {{-- <p class="card-header">Dosen penguji dapat mengisi berita acara seminar proposal dibawah ini</p> --}}
             <div class="card-body table-responsive">
                 <div class="row">
                     <div class="col-sm-6">

@@ -16,7 +16,7 @@ Detail Pengajuan Judul
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Penjadwalan</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Pengajuan Seminar Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Pengajuan Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">

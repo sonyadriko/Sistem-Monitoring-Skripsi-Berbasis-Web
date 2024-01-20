@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Seminar Proposal
+Sidang Proposal
 @endsection
 
 @section('css')
@@ -14,13 +14,13 @@ Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Daftar Jadwal</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Seminar Proposal</li>
+        <li class="breadcrumb-item active" aria-current="page">Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-4">
-            <h5 class="card-header">Data Seminar Proposal</h5>
+            <h5 class="card-header">Data Sidang Proposal</h5>
           <div class="card-body">
               <div class="mb-3 row">
                 <div class="col-md-6">

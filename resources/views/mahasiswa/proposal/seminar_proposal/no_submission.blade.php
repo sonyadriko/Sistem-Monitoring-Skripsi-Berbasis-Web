@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Daftar Seminar Proposal
+Daftar Sidang Proposal
 @endsection
 
 @push('plugin-styles')
@@ -23,7 +23,7 @@ Daftar Seminar Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Forms</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Seminar Proposal Skripsi</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Proposal Skripsi</li>
     </ol>
 </nav>
 <div class="row">
