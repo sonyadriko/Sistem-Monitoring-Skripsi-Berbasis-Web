@@ -27,12 +27,12 @@ Daftar Sidang Proposal
     </ol>
 </nav>
 
-@if ($proposalData->seminar_status == 'tolak')
+{{-- @if ($proposalData->seminar_status == 'tolak')
     <div class="alert alert-danger" role="alert">
         <strong>Pengajuan ditolak!</strong><br>
         Alasan Penolakan: {{ $proposalData->alasan_penolakan }}
     </div>
-@endif
+@endif --}}
 <div class="row">
     <div class="col-lg-12">
         <div class="card">

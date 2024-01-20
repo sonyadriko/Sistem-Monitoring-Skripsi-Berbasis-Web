@@ -43,7 +43,7 @@ Daftar Sidang Proposal
             @elseif ($datas->status == 'terima')
             <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Sidang Propoasl Skripsi telah disubmit.</h4>
+                    <h4 class="card-title mb-3" style="font-weight: bold;">Pendaftaran Sidang Proposal Skripsi telah disubmit.</h4>
                     <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success mt-3" role="alert">
