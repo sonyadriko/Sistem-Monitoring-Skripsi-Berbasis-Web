@@ -26,17 +26,17 @@ Penjadwalan
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('jadwal-seminar-proposal.index') }}" class="text-decoration-none">
+                    <a href="{{ route('jadwal-seminar-proposal.index') }}" class="text-decoration-none text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <h6 class="card-title mb-0">Sidang Proposal</h6>
+                            <h6 class="card-title mb-0" style="color: #224ABE">Sidang Proposal</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $semproCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -48,17 +48,17 @@ Penjadwalan
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('jadwal-sidang-skripsi.index') }}" class="text-decoration-none">
+                    <a href="{{ route('jadwal-sidang-skripsi.index') }}" class="text-decoration-none text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <h6 class="card-title mb-0">Sidang Skripsi</h6>
+                            <h6 class="card-title mb-0" style="color: #1CC88A">Sidang Skripsi</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $semhasCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mingcute:task-2-fill" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="octicon:checklist-16" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>

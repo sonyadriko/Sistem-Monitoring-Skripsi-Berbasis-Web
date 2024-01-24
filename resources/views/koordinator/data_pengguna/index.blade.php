@@ -28,17 +28,17 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('data-pengguna-mhs.index') }}" class="card-link">
+                    <a href="{{ route('data-pengguna-mhs.index') }}" class="card-link text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <h6 class="card-title mb-0">Mahasiswa</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $mahasiswaCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="ph:student" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -49,17 +49,17 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('data-pengguna-dosen.index') }}" class="card-link">
+                    <a href="{{ route('data-pengguna-dosen.index') }}" class="card-link text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <h6 class="card-title mb-0">Dosen</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $dosenCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="ph:chalkboard-teacher" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +70,17 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('data-pengguna-kajur.index') }}" class="card-link">
+                    <a href="{{ route('data-pengguna-kajur.index') }}" class="card-link text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <h6 class="card-title mb-0">Ketua Jurusan</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $kajurCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="ph:users" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -91,17 +91,17 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('data-pengguna-penggunabaru.index') }}" class="card-link">
+                    <a href="{{ route('data-pengguna-penggunabaru.index') }}" class="card-link text-reset">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <h6 class="card-title mb-0">Registrasi User</h6>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-6 col-md-12 col-xl-7">
                                 <h3 class="mb-2">{{ $newUserCount }}</h3>
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="ci:user-check" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>

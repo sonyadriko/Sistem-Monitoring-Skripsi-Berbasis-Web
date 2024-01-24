@@ -37,7 +37,7 @@ Dashboard
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ Dashboard
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ Dashboard
                             </div>
                             <div class="col-6 col-md-12 col-xl-5">
                                 <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
                                 </div>
                             </div>
                         </div>

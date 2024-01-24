@@ -409,5 +409,9 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         // Route::get('/submit-form', 'create')->name('submit-form');
     });
 
+    Route::fallback(function () {
+        return view('404'); // Gantilah 'errors.404' dengan nama view yang sesuai untuk halaman 404 Anda
+    });
+
 // });
 

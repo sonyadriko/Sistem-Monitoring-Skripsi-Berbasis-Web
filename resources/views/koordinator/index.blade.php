@@ -30,76 +30,84 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Mahasiswa</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$mahasiswaCount }}</h3>
+                    <a href="{{ route('data-pengguna-mhs.index') }}" class="text-decoration-none text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #000000; font-family: 'Nunito', sans-serif; font-weight: bold;">Mahasiswa</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$mahasiswaCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:user-child" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Dosen Pembimbing</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$dosenCount }}</h3>
+                    <a href="{{ route('data-pengguna-dosen.index') }}" class="text-decoration-none text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #1CC88A; font-family: 'Nunito', sans-serif; font-weight: bold;">Dosen Pembimbing</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="mingcute:task-2-fill" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$dosenCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="octicon:checklist-16" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Pengajuan Masuk</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$pengajuanCount }}</h3>
+                    <a href="{{ route('pengajuan-judul.index') }}" class="text-decoration-none text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #224ABE; font-family: 'Nunito', sans-serif; font-weight: bold;">Pengajuan Masuk</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$pengajuanCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Jadwal Dibuat</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$pengajuanCount }}</h3>
+                    <a href="{{ route('data-pengguna-penggunabaru.index') }}" class="text-decoration-none text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #C22127; font-family: 'Nunito', sans-serif; font-weight: bold;">Registrasi Baru</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="uis:calender" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$newUserCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="ci:user-check" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

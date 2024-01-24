@@ -28,76 +28,84 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Mahasiswa</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$mahasiswaCount }}</h3>
+                    <a href="{{ route('data-mhs') }}" class="card-link text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #000000; font-family: 'Nunito', sans-serif; font-weight: bold;">Mahasiswa</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="mdi:users" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$mahasiswaCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="ph:student" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Dosen Pembimbing</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$dosenCount }}</h3>
+                    <a href="{{ route('data-dsn') }}" class="card-link text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #1CC88A; font-family: 'Nunito', sans-serif; font-weight: bold;">Dosen Pembimbing</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="mingcute:task-2-fill" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$dosenCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="mdi:user-child" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Pengajuan Masuk</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$total }}</h3>
+                    <a href="{{ route('data-bi') }}" class="card-link text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #224ABE; font-family: 'Nunito', sans-serif; font-weight: bold;">Bidang Ilmu</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="bxs:message" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$bidangIlmuCount }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="jam:messages-alt" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h6 class="card-title mb-0">Bidang Ilmu</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-12 col-xl-7">
-                            <h3 class="mb-2">{{$bidangIlmuCount }}</h3>
+                    <a href="{{ route('data-jadwal') }}" class="card-link text-reset">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0" style="color: #C22127; font-family: 'Nunito', sans-serif; font-weight: bold;">Jadwal</h6>
                         </div>
-                        <div class="col-6 col-md-12 col-xl-5">
-                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                <iconify-icon icon="uis:calender" width="36" height="36"></iconify-icon>
+                        <div class="row mt-2">
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <h3 class="mb-2">{{$total }}</h3>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-5">
+                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                    <iconify-icon icon="uil:schedule" width="36" height="36"></iconify-icon>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

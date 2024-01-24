@@ -111,12 +111,12 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{{ route('profile.index') }}" id="profileDropdown" role="button">
-					<img alt="profile" class="wd-30 ht-30 rounded-circle" src="{{ asset('img/profile-user.png') }}">
+					<img alt="profile" class="wd-30 ht-30 rounded-circle" src="{{ asset('img/undraw_profile.png') }}">
 				</a>
 				<div aria-labelledby="profileDropdown" class="dropdown-menu p-0">
 					<div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
 						<div class="mb-3">
-							<img alt="" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/profile-userx80.png') }}">
+							<img alt="" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/undraw_profile.png') }}">
 						</div>
 						<div class="text-center">
 							<p class="tx-16 fw-bolder">{{ Auth::user()->name }}</p>

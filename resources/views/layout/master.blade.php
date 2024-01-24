@@ -93,9 +93,6 @@
 			});
 		});
 	</script>
-
-	<!-- JAVASCRIPT -->
-	{{-- @include('layout.vendor-scripts') --}}
 </body>
 
 </html>

@@ -14,10 +14,8 @@ class BeritaAcaraProposalController extends Controller
     {
         $this->middleware('checkDosen');
     }
-    //
     public function index()
     {
-
         $ba = DB::table('berita_acara_proposal')
         ->join('users', 'users.id', 'berita_acara_proposal.users_id')
         ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
@@ -30,18 +28,13 @@ class BeritaAcaraProposalController extends Controller
         })
         ->latest('berita_acara_proposal.created_at')
         ->get();
-
         $angkatan = DB::table('angkatan')->get();
-
-
         return view('dosen/berita_acara/seminar.index', compact('ba', 'angkatan'));
-
     }
     public function detail($id)
     {
         $data = [
             'data' => DB::table('berita_acara_proposal')
-
                 ->join('users', 'users.id', 'berita_acara_proposal.users_id')
                 ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
                 ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
@@ -56,10 +49,8 @@ class BeritaAcaraProposalController extends Controller
         ];
         return view('dosen/berita_acara/seminar.detail', $data);
     }
-
     public function store(Request $request)
     {
-        // Validasi input
         $validatedData = $request->validate([
             'berita_acara_proposal_id' => 'required|integer',
             'revisi' => 'required|string',
@@ -70,12 +61,6 @@ class BeritaAcaraProposalController extends Controller
             'string' => 'Field :attribute harus berupa teks.',
             'numeric' => 'Field :attribute harus berupa angka.',
         ]);
-        // $request->validate([
-        //     'berita_acara_proposal_id' => 'required|integer', // Sesuaikan dengan aturan validasi yang sesuai
-        //     'revisi' => 'required|string', // Sesuaikan dengan aturan validasi yang sesuai
-        //     'nilai' => 'required|numeric', // Sesuaikan dengan aturan validasi yang sesuai
-        // ]);
-
         try {
             $ba = new DetailBeritaAcaraProposal();
             $ba->users_id = Auth::user()->id;
@@ -86,12 +71,7 @@ class BeritaAcaraProposalController extends Controller
             $ba->save();
             return redirect()->route('berita-acara-proposal.index')->with('success', 'Berita Acara Proposal berhasil diisi.');
         } catch (\Exception $e) {
-            // Tanggapi kesalahan penyimpanan data
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data. Pesan Kesalahan: ' . $e->getMessage())->withInput();
         }
-
     }
-
-
-
 }

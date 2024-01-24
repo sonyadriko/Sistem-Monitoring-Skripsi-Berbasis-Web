@@ -122,7 +122,7 @@ Detail Pengajuan Judul
                 </div>
                 <div class="mb-3">
                     <label for="tbi" class="form-label">Dosen Pembimbing II</label>
-                    <input class="form-control" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_ii ?? 'Pengajuan ditolak' }}" name="tbi" readonly disabled/>
+                    <input class="form-control" style="text-transform: capitalize;" type="text" id="tbi" value="{{ $data2->dosen_pembimbing_ii ?? 'Pengajuan ditolak' }}" name="tbi" readonly disabled/>
                 </div>
                 <input type="hidden" name="pengajuan_id" value="{{ $data->id_pengajuan_judul }}" />
                 <input type="hidden" name="bidang_ilmu_id" value="{{ $data->bidang_ilmu_id }}" />

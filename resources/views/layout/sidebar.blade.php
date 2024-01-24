@@ -28,318 +28,117 @@
   </div>
   <div class="sidebar-body">
     <ul class="nav">
-      @if(Auth::user()->role_id == 1)
+        @if(Auth::user()->role_id == 1)
 
-      {{-- <li class="nav-item nav-category">Main</li> --}}
-      <li class="nav-item">
-        @php
-            $dashboardUrl = '';
-            switch (auth()->user()->role_id) {
-                case 2:
-                    $dashboardUrl = url('/dosen');
-                    break;
-                case 3:
-                    $dashboardUrl = url('/koordinator');
-                    break;
-                case 4:
-                    $dashboardUrl = url('/ketua_jurusan');
-                    break;
-                default:
-                    $dashboardUrl = url('/dashboard');
-            }
-        @endphp
-        <a href="{{ $dashboardUrl }}" class="nav-link">
-        {{-- <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : auth()->user()->role_id === 3 ? url('/koordinator') : auth()->user()->role_id === 4 ? url('/ketua_jurusan') : url('/dashboard')) }}" class="nav-link"> --}}
-          <i class="link-icon" data-feather="box"></i>
-          <span class="link-title">Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item nav-category">Pengajuan & Surat</li>
-      <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
-          <i class="link-icon" data-feather="inbox"></i>
-          <span class="link-title">Forms</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="email">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ route('pengajuan-judul.form') }}" class="nav-link">Pengajuan Judul</a>
-              {{-- <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a> --}}
+        {{-- <li class="nav-item nav-category">Main</li> --}}
+        <li class="nav-item">
+            @php
+                $dashboardUrl = '';
+                switch (auth()->user()->role_id) {
+                    case 2:
+                        $dashboardUrl = url('/dosen');
+                        break;
+                    case 3:
+                        $dashboardUrl = url('/koordinator');
+                        break;
+                    case 4:
+                        $dashboardUrl = url('/ketua_jurusan');
+                        break;
+                    default:
+                        $dashboardUrl = url('/dashboard');
+                }
+            @endphp
+            <a href="{{ $dashboardUrl }}" class="nav-link">
+                {{-- <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : auth()->user()->role_id === 3 ? url('/koordinator') : auth()->user()->role_id === 4 ? url('/ketua_jurusan') : url('/dashboard')) }}" class="nav-link"> --}}
+                <i class="link-icon" data-feather="box"></i>
+                <span class="link-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item nav-category">Pengajuan & Surat</li>
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"  aria-controls="email">
+                <i class="link-icon" data-feather="inbox"></i>
+                <span class="link-title">Forms</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="email">
+                <ul class="nav sub-menu">
+                    <li class="nav-item">
+                    <a href="{{ route('pengajuan-judul.form') }}" class="nav-link">Pengajuan Judul</a>
+                    {{-- <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a> --}}
 
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Sidang Proposal</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('pengajuan-st.check') }}" class="nav-link">Surat Tugas Bimbingan</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>
-            </li>
-            {{-- <li class="nav-item">
-                <a href="{{ route('yudisium.check')}}" class="nav-link">Yudisium</a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-            </li> --}}
-          </ul>
-        </div>
-      </li>
-      {{-- <li class="nav-item">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Chat</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Calendar</span>
-        </a>
-      </li> --}}
-    <li class="nav-item nav-category">Bimbingan & Revisi</li>
-    {{-- <li class="nav-item">
-        <a href="{{route('bimbingan-mhs.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Bimbingan</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{route('bimbingans-mhs.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Bimbingan Skripsi</span>
-        </a>
-    </li> --}}
-    <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#bimbingan" role="button"  aria-controls="bimbingan">
-          <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Bimbingan</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="bimbingan">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ route('bimbingan-mhs.index') }}" class="nav-link">Bimbingan Proposal</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('bimbingans-mhs.index')}}" class="nav-link">Bimbingan Skripsi</a>
-            </li>
-          </ul>
-        </div>
-    </li>
-    <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#revisi" role="button"  aria-controls="revisi">
-          <i class="link-icon" data-feather="inbox"></i>
-          <span class="link-title">Revisi</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="revisi">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ route('revisi_sp.index') }}" class="nav-link">Sidang Proposal Skripsi</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('revisi_sk.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
-            </li>
-          </ul>
-        </div>
-    </li>
-    <li class="nav-item nav-category">Lain - lain</li>
-    <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#lainlain" role="button"  aria-controls="lainlain">
-            <i class="link-icon" data-feather="mail"></i>
-            <span class="link-title">Lain - lain</span>
-            <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="lainlain">
-            <ul class="nav sub-menu">
-                {{-- <li class="nav-item">
-                    <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-                </li> --}}
-                <li class="nav-item">
-                    <a href="{{ route('faq')}}" class="nav-link">FAQ</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-      {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
-          <i class="link-icon" data-feather="anchor"></i>
-          <span class="link-title">Advanced UI</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['advanced-ui/*']) }}" id="advanced-ui">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/cropper') }}" class="nav-link {{ active_class(['advanced-ui/cropper']) }}">Cropper</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/owl-carousel') }}" class="nav-link {{ active_class(['advanced-ui/owl-carousel']) }}">Owl Carousel</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/sortablejs') }}" class="nav-link {{ active_class(['advanced-ui/sortablejs']) }}">SortableJs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/sweet-alert') }}" class="nav-link {{ active_class(['advanced-ui/sweet-alert']) }}">Sweet Alert</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['forms/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#forms" role="button" aria-expanded="{{ is_active_route(['forms/*']) }}" aria-controls="forms">
-          <i class="link-icon" data-feather="inbox"></i>
-          <span class="link-title">Forms</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/forms/basic-elements') }}" class="nav-link {{ active_class(['forms/basic-elements']) }}">Basic Elements</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/advanced-elements') }}" class="nav-link {{ active_class(['forms/advanced-elements']) }}">Advanced Elements</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/editors') }}" class="nav-link {{ active_class(['forms/editors']) }}">Editors</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Wizard</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['charts/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="{{ is_active_route(['charts/*']) }}" aria-controls="charts">
-          <i class="link-icon" data-feather="pie-chart"></i>
-          <span class="link-title">Charts</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['charts/*']) }}" id="charts">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/charts/apex') }}" class="nav-link {{ active_class(['charts/apex']) }}">Apex</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/chartjs') }}" class="nav-link {{ active_class(['charts/chartjs']) }}">ChartJs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/flot') }}" class="nav-link {{ active_class(['charts/flot']) }}">Flot</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/peity') }}" class="nav-link {{ active_class(['charts/peity']) }}">Peity</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/sparkline') }}" class="nav-link {{ active_class(['charts/sparkline']) }}">Sparkline</a>
-            </li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item {{ active_class(['tables/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="{{ is_active_route(['tables/*']) }}" aria-controls="tables">
-          <i class="link-icon" data-feather="layout"></i>
-          <span class="link-title">Tables</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['tables/*']) }}" id="tables">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/tables/basic-tables') }}" class="nav-link {{ active_class(['tables/basic-tables']) }}">Basic Tables</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/tables/data-table') }}" class="nav-link {{ active_class(['tables/data-table']) }}">Data Table</a>
-            </li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item {{ active_class(['icons/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button" aria-expanded="{{ is_active_route(['icons/*']) }}" aria-controls="icons">
-          <i class="link-icon" data-feather="smile"></i>
-          <span class="link-title">Icons</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['icons/*']) }}" id="icons">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/icons/feather-icons') }}" class="nav-link {{ active_class(['icons/feather-icons']) }}">Feather Icons</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/icons/mdi-icons') }}" class="nav-link {{ active_class(['icons/mdi-icons']) }}">Mdi Icons</a>
-            </li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item nav-category">Pages</li> --}}
-      {{-- <li class="nav-item {{ active_class(['general/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#general" role="button" aria-expanded="{{ is_active_route(['general/*']) }}" aria-controls="general">
-          <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Special Pages</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['general/*']) }}" id="general">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/general/blank-page') }}" class="nav-link {{ active_class(['general/blank-page']) }}">Blank page</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/general/faq') }}" class="nav-link {{ active_class(['general/faq']) }}">Faq</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/general/invoice') }}" class="nav-link {{ active_class(['general/invoice']) }}">Invoice</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/general/profile') }}" class="nav-link {{ active_class(['general/profile']) }}">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/general/pricing') }}" class="nav-link {{ active_class(['general/pricing']) }}">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/general/timeline') }}" class="nav-link {{ active_class(['general/timeline']) }}">Timeline</a>
-            </li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item {{ active_class(['auth/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#auth" role="button" aria-expanded="{{ is_active_route(['auth/*']) }}" aria-controls="auth">
-          <i class="link-icon" data-feather="unlock"></i>
-          <span class="link-title">Authentication</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['auth/*']) }}" id="auth">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/auth/login') }}" class="nav-link {{ active_class(['auth/login']) }}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/auth/register') }}" class="nav-link {{ active_class(['auth/register']) }}">Register</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['error/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#error" role="button" aria-expanded="{{ is_active_route(['error/*']) }}" aria-controls="error">
-          <i class="link-icon" data-feather="cloud-off"></i>
-          <span class="link-title">Error</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['error/*']) }}" id="error">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/error/404') }}" class="nav-link {{ active_class(['error/404']) }}">404</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/error/500') }}" class="nav-link {{ active_class(['error/500']) }}">500</a>
-            </li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item nav-category">Docs</li>
-      <li class="nav-item">
-        <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
-          <i class="link-icon" data-feather="hash"></i>
-          <span class="link-title">Documentation</span>
-        </a>
-      </li> --}}
+                    </li>
+                    <li class="nav-item">
+                    <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Sidang Proposal</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="{{ route('pengajuan-st.check') }}" class="nav-link">Surat Tugas Bimbingan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('yudisium.check')}}" class="nav-link">Yudisium</a>
+                    </li> --}}
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>
+                    </li> --}}
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item nav-category">Bimbingan & Revisi</li>
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#bimbingan" role="button"  aria-controls="bimbingan">
+                <i class="link-icon" data-feather="book"></i>
+                <span class="link-title">Bimbingan</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="bimbingan">
+                <ul class="nav sub-menu">
+                    <li class="nav-item">
+                        <a href="{{ route('bimbingan-mhs.index') }}" class="nav-link">Bimbingan Proposal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('bimbingans-mhs.index')}}" class="nav-link">Bimbingan Skripsi</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#revisi" role="button"  aria-controls="revisi">
+                <i class="link-icon" data-feather="inbox"></i>
+                <span class="link-title">Revisi</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="revisi">
+                <ul class="nav sub-menu">
+                    <li class="nav-item">
+                        <a href="{{ route('revisi_sp.index') }}" class="nav-link">Sidang Proposal Skripsi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('revisi_sk.index')}}" class="nav-link">Sidang Laporan Skripsi</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item nav-category">Lain - lain</li>
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#lainlain" role="button"  aria-controls="lainlain">
+                <i class="link-icon" data-feather="mail"></i>
+                <span class="link-title">Lain - lain</span>
+                <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="lainlain">
+                <ul class="nav sub-menu">
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Surat Survey Perusahaan</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a href="{{ route('faq')}}" class="nav-link">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
     @elseif(Auth::user()->role_id == 3)
     <li class="nav-item">
@@ -367,9 +166,9 @@
                 <li class="nav-item">
                     <a href="{{ route('bidang-ilmu.index')}}" class="nav-link">Tema Penelitian</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('koor-yudisium.index')}}" class="nav-link">Yudisium</a>
-                </li>
+                </li> --}}
 
             </ul>
         </div>
@@ -426,12 +225,12 @@
           <span class="link-title">Data Pengguna</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a href="{{route('lap-tahunan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="clipboard"></i>
           <span class="link-title">Laporan Tahunan</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="book"></i>

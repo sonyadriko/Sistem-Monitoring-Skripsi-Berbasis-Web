@@ -56,10 +56,14 @@ class KoordinatorJudulController extends Controller
             ->where('id_pengajuan_judul', $id)
             ->first();
 
-        $dosen2 = DB::table('detail_bidang_ilmu')
-            ->join('pengajuan_judul', 'detail_bidang_ilmu.bidang_ilmu_id', 'pengajuan_judul.bidang_ilmu_id')
-            ->join('users', 'users.id', 'detail_bidang_ilmu.users_id')
-            ->where('pengajuan_judul.id_pengajuan_judul', $id)
+        // $dosen2 = DB::table('detail_bidang_ilmu')
+        //     ->join('pengajuan_judul', 'detail_bidang_ilmu.bidang_ilmu_id', 'pengajuan_judul.bidang_ilmu_id')
+        //     ->join('users', 'users.id', 'detail_bidang_ilmu.users_id')
+        //     ->where('pengajuan_judul.id_pengajuan_judul', $id)
+        //     ->get();
+
+        $dosen2 = DB::table('users')
+            ->where('role_id', 2)
             ->get();
 
         // $mergedData = [

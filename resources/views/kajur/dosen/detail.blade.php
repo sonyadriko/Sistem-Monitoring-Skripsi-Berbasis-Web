@@ -32,6 +32,8 @@ Data Detail Dosen
                         <th>Nama</th>
                         <th>NPM</th>
                         <th>Bidang Ilmu</th>
+                        <th>Judul</th>
+
                         {{-- <th>Action</th> --}}
                     </tr>
                     </thead>
@@ -45,6 +47,7 @@ Data Detail Dosen
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->topik_bidang_ilmu }}</td>
+                            <td style="text-truncate">{{ $data->judul }}</td>
                         </tr>
                         @php
                         $no++;

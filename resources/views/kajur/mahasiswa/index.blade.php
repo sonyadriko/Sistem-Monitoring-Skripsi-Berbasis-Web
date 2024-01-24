@@ -32,8 +32,9 @@ Data Mahasiswa
                         <th>NPM</th>
                         <th>Nama</th>
                         <th>Dosen Pembimbing</th>
-                        <th>Bidang Ilmu</th>
-                        {{-- <th>Action</th> --}}
+                        {{-- <th>Progress</th> --}}
+                        {{-- <th>Bidang Ilmu</th> --}}
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,8 +47,9 @@ Data Mahasiswa
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->dosen_pembimbing_utama ?? 'Tidak Ada' }}</td>
-                            <td>{{ $data->topik_bidang_ilmu ?? 'Tidak Ada' }}</td>
-
+                            {{-- <td>{{  'In Progress' }}</td> --}}
+                            {{-- <td>{{ $data->topik_bidang_ilmu ?? 'Tidak Ada' }}</td> --}}
+                            <td><a href="{{ url('/ketua_jurusan/data_mahasiswa/detail/' . $data->id) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;

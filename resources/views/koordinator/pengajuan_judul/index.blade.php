@@ -21,7 +21,7 @@ Pengajuan Judul
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Pengajuan Judul Proposal Skripsi</h4>
+                <h4 class="card-title" style="font-weight: bold">Pengajuan Judul Proposal</h4>
                 <p class="card-title-desc">List pengajuan judul dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.
                 </p>
             </div>
