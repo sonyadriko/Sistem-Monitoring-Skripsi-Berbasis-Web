@@ -44,7 +44,7 @@ Pengajuan Judul
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title mb-3" style="font-weight: bold;">Pengajuan Judul Proposal Skripsimu Sudah disubmit.</h4>
-                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator.</h4>
+                    {{-- <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator.</h4> --}}
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success mt-3" role="alert">
                             Selamat, Pendaftaran anda telah diacc koordinator!

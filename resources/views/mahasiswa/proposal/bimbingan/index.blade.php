@@ -49,7 +49,7 @@ Bimbingan Proposal
         </div>
         <div class="row">
             <div class="col-xl-6">
-                <div class="card mb-4 mb-xl-0">
+                {{-- <div class="card mb-4 mb-xl-0">
                     <h5 class="card-header">File Proposal</h5>
                     <div class="card-body">
                         <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
@@ -68,72 +68,73 @@ Bimbingan Proposal
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
-            <div class="col-xl-6">
-                <div class="card mb-4 ">
-                    <h5 class="card-header">Persetujuan Seminar</h5>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
-                            </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                @if(is_null($dosens->acc_dosen_utama))
-                                <button type="submit" class="btn btn-secondary" disabled">
-                                    Daftar
-                                </button>
-                                @else
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
-                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
-                                    Daftar
-                                </button>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @else
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <h5 class="card-header">Persetujuan Seminar</h5>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $dosens->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
-                                <label class="form-check-label" for="persetujuan2"> Dosen Pembimbing 2 </label>
-                            </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                @if(is_null($dosens->acc_dosen_utama) || is_null($dosens->acc_dosen_ii))
-                                <button type="submit" class="btn btn-secondary" disabled">
-                                    Daftar
-                                </button>
-                                @else
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
-                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
-                                    Daftar
-                                </button>
-                                @endif
+                </div> --}}
+                @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
+                <div class="col-xl-6">
+                    <div class="card mb-4 ">
+                        <h5 class="card-header">Persetujuan Seminar</h5>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                                    <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
+                                </div>
+                                <div class="d-flex justify-content-between mt-4">
+                                    @if(is_null($dosens->acc_dosen_utama))
+                                    <button type="submit" class="btn btn-secondary" disabled">
+                                        Daftar
+                                    </button>
+                                    @else
+                                    {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                    <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                        Daftar
+                                    </button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                @else
+                <div class="col-xl-6">
+                    <div class="card mb-4">
+                        <h5 class="card-header">Persetujuan Seminar</h5>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $dosens->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                                    <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $dosens->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
+                                    <label class="form-check-label" for="persetujuan2"> Dosen Pembimbing 2 </label>
+                                </div>
+                                <div class="d-flex justify-content-between mt-4">
+                                    @if(is_null($dosens->acc_dosen_utama) || is_null($dosens->acc_dosen_ii))
+                                    <button type="submit" class="btn btn-secondary" disabled">
+                                        Daftar
+                                    </button>
+                                    @else
+                                    {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
+                                    <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                        Daftar
+                                    </button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
-            @endif
+            <div class="mb-3">
+                <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
+
+            </div>
 
         </div>
-        <div class="mb-3">
-            <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
 
-        </div>
         @endif
     </div>
 </div>

@@ -29,9 +29,12 @@ Data Pengguna
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NPM</th>
+                            <th>NIP</th>
                             <th>Nama</th>
+                            <th>Status</th>
+
                             <th>Email</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +46,17 @@ Data Pengguna
                             <td>{{ $no }}</td>
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
+                            <td>
+
+                            @php
+                                if ($data->role_id == 4) {
+                                    echo "Ketua Jurusan";
+                                }
+                            @endphp
+
+                            </td>
                             <td>{{ $data->email }}</td>
+                            {{-- <td><a href="{{ url('/koordinator/data_pengguna/ketua_jurusan/' . $data->id) }}" class="btn btn-primary">Edit</a></td> --}}
                         </tr>
                         @php
                         $no++;

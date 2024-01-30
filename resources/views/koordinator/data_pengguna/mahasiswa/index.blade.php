@@ -40,9 +40,13 @@ Data Pengguna
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
                             <th>NPM</th>
-                            <th>Email</th>
+                            <th>Nama</th>
+                            {{-- <th>Email</th> --}}
+                            <th>Judul</th>
+
+                            <th>Dosen Pembimbing</th>
+
                             {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
@@ -53,9 +57,21 @@ Data Pengguna
                         @foreach($datas as $data)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $data->name }}</td>
                             <td>{{ $data->kode_unik }}</td>
-                            <td>{{ $data->email }}</td>
+                            <td>{{ $data->name }}</td>
+                            {{-- <td>{{ $data->email }}</td> --}}
+                            {{-- <td>{{ $data->judul }}</td> --}}
+                            {{-- <td>{{ implode(' ', array_slice(str_word_count($data->judul, 1), 0, 6)) ?? 'Belum Mengajukan' }}...</td> --}}
+                            <td>
+                                @if (!empty($data->judul))
+                                {{ implode(' ', array_slice(str_word_count($data->judul, 1), 0, 6)) }}...
+                            @else
+                                Belum Mengajukan
+                            @endif
+                            </td>
+
+
+                            <td>{{ $data->dosen_pembimbing_utama ?? 'Belum Mengajukan' }}</td>
                             {{-- <td><a href="{{ url('/koordinator/pengajuan_judul/detail/' . $data->id) }}" class="btn btn-primary">Detail</a></td> --}}
 
                         </tr>
@@ -113,7 +129,7 @@ Data Pengguna
 
         $('#tahunFilter').change(function() {
             var tahun = $(this).val();
-            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+            table.column(1).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
         });
     });
 </script>

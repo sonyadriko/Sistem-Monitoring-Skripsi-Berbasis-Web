@@ -12,13 +12,23 @@
     <div class="container-fluid px-4 py-5 text-center text-lg-start">
         <div class="row justify-content-center align-items-start"> <!-- Updated to align-items-start -->
             <div class="col-lg-6 mb-5 mb-lg-0 text-center d-none d-md-block"> <!-- Removed text-lg-start -->
-                <h1 class="my-5 display-3 fw-bold ls-tight text-white">
-                    SM SKRIPSI <br />
+                <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                <img src="{{ asset('img/login/Logo_SI_Mini_Putih_1.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+
+                <h1 class="display-4 fw-bold ls-tight text-white" style="font-size: 42px">
+                    Sistem Monitoring Skripsi <br />
                     {{-- <span class="text-primary">Sistem Monitoring Skripsi</span> --}}
                 </h1>
-                <img src="{{ asset('img/User_Mahasiswa.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                <h1 class="fw-bold ls-tight text-white mb-4 mt-4" style="font-size: 24px">
+                  Anda dapat masuk sebagai <br />
+                    {{-- <span class="text-primary">Sistem Monitoring Skripsi</span> --}}
+                </h1>
+                <img src="{{ asset('img/login/User_Mahasiswa.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                <img src="{{ asset('img/login/User_Dosen.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                <img src="{{ asset('img/login/User_Koordinator.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                <img src="{{ asset('img/login/user _Ketua Jurusan.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
 
-                <p class="text-white">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
+                <p class="text-white mt-4">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0">

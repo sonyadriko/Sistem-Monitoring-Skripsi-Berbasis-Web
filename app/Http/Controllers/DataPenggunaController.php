@@ -25,7 +25,11 @@ class DataPenggunaController extends Controller
     public function mhs()
     {
         // $datas = DB::table('users')->where('role_id', '1')->get();
-        $datas = DB::table('users')->where('role_id', '1')->where('status', 'aktif')->get();
+        $datas = DB::table('users')
+        ->leftjoin('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
+        ->leftjoin('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
+        ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.users_id', 'users.id')
+        ->where('role_id', '1')->where('users.status', 'aktif')->get();
         $angkatan = DB::table('angkatan')->get();
         return view('koordinator/data_pengguna/mahasiswa.index', compact('datas', 'angkatan'));
     }

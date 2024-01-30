@@ -29,9 +29,11 @@ Data Pengguna
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NPM</th>
+                            <th>NIP</th>
                             <th>Nama</th>
-                            <th>Email</th>
+                            <th>Action</th>
+                            {{-- <th>Email</th> --}}
+
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +45,9 @@ Data Pengguna
                             <td>{{ $no }}</td>
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->email }}</td>
+                            <td><a href="{{ url('/koordinator/data_pengguna/dosen/' . $data->id) }}" class="btn btn-primary">Detail</a></td>
+
+                            {{-- <td>{{ $data->email }}</td> --}}
                         </tr>
                         @php
                         $no++;

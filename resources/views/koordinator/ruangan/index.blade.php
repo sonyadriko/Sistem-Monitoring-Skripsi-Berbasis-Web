@@ -50,7 +50,7 @@ Ruangan
                             <form action="{{ url('/koordinator/ruangan/delete/' . $ruangan->id_ruangan) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-secondary" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')">Delete</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')">Delete</button>
                             </form>
                         </td>
                     </tr>
