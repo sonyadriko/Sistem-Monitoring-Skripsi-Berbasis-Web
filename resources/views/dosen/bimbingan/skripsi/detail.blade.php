@@ -223,7 +223,7 @@ Detail Bimbingan Skripsi
                var idBimbinganSkripsi = document.getElementById('idBimbinganSkripsi').value;
 
                console.log('Revisi yang dikirim:', revisiInput);
-               console.log('ID Bimbingan Proposal:', idBimbinganSkripsi);
+               console.log('ID Bimbingan Skripsi:', idBimbinganSkripsi);
 
                axios.post(`/dosen/bimbingan_skripsi/updaterevisi/${idBimbinganSkripsi}`, {
                    revisi: revisiInput

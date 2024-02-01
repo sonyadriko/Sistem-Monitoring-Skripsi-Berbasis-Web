@@ -42,12 +42,29 @@ class DosenBimbinganProposalController extends Controller
                     ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                     ->join('users', 'users.id', 'bimbingan_proposal.users_id')
                     ->select('bimbingan_proposal.*', 'users.*', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.judul')
-                    ->where('id_bimbingan_proposal', '=',$id)->first(),
-            'detail' => DB::table('detail_bimbingan_proposal')->where('bimbingan_proposal_id', '=',$id)->get(),
+                    ->where('id_bimbingan_proposal', $id)->first(),
+            'detail' => DB::table('detail_bimbingan_proposal')->where('bimbingan_proposal_id',$id)->get(),
         ];
 
         return view('dosen/bimbingan/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
 
+    }
+
+    public function tambahrevisi(Request $request)
+    {
+        $validatedData = $request->validate([
+            'revisi' => 'required|string',
+        ], [
+            'revisi.required' => 'Revisi is required.',
+        ]);
+
+        $detailBimbingan = new DetailBimbinganProposal();
+        $detailBimbingan->bimbingan_proposal_id = $request->input('idBimbinganProposal');
+        $detailBimbingan->revisi = $validatedData['revisi'];
+        $detailBimbingan->updated_at = now();
+        $detailBimbingan->save();
+
+        return response()->json("Berhasil menambah revisi");
     }
 
     public function addrevisi($id)

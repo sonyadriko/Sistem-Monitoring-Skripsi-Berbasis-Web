@@ -35,7 +35,6 @@ History Bimbingan Proposal
                   <th>No</th>
                   <th>Tanggal</th>
                   <th>Bimbingan</th>
-                  <th>File</th>
                   <th>Revisi</th>
                   {{-- <th>Validasi Revisi</th> --}}
                   {{-- <th>Status</th> --}}
@@ -50,9 +49,6 @@ History Bimbingan Proposal
                     <td>{{ $no }}</td>
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
                     <td>{{ $no }}</td>
-                    <td>
-                        <a href="{{ asset($hbmhs->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                    </td>
                     <td>{{ $hbmhs->revisi }}</td>
 
                     {{-- <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td> --}}

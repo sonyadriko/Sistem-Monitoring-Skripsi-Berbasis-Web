@@ -50,6 +50,7 @@ use App\Http\Controllers\KajurSeminarController;
 use App\Http\Controllers\KajurSidangController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\KoordinatorYudisiumController;
+use App\Http\Controllers\JadwalMengujiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::group(['prefix' => 'dosen/bimbingan_proposal'], function () {
         Route::get('/', [DosenBimbinganProposalController::class, 'index'])->name('bimbingan-dosen.index');
+        Route::post('/tambahrevisi', [DosenBimbinganProposalController::class, 'tambahrevisi'])->name('bimbingan-dosen.tambahrevisi');
         Route::get('/detail/{id}', [DosenBimbinganProposalController::class, 'detail'])->name('bimbingan-dosen.detail');
         Route::post('/updaterevisi/{id}', [DosenBimbinganProposalController::class, 'updaterevisi'])->name('bimbingan-dosen.addrevisi');
         Route::post('/accrevisi/{id}', [DosenBimbinganProposalController::class, 'accrevisi'])->name('bimbingan-dosen.accrevisi');
@@ -155,6 +157,11 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::get('/', [BeritaAcaraProposalController::class, 'index'])->name('berita-acara-proposal.index');
         Route::get('/detail/{id}', [BeritaAcaraProposalController::class, 'detail'])->name('berita-acara-proposal.detail');
         Route::post('/detail/store', [BeritaAcaraProposalController::class, 'store'])->name('berita-acara-proposal.store');
+    });
+
+    Route::group(['prefix' => 'dosen/jadwal_menguji'], function () {
+        Route::get('/', [JadwalMengujiController::class, 'index'])->name('jadwal-menguji.index');
+        Route::get('/detail/{id}', [JadwalMengujiController::class, 'detail'])->name('jadwal-menguji.detail');
     });
 
     Route::group(['prefix' => 'dosen/berita_acara_skripsi'], function () {

@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Revisi Sidang Proposal
+Jadwal Menguji
 @endsection
 
 @section('css')
@@ -19,19 +19,27 @@ Revisi Sidang Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Revisi Sidang Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Daftar Jadwal</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Revisi Mahasiswa Sidang Proposal</h4>
-                <p class="card-title-desc">Tabel berikut merupakan list mahasiswa yang telah melakukan sidang dan masih memerlukan revisi pada proposalnya</p>
+                <h4 class="card-title" style="font-weight: bold">Tabel List Sidang Proposal & Sidang Skripsi</h4>
+                <p class="card-title-desc">List sidang proposal dan skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.</p>
             </div>
             <div class="card-body table-responsive">
                 <div class="row mb-3">
                     <div class="col-md-2">
+                        <label for="statusFilter">Filter Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="proposal">Proposal</option>
+                            <option value="skripsi">Skripsi</option>
+                        </select>
+                    </div>
+                    {{-- <div class="col-md-2">
                         <label for="tahunFilter">Filter Angkatan:</label>
                         <select id="tahunFilter" class="form-control">
                             <option value="">Semua</option>
@@ -39,53 +47,52 @@ Revisi Sidang Proposal
                                 <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="statusFilter">Filter Sebagai:</label>
-                        <select id="statusFilter" class="form-control">
-                            <option value="">Semua</option>
-                            <option value="Dosen Penguji 1">Dosen Penguji 1</option>
-                            <option value="Dosen Penguji 2">Dosen Penguji 2</option>
-                            <option value="Dosen Pembimbing">Dosen Pembimbing</option>
-                        </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>NPM</th>
-                        <th>Judul</th>
-                        <th>Bidang Ilmu</th>
-                        <th>Sebagai</th>
+                        <th>Sidang</th>
+                        <th>Jadwal</th>
+                        <th>Ruang & Waktu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @php
-                        $no=1;
+                        $no = 1;
                         @endphp
-                        @foreach($rev as $dosen)
+                        @foreach($jadwalMengujip as $jadwal)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $dosen->name }}</td>
-                            <td>{{ $dosen->kode_unik }}</td>
-                            {{-- <td>{{ $dosen->judul }}</td> --}}
-                            <td>{{ implode(' ', array_slice(str_word_count($dosen->judul, 1), 0, 6)) }}...</td>
-                            <td>{{ $dosen->topik_bidang_ilmu }}</td>
-                            <td>
-                                @if($dosen->dosen_pembimbing_utama == Auth::user()->name)
-                                    Dosen Pembimbing
-                                @elseif($dosen->dosen_penguji_1 == Auth::user()->id)
-                                    Dosen Penguji 1
-                                @elseif($dosen->dosen_penguji_2 == Auth::user()->id)
-                                    Dosen Penguji 2
-                                @else
-                                    Tidak Diketahui
-                                @endif
-                            </td>
-                            <td><a href="{{ url('/dosen/revisi_seminar_proposal/detail/' . $dosen->id_revisi_seminar_proposal) }}" class="btn btn-primary">Cek Revisi</a></td>
+                            <td>Proposal</td> <!-- Set the value based on the source of the data -->
+                            {{-- <td>{{ $jadwal->tanggal }}</td> --}}
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                            @endphp
+                            <td>{{ $formatTanggal }}</td>
+                            <td>{{ $jadwal->nama_ruangan }}, {{ $jadwal->jam}}</td>
+                            <td><a href="{{ url('/dosen/berita_acara_proposal/detail/' . $jadwal->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
+                        </tr>
+                        @php
+                        $no++;
+                        @endphp
+                        @endforeach
+
+                        @foreach($jadwalMengujis as $jadwal)
+                        <tr>
+                            <td>{{ $no }}</td>
+                            <td>Skripsi</td> <!-- Set the value based on the source of the data -->
+                            {{-- <td>{{ $jadwal->tanggal }}</td> --}}
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                            @endphp
+                            <td>{{ $formatTanggal }}</td>
+                            <td>{{ $jadwal->nama_ruangan}}, {{ $jadwal->jam}}</td>
+                            <td><a href="{{ url('/dosen/berita_acara_proposal/detail/' . $jadwal->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;
@@ -136,7 +143,7 @@ Revisi Sidang Proposal
         // Handle perubahan filter status
         $('#statusFilter').change(function() {
             var status = $(this).val();
-            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+            table.column(1).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
         });
 
         $('#tahunFilter').change(function() {

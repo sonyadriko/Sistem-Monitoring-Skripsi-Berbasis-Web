@@ -281,6 +281,12 @@
           </ul>
         </div>
     </li>
+    <li class="nav-item">
+        <a href="{{route('jadwal-menguji.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="sidebar"></i>
+          <span class="link-title">Daftar Jadwal</span>
+        </a>
+    </li>
     <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#rev" role="button"  aria-controls="email">
           <i class="link-icon" data-feather="book"></i>

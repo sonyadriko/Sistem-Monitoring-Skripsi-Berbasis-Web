@@ -24,14 +24,12 @@ Detail Bimbingan Proposal
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">NPM </label>
                             <p><span>{{ $data->kode_unik }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->kode_unik }}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Nama </label>
                             <p><span>{{ $data->name }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->name }}" readonly> --}}
                         </div>
                     </div>
                 </div>
@@ -40,14 +38,12 @@ Detail Bimbingan Proposal
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Judul </label>
                             <p><span>{{ $data->judul }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{$data->judul}}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Bidang Ilmu </label>
                             <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly> --}}
                         </div>
                     </div>
                 </div>
@@ -56,16 +52,12 @@ Detail Bimbingan Proposal
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Dosen Pembimbing Utama </label>
                             <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
-
-                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_utama }}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Dosen Pembimbing ii </label>
                             <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
-
-                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly> --}}
                         </div>
                     </div>
                 </div>
@@ -75,6 +67,10 @@ Detail Bimbingan Proposal
 </div>
 <div class="row">
     <div class="mb-3">
+        <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
+            Tambahkan Revisi
+        </button>
+        <input type="hidden" id="idBimbinganProposal" name="idBimbinganProposal" value="{{$data->id_bimbingan_proposal}}">
         <div class="card mb-4 mb-xl-0">
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
@@ -83,10 +79,8 @@ Detail Bimbingan Proposal
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Bimbingan</th>
-                            {{-- <th>Revisi Dosen</th> --}}
-                            <th>File</th>
-                            {{-- <th>Validasi Revisi</th> --}}
-                            <th>Action</th>
+                            <th>Revisi Dosen</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -98,23 +92,17 @@ Detail Bimbingan Proposal
                             <td>{{ $no }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $no }}</td>
-                            <td>
-                                <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td>
-                            <td>
-
+                            <td>{{ $item->revisi }}</td>
+                            {{-- <td>
                                 <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
-                                    Tambahkan Revisi
+                                    Lihat Revisi
                                 </button>
-
-                            </td>
-
+                            </td> --}}
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-
                         <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -129,7 +117,6 @@ Detail Bimbingan Proposal
                                     <div class="modal-body">
                                         <form id="revisiForm">
                                             @csrf
-                                            <input type="hidden" id="idBimbinganProposal" name="id_bimbingan_proposal">
                                             <div class="form-group">
                                                 <label for="revisiInput">Revisi:</label>
                                                 <textarea class="form-control" id="revisiInput" name="revisi"
@@ -156,20 +143,6 @@ Detail Bimbingan Proposal
         <h5 class="card-header">Persetujuan Sidang Proposal</h5>
         <div class="card-body">
             <span class="span0-1">Persetujuan Sidang </span>
-            {{-- @if ($data->acc_dosen_utama == null && $data->acc_dosen_ii == null)
-
-                @if (Auth::user()->name == $data->dosen_pembimbing_utama)
-                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
-                Setujui Proposal
-                </button>
-                @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
-                <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_proposal }}')">
-                Setujui Proposal
-                </button>
-                @endif
-            @else
-            <span class="span0-1">Sudah di acc oleh dosen pada {{$data->tgl_acc_dosen_utama}} </span>
-            @endif --}}
             <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
             <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
             @if (Auth::user()->name == $data->dosen_pembimbing_utama)
@@ -203,16 +176,12 @@ Detail Bimbingan Proposal
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script>
-   function prepareModal(idBimbinganProposal) {
-       // Reset nilai textarea
-       document.getElementById('revisiInput').value = '';
+   function openRevisiModal() {
+        // Open the modal
+        $('#revisiModal').modal('show');
 
-       // Mengisi nilai id bimbingan proposal
-       document.getElementById('idBimbinganProposal').value = idBimbinganProposal;
-
-       // Tampilkan modal
-       $('#revisiModal').modal('show');
-   }
+        // Optionally, you can set other values or perform other actions here
+    }
 </script>
 
 
@@ -229,13 +198,13 @@ Detail Bimbingan Proposal
                event.preventDefault();
 
                var revisiInput = document.getElementById("revisiInput").value;
-               var idBimbinganProposal = document.getElementById('idBimbinganProposal').value;
-
+                var idBimbinganProposal = document.getElementById('idBimbinganProposal').value;
                console.log('Revisi yang dikirim:', revisiInput);
                console.log('ID Bimbingan Proposal:', idBimbinganProposal);
 
-               axios.post(`/dosen/bimbingan_proposal/updaterevisi/${idBimbinganProposal}`, {
-                   revisi: revisiInput
+               axios.post(`/dosen/bimbingan_proposal/tambahrevisi`, {
+                   revisi: revisiInput,
+                   idBimbinganProposal: idBimbinganProposal
                })
                .then(function (response) {
                    console.log('Respon dari server:', response.data);
