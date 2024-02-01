@@ -93,36 +93,44 @@ Detail Berita Acara Proposal
                 </div>
             </div>
         </div>
-        <div class="card">
-            <h5 class="card-header">Review Dosen Pembimbing</h5>
-            <form action="{{route('berita-acara-proposal.store')}}" method="POST" id="reviewForm">
-                @csrf
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="revisi" class="form-label">Revisi</label>
-                        <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
-                        @error('revisi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="nilai" class="form-label">Nilai Ujian</label>
-                        <input type="number" class="form-control" name="nilai" max="100" id="nilai" placeholder="Masukan Nilai Ujian..." aria-describedby="defaultFormControlHelp"/>
-                        @error('nilai')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}"/>
-                    <div class="d-flex justify-content-between mt-4">
-                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
-                        <button type="button" class="btn btn-primary" onclick="submitForm();">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 
+<div class="row">
+    <div class="container-xxl flex-grow-1 container-p-y">
+@if($detail && $detail->revisi)
+    <span>Sudah ada</span>
+        @else
+            <div class="card mb-3">
+                <h5 class="card-header">Review Dosen Pembimbing</h5>
+                <form action="{{ route('berita-acara-proposal.store') }}" method="POST" id="reviewForm">
+                    @csrf
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="revisi" class="form-label">Revisi</label>
+                            <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
+                            @error('revisi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="nilai" class="form-label">Nilai 1</label>
+                            <input type="number" class="form-control" name="nilai" max="100" id="nilai" placeholder="Masukan Nilai nilai..." aria-describedby="defaultFormControlHelp"/>
+                            @error('nilai')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="berita_acara_proposal_id" value="{{ $data->id_berita_acara_p }}"/>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                            <button type="button" class="btn btn-primary" onclick="submitForm();">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        @endif
+    </div>
+</div>
 @endsection
 
 @push('plugin-scripts')

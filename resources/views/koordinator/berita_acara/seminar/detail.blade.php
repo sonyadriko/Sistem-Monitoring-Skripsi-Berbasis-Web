@@ -96,10 +96,14 @@ Detail Berita Acara Sidang Proposal
                     <input type="hidden" name="berita_acara_proposal_id" value="{{$data->id_berita_acara_p}}" />
                     <div class="mb-3">
                         <span style="font-weight: bold">Cetak Revisi: </span>
-                        @if(is_null($data) || is_null($data->cetak_revisi))
-                            <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
+                        @if(count($bad) >= 3)
+                            @if(is_null($data) || is_null($data->cetak_revisi))
+                                <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
+                            @else
+                            <span>Sudah dicetak </span>
+                            @endif
                         @else
-                        <span>Sudah dicetak </span>
+                        <span style="color: #FF0000">Seluruh dosen belum mengisi berita acara</span>
                         @endif
                     </div>
                 </div>
@@ -108,38 +112,38 @@ Detail Berita Acara Sidang Proposal
     </div>
 </div>
 <div class="row">
-    <div class="card">
-        <h5 class="card-header">Review Dosen Pembimbing</h5>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Nama</th>
-                          <th>Revisi</th>
-                          <th>Nilai</th>
-                          {{-- <th>Action</th> --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        @foreach($bad as $bad)
-                        <tr>
-                            <td>{{ $no }}</td>
-                            <td>{{ $bad->name }}</td>
-                            <td>{{ $bad->revisi }}</td>
-                            <td>{{ $bad->nilai }}</td>
-                            {{-- <td><a href="{{ url('/koordinator/berita_acara_proposal/detail/' . $bad->id_detail_berita_acara_p) }}" class="btn btn-primary">Cetak</a></td>  --}}
-                        </tr>
-                        @php
-                        $no++;
-                        @endphp
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">Review Dosen Pembimbing</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Revisi</th>
+                            <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $no=1;
+                            @endphp
+                            @foreach($bad as $bad)
+                            <tr>
+                                <td>{{ $no }}</td>
+                                <td>{{ $bad->name }}</td>
+                                <td>{{ $bad->revisi }}</td>
+                                <td>{{ $bad->nilai }}</td>
+                            </tr>
+                            @php
+                            $no++;
+                            @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

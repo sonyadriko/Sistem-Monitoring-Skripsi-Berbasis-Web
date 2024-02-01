@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\DetailBeritaAcaraProposal as DetailBeritaAcaraProposal;
+use App\Models\DetailRevisiSeminarProposal as DetailRevisiSeminarProposal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -67,6 +68,23 @@ class DosenRevisiSeminarProposal extends Controller
         ];
 
         return view('dosen/revisi/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail'], 'revisi' => $data['revisi']]);
+    }
+
+    public function tambahrevisi(Request $request)
+    {
+        $validatedData = $request->validate([
+            'revisiInput' => 'required|string',
+        ], [
+            'revisiInput.required' => 'Revisi is required.',
+        ]);
+
+        $detailRevisiSeminarProposal = new DetailRevisiSeminarProposal();
+        $detailRevisiSeminarProposal->revisi_seminar_proposal_id = $request->input('idRevisiBimbinganProposal');
+        $detailRevisiSeminarProposal->revisi = $validatedData['revisiInput'];
+        $detailRevisiSeminarProposal->updated_at = now();
+        $detailRevisiSeminarProposal->save();
+
+        return response()->json("Berhasil menambah revisi");
     }
 
     public function accrevisi($id, Request $request)

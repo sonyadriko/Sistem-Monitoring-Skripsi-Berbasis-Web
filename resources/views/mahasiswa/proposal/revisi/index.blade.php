@@ -43,7 +43,7 @@ Revisi Sidang Proposal
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6">
+        {{-- <div class="col-xl-6">
             <div class="card mb-4 mb-xl-0">
                 <h5 class="card-header">File Revisi Proposal</h5>
                 <div class="card-body">
@@ -57,16 +57,14 @@ Revisi Sidang Proposal
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_berita_acara_p }}" /> --}}
                         <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisp->id_revisi_seminar_proposal }}" />
-                        {{-- <input type="hidden" id="seminar_id" name="seminar_id" value="{{ $revisisp->id_revisi_seminar_proposal }}" /> --}}
                         <div class="d-flex justify-content-between mt-4">
                             <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-xl-6">
             <div class="card mb-4">
                 <h5 class="card-header">Acc Revisi Sidang Proposal</h5>

@@ -43,12 +43,27 @@ class BeritaAcaraProposalController extends Controller
                 ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
                 ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
                 ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
-                ->where('id_berita_acara_p', '=', $id)
+                ->where('id_berita_acara_p', $id)
                 ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*', 'ruangan.nama_ruangan','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'pengajuan_judul.judul')
                 ->first(),
+
         ];
-        return view('dosen/berita_acara/seminar.detail', $data);
+        $detail = [
+            'detail' => DB::table('detail_berita_acara_proposal')->where('berita_acara_proposal_id', $id)->where('users_id', Auth::user()->id)->first(),
+        ];
+        // var_dump($detail);
+        return view('dosen/berita_acara/seminar.detail', $data, $detail);
     }
+
+    public function showReviewForm($id)
+    {
+        // Similar to your existing code to fetch data
+        $proposal = DB::table('berita_acara_proposal')->where('id_berita_acara_p', $id)->where('users_id', Auth::user()->id)->first();
+        return view('dosen/berita_acara/seminar.review_form', compact('proposal'));
+    }
+
+
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

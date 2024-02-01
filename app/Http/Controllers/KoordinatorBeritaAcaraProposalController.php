@@ -50,6 +50,7 @@ class KoordinatorBeritaAcaraProposalController extends Controller
                     ->where('berita_acara_proposal_id', $id)
                     ->get(),
         ];
+        // var_dump($bad);
 
 
         return view('koordinator/berita_acara/seminar.detail', $data, $bad);

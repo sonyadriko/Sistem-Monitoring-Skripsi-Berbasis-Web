@@ -75,6 +75,10 @@ Detail Revisi Sidang Proposal
         </div>
     </div>
 </div>
+<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="openRevisiModal()">
+    Tambahkan Revisi
+</button>
+<input type="hidden" id="idRevisiBimbinganProposal" name="idRevisiBimbinganProposal" value="{{$revisi->id_detail_berita_acara_p}}">
 <div class="row">
     <div class="mb-3">
         <div class="card mb-4 mb-xl-0">
@@ -84,7 +88,7 @@ Detail Revisi Sidang Proposal
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            <th>File</th>
+                            <th>Revisi</th>
                             {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
@@ -96,15 +100,8 @@ Detail Revisi Sidang Proposal
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                            <td>
-                                <a href="{{ asset($item->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td>
-                            {{-- <td>
-                                <button type="button" class="btn btn-primary"
-                                    onclick="prepareModal({{ $item->id_revisi_seminar_proposal }})">
-                                    Tambahkan Revisi
-                                </button>
-                            </td> --}}
+                            <td>{{ $item->revisi }}</td>
+                           
                         </tr>
                         @php
                         $no++;
@@ -116,9 +113,7 @@ Detail Revisi Sidang Proposal
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="prepareModal({{ $revisi->id_detail_berita_acara_p }})">
-    Tambahkan Revisi
-</button>
+
 <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -194,61 +189,16 @@ Detail Revisi Sidang Proposal
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<script>
-    function prepareModal(idBeritaAcara) {
-        // Reset nilai textarea
-        document.getElementById('revisiInput').value = '';
-
-        // Mengisi nilai id bimbingan proposal
-        document.getElementById('idBeritaAcara').value = idBeritaAcara;
-
-        // Tampilkan modal
-        $('#revisiModal').modal('show');
-    }
-</script>
 
 <script>
-    $(document).ready(function () {
-        // Function to prepare the modal
-        function prepareModal(id) {
-            $('#idBeritaAcara').val(id);
-            $('#revisiModal').modal('show');
-        }
-
-        // Function to handle form submission
-        $('#revisiForm').submit(function (e) {
-            e.preventDefault();
-
-            // Perform AJAX submission
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("dosen-revisi-add.detail", $revisi->id_detail_berita_acara_p) }}',
-                data: $('#revisiForm').serialize(),
-                success: function (response) {
-                    // Hide the modal
-                    $('#revisiModal').modal('hide');
-
-                    // Display success message
-                    $('#successAlert').show();
-
-                    // Optionally, you can redirect or perform other actions after a successful submission
-                    Example: window.location.href = '{{ route("dosen-revisi-sempro.index") }}';
-                },
-                error: function (error) {
-                    console.error('Error submitting form:', error);
-                    // Handle error if needed
-                }
-            });
-        });
-
-        // Function to handle OK button click
-        $('#okButton').click(function () {
-            // Hide the success alert
-            $('#successAlert').hide();
-        });
-    });
-</script>
-
+    function openRevisiModal() {
+         // Open the modal
+         $('#revisiModal').modal('show');
+ 
+         // Optionally, you can set other values or perform other actions here
+     }
+ </script>
+ 
 
 <script>
 
@@ -264,13 +214,14 @@ Detail Revisi Sidang Proposal
                 event.preventDefault();
 
                 var revisiInput = document.getElementById("revisiInput").value;
-                var idBeritaAcara = document.getElementById('idBeritaAcara').value;
+                var idRevisiBimbinganProposal = document.getElementById('idRevisiBimbinganProposal').value;
 
                 console.log('Revisi yang dikirim:', revisiInput);
-                console.log('ID Berita Acara:', idBeritaAcara);
+                console.log('ID Berita Acara:', idRevisiBimbinganProposal);
 
-                axios.post(`/dosen/revisi_seminar_proposal/addrevisi/${idBeritaAcara}`, {
-                    revisi: revisiInput
+                axios.post(`/dosen/revisi_seminar_proposal/tambahrevisi`, {
+                    revisiInput: revisiInput,
+                    idRevisiBimbinganProposal: idRevisiBimbinganProposal
                 })
                 .then(function (response) {
                     console.log('Respon dari server:', response.data);
