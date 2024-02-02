@@ -35,7 +35,19 @@ Revisi Sidang Proposal
         <h5 class="card-header">Review Sidang Proposal</h5>
         <div class="card-body">
             <p class="revisi-rumusan-masa">
-                <span class="span0-1">Revisi:<br/></span>
+                <span class="span0-1">Revisi : <br/></span>
+                @if (!is_null($detailrev))
+                    @if(is_null($detailrev->revisi))
+                        <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>
+                    @else
+                        <span class="span0-1">{{ $detailrev->revisi }} </span><br>
+                    @endif
+                @else
+                    <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>
+                @endif
+
+
+
                 @foreach($revisisp2 as $revisisp2)
                 <span class="span0-1">{{$revisisp2->revisi}} dari {{$revisisp2->name}}</span></br>
                 @endforeach

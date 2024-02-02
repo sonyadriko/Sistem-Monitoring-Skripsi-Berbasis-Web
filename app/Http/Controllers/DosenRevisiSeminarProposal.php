@@ -43,7 +43,6 @@ class DosenRevisiSeminarProposal extends Controller
     {
         $data = [
             'data' => DB::table('revisi_seminar_proposal')
-                    // ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
                     ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'revisi_seminar_proposal.berita_acara_proposal_id')
                     ->join('users', 'users.id', 'berita_acara_proposal.users_id')
                     ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
@@ -58,7 +57,7 @@ class DosenRevisiSeminarProposal extends Controller
                     ->first(),
             'detail' => DB::table('detail_revisi_seminar_proposal')
                     ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
-                    ->select('detail_revisi_seminar_proposal.*')
+
                     ->where('revisi_seminar_proposal_id', $id)
                     ->get(),
             'revisi' => DB::table('detail_berita_acara_proposal')
@@ -66,7 +65,6 @@ class DosenRevisiSeminarProposal extends Controller
                 ->where('detail_berita_acara_proposal.users_id', Auth::User()->id)
                 ->first(),
         ];
-
         return view('dosen/revisi/proposal.detail', ['data' => $data['data'], 'detail' => $data['detail'], 'revisi' => $data['revisi']]);
     }
 

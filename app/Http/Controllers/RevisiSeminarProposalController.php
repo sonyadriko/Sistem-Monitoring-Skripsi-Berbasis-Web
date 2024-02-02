@@ -31,11 +31,17 @@ class RevisiSeminarProposalController extends Controller
         $revisisp2 = DB::table('detail_berita_acara_proposal')
         ->select('detail_berita_acara_proposal.*', 'berita_acara_proposal.id_berita_acara_p', 'users.*')
         ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'detail_berita_acara_proposal.berita_acara_proposal_id')
-        ->join('users', 'users.id', '=', 'detail_berita_acara_proposal.users_id')
+        ->join('users', 'users.id', 'detail_berita_acara_proposal.users_id')
         ->where('berita_acara_proposal.users_id', Auth::user()->id)
         ->get();
 
-        return view('mahasiswa/proposal/revisi.index', compact('revisisp', 'revisisp2')) ;
+        $detailrev = DB::table('detail_revisi_seminar_proposal')
+            ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
+            ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', 'revisi_seminar_proposal.berita_acara_proposal_id')
+            ->where('berita_acara_proposal.users_id', Auth::user()->id)
+            ->first();
+
+        return view('mahasiswa/proposal/revisi.index', compact('revisisp', 'revisisp2', 'detailrev')) ;
 
     }
     public function store(Request $request)

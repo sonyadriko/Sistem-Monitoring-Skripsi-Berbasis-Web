@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class SeminarProposalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function create()
     {
         $datas = DB::table('users')

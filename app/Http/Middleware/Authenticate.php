@@ -51,8 +51,8 @@ class Authenticate extends Middleware
                     return redirect()->route('dashboard');
                 }
             }
-        // If no specific guard conditions are met, redirect to the default login route
             return redirect()->route('login');
         }
+        return redirect()->route('login');
     }
 }

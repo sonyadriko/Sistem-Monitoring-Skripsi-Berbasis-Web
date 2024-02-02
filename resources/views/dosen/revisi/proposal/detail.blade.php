@@ -78,7 +78,7 @@ Detail Revisi Sidang Proposal
 <button type="button" class="btn btn-primary justify-content-end mb-4" onclick="openRevisiModal()">
     Tambahkan Revisi
 </button>
-<input type="hidden" id="idRevisiBimbinganProposal" name="idRevisiBimbinganProposal" value="{{$revisi->id_detail_berita_acara_p}}">
+<input type="hidden" id="idRevisiBimbinganProposal" name="idRevisiBimbinganProposal" value="{{$data->id_revisi_seminar_proposal}}">
 <div class="row">
     <div class="mb-3">
         <div class="card mb-4 mb-xl-0">
@@ -89,7 +89,6 @@ Detail Revisi Sidang Proposal
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Revisi</th>
-                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +100,6 @@ Detail Revisi Sidang Proposal
                             <td>{{ $no }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                             <td>{{ $item->revisi }}</td>
-                           
                         </tr>
                         @php
                         $no++;
@@ -194,11 +192,11 @@ Detail Revisi Sidang Proposal
     function openRevisiModal() {
          // Open the modal
          $('#revisiModal').modal('show');
- 
+
          // Optionally, you can set other values or perform other actions here
      }
  </script>
- 
+
 
 <script>
 

@@ -19,6 +19,7 @@ class CheckMahasiswa
             return $next($request);
         }
 
-        abort(403, 'Unauthorized action.');
+        // abort(403, 'Unauthorized action.');
+        return redirect()->route('login');
     }
 }

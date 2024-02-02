@@ -90,14 +90,9 @@ Detail Bimbingan Proposal
                         @foreach($detail as $item)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                             <td>{{ $no }}</td>
                             <td>{{ $item->revisi }}</td>
-                            {{-- <td>
-                                <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_proposal }})">
-                                    Lihat Revisi
-                                </button>
-                            </td> --}}
                         </tr>
                         @php
                         $no++;
