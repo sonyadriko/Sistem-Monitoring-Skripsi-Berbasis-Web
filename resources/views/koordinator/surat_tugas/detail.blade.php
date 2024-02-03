@@ -22,7 +22,7 @@ Detail Surat Tugas
         <div class="card mb-4">
             <h5 class="card-header">Detail Pengajuan Surat Tugas</h5>
             <div class="card-body">
-                <form action="{{ route('koor-surat-tugas.update', ['id' => $data->id_surat_tugas]) }}" method="POST">
+                <form action="{{ route('koor-surat-tugas.update', ['id' => $data->id_surat_tugas]) }}" method="POST" id="cetakForm">
                   @csrf
                   <div class="mb-3">
                     <label for="npm" class="form-label">NPM</label>
@@ -60,23 +60,17 @@ Detail Surat Tugas
                     <a href="{{asset($data->file_proposal) }}" target="_blank">
                         {{basename($data->file_proposal)}}
                     </a>
-                    {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">
-                        View Proposal
-                    </button> --}}
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">Slip Pembayaran Bimbingan</label>
                     <a href="{{ asset($data->file_slip_pembayaran) }}" target="_blank">
                         {{basename($data->file_slip_pembayaran)}}
                     </a>
-                    {{-- <button type="button" class="btn btn-outline-primary" onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">
-                        {{basename($data->file_slip_pembayaran)}}
-                    </button> --}}
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
                   @if($data->status == 'pending')
-                  <button type="submit" id="submitBtn" class="btn btn-primary">Cetak</button>
+                  <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
                   @elseif($data->status == 'terima')
                   <p>Data ini telah diterima.</p>
                   @elseif($data->status == 'tolak')
@@ -84,7 +78,6 @@ Detail Surat Tugas
                     @endif
                 </div>
             </form>
-
             {{-- <form action="{{ route('koor-surat-tugas-tolak', ['id' => $data->id_surat_tugas]) }}" method="POST">
                 @csrf
                 <!-- ... form fields ... -->
@@ -97,27 +90,41 @@ Detail Surat Tugas
           </div>
         </div>
     </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('submitBtn').addEventListener('click', function() {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Data updated successfully.',
-          confirmButtonText: 'OK',
-          showCancelButton: false,
-          showLoaderOnConfirm: true,
-          allowOutsideClick: false,
-          willClose: () => {
-            window.location.href = "/proposal";
-          }
-        });
-      });
-    });
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+    <script>
+        function showConfirmation() {
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin mencetak?',
+                text: 'Pastikan data sudah benar sebelum mencetak.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Cetak!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tampilkan pesan sukses sebelum reload
+                    Swal.fire({
+                        title: 'Surat Tugas Dicetak',
+                        text: 'Surat Tugas berhasil dicetak.',
+                        icon: 'success',
+                    }).then(() => {
+                        // Submit form cetak
+                        document.getElementById('cetakForm').submit();
+                    });
+                }
+            });
+        }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+
+
+
+
+
 </div>
 @endsection
 @push('plugin-scripts')

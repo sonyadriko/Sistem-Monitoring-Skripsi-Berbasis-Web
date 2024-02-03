@@ -78,18 +78,35 @@ Detail Bimbingan Skripsi
 </div>
 <div class="row">
     <div class="mb-3">
+        @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+            @if ($data->acc_dosen_utama == null)
+            <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
+                Tambahkan Revisi
+            </button>
+            @endif
+        @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+            @if ($data->acc_dosen_ii == null)
+            <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
+                Tambahkan Revisi
+            </button>
+            @endif
+        @endif
+        <input type="hidden" id="idBimbinganSkripsi" name="idBimbinganSkripsi" value="{{$data->id_bimbingan_skripsi}}">
+        @if ($detail->isEmpty())
+
+        @else
         <div class="card mb-4 mb-xl-0">
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
                             <th>Bimbingan</th>
+                            <th>Tanggal</th>
+                            {{-- <th>Bimbingan</th> --}}
                             {{-- <th>Revisi Dosen</th> --}}
-                            <th>File</th>
+                            {{-- <th>File</th> --}}
                             {{-- <th>Validasi Revisi</th> --}}
-                            <th>Action</th>
+                            <th>Revisi Dosen</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,63 +116,68 @@ Detail Bimbingan Skripsi
                         @foreach($detail as $item)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>{{ $no }}</td>
-                            <td>
+                            {{-- <td>{{ $item->created_at }}</td> --}}
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+
+                            {{-- <td>{{ $no }}</td> --}}
+                            <td>{{ $item->revisi }}</td>
+
+                            {{-- <td>
                                 <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td>
+                            </td> --}}
                             {{-- <td>{{ $item->validasi }}</td> --}}
-                            <td>
+                            {{-- <td> --}}
                                 {{-- @if($item->validasi === 'acc')
                                 Revisi sudah di Acc
                                 @else --}}
-                                <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
+                                {{-- <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
                                     Tambahkan Revisi
-                                </button>
+                                </button> --}}
                                     {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_skripsi }})">
                                         Acc Revisi
                                     </button>
                                 @endif --}}
-                            </td>
+                            {{-- </td> --}}
                         </tr>
                         @php
                         $no++;
                         @endphp
                         @endforeach
-                        <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Revisi Skripsi</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="revisiForm">
-                                            @csrf
-                                            <input type="hidden" id="idBimbinganSkripsi" name="id_bimbingan_skripsi">
-                                            <div class="form-group">
-                                                <label for="revisiInput">Revisi:</label>
-                                                <textarea class="form-control" id="revisiInput" name="revisi"
-                                                    rows="4" cols="50"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit Revisi</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="successAlert" class="alert alert-success" style="display: none;">
-                            Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
-                        </div>
+
                     </tbody>
                 </table>
             </div>
         </div>
+        @endif
     </div>
+</div>
+<div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Revisi Skripsi</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="revisiForm">
+                    @csrf
+                    <input type="hidden" id="idBimbinganSkripsi" name="id_bimbingan_skripsi">
+                    <div class="form-group mb-3">
+                        <label for="revisiInput">Revisi:</label>
+                        <textarea class="form-control" id="revisiInput" name="revisi"
+                            rows="4" cols="50"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Revisi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="successAlert" class="alert alert-success" style="display: none;">
+    Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</button>
 </div>
 <div class="mb-3">
     <div class="card mb-4">
@@ -164,23 +186,26 @@ Detail Bimbingan Skripsi
             <span class="span0-1">Persetujuan Skripsi :</span>
             <input type="hidden" id="dospem1" value="{{$data->dosen_pembimbing_utama}}">
             <input type="hidden" id="dospem2" value="{{$data->dosen_pembimbing_ii}}">
-
-             @if (Auth::user()->name == $data->dosen_pembimbing_utama)
-                @if ($data->acc_dosen_utama == null)
-                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                        Setujui Skripsi
-                    </button>
-                @else
-                    <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{$data->tgl_acc_dosen_utama}} </span>
+            @if(count($detail) >= 12)
+                @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+                    @if ($data->acc_dosen_utama == null)
+                        <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{ \Carbon\Carbon::parse($data->tgl_acc_dosen_utama)->format('d-m-Y H:i:s')}} </span>
+                    @endif
+                @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+                    @if ($data->acc_dosen_ii == null)
+                        <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
+                            Setujui Skripsi
+                        </button>
+                    @else
+                        <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{\Carbon\Carbon::parse($data->tgl_acc_dosen_ii)->format('d-m-Y H:i:s') }}  </span>
+                    @endif
                 @endif
-            @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
-                @if ($data->acc_dosen_ii == null)
-                    <button type="button" id="accProposalBtn" class="btn btn-primary accept-button" onclick="confirmAccProposal('{{ $data->id_bimbingan_skripsi }}')">
-                        Setujui Skripsi
-                    </button>
-                @else
-                    <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{$data->tgl_acc_dosen_ii}} </span>
-                @endif
+            @else
+                <span class="span0-1 text-danger">Bimbingan harus dilakukan minimal 12x </span>
             @endif
         </div>
     </div>
@@ -194,17 +219,13 @@ Detail Bimbingan Skripsi
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script>
-   function prepareModal(idBimbinganSkripsi) {
-       // Reset nilai textarea
-       document.getElementById('revisiInput').value = '';
+    function openRevisiModal() {
+         // Open the modal
+         $('#revisiModal').modal('show');
 
-       // Mengisi nilai id bimbingan proposal
-       document.getElementById('idBimbinganSkripsi').value = idBimbinganSkripsi;
-
-       // Tampilkan modal
-       $('#revisiModal').modal('show');
-   }
-</script>
+         // Optionally, you can set other values or perform other actions here
+     }
+ </script>
 
 
 <script>
@@ -225,8 +246,9 @@ Detail Bimbingan Skripsi
                console.log('Revisi yang dikirim:', revisiInput);
                console.log('ID Bimbingan Skripsi:', idBimbinganSkripsi);
 
-               axios.post(`/dosen/bimbingan_skripsi/updaterevisi/${idBimbinganSkripsi}`, {
-                   revisi: revisiInput
+               axios.post(`/dosen/bimbingan_skripsi/tambahrevisi`, {
+                   revisi: revisiInput,
+                   idBimbinganSkripsi: idBimbinganSkripsi
                })
                .then(function (response) {
                    console.log('Respon dari server:', response.data);
@@ -255,7 +277,7 @@ Detail Bimbingan Skripsi
 
    function confirmAccRevisi(idDetailBimbinganProposal) {
        Swal.fire({
-           title: 'Apakah Anda yakin ingin acc revisi ini?',
+           title: 'Apakah anda yakin acc revisi ini?',
            icon: 'question',
            showCancelButton: true,
            confirmButtonText: 'Ya',
@@ -297,7 +319,7 @@ Detail Bimbingan Skripsi
    const dospem2 = document.getElementById('dospem2').value;
 
    Swal.fire({
-       title: 'Apakah Anda yakin ingin acc skripsi ini?',
+       title: 'Apakah anda yakin acc skripsi ini?',
        icon: 'question',
        showCancelButton: true,
        confirmButtonText: 'Ya',

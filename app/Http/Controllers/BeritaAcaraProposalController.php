@@ -77,13 +77,13 @@ class BeritaAcaraProposalController extends Controller
             'numeric' => 'Field :attribute harus berupa angka.',
         ]);
         try {
-            $ba = new DetailBeritaAcaraProposal();
-            $ba->users_id = Auth::user()->id;
-            $ba->berita_acara_proposal_id = $request->berita_acara_proposal_id;
-            $ba->presensi = 'hadir';
-            $ba->revisi = $request->revisi;
-            $ba->nilai = $request->nilai;
-            $ba->save();
+            $detailBAP = new DetailBeritaAcaraProposal();
+            $detailBAP->users_id = Auth::user()->id;
+            $detailBAP->berita_acara_proposal_id = $request->berita_acara_proposal_id;
+            $detailBAP->presensi = 'hadir';
+            $detailBAP->revisi = $request->revisi;
+            $detailBAP->nilai = $request->nilai;
+            $detailBAP->save();
             return redirect()->route('berita-acara-proposal.index')->with('success', 'Berita Acara Proposal berhasil diisi.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data. Pesan Kesalahan: ' . $e->getMessage())->withInput();

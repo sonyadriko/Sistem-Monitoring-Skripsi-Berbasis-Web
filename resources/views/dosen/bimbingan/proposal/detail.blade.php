@@ -67,18 +67,31 @@ Detail Bimbingan Proposal
 </div>
 <div class="row">
     <div class="mb-3">
-        <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
-            Tambahkan Revisi
-        </button>
+        @if (Auth::user()->name == $data->dosen_pembimbing_utama)
+            @if ($data->acc_dosen_utama == null)
+            <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
+                Tambahkan Revisi
+            </button>
+            @endif
+        @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
+            @if ($data->acc_dosen_ii == null)
+            <button type="button" class="btn btn-primary mb-4" onclick="openRevisiModal()">
+                Tambahkan Revisi
+            </button>
+            @endif
+        @endif
         <input type="hidden" id="idBimbinganProposal" name="idBimbinganProposal" value="{{$data->id_bimbingan_proposal}}">
+        @if ($detail->isEmpty())
+
+        @else
         <div class="card mb-4 mb-xl-0">
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
                             <th>Bimbingan</th>
+                            <th>Tanggal</th>
+                            {{-- <th>Bimbingan</th> --}}
                             <th>Revisi Dosen</th>
                             {{-- <th>Action</th> --}}
                         </tr>
@@ -91,7 +104,7 @@ Detail Bimbingan Proposal
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                            <td>{{ $no }}</td>
+                            {{-- <td>{{ $no }}</td> --}}
                             <td>{{ $item->revisi }}</td>
                         </tr>
                         @php
@@ -131,6 +144,7 @@ Detail Bimbingan Proposal
                 </table>
             </div>
         </div>
+        @endif
     </div>
 </div>
 <div class="mb-3">
@@ -146,7 +160,7 @@ Detail Bimbingan Proposal
                         Setujui Proposal
                     </button>
                 @else
-                    <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{$data->tgl_acc_dosen_utama}} </span>
+                    <span class="span0-1">Sudah di acc oleh dosen pembimbing utama pada {{\Carbon\Carbon::parse($data->tgl_acc_dosen_utama)->format('d-m-Y H:i:s')}}  </span>
                 @endif
             @elseif (Auth::user()->name == $data->dosen_pembimbing_ii)
                 @if ($data->acc_dosen_ii == null)
@@ -154,7 +168,7 @@ Detail Bimbingan Proposal
                         Setujui Proposal
                     </button>
                 @else
-                    <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{$data->tgl_acc_dosen_ii}} </span>
+                    <span class="span0-1">Sudah di acc oleh dosen pembimbing ii pada {{ \Carbon\Carbon::parse($data->tgl_acc_dosen_ii)->format('d-m-Y H:i:s')}}  </span>
                 @endif
             @endif
 
@@ -236,7 +250,7 @@ Detail Bimbingan Proposal
         const dospem2 = dospem2Element.value;
 
         Swal.fire({
-            title: 'Apakah Anda yakin ingin acc proposal ini?',
+            title: 'Apakah anda yakin acc proposal ini?',
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Ya',

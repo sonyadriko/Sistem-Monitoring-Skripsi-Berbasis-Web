@@ -74,6 +74,11 @@ Detail Revisi Sidang Skripsi
         </div>
     </div>
 </div>
+<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="openRevisiModal()">
+    Tambahkan Revisi
+</button>
+<input type="hidden" id="idRevisiBimbinganSkripsi" name="idRevisiBimbinganSkripsi" value="{{$data->id_revisi_sidang_skripsi}}">
+
 <div class="row">
     <div class="mb-3">
         <div class="card mb-4 mb-xl-0">
@@ -84,7 +89,7 @@ Detail Revisi Sidang Skripsi
                             <th>No</th>
                             <th>Tanggal</th>
                             {{-- <th>Revisi Dosen</th> --}}
-                            <th>File</th>
+                            <th>Revisi</th>
                             {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
@@ -96,9 +101,7 @@ Detail Revisi Sidang Skripsi
                         <tr>
                             <td>{{ $no }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                            <td>
-                                <a href="{{ asset($item->file_revisi) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td>
+                            <td>{{ $item->revisi }}</td>
                         </tr>
                         @php
                         $no++;
@@ -110,9 +113,7 @@ Detail Revisi Sidang Skripsi
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="prepareModal({{ $revisi->id_detail_berita_acara_s }})">
-    Tambahkan Revisi
-</button>
+
 <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -199,17 +200,18 @@ Detail Revisi Sidang Skripsi
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script>
-   function prepareModal(idBeritaAcara) {
-       // Reset nilai textarea
-       document.getElementById('revisiInput').value = '';
+    function openRevisiModal() {
+         // Open the modal
+        //  const addButton = document.getElementById('tambahkanRevisiButton');
+        //     if (addButton && addButton.style.display !== 'none') {
+                // Open the modal
+                $('#revisiModal').modal('show');
+                // Optionally, you can set other values or perform other actions here
+            // }
 
-       // Mengisi nilai id bimbingan proposal
-       document.getElementById('idBeritaAcara').value = idBeritaAcara;
-
-       // Tampilkan modal
-       $('#revisiModal').modal('show');
-   }
-</script>
+         // Optionally, you can set other values or perform other actions here
+     }
+ </script>
 
 <script>
     $(document).ready(function () {

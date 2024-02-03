@@ -75,10 +75,34 @@ Detail Revisi Sidang Proposal
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary justify-content-end mb-4" onclick="openRevisiModal()">
-    Tambahkan Revisi
-</button>
+@if (Auth::user()->name == $data->nama_penguji_1)
+    @if (is_null($data->tgl_acc_penguji_1))
+    <button type="button" class="btn btn-primary justify-content-end mb-4" id="tambahkanRevisiButton" onclick="openRevisiModal()">
+        Tambahkan Revisi
+    </button>
+    @else
+    @endif
+@elseif (Auth::user()->name == $data->nama_penguji_2)
+    @if (is_null($data->tgl_acc_penguji_2))
+    <button type="button" class="btn btn-primary justify-content-end mb-4" id="tambahkanRevisiButton" onclick="openRevisiModal()">
+        Tambahkan Revisi
+    </button>
+    @else
+    @endif
+@elseif (Auth::user()->name == $data->dosen_pembimbing_utama)
+    @if (is_null($data->tgl_acc_dospem))
+        <button type="button" class="btn btn-primary justify-content-end mb-4" id="tambahkanRevisiButton" onclick="openRevisiModal()">
+            Tambahkan Revisi
+        </button>
+    @else
+
+    @endif
+@endif
+
 <input type="hidden" id="idRevisiBimbinganProposal" name="idRevisiBimbinganProposal" value="{{$data->id_revisi_seminar_proposal}}">
+@if ($detail->isEmpty())
+
+@else
 <div class="row">
     <div class="mb-3">
         <div class="card mb-4 mb-xl-0">
@@ -94,6 +118,7 @@ Detail Revisi Sidang Proposal
                     <tbody>
                         @php
                         $no=1;
+                        // var_dump($detail)
                         @endphp
                         @foreach($detail as $item)
                         <tr>
@@ -111,7 +136,7 @@ Detail Revisi Sidang Proposal
         </div>
     </div>
 </div>
-
+@endif
 <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -191,7 +216,12 @@ Detail Revisi Sidang Proposal
 <script>
     function openRevisiModal() {
          // Open the modal
-         $('#revisiModal').modal('show');
+         const addButton = document.getElementById('tambahkanRevisiButton');
+            if (addButton && addButton.style.display !== 'none') {
+                // Open the modal
+                $('#revisiModal').modal('show');
+                // Optionally, you can set other values or perform other actions here
+            }
 
          // Optionally, you can set other values or perform other actions here
      }

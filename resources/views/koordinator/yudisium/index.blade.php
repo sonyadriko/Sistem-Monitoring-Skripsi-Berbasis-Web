@@ -33,7 +33,7 @@ Yudisium
                         <label for="statusFilter">Filter Status:</label>
                         <select id="statusFilter" class="form-control">
                             <option value="">Semua</option>
-                            <option value="tolak">Tolak</option>
+
                             <option value="pending">Pending</option>
                             <option value="lulus dengan revisi">Lulus dengan revisi</option>
                             <option value="lulus tanpa revisi">Lulus tanpa revisi</option>

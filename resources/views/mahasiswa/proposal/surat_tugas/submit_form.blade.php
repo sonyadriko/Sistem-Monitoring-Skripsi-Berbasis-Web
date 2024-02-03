@@ -91,7 +91,10 @@ Pengajuan Surat Tugas
                             </div>
                             <div class="mb-3">
                                 <label for="tanggal_sidang_proposal" class="form-label">Tanggal Sidang Proposal Skripsi</label>
-                                <input class="form-control" type="date" name="tanggal_sidang_proposal" id="tanggal_sidang_proposal" />
+                                {{-- <input class="form-control" type="date" name="tanggal_sidang_proposal" id="tanggal_sidang_proposal" /> --}}
+                                {{-- <input class="form-control" type="text" id="tanggal_sidang_proposal" value="{{$datas->tanggal}}" name="tanggal_sidang_proposal" disabled/> --}}
+                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($datas->tanggal)->format('d-m-Y') }}" disabled/>
+                                <input type="hidden" id="tanggal_sidang_proposal" name="tanggal_sidang_proposal" value="{{$datas->tanggal}}"/>
                                 @error('tanggal_sidang_proposal')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -99,7 +102,8 @@ Pengajuan Surat Tugas
                             <div class="mb-3">
                                 <label for="file_proposal" class="form-label">Upload File Proposal Skripsi</label>
                                 <input class="form-control" type="file" name="file_proposal" id="file_proposal" />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
+                                <p class="text-danger"> File : PDF</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 5MB.</p> --}}
                                 @error('file_proposal')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -107,7 +111,8 @@ Pengajuan Surat Tugas
                             <div class="mb-3">
                                 <label for="file_slip_pembayaran" class="form-label">Upload File Slip Pembayaran Surat Tugas</label>
                                 <input class="form-control" type="file" name="file_slip_pembayaran" id="file_slip_pembayaran" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 1MB.</p> --}}
                                 @error('file_slip_pembayaran')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -153,7 +158,7 @@ Pengajuan Surat Tugas
     // Use SweetAlert to show a simple confirmation message
         Swal.fire({
             title: 'Are you sure?',
-            text: 'Do you want to save changes?',
+            text: 'Apakah Anda ingin menyimpan perubahan?',
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Yes',

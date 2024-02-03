@@ -48,6 +48,24 @@ class DOsenBimbinganSkripsiController extends Controller
 
         return view('dosen/bimbingan/skripsi.detail', ['data' => $data['data'], 'detail' => $data['detail']]);
     }
+
+    public function tambahrevisi(Request $request)
+    {
+        $validatedData = $request->validate([
+            'revisi' => 'required|string',
+        ], [
+            'revisi.required' => 'Revisi is required.',
+        ]);
+
+        $detailBimbingan = new DetailBimbinganSkripsi();
+        $detailBimbingan->bimbingan_skripsi_id = $request->input('idBimbinganSkripsi');
+        $detailBimbingan->revisi = $validatedData['revisi'];
+        $detailBimbingan->updated_at = now();
+        $detailBimbingan->save();
+
+        return response()->json("Berhasil menambah revisi");
+    }
+
     public function addrevisi($id)
     {
         $data = [

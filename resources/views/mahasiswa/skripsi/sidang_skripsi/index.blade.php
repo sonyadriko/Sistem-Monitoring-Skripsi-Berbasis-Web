@@ -222,7 +222,7 @@ Daftar Sidang Skripsi
                 // If both files are uploaded, show the confirmation dialog
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: 'Do you want to save changes?',
+                    text: 'Apakah Anda ingin menyimpan perubahan?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Yes',

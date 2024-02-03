@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class SuratSurveyController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         $ss = DB::table('bimbingan_proposal')

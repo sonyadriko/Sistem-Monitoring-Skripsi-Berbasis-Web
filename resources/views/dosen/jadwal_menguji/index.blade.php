@@ -92,7 +92,7 @@ Jadwal Menguji
                             @endphp
                             <td>{{ $formatTanggal }}</td>
                             <td>{{ $jadwal->nama_ruangan}}, {{ $jadwal->jam}}</td>
-                            <td><a href="{{ url('/dosen/berita_acara_proposal/detail/' . $jadwal->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/dosen/berita_acara_skripsi/detail/' . $jadwal->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;

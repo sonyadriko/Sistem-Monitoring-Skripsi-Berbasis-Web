@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SidangSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         $datas = DB::table('bimbingan_skripsi')
@@ -75,7 +79,8 @@ class SidangSkripsiController extends Controller
             ->leftjoin('users as penguji1', 'penguji1.id', 'sidang_skripsi.dosen_penguji_1')
             ->leftjoin('users as penguji2', 'penguji2.id', 'sidang_skripsi.dosen_penguji_2')
             ->leftjoin('users as penguji3', 'penguji3.id', 'sidang_skripsi.dosen_penguji_3')
-            ->select('users.*', 'pengajuan_judul.judul', 'bimbingan_proposal.*', 'sidang_skripsi.file_skripsi', 'sidang_skripsi.file_slip_pembayaran', 'sidang_skripsi.status', 'sidang_skripsi.tanggal',  'sidang_skripsi.jam', 'ruangan.nama_ruangan',  'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3')
+            ->leftjoin('users as sekretaris', 'sekretaris.id', 'sidang_skripsi.sekretaris')
+            ->select('users.*', 'pengajuan_judul.judul', 'bimbingan_proposal.*', 'sidang_skripsi.file_skripsi', 'sidang_skripsi.file_slip_pembayaran', 'sidang_skripsi.status', 'sidang_skripsi.tanggal',  'sidang_skripsi.jam', 'ruangan.nama_ruangan',  'penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'penguji3.name as nama_penguji_3', 'sekretaris.name as nama_sekretaris')
             ->where('id_sidang_skripsi', $id)
             ->latest('sidang_skripsi.created_at')
             ->first();

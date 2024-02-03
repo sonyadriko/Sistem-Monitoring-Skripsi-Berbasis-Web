@@ -57,7 +57,7 @@ class DosenRevisiSeminarProposal extends Controller
                     ->first(),
             'detail' => DB::table('detail_revisi_seminar_proposal')
                     ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
-
+                    ->where('detail_revisi_seminar_proposal.users_id', Auth::user()->id)
                     ->where('revisi_seminar_proposal_id', $id)
                     ->get(),
             'revisi' => DB::table('detail_berita_acara_proposal')
@@ -77,6 +77,7 @@ class DosenRevisiSeminarProposal extends Controller
         ]);
 
         $detailRevisiSeminarProposal = new DetailRevisiSeminarProposal();
+        $detailRevisiSeminarProposal->users_id = Auth::user()->id;
         $detailRevisiSeminarProposal->revisi_seminar_proposal_id = $request->input('idRevisiBimbinganProposal');
         $detailRevisiSeminarProposal->revisi = $validatedData['revisiInput'];
         $detailRevisiSeminarProposal->updated_at = now();

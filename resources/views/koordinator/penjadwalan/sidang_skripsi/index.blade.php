@@ -36,7 +36,7 @@ Sidang Skripsi
                         <label for="statusFilter">Filter Status:</label>
                         <select id="statusFilter" class="form-control">
                             <option value="">Semua</option>
-                            <option value="tolak">Tolak</option>
+
                             <option value="pending">Pending</option>
                             <option value="terima">Terima</option>
                         </select>

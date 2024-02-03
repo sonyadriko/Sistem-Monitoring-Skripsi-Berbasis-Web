@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class HistoryBimbinganController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         $hisbimmhs = DB::table('detail_bimbingan_proposal')

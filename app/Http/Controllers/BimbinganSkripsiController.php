@@ -10,7 +10,10 @@ use App\Models\DetailBimbinganSkripsi as DetailBimbinganSkripsi;
 
 class BimbinganSkripsiController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         // $bimbingans = DB::table('bimbingan_skripsi')

@@ -44,10 +44,10 @@ Edit Profile
                 <label for="notelpot" class="form-label">No Telp Orang Tua</label>
                 <input type="number" class="form-control" id="notelpot" name="notelpot" autocomplete="off" value="{{ $data->no_telp_orang_tua }}" placeholder="no telp orang tua">
               </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-            {{-- <button class="btn btn-secondary">Cancel</button> --}}
-            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
 
           </form>
 

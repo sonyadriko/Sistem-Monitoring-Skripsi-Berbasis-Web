@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HistoryRevisiSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         $hisbimmhs = DB::table('detail_revisi_sidang_skripsi')

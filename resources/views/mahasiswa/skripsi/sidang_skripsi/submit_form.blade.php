@@ -85,7 +85,8 @@ Daftar Sidang Skripsi
                             <div class="mb-3">
                                 <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
                                 <input class="form-control" type="file" name="skripsi_file" id="skripsi_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
+                                <p class="text-danger"> File : PDF</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 5MB.</p> --}}
                                 @error('skripsi_file')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -93,13 +94,16 @@ Daftar Sidang Skripsi
                             <div class="mb-3">
                                 <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Skripsi</label>
                                 <input class="form-control" type="file" name="slip_file" id="slip_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 1MB.</p> --}}
                                 @error('slip_file')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </form>
+
                     </section>
+
                 </div>
             </div>
         </div>
@@ -142,14 +146,14 @@ Daftar Sidang Skripsi
                 // If either file is not uploaded, show an error message
                 Swal.fire({
                     title: 'Error',
-                    text: 'Please upload both proposal and slip files before saving changes.',
+                    text: 'Harap unggah file skripsi dan slip pembayaran.',
                     icon: 'error',
                 });
             } else {
                 // If both files are uploaded, show the confirmation dialog
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: 'Do you want to save changes?',
+                    text: 'Apakah Anda ingin menyimpan perubahan?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
@@ -163,10 +167,21 @@ Daftar Sidang Skripsi
             }
         }
         function saveChanges() {
-            // Gather form data
-            var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
-            form.submit();
-        }
+        // Gather form data
+        var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+        form.submit();
+
+        // Show a success message
+        // Swal.fire({
+        //     title: 'Success',
+        //     text: 'Registration successful!',
+        //     icon: 'success',
+        //     confirmButtonText: 'OK',
+        // }).then(() => {
+        //     // Redirect to the dashboard after clicking "OK"
+        //     window.location.href = '/dashboard'; // Replace '/dashboard' with the actual dashboard URL
+        // });
+    }
 });
 </script>
 @endpush

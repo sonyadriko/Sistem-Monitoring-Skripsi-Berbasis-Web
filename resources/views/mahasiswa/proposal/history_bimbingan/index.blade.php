@@ -32,9 +32,9 @@ History Bimbingan Proposal
         <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Tanggal</th>
                   <th>Bimbingan</th>
+                  <th>Tanggal</th>
+                  {{-- <th>Bimbingan</th> --}}
                   <th>Revisi</th>
                   {{-- <th>Validasi Revisi</th> --}}
                   {{-- <th>Status</th> --}}
@@ -48,7 +48,7 @@ History Bimbingan Proposal
                 <tr>
                     <td>{{ $no }}</td>
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
-                    <td>{{ $no }}</td>
+                    {{-- <td>{{ $no }}</td> --}}
                     <td>{{ $hbmhs->revisi }}</td>
 
                     {{-- <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td> --}}

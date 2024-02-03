@@ -41,7 +41,7 @@ Bimbingan Skripsi
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6">
+            {{-- <div class="col-xl-6">
                 <div class="card mb-4 mb-xl-0">
                     <h5 class="card-header">File Skripsi</h5>
                     <div class="card-body">
@@ -62,7 +62,7 @@ Bimbingan Skripsi
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
                 <div class="card mb-4">

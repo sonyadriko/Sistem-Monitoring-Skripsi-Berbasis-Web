@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class BimbinganProposalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
         $dosens = DB::table('bimbingan_proposal')

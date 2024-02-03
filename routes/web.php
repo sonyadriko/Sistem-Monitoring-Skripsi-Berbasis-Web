@@ -147,6 +147,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::group(['prefix' => 'dosen/bimbingan_skripsi'], function () {
         Route::get('/', [DosenBimbinganSkripsiController::class, 'index'])->name('bimbingans-dosen.index');
+        Route::post('/tambahrevisi', [DosenBimbinganSkripsiController::class, 'tambahrevisi'])->name('bimbingans-dosen.tambahrevisi');
         Route::get('/detail/{id}', [DosenBimbinganSkripsiController::class, 'detail'])->name('bimbingans-dosen.detail');
         Route::post('/updaterevisi/{id}', [DosenBimbinganSkripsiController::class, 'updaterevisi'])->name('bimbingans-dosen.addrevisi');
         Route::post('/accrevisi/{id}', [DosenBimbinganSkripsiController::class, 'accrevisi'])->name('bimbingans-dosen.accrevisi');

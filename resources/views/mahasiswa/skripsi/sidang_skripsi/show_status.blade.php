@@ -123,7 +123,8 @@ Daftar Sidang Skripsi
                                 <label class="form-label" style="font-weight: bold">Dosen Penguji</label>
                                 <p><span>{{$datas->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                     {{$datas->nama_penguji_2}} (Dosen Penguji 2)<br/>
-                                    {{$datas->nama_penguji_3}} (Dosen Penguji 3)</span></p>
+                                    {{$datas->nama_penguji_3}} (Dosen Penguji 3)<br/>
+                                    {{$datas->nama_sekretaris}} (Sekretaris)</span></p>
                             </div>
                         </div>
                     </div>

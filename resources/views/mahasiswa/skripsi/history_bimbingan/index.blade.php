@@ -32,10 +32,10 @@ History Bimbingan Skripsi
         <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Tanggal</th>
                   <th>Bimbingan</th>
-                  <th>File</th>
+                  <th>Tanggal</th>
+                  {{-- <th>Bimbingan</th> --}}
+                  <th>Revisi</th>
                   {{-- <th>Validasi Revisi</th> --}}
                   {{-- <th>Status</th> --}}
                 </tr>
@@ -48,11 +48,11 @@ History Bimbingan Skripsi
                 <tr>
                     <td>{{ $no }}</td>
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
-                    <td>{{ $no }}</td>
-                    <td>
+                    {{-- <td>{{ $no }}</td> --}}
+                    {{-- <td>
                         <a href="{{ asset($hbmhs->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                    </td>
-                    {{-- <td>{{ $hbmhs->validasi ?? 'belum acc' }}</td> --}}
+                    </td> --}}
+                    <td>{{ $hbmhs->revisi }}</td>
 
                     {{-- <td><a href="{{ url('/mahasiswa/history_bimbingan_proposal/detail/' . $hbmhs->id_detail_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td> --}}
                 </tr>

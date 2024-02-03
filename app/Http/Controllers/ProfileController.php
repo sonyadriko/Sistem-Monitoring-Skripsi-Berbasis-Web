@@ -12,6 +12,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class ProfileController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
 

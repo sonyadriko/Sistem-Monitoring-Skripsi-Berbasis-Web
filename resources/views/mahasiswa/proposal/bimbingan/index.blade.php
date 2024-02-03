@@ -47,26 +47,6 @@ Bimbingan Proposal
         </div>
         <div class="row">
             <div class="col-xl-6">
-                {{-- <div class="card mb-4 mb-xl-0">
-                    <h5 class="card-header">File Proposal</h5>
-                    <div class="card-body">
-                        <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="file_proposal" class="form-label">Upload File Proposal</label>
-                                <input class="form-control" type="file" id="file_proposal" name="file_proposal" id="slip_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
-                                    @error('file_proposal')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                            </div>
-                            <input type="hidden" id="bimbingan_proposal_id" name="bimbingan_proposal_id" value="{{ $dosens->id_bimbingan_proposal }}" />
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div> --}}
                 @if ($dosens->dosen_pembimbing_ii == 'tidak ada')
                 <div class="col-xl-6">
                     <div class="card mb-4 ">

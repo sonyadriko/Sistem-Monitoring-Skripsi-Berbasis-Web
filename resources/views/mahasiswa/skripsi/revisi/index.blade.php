@@ -43,7 +43,7 @@ Revisi Sidang Skripsi
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6">
+            {{-- <div class="col-xl-6">
                 <div class="card mb-4 mb-xl-0">
                     <h5 class="card-header">File Revisi Skripsi</h5>
                     <div class="card-body">
@@ -58,7 +58,7 @@ Revisi Sidang Skripsi
                                 @enderror
                             </div>
                             {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
-                             --}}
+
                             <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_revisi_sidang_skripsi }}" />
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
@@ -66,7 +66,7 @@ Revisi Sidang Skripsi
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xl-6">
                 <div class="card mb-4">
                     <h5 class="card-header">Acc Revisi Skripsi</h5>

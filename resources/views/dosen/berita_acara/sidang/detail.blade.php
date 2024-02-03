@@ -88,13 +88,22 @@ Detail Berita Acara Sidang Skripsi
                             <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
                             <p><span>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                 {{$data->nama_penguji_2}} (Dosen Penguji 2)<br/>
-                                {{$data->nama_penguji_3}} (Dosen Penguji 3)</span></p>
+                                {{$data->nama_penguji_3}} (Dosen Penguji 3)<br/>
+                                {{$data->nama_sekretaris}} (Sekretaris)</span></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        @if($detail && $detail->revisi)
+        @else
+        <div class="card mb-3">
             <h5 class="card-header">Review Dosen Pembimbing</h5>
             <form action="{{route('berita-acara-skripsi.store')}}" method="POST" id="reviewForm">
                 @csrf
@@ -103,10 +112,20 @@ Detail Berita Acara Sidang Skripsi
                     <label for="revisi" class="form-label">Revisi</label>
                     <textarea class="form-control" id="revisi" name="revisi" rows="3" placeholder="Masukan Revisi"></textarea>
                 </div>
-                <div class="mb-3">
-                    <label for="nilai" class="form-label">Nilai Ujian</label>
-                    <input type="number" class="form-control" name="nilai" id="nilai" placeholder="Masukan Nilai Ujian..." aria-describedby="defaultFormControlHelp"/>
-                </div>
+                @php
+                $labels = ['Penulisan', 'Penyajian', 'Penguasaan Program', 'Penguasaan Materi', 'Penampilan'];
+                @endphp
+
+                @for($i = 0; $i < 5; $i++)
+                    <div class="mb-3">
+                        <label for="nilai_{{ $i+1 }}" class="form-label">Nilai {{ $labels[$i] }}</label>
+                        <input type="number" class="form-control" name="nilai_{{ $i+1 }}" max="100" id="nilai_{{ $i+1 }}" placeholder="Masukkan Nilai {{ $labels[$i] }}..." aria-describedby="defaultFormControlHelp"/>
+
+                        @error("nilai_".($i+1))
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                @endfor
                 <input type="hidden" name="berita_acara_skripsi_id" value="{{$data->id_berita_acara_s}}"/>
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
@@ -115,6 +134,7 @@ Detail Berita Acara Sidang Skripsi
             </div>
             </form>
         </div>
+        @endif
     </div>
 </div>
 
@@ -134,9 +154,13 @@ Detail Berita Acara Sidang Skripsi
     function submitForm() {
         // Validasi revisi dan nilai
         var revisi = document.getElementById('revisi').value;
-        var nilai = document.getElementById('nilai').value;
+        var nilai_1 = document.getElementById('nilai_1').value;
+        var nilai_2 = document.getElementById('nilai_2').value;
+        var nilai_3 = document.getElementById('nilai_3').value;
+        var nilai_4 = document.getElementById('nilai_4').value;
+        var nilai_5 = document.getElementById('nilai_5').value;
 
-        if (!revisi.trim() || !nilai.trim()) {
+        if (!revisi.trim() || !nilai_1.trim() || !nilai_2.trim() || !nilai_3.trim() || !nilai_4.trim() || !nilai_5.trim() ) {
             Swal.fire({
                 title: 'Error',
                 text: 'Revisi dan nilai harus diisi.',
@@ -148,24 +172,29 @@ Detail Berita Acara Sidang Skripsi
     }
 
     function showConfirmation() {
-        Swal.fire({
-            title: 'Konfirmasi Submit',
-            text: 'Apakah Anda yakin ingin submit data?',
-            icon: 'warning',
-            showCancelButton: false, // Set to false to hide the "Cancel" button
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, Submit!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Success',
-                    text: 'Data berhasil disubmit.',
-                    icon: 'success',
-                }).then(() => {
-                    // Submit form
-                    document.getElementById('reviewForm').submit();
-                });
-            }
-        });
-    }
+    Swal.fire({
+        title: 'Konfirmasi Submit',
+        text: 'Apakah Anda yakin ingin submit data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, Submit!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Success',
+                text: 'Data berhasil disubmit.',
+                icon: 'success',
+            }).then(() => {
+                // Submit form
+                document.getElementById('reviewForm').submit();
+            }).then(() => {
+                // Redirect to dashboard after successful submission
+                // window.location.href = '/dashboard'; // Ganti dengan route dashboard yang sesuai
+            });
+        }
+    });
+}
+
+
 </script>

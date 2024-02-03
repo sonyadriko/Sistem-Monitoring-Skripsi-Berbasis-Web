@@ -215,7 +215,7 @@ Pengajuan Surat Survey
     // Use SweetAlert to show a simple confirmation message
     Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to save changes?',
+        text: 'Apakah Anda ingin menyimpan perubahan?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes',

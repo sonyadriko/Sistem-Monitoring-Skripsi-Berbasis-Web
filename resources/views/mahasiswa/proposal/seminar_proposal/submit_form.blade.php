@@ -148,14 +148,14 @@ Daftar Sidang Proposal
             // If either file is not uploaded, show an error message
             Swal.fire({
                 title: 'Error',
-                text: 'Please upload both proposal and slip files before saving changes.',
+                text: 'Harap unggah file proposal dan slip pembayaran.',
                 icon: 'error',
             });
         } else {
             // If both files are uploaded, show the confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'Do you want to save changes?',
+                text: 'Apakah Anda ingin menyimpan perubahan?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
@@ -210,7 +210,7 @@ Daftar Sidang Proposal
                     // Jika kesalahan bukan karena validasi, tampilkan pesan kesalahan umum
                     Swal.fire({
                         title: 'Error',
-                        text: 'An error occurred while processing your request. Please try again.',
+                        text: 'Terjadi kesalahan saat memproses permintaan Anda. Silakan coba lagi.',
                         icon: 'error',
                     });
                 }

@@ -10,6 +10,10 @@ use App\Models\DetailRevisiSidangSkripsi as DetailRevisiSidangSkripsi;
 
 class RevisiSidangSkripsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkMahasiswa');
+    }
     public function index()
     {
 

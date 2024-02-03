@@ -90,18 +90,23 @@ Detail Berita Acara Sidang Skripsi
                                 <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
                                 <p><span>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                     {{$data->nama_penguji_2}} (Dosen Penguji 2)<br/>
-                                    {{$data->nama_penguji_3}} (Dosen Penguji 3)</span></p>
+                                    {{$data->nama_penguji_3}} (Dosen Penguji 3)<br/>
+                                    {{$data->nama_sekretaris}} (Sekretaris)</span></p>
                             </div>
                         </div>
                     </div>
                     <input type="hidden" name="berita_acara_skripsi_id" value="{{$data->id_berita_acara_s}}" />
                     <div class="mb-3">
                         <span>Cetak Revisi: </span>
-                        @if(is_null($data) || is_null($data->cetak_revisi))
-                            <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
-                        @else
-                        <span>Sudah dicetak </span>
+                        @if(count($bad) >= 3)
+                            @if(is_null($data) || is_null($data->cetak_revisi))
+                                <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
+                            @else
+                            <span>Sudah dicetak </span>
 
+                            @endif
+                        @else
+                        <span style="color: #FF0000">Seluruh dosen belum mengisi berita acara</span>
                         @endif
                     </div>
                 </div>
@@ -133,7 +138,7 @@ Detail Berita Acara Sidang Skripsi
                             <td>{{ $no }}</td>
                             <td>{{ $bad->name }}</td>
                             <td>{{ $bad->revisi }}</td>
-                            <td>{{ $bad->nilai }}</td>
+                            <td>{{ $bad->nilai_total }}</td>
                             {{-- <td><a href="{{ url('/koordinator/berita_acara_proposal/detail/' . $bad->id_detail_berita_acara_p) }}" class="btn btn-primary">Cetak</a></td>  --}}
                         </tr>
                         @php

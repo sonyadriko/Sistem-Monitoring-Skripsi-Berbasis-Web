@@ -217,7 +217,7 @@ $(function() {
       // Gunakan SweetAlert untuk menampilkan pesan konfirmasi sederhana
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to save changes?',
+        text: 'Apakah Anda ingin menyimpan perubahan?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes',
