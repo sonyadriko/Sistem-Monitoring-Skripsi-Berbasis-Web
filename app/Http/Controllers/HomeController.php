@@ -41,9 +41,9 @@ class HomeController extends Controller
     public function index()
     {
         $tablesPart1 = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "berita_acara_proposal", "surat_tugas"];
-        $tablesPart2 = ["bimbingan_skripsi", "sidang_skripsi", "berita_acara_skripsi", "yudisium"];
+        $tablesPart2 = ["bimbingan_skripsi", "sidang_skripsi", "berita_acara_skripsi"];
 
-        $tables_text = ["pengajuan_judul", "bimbingan_proposal", "sidang_proposal", "revisi_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "revisi_skripsi", "yudisium"];
+        $tables_text = ["pengajuan_judul", "bimbingan_proposal", "sidang_proposal", "revisi_proposal", "surat_tugas", "bimbingan_skripsi", "sidang_skripsi", "revisi_skripsi"];
 
         // Menghitung persentase untuk bagian pertama (pengajuan judul sampai surat tugas)
         $totalTablesPart1 = count($tablesPart1);
