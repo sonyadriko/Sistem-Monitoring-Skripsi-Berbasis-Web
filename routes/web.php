@@ -173,6 +173,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::group(['prefix' => 'dosen/revisi_sidang_skripsi'], function () {
         Route::get('/', [DosenRevisiSidangSkripsiController::class, 'index'])->name('dosen-revisi-semhas.index');
+        Route::post('/tambahrevisi', [DosenRevisiSidangSkripsiController::class, 'tambahrevisi'])->name('dosen-revisi-semhas.tambahrevisi');
         Route::get('/detail/{id}', [DosenRevisiSidangSkripsiController::class, 'detail'])->name('dosen-revisi-semhas.detail');
         Route::post('/accrevisi/{id}', [DosenRevisiSidangSkripsiController::class, 'accrevisi'])->name('dosen-revisi-semhas.acc');
         Route::post('/addrevisi/{id}', [DosenRevisiSidangSkripsiController::class, 'addrevisi'])->name('dosen-revisi-semhas.detail');

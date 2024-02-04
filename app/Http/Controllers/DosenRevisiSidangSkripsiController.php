@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailBeritaAcaraSkripsi as DetailBeritaAcaraSkripsi;
+use App\Models\DetailRevisiSidangSkripsi as DetailRevisiSidangSkripsi;
 use Illuminate\Support\Carbon;
 
 class DosenRevisiSidangSkripsiController extends Controller
@@ -73,6 +74,25 @@ class DosenRevisiSidangSkripsiController extends Controller
 
 
     }
+
+    public function tambahrevisi(Request $request)
+    {
+        $validatedData = $request->validate([
+            'revisiInput' => 'required|string',
+        ], [
+            'revisiInput.required' => 'Revisi is required.',
+        ]);
+
+        $detailRevisiSidangSkripsi = new DetailRevisiSidangSkripsi();
+        $detailRevisiSidangSkripsi->users_id = Auth::user()->id;
+        $detailRevisiSidangSkripsi->revisi_sidang_skripsi_id = $request->input('idRevisiBimbinganSkripsi');
+        $detailRevisiSidangSkripsi->revisi = $validatedData['revisiInput'];
+        $detailRevisiSidangSkripsi->updated_at = now();
+        $detailRevisiSidangSkripsi->save();
+
+        return response()->json("Berhasil menambah revisi");
+    }
+
     public function accrevisi($id, Request $request)
     {
 

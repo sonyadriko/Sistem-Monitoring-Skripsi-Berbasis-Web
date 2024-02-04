@@ -88,9 +88,7 @@ Detail Revisi Sidang Skripsi
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            {{-- <th>Revisi Dosen</th> --}}
                             <th>Revisi</th>
-                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -213,45 +211,50 @@ Detail Revisi Sidang Skripsi
      }
  </script>
 
+
 <script>
-    $(document).ready(function () {
-        // Function to prepare the modal
-        function prepareModal(id) {
-            $('#idBeritaAcara').val(id);
-            $('#revisiModal').modal('show');
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil elemen 'revisiForm' jika ada
+        var revisiForm = document.getElementById('revisiForm');
 
-        // Function to handle form submission
-        $('#revisiForm').submit(function (e) {
-            e.preventDefault();
+        // Periksa apakah elemen 'revisiForm' ditemukan
+        if (revisiForm) {
+            // Tambahkan event listener untuk saat form di-submit
+            revisiForm.addEventListener('submit', function(event) {
+                event.preventDefault();
 
-            // Perform AJAX submission
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("dosen-revisi-semhas.detail", $revisi->id_detail_berita_acara_s) }}',
-                data: $('#revisiForm').serialize(),
-                success: function (response) {
-                    // Hide the modal
-                    $('#revisiModal').modal('hide');
+                var revisiInput = document.getElementById("revisiInput").value;
+                var idRevisiBimbinganSkripsi = document.getElementById('idRevisiBimbinganSkripsi').value;
 
-                    // Display success message
-                    $('#successAlert').show();
+                console.log('Revisi yang dikirim:', revisiInput);
+                console.log('ID Berita Acara:', idRevisiBimbinganSkripsi);
 
-                    // Optionally, you can redirect or perform other actions after a successful submission
-                    Example: window.location.href = '{{ route("dosen-revisi-semhas.index") }}';
-                },
-                error: function (error) {
-                    console.error('Error submitting form:', error);
-                    // Handle error if needed
-                }
+                axios.post(`/dosen/revisi_sidang_skripsi/tambahrevisi`, {
+                    revisiInput: revisiInput,
+                    idRevisiBimbinganSkripsi: idRevisiBimbinganSkripsi
+                })
+                .then(function (response) {
+                    console.log('Respon dari server:', response.data);
+                    $('#revisiModal').modal('hide'); // Tutup modal setelah berhasil submit
+
+                    Swal.fire({
+                        title: 'Revisi berhasil dikirim!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Lakukan refresh halaman
+                            location.reload();
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    console.error("Terjadi kesalahan: " + error);
+                });
             });
-        });
-
-        // Function to handle OK button click
-        $('#okButton').click(function () {
-            // Hide the success alert
-            $('#successAlert').hide();
-        });
+        } else {
+            console.error("Elemen 'revisiForm' tidak ditemukan.");
+        }
     });
 </script>
 
