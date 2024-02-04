@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Jadwal Menguji
+Berita Acara Sidang Skripsi
 @endsection
 
 @section('css')
@@ -18,25 +18,27 @@ Jadwal Menguji
 @endif
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Daftar Jadwal</li>
+      <li class="breadcrumb-item"><a href="#">Lain-lain</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Sekretaris</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" style="font-weight: bold">Tabel List Sidang Proposal & Sidang Skripsi</h4>
-                <p class="card-title-desc">List sidang proposal dan skripsi dapat dilihat pada tabel dibawah ini, dan juga terdapat tombol detailnya.</p>
+                <h4 class="card-title" style="font-weight: bold">Tabel Sekretaris</h4>
+                <p class="card-title-desc">Jadwal Sidang Skripsi sebagai sekretaris dapat dilihat pada tabel dibawah ini.</code>.
+                </p>
             </div>
             <div class="card-body table-responsive">
                 <div class="row mb-3">
                     <div class="col-md-2">
-                        <label for="statusFilter">Filter Status:</label>
-                        <select id="statusFilter" class="form-control">
+                        <label for="tahunFilter">Filter Angkatan:</label>
+                        <select id="tahunFilter" class="form-control">
                             <option value="">Semua</option>
-                            <option value="proposal">Proposal</option>
-                            <option value="skripsi">Skripsi</option>
+                            @foreach($angkatan as $year)
+                                <option value="{{ $year->nama_angkatan }}">{{ $year->nama_angkatan }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -44,33 +46,34 @@ Jadwal Menguji
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Sidang</th>
-                        <th>Jadwal</th>
-                        <th>Ruang & Waktu</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Ruang</th>
+                        <th>Hari</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @php
-                        $no = 1;
+                        $no=1;
                         @endphp
-                        @foreach($uniqueJadwal as $jadwal)
+                        @foreach($baskripsi as $ba)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $jadwal->jenis_sidang }}</td>
+                            <td>{{ $ba->name }}</td>
+                            <td>{{ $ba->kode_unik }}</td>
+                            <td>{{ $ba->nama_ruangan }}</td>
                             @php
-                                $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
+                                $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
                                 $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                             @endphp
                             <td>{{ $formatTanggal }}</td>
-                            <td>{{ $jadwal->nama_ruangan }}, {{ $jadwal->jam}}</td>
-                            <td><a href="{{ url('/dosen/jadwal_menguji/detailjadwal/' . $jadwal->tanggal) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/dosen/sekretaris/detail/'.$ba->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;
                         @endphp
-                    @endforeach
-
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -116,7 +119,7 @@ Jadwal Menguji
         // Handle perubahan filter status
         $('#statusFilter').change(function() {
             var status = $(this).val();
-            table.column(1).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+            table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
         });
 
         $('#tahunFilter').change(function() {

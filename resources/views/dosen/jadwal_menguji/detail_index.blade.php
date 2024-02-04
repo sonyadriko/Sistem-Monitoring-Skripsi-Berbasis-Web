@@ -44,9 +44,10 @@ Jadwal Menguji
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Sidang</th>
-                        <th>Jadwal</th>
-                        <th>Ruang & Waktu</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Ruang</th>
+                        <th>Hari</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -54,23 +55,41 @@ Jadwal Menguji
                         @php
                         $no = 1;
                         @endphp
-                        @foreach($uniqueJadwal as $jadwal)
+                        @foreach($jadwalMengujip as $jadwal)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $jadwal->jenis_sidang }}</td>
+                            <td>{{ $jadwal->name }}</td>
+                            <td>{{ $jadwal->kode_unik }}</td>
+                            <td>{{ $jadwal->nama_ruangan }}</td>
+                            @php
+                                $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
+                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+
+                            @endphp
+                            <td>{{ $formatTanggal }}</td>
+                            <td><a href="{{ url('/dosen/berita_acara_proposal/detail/'.$jadwal->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
+                        </tr>
+                        @php
+                        $no++;
+                        @endphp
+                        @endforeach
+                        @foreach($jadwalMengujis as $jadwal)
+                        <tr>
+                            <td>{{ $no }}</td>
+                            <td>{{ $jadwal->name }}</td>
+                            <td>{{ $jadwal->kode_unik }}</td>
+                            <td>{{ $jadwal->nama_ruangan }}</td>
                             @php
                                 $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
                                 $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                             @endphp
                             <td>{{ $formatTanggal }}</td>
-                            <td>{{ $jadwal->nama_ruangan }}, {{ $jadwal->jam}}</td>
-                            <td><a href="{{ url('/dosen/jadwal_menguji/detailjadwal/' . $jadwal->tanggal) }}" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ url('/dosen/berita_acara_skripsi/detail/'.$jadwal->id_berita_acara_s) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                         @php
                         $no++;
                         @endphp
-                    @endforeach
-
+                        @endforeach
                     </tbody>
                 </table>
 

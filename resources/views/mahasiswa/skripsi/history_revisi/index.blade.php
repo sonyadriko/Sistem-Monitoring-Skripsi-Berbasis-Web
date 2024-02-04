@@ -8,7 +8,6 @@
 History Revisi Sidang
 @endsection
 
-
 @section('content')
 @if(session('success'))
 <div class="alert alert-success">
@@ -34,10 +33,7 @@ History Revisi Sidang
                 <tr>
                   <th>Bimbingan</th>
                   <th>Tanggal</th>
-                  {{-- <th>Bimbingan</th> --}}
                   <th>Revisi</th>
-                  {{-- <th>Validasi Revisi</th> --}}
-                  {{-- <th>Status</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -48,11 +44,7 @@ History Revisi Sidang
                 <tr>
                     <td>{{ $no }}</td>
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
-                    {{-- <td>{{ $no }}</td> --}}
-
                     <td>{{ $hbmhs->revisi }}</td>
-
-
                 </tr>
                 @php
                 $no++;

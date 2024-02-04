@@ -181,25 +181,6 @@
             <span class="link-title">Penjadwalan</span>
         </a>
     </li>
-
-    {{-- <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#penjadwalan" role="button" aria-controls="general">
-          <i class="link-icon" data-feather="book"></i>
-          <span class="link-title">Penjadwalan</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="penjadwalan">
-            <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Judul</a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
-                </li>
-              </ul>
-        </div>
-      </li> --}}
-
       <li class="nav-item ">
         <a class="nav-link" data-bs-toggle="collapse" href="#ba" role="button"  aria-controls="email">
           <i class="link-icon" data-feather="book"></i>
@@ -225,12 +206,6 @@
           <span class="link-title">Data Pengguna</span>
         </a>
       </li>
-      {{-- <li class="nav-item">
-        <a href="{{route('lap-tahunan.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="clipboard"></i>
-          <span class="link-title">Laporan Tahunan</span>
-        </a>
-      </li> --}}
       <li class="nav-item">
         <a href="{{route('ruangan.index')}}" class="nav-link">
           <i class="link-icon" data-feather="book"></i>
@@ -243,12 +218,6 @@
           <span class="link-title">Mata Kuliah Pendukung</span>
         </a>
       </li>
-      {{-- <li class="nav-item">
-        <a href="{{route('ruangan.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="smile"></i>
-          <span class="link-title">Info Penting</span>
-        </a>
-      </li> --}}
      @elseif(Auth::user()->role_id == 2)
      <li class="nav-item">
         <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="nav-link">
@@ -283,8 +252,8 @@
     </li>
     <li class="nav-item">
         <a href="{{route('jadwal-menguji.index')}}" class="nav-link">
-          <i class="link-icon" data-feather="sidebar"></i>
-          <span class="link-title">Daftar Jadwal</span>
+            <i class="link-icon" data-feather="sidebar"></i>
+            <span class="link-title">Daftar Jadwal</span>
         </a>
     </li>
     <li class="nav-item ">
@@ -304,7 +273,6 @@
           </ul>
         </div>
     </li>
-
     <li class="nav-item nav-category">Berita Acara</li>
     <li class="nav-item">
         <a href="{{route('berita-acara-proposal.index')}}" class="nav-link">
@@ -316,6 +284,13 @@
         <a href="{{route('berita-acara-skripsi.index')}}" class="nav-link">
           <i class="link-icon" data-feather="file-text"></i>
           <span class="link-title">Sidang Skripsi</span>
+        </a>
+    </li>
+    <li class="nav-item nav-category">Lain-lain</li>
+    <li class="nav-item">
+        <a href="{{route('sekretaris-ba.index')}}" class="nav-link">
+          <i class="link-icon" data-feather="book-open"></i>
+          <span class="link-title">Sekretaris</span>
         </a>
     </li>
     @elseif(Auth::user()->role_id == 4)
@@ -354,35 +329,3 @@
       @endif
   </div>
 </nav>
-{{-- <nav class="settings-sidebar">
-  <div class="sidebar-body">
-    <a href="#" class="settings-sidebar-toggler">
-      <i data-feather="settings"></i>
-    </a>
-    <h6 class="text-muted mb-2">Sidebar:</h6>
-    <div class="mb-3 pb-3 border-bottom">
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarLight" value="sidebar-light" checked>
-          Light
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarDark" value="sidebar-dark">
-          Dark
-        </label>
-      </div>
-    </div>
-    <div class="theme-wrapper">
-      <h6 class="text-muted mb-2">Light Version:</h6>
-      <a class="theme-item active" href="https://www.nobleui.com/laravel/template/demo1/">
-        <img src="{{ url('assets/images/screenshots/light.jpg') }}" alt="light version">
-      </a>
-      <h6 class="text-muted mb-2">Dark Version:</h6>
-      <a class="theme-item" href="https://www.nobleui.com/laravel/template/demo2/">
-        <img src="{{ url('assets/images/screenshots/dark.jpg') }}" alt="light version">
-      </a>
-    </div>
-  </div>
-</nav> --}}

@@ -51,6 +51,7 @@ use App\Http\Controllers\KajurSidangController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\KoordinatorYudisiumController;
 use App\Http\Controllers\JadwalMengujiController;
+use App\Http\Controllers\SekretarisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,8 +131,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::controller(DosenBidangIlmuController::class)->group(function () {
         Route::get('/dosen/bidang_ilmu', 'index')->name('dosen-bidang-ilmu.index');
-        // Route::get('/dosen/bidang_ilmu/create', 'create')->name('bidang-ilmu.create');
-        // Route::post('/dosen/bidang_ilmu/create', 'store')->name('bidang-ilmu.submit');
         Route::get('/dosen/bidang_ilmu/detail/{id}', 'detail')->name('dosen-bidang-ilmu.detail');
         Route::post('/dosen/bidang_ilmu/detail/{id}', 'submitpaper')->name('dosen-bidang-ilmu.store');
     });
@@ -162,6 +161,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::group(['prefix' => 'dosen/jadwal_menguji'], function () {
         Route::get('/', [JadwalMengujiController::class, 'index'])->name('jadwal-menguji.index');
+        Route::get('/detailjadwal/{tanggal}', [JadwalMengujiController::class, 'detailshow'])->name('jadwal-menguji.detailshow');
         Route::get('/detail/{id}', [JadwalMengujiController::class, 'detail'])->name('jadwal-menguji.detail');
     });
 
@@ -169,6 +169,12 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::get('/', [BeritaAcaraSkripsiController::class, 'index'])->name('berita-acara-skripsi.index');
         Route::get('/detail/{id}', [BeritaAcaraSkripsiController::class, 'detail'])->name('berita-acara-skripsi.detail');
         Route::post('/detail/store', [BeritaAcaraSkripsiController::class, 'store'])->name('berita-acara-skripsi.store');
+    });
+
+    Route::group(['prefix' => 'dosen/sekretaris'], function () {
+        Route::get('/', [SekretarisController::class, 'index'])->name('sekretaris-ba.index');
+        Route::get('/detail/{id}', [SekretarisController::class, 'detail'])->name('sekretaris-ba.detail');
+        Route::post('/detail/store', [SekretarisController::class, 'store'])->name('sekretaris-ba.store');
     });
 
     Route::group(['prefix' => 'dosen/revisi_sidang_skripsi'], function () {

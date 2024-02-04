@@ -13,8 +13,8 @@ Detail Berita Acara Sidang Skripsi
 @section('content')
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Sidang Skripsi</li>
+      <li class="breadcrumb-item"><a href="#">Lain-lain</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Sekretaris</li>
     </ol>
 </nav>
 <div class="row">
@@ -96,19 +96,6 @@ Detail Berita Acara Sidang Skripsi
                         </div>
                     </div>
                     <input type="hidden" name="berita_acara_skripsi_id" value="{{$data->id_berita_acara_s}}" />
-                    <div class="mb-3">
-                        <span>Cetak Revisi: </span>
-                        @if(count($bad) >= 4)
-                            @if(is_null($data) || is_null($data->cetak_revisi))
-                                <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
-                            @else
-                            <span>Sudah dicetak </span>
-
-                            @endif
-                        @else
-                        <span style="color: #FF0000">Seluruh dosen belum mengisi berita acara</span>
-                        @endif
-                    </div>
                 </div>
             </form>
         </div>
@@ -125,8 +112,12 @@ Detail Berita Acara Sidang Skripsi
                           <th>No</th>
                           <th>Nama</th>
                           <th>Revisi</th>
-                          <th>Nilai</th>
-                          {{-- <th>Action</th> --}}
+                          <th>Nilai Penulisan</th>
+                          <th>Nilai Penyajian</th>
+                          <th>Nilai Penguasaan Program</th>
+                          <th>Nilai Penguasaan Materi</th>
+                          <th>Nilai Penampilan</th>
+                          <th>Nilai Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,8 +129,12 @@ Detail Berita Acara Sidang Skripsi
                             <td>{{ $no }}</td>
                             <td>{{ $bad->name }}</td>
                             <td>{{ $bad->revisi }}</td>
+                            <td>{{ $bad->nilai_penulisan }}</td>
+                            <td>{{ $bad->nilai_penyajian }}</td>
+                            <td>{{ $bad->nilai_penguasaan_program }}</td>
+                            <td>{{ $bad->nilai_penguasaan_materi }}</td>
+                            <td>{{ $bad->nilai_penampilan }}</td>
                             <td>{{ $bad->nilai_total }}</td>
-                            {{-- <td><a href="{{ url('/koordinator/berita_acara_proposal/detail/' . $bad->id_detail_berita_acara_p) }}" class="btn btn-primary">Cetak</a></td>  --}}
                         </tr>
                         @php
                         $no++;
