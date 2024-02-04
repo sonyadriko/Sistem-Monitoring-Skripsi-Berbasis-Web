@@ -16,27 +16,30 @@ class BeritaAcaraSkripsiController extends Controller
     }
     public function index()
     {
+        try {
+            $baskripsi = DB::table('berita_acara_skripsi')
+            ->join('users', 'users.id', 'berita_acara_skripsi.users_id')
+            ->join('sidang_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'berita_acara_skripsi.sidang_skripsi_id')
+            ->leftjoin('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
+            ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
+            ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
+            ->where(function($query) {
+                $query->where('sidang_skripsi.dosen_penguji_1', Auth::user()->id)
+                    ->orWhere('sidang_skripsi.dosen_penguji_2',  Auth::user()->id)
+                    ->orWhere('sidang_skripsi.dosen_penguji_3', Auth::user()->id)
+                    ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', Auth::user()->name);
+            })
+            ->latest('berita_acara_skripsi.created_at')
+            ->get();
 
-        $baskripsi = DB::table('berita_acara_skripsi')
-        ->join('users', 'users.id', 'berita_acara_skripsi.users_id')
-        ->join('sidang_skripsi', 'sidang_skripsi.id_sidang_skripsi', 'berita_acara_skripsi.sidang_skripsi_id')
-        ->leftjoin('bimbingan_skripsi', 'bimbingan_skripsi.id_bimbingan_skripsi', 'sidang_skripsi.bimbingan_skripsi_id')
-        ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-        ->join('ruangan', 'ruangan.id_ruangan', 'sidang_skripsi.ruangan')
-        ->where(function($query) {
-            $query->where('sidang_skripsi.dosen_penguji_1', Auth::user()->id)
-                  ->orWhere('sidang_skripsi.dosen_penguji_2',  Auth::user()->id)
-                  ->orWhere('sidang_skripsi.dosen_penguji_3', Auth::user()->id)
-                  ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', Auth::user()->name);
-        })
-        ->latest('berita_acara_skripsi.created_at')
-        ->get();
-
-        $angkatan = DB::table('angkatan')->get();
+            $angkatan = DB::table('angkatan')->get();
 
 
-        return view('dosen/berita_acara/sidang.index', compact('baskripsi', 'angkatan'));
-
+            return view('dosen/berita_acara/sidang.index', compact('baskripsi', 'angkatan'));
+        } catch (\Exception $e) {
+            // Menangani eksepsi di sini
+            return view('404'); // Atau Anda dapat mengembalikan tampilan khusus untuk error
+        }
     }
     public function detail($id)
     {

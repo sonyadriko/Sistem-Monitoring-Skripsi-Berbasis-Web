@@ -39,7 +39,6 @@ class MataKuliahPendukungController extends Controller
         $form->save();
         $message = 'Mata kuliah berhasil ditambahkan!';
 
-        // return redirect('/koordinator/mata_kuliah_pendukung')->with('success', $message);
         return redirect('/koordinator/mata_kuliah_pendukung');
 
     }

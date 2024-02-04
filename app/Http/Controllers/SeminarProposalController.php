@@ -27,16 +27,6 @@ class SeminarProposalController extends Controller
         return view('mahasiswa/proposal/seminar_proposal.index', compact('datas'));
     }
 
-    // public function showFormPengajuan() {
-    //     $pengajuan = SeminarProposal::where('users_id', auth()->user()->id)->first();
-
-    //     if (!$pengajuan) {
-    //         // Jika belum pernah submit pengajuan, tampilkan formulir kosong
-    //         return view('mahasiswa/proposal/seminar_proposal.index');
-    //     }
-
-    // }
-
     public function checkStatus()
     {
         $datas = DB::table('users')

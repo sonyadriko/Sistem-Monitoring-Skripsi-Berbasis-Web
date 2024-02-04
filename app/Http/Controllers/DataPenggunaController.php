@@ -24,7 +24,6 @@ class DataPenggunaController extends Controller
     }
     public function mhs()
     {
-        // $datas = DB::table('users')->where('role_id', '1')->get();
         $datas = DB::table('users')
         ->leftjoin('pengajuan_judul', 'pengajuan_judul.users_id', 'users.id')
         ->leftjoin('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'pengajuan_judul.bidang_ilmu_id')
@@ -45,7 +44,6 @@ class DataPenggunaController extends Controller
     }
     public function newuser()
     {
-        // $datas = DB::table('users')->where('role_id', '1')->get();
         $datas = DB::table('users')->where('role_id', '1')->where('status', 'pending')->get();
         $angkatan = DB::table('angkatan')->get();
 
@@ -68,7 +66,6 @@ class DataPenggunaController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            // $user->status = 'nonaktif'; // Gantilah 'nonaktif' sesuai dengan nilai yang sesuai di model Anda
             $user->delete();
 
             return redirect()->back()->with('success', 'Pengguna ditolak');

@@ -101,11 +101,9 @@ class SidangSkripsiController extends Controller
             'slip_file.max' => 'File slip pembayaran may not be greater than 1000 KB.',
         ]);
 
-        // Generate unique file names
-        // $fileSkripsiName = uniqid() . '.' . $request->file('skripsi_file')->getClientOriginalExtension();
+
         $fileSkripsiName = $request->file('skripsi_file')->getClientOriginalName();
         $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
-        // $fileSlipPembayaranName = uniqid() . '.' . $request->file('slip_file')->getClientOriginalExtension();
 
         // Move the files to the appropriate directory
         $userFolder = Auth::user()->name;

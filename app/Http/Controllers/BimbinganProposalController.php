@@ -27,7 +27,7 @@ class BimbinganProposalController extends Controller
             ->latest('detail_bimbingan_proposal.created_at') // Order by the creation timestamp in descending order
             ->first();
 
-    return view('mahasiswa/proposal/bimbingan.index', compact('dosens', 'detailbim'));
+        return view('mahasiswa/proposal/bimbingan.index', compact('dosens', 'detailbim'));
 
 
     }

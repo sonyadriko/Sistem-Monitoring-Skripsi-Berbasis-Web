@@ -1,4 +1,4 @@
-@extends('layout.master2')
+@extends('layout.master_login')
 
 @section('title')
     Login
@@ -6,23 +6,19 @@
 
 @section('content')
 
-<!-- Section: Design Block -->
-<section class="h-100 d-flex justify-content-center align-items-center" style="background: linear-gradient(to bottom, #1D4ED8 50%, #3B82F6);">
-    <!-- Jumbotron -->
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <!-- Gambar di kiri -->
-            <div class="col-lg-6 mb-5 mb-lg-0 text-center position-relative" style="height: 100vh; overflow: hidden;">
-                <img src="{{ asset('img/login/img_login.svg') }}" alt="User Icon" class="img-fluid translate-middle-y" style="min-width: 100%; min-height: 100%;">
-            </div>
-
-            <div class="col-lg-6 mb-5 mb-lg-0">
-                <div class="card mx-auto" style="max-width: 500px;">
-                    <div class="card-body py-5 px-md-5">
-                        <h2 class="text-primary text-center mb-4">Login</h2>
-                        <p class="text-muted text-center mb-4">Izinkan Sistem mengenali anda.</p>
-                        <!-- Display error message -->
-
+    <div class="d-lg-flex half">
+        <div class="contents order-2">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-7">
+                        <div class="mb-4" style="text-align: center">
+                            <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                            <img src="{{ asset('img/login/logo_si_mini_normal.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                        </div>
+                        <div class="mb-4">
+                            <h2 class="text-primary text-center mb-4" style="text-align: center">Login</h2>
+                            <p class="mb-4" style="text-align: center; color: #7987A1; font-size: 14px">Izinkan Sistem mengenali anda.</p>
+                        </div>
                         <script>
                             @if($errors->any())
                                 Swal.fire({
@@ -32,10 +28,8 @@
                                 });
                             @endif
                         </script>
-
-                        <form method="POST" action="{{ route('login') }}">
+                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-
                             <div class="mb-3">
                                 <label for="email" class="form-label text-dark">Email address</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror text-dark" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -60,19 +54,18 @@
                                 <button type="submit" class="btn btn-primary w-100">Login</button>
                             </div>
                         </form>
-
-                        <!-- Registration link -->
                         <div class="mt-3 text-center">
                             <p class="text-muted">Belum punya akun? <a href="{{ route('register') }}" class="text-dark">Register</a></p>
                         </div>
+                        <p class="text-center mt-4" style="color: #171717">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
+
                     </div>
                 </div>
             </div>
         </div>
+        <div class="bg d-none d-lg-block order-1" style="background-image: url('{{ asset('img/login/img_login.svg') }}'); background-size: cover;"></div>
     </div>
-    <!-- Jumbotron -->
-</section>
-<!-- Section: Design Block -->
+
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -29,10 +29,7 @@ class ProfileController extends Controller
 
         $data = [
             'data' => DB::table('users')->where('id', '=',$id)->first(),
-            // 'bidang_ilmu' => DB::table('bidang_ilmu')->select('id', 'topik_bidang_ilmu')->get(),
         ];
-
-        // return view('koordinator/penjadwalan/seminar_proposal.detail', $data);
 
         return view('/mahasiswa/profile.edit', $data);
     }
@@ -62,8 +59,6 @@ class ProfileController extends Controller
 
         // return redirect()->back()->with('success', 'Profile updated successfully');
         return redirect('/dashboard')->with('success', 'Profile updated successfully');
-
-
 
     }
 }

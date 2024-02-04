@@ -37,7 +37,7 @@ class RevisiSeminarProposalController extends Controller
             ->where('berita_acara_proposal.users_id', Auth::user()->id)
             ->get();
 
-            $detailrev = DB::table('detail_revisi_seminar_proposal')
+        $detailrev = DB::table('detail_revisi_seminar_proposal')
             ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', '=', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
             ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', '=', 'revisi_seminar_proposal.berita_acara_proposal_id')
             ->join('users', 'users.id', '=', 'detail_revisi_seminar_proposal.users_id')
@@ -45,18 +45,13 @@ class RevisiSeminarProposalController extends Controller
             ->groupBy('berita_acara_proposal.users_id', 'detail_revisi_seminar_proposal.revisi')
             ->get();
 
-            $latestRevisions = DB::table('detail_revisi_seminar_proposal')
-    ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', '=', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
-    ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', '=', 'revisi_seminar_proposal.berita_acara_proposal_id')
-    ->join('users', 'users.id', '=', 'detail_revisi_seminar_proposal.users_id')
-    ->select('berita_acara_proposal.users_id', 'detail_revisi_seminar_proposal.revisi', DB::raw('GROUP_CONCAT(DISTINCT users.name) as unique_names'), 'detail_revisi_seminar_proposal.id_detail_revisi_seminar')
-    ->groupBy('berita_acara_proposal.users_id', 'detail_revisi_seminar_proposal.revisi', 'detail_revisi_seminar_proposal.id_detail_revisi_seminar')
-    ->get();
-
-
-            // var_dump($detailrev);
-
-
+        $latestRevisions = DB::table('detail_revisi_seminar_proposal')
+            ->join('revisi_seminar_proposal', 'revisi_seminar_proposal.id_revisi_seminar_proposal', '=', 'detail_revisi_seminar_proposal.revisi_seminar_proposal_id')
+            ->join('berita_acara_proposal', 'berita_acara_proposal.id_berita_acara_p', '=', 'revisi_seminar_proposal.berita_acara_proposal_id')
+            ->join('users', 'users.id', '=', 'detail_revisi_seminar_proposal.users_id')
+            ->select('berita_acara_proposal.users_id', 'detail_revisi_seminar_proposal.revisi', DB::raw('GROUP_CONCAT(DISTINCT users.name) as unique_names'), 'detail_revisi_seminar_proposal.id_detail_revisi_seminar')
+            ->groupBy('berita_acara_proposal.users_id', 'detail_revisi_seminar_proposal.revisi', 'detail_revisi_seminar_proposal.id_detail_revisi_seminar')
+            ->get();
 
         return view('mahasiswa/proposal/revisi.index', compact('revisisp', 'revisisp2', 'detailrev', 'latestRevisions')) ;
 

@@ -16,16 +16,11 @@ class BimbinganSkripsiController extends Controller
     }
     public function index()
     {
-        // $bimbingans = DB::table('bimbingan_skripsi')
-        //     ->join('bimbingan')
-        //     ->where('users_id', Auth::user()->id)
-        //     ->first();
+
         $bimbingans = DB::table('bimbingan_skripsi')
         ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'bimbingan_skripsi.bimbingan_proposal_id')
-        // ->join('detail_bimbingan_skripsi', 'detail_bimbingan_skripsi.bimbingan_skripsi_id', 'bimbingan_skripsi.id_bimbingan_skripsi')
         ->select('bimbingan_skripsi.*', 'bimbingan_proposal.dosen_pembimbing_utama', 'bimbingan_proposal.dosen_pembimbing_ii')
         ->where('bimbingan_skripsi.users_id', Auth::user()->id)
-        // ->latest('detail_bimbingan_skripsi.created_at') // Order by the creation timestamp in descending order
         ->first();
 
         $detailbim = DB::table('detail_bimbingan_skripsi')
@@ -35,10 +30,7 @@ class BimbinganSkripsiController extends Controller
             ->latest('detail_bimbingan_skripsi.created_at') // Order by the creation timestamp in descending order
             ->first();
 
-        // return view('mahasiswa/proposal/bimbingan.index', compact('dosens'));
         return view('mahasiswa/skripsi/bimbingan.index', compact('bimbingans', 'detailbim'));
-
-
     }
 
     public function store(Request $request)
@@ -52,7 +44,6 @@ class BimbinganSkripsiController extends Controller
 
         if ($request->hasFile('file_skripsi')) {
             $proposalFilePath = $request->file('file_skripsi');
-            // $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
             $fileName = $proposalFilePath->getClientOriginalName();
             $userFolder = Auth::user()->name;
             $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_skripsi/'), $fileName);

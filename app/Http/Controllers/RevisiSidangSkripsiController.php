@@ -56,11 +56,6 @@ class RevisiSidangSkripsiController extends Controller
                 return response()->json(['success' => false, 'message' => 'File Skripsi tidak valid.']);
             }
 
-            // $revisi = new RevisiSidangSkripsi();
-            // $revisi->berita_acara_skripsi_id = $request->input('berita_acara_id'); // Sesuaikan ini dengan input yang benar
-            // $revisi->file_revisi = $fileUrl;
-            // $revisi->save();
-
             $detailrevisi = new DetailRevisiSidangSkripsi();
             $detailrevisi->revisi_sidang_skripsi_id = $request->input('berita_acara_id');
             $detailrevisi->file_revisi = $fileUrl;

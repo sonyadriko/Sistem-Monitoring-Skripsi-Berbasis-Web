@@ -16,43 +16,55 @@ class BeritaAcaraProposalController extends Controller
     }
     public function index()
     {
-        $ba = DB::table('berita_acara_proposal')
-        ->join('users', 'users.id', 'berita_acara_proposal.users_id')
-        ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
-        ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
-        ->leftjoin('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
-        ->where(function($query) {
-            $query->where('seminar_proposal.dosen_penguji_1', '=', Auth::user()->id)
-                  ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id)
-                  ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', '=', Auth::user()->name);
-        })
-        ->latest('berita_acara_proposal.created_at')
-        ->get();
-        $angkatan = DB::table('angkatan')->get();
-        return view('dosen/berita_acara/seminar.index', compact('ba', 'angkatan'));
+        try {
+            $ba = DB::table('berita_acara_proposal')
+                ->join('users', 'users.id', 'berita_acara_proposal.users_id')
+                ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
+                ->leftjoin('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+                ->leftjoin('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+                ->where(function ($query) {
+                    $query->where('seminar_proposal.dosen_penguji_1', '=', Auth::user()->id)
+                        ->orWhere('seminar_proposal.dosen_penguji_2', '=', Auth::user()->id)
+                        ->orWhere('bimbingan_proposal.dosen_pembimbing_utama', '=', Auth::user()->name);
+                })
+                ->latest('berita_acara_proposal.created_at')
+                ->get();
+            $angkatan = DB::table('angkatan')->get();
+
+            return view('dosen/berita_acara/seminar.index', compact('ba', 'angkatan'));
+        } catch (QueryException $e) {
+            // Handle the query exception
+            // Log the error, redirect to an error page, or display a custom error message
+            return redirect()->route('404')->with('error', 'An error occurred while fetching data.');
+        }
     }
     public function detail($id)
     {
-        $data = [
-            'data' => DB::table('berita_acara_proposal')
-                ->join('users', 'users.id', 'berita_acara_proposal.users_id')
-                ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
-                ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
-                ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
-                ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
-                ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
-                ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
-                ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
-                ->where('id_berita_acara_p', $id)
-                ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*', 'ruangan.nama_ruangan','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'pengajuan_judul.judul')
-                ->first(),
+        try {
+            $data = [
+                'data' => DB::table('berita_acara_proposal')
+                    ->join('users', 'users.id', 'berita_acara_proposal.users_id')
+                    ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
+                    ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')
+                    ->join('users as penguji2', 'penguji2.id', 'seminar_proposal.dosen_penguji_2')
+                    ->join('bimbingan_proposal', 'bimbingan_proposal.id_bimbingan_proposal', 'seminar_proposal.bimbingan_proposal_id')
+                    ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'bimbingan_proposal.bidang_ilmu_id')
+                    ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
+                    ->join('ruangan', 'ruangan.id_ruangan', 'seminar_proposal.ruangan')
+                    ->where('id_berita_acara_p', $id)
+                    ->select('berita_acara_proposal.*', 'users.*', 'seminar_proposal.*', 'bidang_ilmu.*', 'bimbingan_proposal.*', 'ruangan.nama_ruangan','penguji1.name as nama_penguji_1', 'penguji2.name as nama_penguji_2', 'pengajuan_judul.judul')
+                    ->first(),
 
-        ];
-        $detail = [
-            'detail' => DB::table('detail_berita_acara_proposal')->where('berita_acara_proposal_id', $id)->where('users_id', Auth::user()->id)->first(),
-        ];
-        // var_dump($detail);
-        return view('dosen/berita_acara/seminar.detail', $data, $detail);
+            ];
+            $detail = [
+                'detail' => DB::table('detail_berita_acara_proposal')->where('berita_acara_proposal_id', $id)->where('users_id', Auth::user()->id)->first(),
+            ];
+            return view('dosen/berita_acara/seminar.detail', $data, $detail);
+        } catch (QueryException $e) {
+            // Handle the query exception
+            // Log the error, redirect to an error page, or display a custom error message
+            return redirect()->route('404')->with('error', 'An error occurred while fetching data.');
+        }
     }
 
     public function showReviewForm($id)

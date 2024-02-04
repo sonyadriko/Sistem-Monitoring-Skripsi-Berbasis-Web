@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class DosenBidangIlmuController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('checkDosen');
@@ -49,7 +48,6 @@ class DosenBidangIlmuController extends Controller
                 $safeFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $fileName = $safeFileName . '_' . time() . '.' . $file->getClientOriginalExtension();
                 $userFolder = Auth::user()->name;
-                // $filePath = $file->storeAs('papers', $fileName, 'public');
                 $file->move(public_path('uploads/'.$userFolder.'/paper/'), $fileName);
                 $fileUrl = 'uploads/'.$userFolder.'/paper/'.$fileName;
 
