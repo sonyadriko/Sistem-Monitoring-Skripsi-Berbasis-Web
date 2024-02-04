@@ -17,10 +17,10 @@
 	<div class="d-flex justify-content-between align-items-center grid-margin flex-wrap">
 
 		<div>
-			<h4 class="mb-md-0 mb-3">Welcome to Dashboard</h4>
+			<h4 class="mb-md-0 mb-3">Selamat Datang</h4>
 		</div>
 	</div>
-	<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi</h6>
+	<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
 
 	<div class="row">
 		<div class="col-lg-12 col-xl-12 grid-margin stretch-card">
@@ -30,23 +30,11 @@
 					<div class="progress mt-4">
 						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
 					</div>
-					{{-- <div class="progress-text">
-						<ul class="list-inline" style="display: flex; width: {{ $progressPercentage }}%;">
-							@foreach ($tables as $table)
-								<li class="list-inline-item">{{ $table }}</li>
-							@endforeach
-						</ul>
-					</div> --}}
 					<div class="row mt-1">
 						@foreach ($tables as $table)
 							<div class="col text-center" style="font-weight: bold">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
 						@endforeach
 					</div>
-					{{-- @if ($progressPercentage == 12.5)
-						<div class="additional-text">
-							Text 1
-						</div>
-					@endif --}}
 				</div>
 			</div>
 		</div>
@@ -67,8 +55,8 @@
 						</div>
 					</div>
 
-					<p class="text-muted mb-2">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
-					{{-- <p>Lihat lebih banyak</p> --}}
+					<p class="text-dark mb-2">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
+					<p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p>
 				</div>
 			</div>
 		</div>

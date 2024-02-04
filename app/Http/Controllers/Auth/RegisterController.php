@@ -74,7 +74,8 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->input('password')),
                 'ktm' => "uploads/{$userFolder}/ktm/{$fileProposalName}",
                 'role_id' => 1,
-                'status' => 'pending',
+                // 'status' => 'pending',
+                'status' => 'aktif',
             ]);
 
             // Kirim notifikasi ke email pengguna
