@@ -89,72 +89,78 @@ class SeminarProposalController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'bimbingan_proposal_id' => 'required',
-        'proposal_file' => 'required|mimes:pdf|max:5000',
-        'slip_file' => 'required|mimes:pdf|max:1000',
-    ], [
-        'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID diperlukan.',
-        'proposal_file.required' => 'File proposal diperlukan.',
-        'proposal_file.mimes' => 'File proposal harus berformat PDF.',
-        'proposal_file.max' => 'File proposal tidak boleh lebih dari 5000 KB.',
-        'slip_file.required' => 'File slip pembayaran diperlukan.',
-        'slip_file.mimes' => 'File slip pembayaran harus berformat PDF.',
-        'slip_file.max' => 'File slip pembayaran tidak boleh lebih dari 1000 KB.',
-    ]);
+    {
+        $validatedData = $request->validate([
+            'bimbingan_proposal_id' => 'required',
+            'proposal_file' => 'required|mimes:pdf|max:10000',
+            'slip_file' => 'required|mimes:pdf|max:1000',
+        ], [
+            'bimbingan_proposal_id.required' => 'Bimbingan Proposal ID diperlukan.',
+            'proposal_file.required' => 'File proposal diperlukan.',
+            'proposal_file.mimes' => 'File proposal harus berformat PDF.',
+            'proposal_file.max' => 'File proposal tidak boleh lebih dari 10 MB.',
+            'slip_file.required' => 'File slip pembayaran diperlukan.',
+            'slip_file.mimes' => 'File slip pembayaran harus berformat PDF.',
+            'slip_file.max' => 'File slip pembayaran tidak boleh lebih dari 1 MB.',
+        ]);
 
-    try {
-        // Cek apakah ada pengajuan sebelumnya dari pengguna yang sama
-        $existingProposal = SeminarProposal::where('users_id', Auth::user()->id)
-            ->where('bimbingan_proposal_id', $validatedData['bimbingan_proposal_id'])
-            ->first();
+        try {
+            // Cek apakah ada pengajuan sebelumnya dari pengguna yang sama
+            $existingProposal = SeminarProposal::where('users_id', Auth::user()->id)
+                ->where('bimbingan_proposal_id', $validatedData['bimbingan_proposal_id'])
+                ->first();
 
-        if ($existingProposal) {
-            // Jika ada, update pengajuan yang sudah ada
-            $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
-            $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
+            if ($existingProposal) {
+                // Jika ada, update pengajuan yang sudah ada
+                $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
+                $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
+                $userFolder = Auth::user()->name;
+                // Pindahkan file ke direktori yang sesuai
+                try {
+                    $request->file('proposal_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileProposalName);
+                    $request->file('slip_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileSlipPembayaranName);
+                } catch (FileException $e) {
+                    // Tangani kesalahan penyimpanan file di sini
+                    throw new \Exception('Gagal menyimpan file: ' . $e->getMessage());
+                }
+                // Update data pengajuan yang sudah ada
+                $existingProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
+                $existingProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
+                $existingProposal->status = 'pending';
+                $existingProposal->alasan = null;
+                // 'alasan' => null, // Reset alasan penolakan jika ada
 
-            // Pindahkan file ke direktori yang sesuai
-            $userFolder = Auth::user()->name;
-            $request->file('proposal_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileProposalName);
-            $request->file('slip_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileSlipPembayaranName);
+                $existingProposal->save();
 
-            // Update data pengajuan yang sudah ada
-            $existingProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
-            $existingProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
-            $existingProposal->status = 'pending';
-            $existingProposal->alasan = null;
-            // 'alasan' => null, // Reset alasan penolakan jika ada
+                return redirect('/dashboard')->with('success', 'Berhasil memperbarui pengajuan.');
+            } else {
+                // Jika tidak ada, buat pengajuan baru
+                $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
+                $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
+                $userFolder = Auth::user()->name;
+                // Pindahkan file ke direktori yang sesuai
+                try {
+                    $request->file('proposal_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileProposalName);
+                    $request->file('slip_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileSlipPembayaranName);
+                } catch (FileException $e) {
+                    // Tangani kesalahan penyimpanan file di sini
+                    throw new \Exception('Gagal menyimpan file: ' . $e->getMessage());
+                }
+                // Simpan data pengajuan baru
+                $seminarProposal = new SeminarProposal();
+                $seminarProposal->users_id = Auth::user()->id;
+                $seminarProposal->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
+                $seminarProposal->status = 'pending';
+                $seminarProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
+                $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
+                $seminarProposal->save();
 
-            $existingProposal->save();
-
-            return redirect('/dashboard')->with('success', 'Berhasil memperbarui pengajuan.');
-        } else {
-            // Jika tidak ada, buat pengajuan baru
-            $fileProposalName = $request->file('proposal_file')->getClientOriginalName();
-            $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
-
-            // Pindahkan file ke direktori yang sesuai
-            $userFolder = Auth::user()->name;
-            $request->file('proposal_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileProposalName);
-            $request->file('slip_file')->move(public_path("uploads/{$userFolder}/seminar_proposal/"), $fileSlipPembayaranName);
-
-            // Simpan data pengajuan baru
-            $seminarProposal = new SeminarProposal();
-            $seminarProposal->users_id = Auth::user()->id;
-            $seminarProposal->bimbingan_proposal_id = $validatedData['bimbingan_proposal_id'];
-            $seminarProposal->status = 'pending';
-            $seminarProposal->file_proposal = "uploads/{$userFolder}/seminar_proposal/{$fileProposalName}";
-            $seminarProposal->file_slip_pembayaran = "uploads/{$userFolder}/seminar_proposal/{$fileSlipPembayaranName}";
-            $seminarProposal->save();
-
-            return redirect('/dashboard')->with('success', 'Berhasil Daftar Sidang Proposal.');
+                return redirect('/dashboard')->with('success', 'Berhasil Daftar Sidang Proposal.');
+            }
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika ada
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    } catch (\Exception $e) {
-        // Tangani kesalahan jika ada
-        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
     }
-}
 
 }

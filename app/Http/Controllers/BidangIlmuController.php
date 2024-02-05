@@ -40,13 +40,13 @@ class BidangIlmuController extends Controller
         $validatedData = $request->validate([
             'topik_bidang_ilmu' => 'required|string',
             'selected_mkp.*' => 'required|string',
-            'dosen_pengampu.*' => 'required|string', // You can remove this line if it's not part of the form
+            'dosen_pengampu.*' => 'required|string',
             'keterangan' => 'required|string',
         ], [
-            'topik_bidang_ilmu.required' => 'Topik bidang ilmu is required.',
+            'topik_bidang_ilmu.required' => 'Topik bidang ilmu diperlukan.',
             'selected_mkp.*.exists' => 'Invalid Matakuliah Pendukung selected.',
             'selected_users.*.exists' => 'Invalid User selected.',
-            'keterangan.required' => 'Keterangan is required.',
+            'keterangan.required' => 'Keterangan diperlukan.',
         ]);
         $selectedUsers = $request->input('selected_users') ?? [];
 
@@ -78,7 +78,8 @@ class BidangIlmuController extends Controller
 
 
         // Redirect to the dashboard or any other appropriate route
-        return redirect('/koordinator/bidang_ilmu');
+        // return redirect('/koordinator/bidang_ilmu');
+        return redirect('/koordinator/bidang_ilmu')->with('success', 'Bidang ilmu berhasil disimpan');
     }
 
     public function detail($id, Request $request)
@@ -91,22 +92,4 @@ class BidangIlmuController extends Controller
                     ->where('id_bidang_ilmu', $id)->get();
         return view('koordinator/bidang_ilmu.detail', compact('bidetail', 'paper'));
     }
-//     public function detail($id, Request $request)
-// {
-//     $bidetail = BidangIlmu::with('mataKuliahPendukung')->find($id);
-//     $paper = DB::table('paper_bidang_ilmu')
-//         ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', 'paper_bidang_ilmu.bidang_ilmu_id')
-//         ->where('id_bidang_ilmu', $id)
-//         ->get();
-
-//     return view('koordinator/bidang_ilmu.detail', compact('bidetail', 'paper'));
-// }
-
-
-// public function mataKuliahPendukung()
-// {
-//     return $this->belongsTo(MataKuliahPendukung::class, 'mata_kuliah_pendukung');
-// }
-
-
 }

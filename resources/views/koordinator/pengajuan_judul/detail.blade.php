@@ -223,7 +223,7 @@ $(document).ready(function () {
                             // Handle success (if needed)
                             Swal.fire({
                                 title: 'Berhasil!',
-                                text: 'Pengajuan diterima.',
+                                text: 'Pengajuan berhasil diterima.',
                                 icon: 'success',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
@@ -251,7 +251,7 @@ $(document).ready(function () {
             // Display SweetAlert for validation error
             Swal.fire({
                 title: 'Gagal!',
-                text: 'Pastikan semua bidang terisi.',
+                text: 'Harap mengisi semua input.',
                 icon: 'error',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK'

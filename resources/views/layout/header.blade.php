@@ -125,15 +125,15 @@
 				<div aria-labelledby="profileDropdown" class="dropdown-menu p-0">
 					<div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
 						<div class="mb-3">
-							@if (Auth::user()->role_id == 1)
-                    <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/mhs_profile.svg') }}">
-                    @elseif(Auth::user()->role_id == 2)
-                    <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/man_profile.svg') }}">
-                    @elseif(Auth::user()->role_id == 3)
-                    <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/women_profile.svg') }}">
-                    @elseif(Auth::user()->role_id == 4)
-                    <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/women_profile.svg') }}">
-                    @endif
+                        @if (Auth::user()->role_id == 1)
+                        <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/mhs_profile.svg') }}">
+                        @elseif(Auth::user()->role_id == 2)
+                        <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/man_profile.svg') }}">
+                        @elseif(Auth::user()->role_id == 3)
+                        <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/women_profile.svg') }}">
+                        @elseif(Auth::user()->role_id == 4)
+                        <img alt="profile" class="wd-80 ht-80 rounded-circle" src="{{ asset('img/women_profile.svg') }}">
+                        @endif
 						</div>
 						<div class="text-center">
 							<p class="tx-16 fw-bolder">{{ Auth::user()->name }}</p>
@@ -159,24 +159,6 @@
 							</a>
 						</li>
                         @endif
-						{{-- <li class="dropdown-item py-2">
-              <a href="javascript:;" class="text-body ms-0">
-                <i class="me-2 icon-md" data-feather="edit"></i>
-                <span>Edit Profile</span>
-              </a>
-            </li>
-            <li class="dropdown-item py-2">
-              <a href="javascript:;" class="text-body ms-0">
-                <i class="me-2 icon-md" data-feather="repeat"></i>
-                <span>Switch User</span>
-              </a>
-            </li> --}}
-						{{-- <li class="dropdown-item py-2">
-              <a href="{{ route('logout') }}" class="text-body ms-0">
-                <i class="me-2 icon-md" data-feather="log-out"></i>
-                <span>Log Out</span>
-              </a>
-            </li> --}}
 						<li class="dropdown-item py-2">
 							<a href="{{ route('auth-logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 								<i class="icon-md me-2" data-feather="log-out"></i>

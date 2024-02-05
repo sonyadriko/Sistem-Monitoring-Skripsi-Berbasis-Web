@@ -214,22 +214,43 @@ $(function() {
 
     // Fungsi untuk menampilkan konfirmasi menggunakan SweetAlert
     function showConfirmation() {
-      // Gunakan SweetAlert untuk menampilkan pesan konfirmasi sederhana
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Apakah Anda ingin menyimpan perubahan?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
-          saveChanges();
-        }
-      });
-    }
+        var bidangIlmu = $('#bidang_ilmu_id').val();
+        var judul = $('#judul').val();
 
+        var jumlahKata = judul.split(/\s+/).length;
+        if (jumlahKata > 12) {
+            Swal.fire({
+
+
+        title: 'Error',
+                    text: 'Jumlah kata pada judul tidak boleh lebih dari 12.',
+                    icon: 'error',
+                });
+                return; // Menghentikan proses lebih lanjut jika ada error
+            }
+
+        if (bidangIlmu === '' || judul === '') {
+            // If either file is not uploaded, show an error message
+            Swal.fire({
+                title: 'Error',
+                text: 'Harap mengisi semua input.',
+                icon: 'error',
+            });
+        } else { Swal.fire({
+                title: 'Are you sure?',
+                text: 'Apakah Anda ingin menyimpan perubahan?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
+                saveChanges();
+                }
+            });
+        }
+    }
     // Fungsi untuk menyimpan perubahan
     function saveChanges() {
       // Anda dapat menambahkan logika untuk menyimpan perubahan ke server di sini

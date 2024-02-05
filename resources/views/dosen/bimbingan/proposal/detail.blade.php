@@ -11,7 +11,12 @@ Detail Bimbingan Proposal
 
 @endsection
 @section('content')
-
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Bimbingan Proposal</li>
+    </ol>
+</nav>
 <div class="row">
     <h4>Status Bimbingan Proposal</h4>
     <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
@@ -191,6 +196,7 @@ Revisi berhasil dikirim! <button id="okButton" class="btn btn-primary">OK</butto
         $('#revisiModal').modal('show');
 
         // Optionally, you can set other values or perform other actions here
+
     }
 </script>
 

@@ -53,6 +53,20 @@ class RegisterController extends Controller
             'kode_unik' => 'required|unique:users',
             'name' => 'required',
             'password' => 'required|confirmed|min:6',
+            'ktm' => 'required|mimes:pdf|max:1000'
+        ], [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Email harus berformat valid.',
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
+            'kode_unik.required' => 'Kode unik wajib diisi.',
+            'kode_unik.unique' => 'Kode unik sudah digunakan oleh pengguna lain.',
+            'name.required' => 'Nama wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'password.min' => 'Password minimal harus 6 karakter.',
+            'ktm.required' => 'File KTM wajib diunggah.',
+            'ktm.mimes' => 'File KTM harus berformat PDF.',
+            'ktm.max' => 'Ukuran file KTM tidak boleh lebih dari 1000 KB.'
         ]);
 
         if ($validator->fails()) {
@@ -81,10 +95,8 @@ class RegisterController extends Controller
             // Kirim notifikasi ke email pengguna
             // Implementasikan notifikasi email menggunakan Laravel Notifications
 
-            // return view('auth/register')->with('script', 'showSuccessAlert();');
-            // return redirect()->back()->with('script', 'showSuccessAlert();');
 
-            return redirect()->back()->with('success', 'Pendaftaran berhasil. Tunggu persetujuan admin.');
+            return redirect()->back()->with('success', 'Pendaftaran berhasil. Tunggu persetujuan koordinator.');
         } catch (QueryException $e) {
             // Tangani kesalahan saat menyimpan ke database
             $errorCode = $e->errorInfo[1];

@@ -26,7 +26,7 @@ Bimbingan Skripsi
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Mahasiswa Bimbingan Skripsi</h4>
+                <h4 class="card-title" style="font-weight: bold">Mahasiswa Bimbingan Skripsi</h4>
                 <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</code>.
                 </p>
             </div>

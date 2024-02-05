@@ -2,7 +2,6 @@
 
 @push('plugin-styles')
 <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
-{{-- <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet"> --}}
 @endpush
 
 @section('title')
@@ -10,7 +9,6 @@ Pengajuan Judul
 @endsection
 
 @section('css')
-{{-- <link href="{{ URL::asset('assets2/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css') }}" rel="stylesheet"> --}}
 @endsection
 
 @section('content')
@@ -25,7 +23,6 @@ Pengajuan Judul
       <li class="breadcrumb-item active" aria-current="page">Pengajuan Judul</li>
     </ol>
 </nav>
-{{-- @if(is_null($judul) || is_null($judul->status)) --}}
 
 @if($status === 'tolak')
     <div class="alert alert-danger" role="alert">
@@ -181,11 +178,6 @@ Pengajuan Judul
     </div>
     </div>
 </div>
-<!-- end row -->
-{{-- @else --}}
-
-<!-- end row -->
-{{-- @endif --}}
 @endsection
 
 
@@ -196,13 +188,13 @@ Pengajuan Judul
 
 
 @push('plugin-scripts')
-<script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  {{-- <script src="{{ asset('assets/js/wizard.js') }}"></script> --}}
-  <script>
+<script>
 $(function() {
     'use strict';
 
@@ -222,20 +214,40 @@ $(function() {
 
     // Fungsi untuk menampilkan konfirmasi menggunakan SweetAlert
     function showConfirmation() {
-      // Gunakan SweetAlert untuk menampilkan pesan konfirmasi sederhana
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Apakah Anda ingin menyimpan perubahan?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
-          saveChanges();
+        var bidangIlmu = $('#bidang_ilmu_id').val();
+        var judul = $('#judul').val();
+
+        var jumlahKata = judul.split(/\s+/).length;
+        if (jumlahKata > 12) {
+            Swal.fire({
+        title: 'Error',
+                    text: 'Jumlah kata pada judul tidak boleh lebih dari 12.',
+                    icon: 'error',
+                });
+                return; // Menghentikan proses lebih lanjut jika ada error
+            }
+
+        if (bidangIlmu === '' || judul === '') {
+            // If either file is not uploaded, show an error message
+            Swal.fire({
+                title: 'Error',
+                text: 'Harap mengisi semua input.',
+                icon: 'error',
+            });
+        } else { Swal.fire({
+                title: 'Are you sure?',
+                text: 'Apakah Anda ingin menyimpan perubahan?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                // Jika pengguna mengklik "Yes," panggil fungsi saveChanges
+                saveChanges();
+                }
+            });
         }
-      });
     }
 
     // Fungsi untuk menyimpan perubahan

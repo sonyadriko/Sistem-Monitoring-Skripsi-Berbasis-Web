@@ -194,9 +194,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::post('/accrevisi/{id}', [DosenRevisiSeminarProposal::class, 'accrevisi'])->name('dosen-revisi-sempro.acc');
         Route::post('/addrevisi/{id}', [DosenRevisiSeminarProposal::class, 'addrevisi'])->name('dosen-revisi-add.detail');
     });
-// });
 
-// Route::group(['middleware' => 'auth:koordinator'], function() {
     Route::controller(HistoryController::class)->group(function () {
         Route::get('/notifications', 'notifications')->name('notifications');
     });

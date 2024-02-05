@@ -35,34 +35,12 @@ Bimbingan Skripsi
                     @if (!is_null($detailbim) && !is_null($detailbim->revisi))
                     <span class="span0-1">{{ $detailbim->revisi }}</span><br>
                 @else
-                    <span class="span0-1 text-danger">Upload file bimbingan terlebih dahulu</span><br>
+                    <span class="span0-1 text-danger">Menunggu review dari dosen pembimbing</span><br>
                 @endif
                 </p>
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-xl-6">
-                <div class="card mb-4 mb-xl-0">
-                    <h5 class="card-header">File Skripsi</h5>
-                    <div class="card-body">
-                        <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="file_skripsi" class="form-label">Upload File Skripsi</label>
-                                <input class="form-control" type="file" id="file_skripsi" name="file_skripsi"  />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
-                                    @error('file_skripsi')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                            </div>
-                            <input type="hidden" id="bimbingan_skripsi_id" name="bimbingan_skripsi_id" value="{{ $bimbingans->id_bimbingan_skripsi }}" />
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> --}}
             @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
             <div class="col-xl-6">
                 <div class="card mb-4">
@@ -79,7 +57,6 @@ Bimbingan Skripsi
                                     Daftar
                                 </button>
                                 @else
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>
@@ -110,7 +87,6 @@ Bimbingan Skripsi
                                     Daftar
                                 </button>
                                 @else
-                                {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                 <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                     Daftar
                                 </button>

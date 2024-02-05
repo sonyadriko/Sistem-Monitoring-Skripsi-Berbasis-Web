@@ -92,7 +92,8 @@ Daftar Sidang Proposal
                             <div class="mb-3">
                                 <label for="proposal_file" class="form-label">Upload File Proposal Skripsi</label>
                                 <input class="form-control" type="file" name="proposal_file" id="proposal_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
+                                <p class="text-danger"> File : PDF.</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 5MB.</p> --}}
                                 @error('proposal_file')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -100,7 +101,8 @@ Daftar Sidang Proposal
                             <div class="mb-3">
                                 <label for="slip_file" class="form-label">Upload File Slip Pembayaran Sidang Proposal</label>
                                 <input class="form-control" type="file" name="slip_file" id="slip_file" />
-                                <p class="text-danger"> File : PDF | Size Max : 1MB.</p>
+                                <p class="text-danger"> File : PDF.</p>
+                                {{-- <p class="text-danger"> File : PDF | Size Max : 1MB.</p> --}}
                                 @error('slip_file')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

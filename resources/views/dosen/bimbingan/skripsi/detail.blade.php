@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master3')
 
 @section('title')
 Detail Bimbingan Skripsi
@@ -22,53 +22,47 @@ Detail Bimbingan Skripsi
     <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
     <div class="col-md-12 stretch-card">
         <div class="card mb-4">
-            <h5 class="card-header">Data Mahasiswa dan Dosen Pembimbing</h5>
+            <h5 class="card-header" style="color: #171717">Data Mahasiswa dan Dosen Pembimbing</h5>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">NPM </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">NPM </label>
                             <p><span>{{ $data->kode_unik }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->kode_unik }}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Nama </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">Nama </label>
                             <p><span>{{ $data->name }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->name }}" readonly> --}}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Judul </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">Judul </label>
                             <p><span>{{ $data->judul }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{$data->judul}}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Bidang Ilmu </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">Bidang Ilmu </label>
                             <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{$data->topik_bidang_ilmu}}" readonly> --}}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing Utama </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">Dosen Pembimbing Utama </label>
                             <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_utama }}" readonly> --}}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label class="form-label" style="font-weight: bold">Dosen Pembimbing II </label>
+                            <label class="form-label" style="font-weight: bold; color: #171717">Dosen Pembimbing II </label>
                             <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
-                            {{-- <input type="text" class="form-control" value="{{ $data->dosen_pembimbing_ii }}" readonly> --}}
                         </div>
                     </div>
                 </div>
@@ -95,57 +89,43 @@ Detail Bimbingan Skripsi
         @if ($detail->isEmpty())
 
         @else
-        <div class="card mb-4 mb-xl-0">
-            <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Bimbingan</th>
-                            <th>Tanggal</th>
-                            {{-- <th>Bimbingan</th> --}}
-                            {{-- <th>Revisi Dosen</th> --}}
-                            {{-- <th>File</th> --}}
-                            {{-- <th>Validasi Revisi</th> --}}
-                            <th>Revisi Dosen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        @foreach($detail as $item)
-                        <tr>
-                            <td>{{ $no }}</td>
-                            {{-- <td>{{ $item->created_at }}</td> --}}
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" style="font-weight: bold">History Bimbingan</h4>
+                    {{-- <p class="card-title-desc">Mahasiswa bimbingan anda, akan muncul dibawah ini.</code>. --}}
+                </div>
+                <div class="card-body mb-4 mb-xl-0">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Bimbingan</th>
+                                    <th>Tanggal</th>
+                                    <th>Revisi Dosen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $no=1;
+                                @endphp
+                                @foreach($detail as $item)
+                                <tr>
+                                    <td>{{ $no }}</td>
+                                    {{-- <td>{{ $item->created_at }}</td> --}}
+                                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                    <td>{{ $item->revisi }}</td>
 
-                            {{-- <td>{{ $no }}</td> --}}
-                            <td>{{ $item->revisi }}</td>
+                                </tr>
+                                @php
+                                $no++;
+                                @endphp
+                                @endforeach
 
-                            {{-- <td>
-                                <a href="{{ asset($item->file) }}" class="btn btn-primary" target="_blank">Cek File</a>
-                            </td> --}}
-                            {{-- <td>{{ $item->validasi }}</td> --}}
-                            {{-- <td> --}}
-                                {{-- @if($item->validasi === 'acc')
-                                Revisi sudah di Acc
-                                @else --}}
-                                {{-- <button type="button" class="btn btn-primary" onclick="prepareModal({{ $item->id_detail_bimbingan_skripsi }})">
-                                    Tambahkan Revisi
-                                </button> --}}
-                                    {{-- <button type="button" class="btn btn-primary" onclick="confirmAccRevisi({{ $item->id_detail_bimbingan_skripsi }})">
-                                        Acc Revisi
-                                    </button>
-                                @endif --}}
-                            {{-- </td> --}}
-                        </tr>
-                        @php
-                        $no++;
-                        @endphp
-                        @endforeach
-
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         @endif
@@ -211,6 +191,19 @@ Detail Bimbingan Skripsi
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive/datatables.net-responsive.min.js') }}"></script>
+<script src="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js') }}"></script>
+<script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
+<script src="{{ asset('assets2/js/app.min.js') }}"></script>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

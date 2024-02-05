@@ -130,7 +130,7 @@ class LoginController extends Controller
             } else {
                 // Authentication failed
                 // return redirect('/login')->with('error', 'Invalid email or password. Please try again.');
-                return redirect('/login')->withErrors(['error' => 'email atau kata sandi salah. Silakan coba lagi.']);
+                return redirect('/login')->withErrors(['error' => 'email atau password salah. Silakan coba lagi.']);
             }
         } else {
             // Role tidak diizinkan

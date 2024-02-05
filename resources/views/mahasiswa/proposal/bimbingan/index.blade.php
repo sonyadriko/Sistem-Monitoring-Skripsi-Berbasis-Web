@@ -63,7 +63,6 @@ Bimbingan Proposal
                                         Daftar
                                     </button>
                                     @else
-                                    {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                     <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                         Daftar
                                     </button>
@@ -94,7 +93,6 @@ Bimbingan Proposal
                                         Daftar
                                     </button>
                                     @else
-                                    {{-- <button type="submit" class="btn btn-primary" {{ ($dosens->acc_dosen_utama && $dosens->acc_dosen_ii) ? '' : 'disabled' }}>Daftar</button>{{ route('seminar-proposal.create')}} --}}
                                     <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
                                         Daftar
                                     </button>

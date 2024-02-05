@@ -33,35 +33,39 @@ class BimbinganProposalController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    try {
         $validatedData = $request->validate([
             'file_proposal' => 'required|mimes:pdf|max:5000',
-            'file_proposal.required' => 'File proposal wajib diunggah.',
-            'file_proposal.mimes' => 'Tipe file harus pdf.',
-            'file_proposal.max' => 'Ukuran file melebihi batas maksimum (5000 KB).',
         ]);
 
         if ($request->hasFile('file_proposal')) {
             $proposalFilePath = $request->file('file_proposal');
-            // $fileName = uniqid() . '.' . $proposalFilePath->getClientOriginalExtension();
             $fileName = $proposalFilePath->getClientOriginalName();
             $userFolder = Auth::user()->name;
-            $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
-            $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
+
+            // Gunakan try-catch di sini untuk menangani kesalahan penyimpanan file
+            try {
+                $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
+                $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
+            } catch (\Exception $e) {
+                throw new \Exception('Gagal menyimpan file. ' . $e->getMessage());
+            }
         } else {
-            return response()->json(['success' => false, 'message' => 'File proposal tidak valid.']);
+            throw new \Exception('File proposal tidak valid.');
         }
 
         $bimbingan = new DetailBimbinganProposal();
-        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id'); // Sesuaikan ini dengan input yang benar
+        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id');
         $bimbingan->file = $fileUrl;
         $bimbingan->save();
 
-        // Return a success response
         return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
-        // return redirect('/dashboard')->with('success', 'Pengajuan berhasil dilakukan.');
-
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
     }
+}
+
 
 
 
