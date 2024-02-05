@@ -32,40 +32,6 @@ class BimbinganProposalController extends Controller
 
     }
 
-    public function store(Request $request)
-{
-    try {
-        $validatedData = $request->validate([
-            'file_proposal' => 'required|mimes:pdf|max:5000',
-        ]);
-
-        if ($request->hasFile('file_proposal')) {
-            $proposalFilePath = $request->file('file_proposal');
-            $fileName = $proposalFilePath->getClientOriginalName();
-            $userFolder = Auth::user()->name;
-
-            // Gunakan try-catch di sini untuk menangani kesalahan penyimpanan file
-            try {
-                $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_proposal/'), $fileName);
-                $fileUrl = 'uploads/'.$userFolder.'/bimbingan_proposal/'.$fileName;
-            } catch (\Exception $e) {
-                throw new \Exception('Gagal menyimpan file. ' . $e->getMessage());
-            }
-        } else {
-            throw new \Exception('File proposal tidak valid.');
-        }
-
-        $bimbingan = new DetailBimbinganProposal();
-        $bimbingan->bimbingan_proposal_id = $request->input('bimbingan_proposal_id');
-        $bimbingan->file = $fileUrl;
-        $bimbingan->save();
-
-        return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => $e->getMessage()]);
-    }
-}
-
 
 
 

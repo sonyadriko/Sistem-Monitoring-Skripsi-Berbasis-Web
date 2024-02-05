@@ -160,10 +160,17 @@ Detail Berita Acara Sidang Skripsi
         var nilai_4 = document.getElementById('nilai_4').value;
         var nilai_5 = document.getElementById('nilai_5').value;
 
-        if (!revisi.trim() || !nilai_1.trim() || !nilai_2.trim() || !nilai_3.trim() || !nilai_4.trim() || !nilai_5.trim() ) {
+        nilai_1 = parseInt(nilai_1);
+        nilai_2 = parseInt(nilai_2);
+        nilai_3 = parseInt(nilai_3);
+        nilai_4 = parseInt(nilai_4);
+        nilai_5 = parseInt(nilai_5);
+
+
+        if (!revisi.trim() || nilai_1 > 100 || nilai_2 > 100 || nilai_3 > 100 || nilai_4 > 100 || nilai_5 > 100 ) {
             Swal.fire({
                 title: 'Error',
-                text: 'Revisi dan nilai harus diisi.',
+                text: 'Revisi dan nilai harus diisi dengan benar (nilai maksimal 100).',
                 icon: 'error',
             });
         } else {

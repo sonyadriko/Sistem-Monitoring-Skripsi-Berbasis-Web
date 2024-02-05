@@ -33,31 +33,5 @@ class BimbinganSkripsiController extends Controller
         return view('mahasiswa/skripsi/bimbingan.index', compact('bimbingans', 'detailbim'));
     }
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'file_skripsi' => 'required|mimes:pdf|max:5000',
-            'file_skripsi.required' => 'File Skripsi wajib diunggah.',
-            'file_skripsi.mimes' => 'Tipe file harus pdf',
-            'file_skripsi.max' => 'Ukuran file melebihi batas maksimum (5000 KB).',
-        ]);
 
-        if ($request->hasFile('file_skripsi')) {
-            $proposalFilePath = $request->file('file_skripsi');
-            $fileName = $proposalFilePath->getClientOriginalName();
-            $userFolder = Auth::user()->name;
-            $proposalFilePath->move(public_path('uploads/'.$userFolder.'/bimbingan_skripsi/'), $fileName);
-            $fileUrl = 'uploads/'.$userFolder.'/bimbingan_skripsi/'.$fileName;
-        } else {
-            return response()->json(['success' => false, 'message' => 'File skripsi tidak valid.']);
-        }
-
-        $bimbingan = new DetailBimbinganSkripsi();
-        $bimbingan->bimbingan_skripsi_id = $request->input('bimbingan_skripsi_id'); // Sesuaikan ini dengan input yang benar
-        $bimbingan->file = $fileUrl;
-        $bimbingan->save();
-
-        // Return a success response
-        return response()->json(['success' => true, 'message' => 'File berhasil diunggah.']);
-    }
 }

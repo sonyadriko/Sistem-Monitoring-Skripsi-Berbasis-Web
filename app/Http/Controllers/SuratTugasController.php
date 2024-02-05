@@ -90,7 +90,6 @@ class SuratTugasController extends Controller
             'bimbingan_proposal_id' => 'required|numeric',
             'tanggal_sidang_proposal' => 'required|date',
             'file_proposal' => 'required|mimes:pdf|max:10000',
-            // 'file_proposal' => 'required|mimes:pdf|max:5000',
             'file_slip_pembayaran' => 'required|mimes:pdf|max:1000',
         ], [
             'users_id.required' => 'User ID wajib diisi.',

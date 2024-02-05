@@ -1,33 +1,34 @@
-@extends('layout.master_login')
+@extends('layout.master2')
 
 @section('title')
-    Login
+    Register
 @endsection
 
 @section('content')
 
-    <div class="d-lg-flex half">
-        <div class="contents order-2">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-7">
-                        <div class="mb-4" style="text-align: center">
-                            <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
-                            <img src="{{ asset('img/login/logo_si_mini_normal.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
-                        </div>
-                        <div class="mb-4">
-                            <h2 class="text-primary text-center mb-4" style="text-align: center">Register</h2>
-                            {{-- <p class="mb-4" style="text-align: center; color: #7987A1; font-size: 14px">Izinkan Sistem mengenali anda.</p> --}}
-                        </div>
-                        <script>
-                            @if($errors->any())
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: '{{ $errors->first() }}',
-                                });
-                            @endif
-                        </script>
+<!-- Section: Design Block -->
+<section class="h-100 d-flex justify-content-center align-items-center" style="background: linear-gradient(to bottom, #1D4ED8 50%, #3B82F6);">
+    <!-- Jumbotron -->
+    <div class="container-fluid px-4 py-5 text-center text-lg-start">
+        <div class="row justify-content-center align-items-start"> <!-- Updated to align-items-start -->
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center d-none d-md-block"> <!-- Removed text-lg-start -->
+                <h1 class="my-5 display-4 fw-bold ls-tight text-white" style="font-size: 42px">
+                    SISTEM MONITORING SKRIPSI <br />
+                </h1>
+                <h1 class="fw-bold ls-tight text-white mb-4 mt-4" style="font-size: 24px">
+                    Registrasi sebagai mahasiswa <br />
+                      {{-- <span class="text-primary">Sistem Monitoring Skripsi</span> --}}
+                  </h1>
+                <img src="{{ asset('img/login/User_Mahasiswa.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+
+                <p class="text-white">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card mx-auto" style="max-width: 500px;">
+                    <div class="card-body py-5 px-md-5">
+                        <h2 class="text-primary text-center mb-4">Register</h2>
+
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
 
@@ -89,18 +90,19 @@
                                 <button type="submit" class="btn btn-primary w-100">Register</button>
                             </div>
                         </form>
+
+                        <!-- Redirect link -->
                         <div class="mt-3 text-center">
                             <p class="text-muted">Sudah punya akun? <a href="{{ route('login') }}" class="text-dark">Login</a></p>
                         </div>
-                        <p class="text-center mt-4" style="color: #171717">&copy; <script>document.write(new Date().getFullYear())</script> Sistem Informasi ITATS</p>
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg d-none d-lg-block order-1" style="background-image: url('{{ asset('img/login/img_login.svg') }}'); background-size: cover;"></div>
     </div>
-
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

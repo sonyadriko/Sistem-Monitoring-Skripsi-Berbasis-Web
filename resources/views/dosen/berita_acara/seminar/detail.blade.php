@@ -170,6 +170,12 @@ Detail Berita Acara Proposal
                 text: 'Revisi dan nilai harus diisi.',
                 icon: 'error',
             });
+        } else if (parseInt(nilai) > 100) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Nilai tidak boleh lebih dari 100.',
+                icon: 'error',
+            });
         } else {
             showConfirmation();
         }

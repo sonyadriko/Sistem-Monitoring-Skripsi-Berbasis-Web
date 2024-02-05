@@ -43,30 +43,6 @@ Revisi Sidang Skripsi
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-xl-6">
-                <div class="card mb-4 mb-xl-0">
-                    <h5 class="card-header">File Revisi Skripsi</h5>
-                    <div class="card-body">
-                        <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="file_revisi_skripsi" class="form-label">Upload File Revisi Skripsi</label>
-                                <input class="form-control" type="file" id="file_revisi_skripsi" name="file_revisi_skripsi" />
-                                <p class="text-danger"> File : PDF | Size Max : 5MB.</p>
-                                @error('file_revisi_skripsi')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            {{-- <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_berita_acara_s }}" />
-
-                            <input type="hidden" id="berita_acara_id" name="berita_acara_id" value="{{ $revisisk->id_revisi_sidang_skripsi }}" />
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> --}}
             <div class="col-xl-6">
                 <div class="card mb-4">
                     <h5 class="card-header">Acc Revisi Skripsi</h5>
@@ -91,11 +67,11 @@ Revisi Sidang Skripsi
                             <div class="d-flex justify-content-between mt-4">
                                 @if(is_null($revisisk->acc_dospem) || is_null($revisisk->acc_penguji_1) || is_null($revisisk->acc_penguji_2) || is_null($revisisk->acc_penguji_3))
                                 <button type="submit" class="btn btn-inverse-danger" disabled">
-                                    Belum bisa daftar yudisium
+                                    Selesai
                                 </button>
                                 @else
                                 <button type="submit" class="btn btn-inverse-success" onclick="handleButtonClick()" disabled>
-                                    Sudah bisa daftar yudisium
+                                    Selesai
                                 </button>
                                 @endif
                             </div>

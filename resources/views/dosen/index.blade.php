@@ -15,10 +15,6 @@ Dashboard
 </div>
 @endif
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-
-  {{-- <div>
-    <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
-  </div> --}}
 </div>
 <h6 class="mb-4" style="font-size: 24px">Anda login sebagai <b>Dosen Pembimbing </b></h6>
 
@@ -27,21 +23,19 @@ Dashboard
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('pengajuan-judul.index') }}" class="text-decoration-none text-reset">
-                        <div class="d-flex justify-content-between align-items-baseline">
-                            <h6 class="card-title mb-0" style="color: #000000; font-family: 'Nunito', sans-serif; font-weight: bold;">Mahasiswa Bimbingan</h6>
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <h6 class="card-title mb-0" style="color: #000000; font-family: 'Nunito', sans-serif; font-weight: bold;">Mahasiswa Bimbingan</h6>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6 col-md-12 col-xl-7">
+                            <h3 class="mb-2">{{ $mahasiswaCount }}</h3>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-6 col-md-12 col-xl-7">
-                                <h3 class="mb-2">{{ $mahasiswaCount }}</h3>
-                            </div>
-                            <div class="col-6 col-md-12 col-xl-5">
-                                <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
-                                    <iconify-icon icon="mdi:user-child" width="36" height="36"></iconify-icon>
-                                </div>
+                        <div class="col-6 col-md-12 col-xl-5">
+                            <div class="mt-md-3 mt-xl-0 d-flex justify-content-end">
+                                <iconify-icon icon="mdi:user-child" width="36" height="36"></iconify-icon>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

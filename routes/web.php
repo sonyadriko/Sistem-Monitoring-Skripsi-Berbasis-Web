@@ -48,8 +48,6 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KajurJadwalController;
 use App\Http\Controllers\KajurSeminarController;
 use App\Http\Controllers\KajurSidangController;
-use App\Http\Controllers\YudisiumController;
-use App\Http\Controllers\KoordinatorYudisiumController;
 use App\Http\Controllers\JadwalMengujiController;
 use App\Http\Controllers\SekretarisController;
 
@@ -294,15 +292,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     });
 
-    Route::group(['prefix' => 'koordinator/yudisium'], function () {
-        Route::get('/', [KoordinatorYudisiumController::class, 'index'])->name('koor-yudisium.index');
-        Route::get('/detail/{id}', [KoordinatorYudisiumController::class, 'detail'])->name('koor-yudisium.detail');
-        // Route::[pst]('/detail/{id}', [KoordinatorYudisiumController::class, 'detail'])->name('koor-yudisium.detail');
-        Route::post('/update/{id}', [KoordinatorYudisiumController::class, 'update'])->name('koor-yudisium.update');
-        Route::post('/tolak/{id}', [KoordinatorYudisiumController::class, 'tolak'])->name('koor-yudisium-tolak');
-
-    });
-
     Route::controller(PembagianDosenController::class)->group(function ()
     {
         Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
@@ -412,15 +401,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::controller(FAQController::class)->group(function () {
         Route::get('/faq', 'index')->name('faq');
-    });
-
-    Route::group(['prefix' => '/yudisium'], function () {
-        Route::get('/', [YudisiumController::class, 'index'])->name('yudisium.index');
-        Route::post('/store', [YudisiumController::class, 'store'])->name('yudisium-store');
-        Route::get('/check-status', [YudisiumController::class, 'checkStatus'])->name('yudisium.check');
-        Route::get('/status/{id}', [YudisiumController::class, 'showStatus'])->name('yudisium.status');
-        Route::get('/submit-form', [YudisiumController::class, 'index'])->name('yudisium.store');
-        // Route::get('/submit-form', 'create')->name('submit-form');
     });
 
     Route::fallback(function () {

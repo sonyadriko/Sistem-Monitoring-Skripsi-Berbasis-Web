@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'password.min' => 'Password minimal harus 6 karakter.',
             'ktm.required' => 'File KTM wajib diunggah.',
             'ktm.mimes' => 'File KTM harus berformat PDF.',
-            'ktm.max' => 'Ukuran file KTM tidak boleh lebih dari 1000 KB.'
+            'ktm.max' => 'Ukuran file KTM tidak boleh lebih dari 1 MB.'
         ]);
 
         if ($validator->fails()) {

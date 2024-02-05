@@ -90,17 +90,16 @@ class SidangSkripsiController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'skripsi_file' => 'required|mimes:pdf|max:5000',
+            'skripsi_file' => 'required|mimes:pdf|max:10000',
             'slip_file' => 'required|mimes:pdf|max:1000',
         ], [
-            'skripsi_file.required' => 'File skripsi is required.',
-            'skripsi_file.mimes' => 'File skripsi must be a PDF.',
-            'skripsi_file.max' => 'File skripsi may not be greater than 5000 KB.',
-            'slip_file.required' => 'File slip pembayaran is required.',
-            'slip_file.mimes' => 'File slip pembayaran must be a PDF.',
-            'slip_file.max' => 'File slip pembayaran may not be greater than 1000 KB.',
+            'skripsi_file.required' => 'File skripsi diperlukan.',
+            'skripsi_file.mimes' => 'File skripsi harus berformat PDF.',
+            'skripsi_file.max' => 'Ukuran file skripsi tidak boleh lebih dari 10 MB.',
+            'slip_file.required' => 'File slip pembayaran diperlukan.',
+            'slip_file.mimes' => 'File slip pembayaran harus berformat PDF.',
+            'slip_file.max' => 'Ukuran file slip pembayaran tidak boleh lebih dari 1 MB.',
         ]);
-
 
         $fileSkripsiName = $request->file('skripsi_file')->getClientOriginalName();
         $fileSlipPembayaranName = $request->file('slip_file')->getClientOriginalName();
