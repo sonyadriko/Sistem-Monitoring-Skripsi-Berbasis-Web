@@ -32,22 +32,6 @@ Berita Acara Sidang Proposal
             </div>
             <div class="card-body table-responsive">
                 <div class="row mb-3">
-                    {{-- <div class="col-md-2">
-                        <label for="statusFilter">Filter Status:</label>
-                        @php
-                            $today = \Carbon\Carbon::now()->formatLocalized('%A, %d %B %Y', 'id');
-                             $startDate = \Carbon\Carbon::today();
-                            $endDate = \Carbon\Carbon::today()->addMonths(6);
-                        @endphp
-                        <select id="statusFilter" class="form-control">
-                            <option value="">Semua</option>
-                            <!-- Yang Akan Datang -->
-                            {{-- <option value="{{ \Carbon\Carbon::today()->formatLocalized('%A, %d %B %Y', 'id') }}">Yang Akan Datang</option>s
-                            <option value="{{ \Carbon\Carbon::today()->addMonths(6)->formatLocalized('%A, %d %B %Y', 'id') }}">Yang Akan Datang</option>
-                            <option value="{{ $startDate->formatLocalized('%A, %d %B %Y', 'id') }} - {{ $endDate->formatLocalized('%A, %d %B %Y', 'id') }}">Rentang 6 Bulan ke Depan</option>
-                             <option value="{{ \Carbon\Carbon::now()->subDays(365)->formatLocalized('%A, %d %B %Y', 'id') }}">Sudah Selesai</option>
-                        </select>
-                    </div> --}}
                     <div class="col-md-2">
                         <label for="tahunFilter">Filter Angkatan:</label>
                         <select id="tahunFilter" class="form-control">
@@ -82,7 +66,6 @@ Berita Acara Sidang Proposal
                             @php
                                 $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
                                 $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-
                             @endphp
                             <td>{{ $formatTanggal }}</td>
                             <td><a href="{{ url('/dosen/berita_acara_proposal/detail/'.$ba->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
@@ -93,11 +76,12 @@ Berita Acara Sidang Proposal
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
-    </div> <!-- end col -->
-</div> <!-- end row -->
+    </div>
+</div>
+
+
 
 @endsection
 @push('plugin-scripts')

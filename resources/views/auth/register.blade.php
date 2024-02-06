@@ -17,7 +17,6 @@
                         </div>
                         <div class="mb-4">
                             <h2 class="text-primary text-center" style="text-align: center">Register</h2>
-                            {{-- <p class="mb-4" style="text-align: center; color: #7987A1; font-size: 14px">Izinkan Sistem mengenali anda.</p> --}}
                         </div>
                         <script>
                             @if($errors->any())
@@ -30,7 +29,6 @@
                         </script>
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
-
                             <div class="mb-3">
                                 <label for="name" class="form-label text-dark text-left">{{ __('Nama Lengkap') }}</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror text-dark" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>

@@ -60,6 +60,8 @@ class HomeController extends Controller
             }
         }
         $progressPercentagePart1 = ($completedTablesPart1 / $totalTablesPart1) * 50;
+        // dd($progressPercentagePart1, $completedTablesPart1, $totalTablesPart1);
+
         $totalTablesPart2 = count($tablesPart2);
         $completedTablesPart2 = 0;
         foreach ($tablesPart2 as $table) {
@@ -68,13 +70,10 @@ class HomeController extends Controller
                 $completedTablesPart2++;
             }
         }
+        // dd($totalTablesPart2, $completedTablesPart2, $tablesPart2);
+
 
         $tahap = '';
-
-        $beritaAcaraSkripsiData = \DB::table('berita_acara_skripsi')
-            ->where('users_id', Auth::user()->id)
-            ->get();
-
 
         $countRevisiSidang = \DB::table('berita_acara_skripsi')
             ->whereNotNull('acc_dospem')
@@ -97,16 +96,20 @@ class HomeController extends Controller
 
         // Cek nilai $progressRevisiSidang dan $tahap
         // dd($progressRevisiSidang, $tahap);
-        $totalcompleted2 = $completedTablesPart2 + 1;
+        $totalpart2 = count($tablesPart2);
+        $totalcompleted2 = $totalpart2 + 1;
 
-        $totaltabelhasil = $totalTablesPart2 + $progressRevisiSidang;
+
+        $totaltabelhasil = $completedTablesPart2 + $progressRevisiSidang;
         // dd($totaltabelhasil, $totalTablesPart2, $progressRevisiSidang);
 
         $progressPercentagePart2 = ($totaltabelhasil / $totalcompleted2) * 50; // 100 - 40 = 60
-        // dd($progressPercentagePart2, $totalcompleted2, $totaltabelhasil);
+        // dd($progressPercentagePart2, $totaltabelhasil, $totalcompleted2);
 
         // $finalProgressPercentage = $progressPercentagePart1 + $progressPercentagePart2 + $progressRevisiSidang;
         $finalProgressPercentage = $progressPercentagePart1 + $progressPercentagePart2;
+        // dd($finalProgressPercentage, $progressPercentagePart1, $progressPercentagePart2);
+
         $hasilprogress = number_format($finalProgressPercentage, 2);
 
         return view('home', ['progressPercentage' => $hasilprogress, 'tables' => $tables_text, 'tables2' => $tables_text2]);

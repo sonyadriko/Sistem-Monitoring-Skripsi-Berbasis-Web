@@ -19,6 +19,8 @@ class KajurDataMahasiswaController extends Controller
             ->where('users.status', 'aktif')
             ->get();
 
+        $angkatan = DB::table('angkatan')->get();
+
         $user = Auth::user();
 
         $tablesPart1 = ["pengajuan_judul", "bimbingan_proposal", "seminar_proposal", "berita_acara_proposal", "surat_tugas"];
@@ -59,7 +61,7 @@ class KajurDataMahasiswaController extends Controller
     $hasilprogress = number_format($finalProgressPercentage, 2);
 
         // Mengirimkan data ke view
-        return view('kajur.mahasiswa.index', compact('datamhs', 'hasilprogress', 'tablesPart1', 'tablesPart2'));
+        return view('kajur.mahasiswa.index', compact('datamhs', 'hasilprogress', 'tablesPart1', 'tablesPart2', 'angkatan'));
     }
 
 
