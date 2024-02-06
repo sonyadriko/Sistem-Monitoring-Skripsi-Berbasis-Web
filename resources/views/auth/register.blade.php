@@ -11,12 +11,12 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7">
-                        <div class="mb-4" style="text-align: center">
-                            <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
-                            <img src="{{ asset('img/login/logo_si_mini_normal.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
+                        <div style="text-align: center">
+                            <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid" style="max-width: 600px;">
+                            <img src="{{ asset('img/login/logo_si_mini_normal.svg') }}" alt="User Icon" class="img-fluid" style="max-width: 600px;">
                         </div>
                         <div class="mb-4">
-                            <h2 class="text-primary text-center mb-4" style="text-align: center">Register</h2>
+                            <h2 class="text-primary text-center" style="text-align: center">Register</h2>
                             {{-- <p class="mb-4" style="text-align: center; color: #7987A1; font-size: 14px">Izinkan Sistem mengenali anda.</p> --}}
                         </div>
                         <script>

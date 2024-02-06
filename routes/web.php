@@ -95,10 +95,11 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     });
     Route::controller(KajurDataMahasiswaController::class)->group(function () {
         Route::get('/ketua_jurusan/data_mahasiswa', 'index')->name('data-mhs');
+        Route::get('/ketua_jurusan/data_mahasiswa/detail/{id}', 'detail')->name('data-mhs-detail');
     });
     Route::controller(KajurDataDosenController::class)->group(function () {
         Route::get('/ketua_jurusan/data_dosen', 'index')->name('data-dsn');
-        Route::get('/ketua_jurusan/data_dosen/detail{id}', 'detail')->name('data-dsn-detail');
+        Route::get('/ketua_jurusan/data_dosen/detail/{id}', 'detail')->name('data-dsn-detail');
     });
     Route::controller(KajurDataBidangIlmuController::class)->group(function () {
         Route::get('/ketua_jurusan/data_bidang_ilmu', 'index')->name('data-bi');
@@ -349,7 +350,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     });
 
     Route::controller(PengajuanJudulController::class)->group(function () {
-        // Route::get('/pengajuan_judul', 'create')->name('pengajuan-judul.create');
         Route::post('/pengajuan_judul', 'store')->name('pengajuan-judul.submit');
         Route::get('/pengajuan_judul', 'showFormPengajuan')->name('pengajuan-judul.form');
     });

@@ -30,7 +30,6 @@ class KoordinatorBeritaAcaraProposalController extends Controller
     {
         $data = [
             'data' => DB::table('berita_acara_proposal')
-
                 ->join('users', 'users.id', 'berita_acara_proposal.users_id')
                 ->join('seminar_proposal', 'seminar_proposal.id_seminar_proposal', 'berita_acara_proposal.seminar_proposal_id')
                 ->join('users as penguji1', 'penguji1.id', 'seminar_proposal.dosen_penguji_1')

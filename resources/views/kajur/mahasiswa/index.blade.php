@@ -32,8 +32,7 @@ Data Mahasiswa
                         <th>NPM</th>
                         <th>Nama</th>
                         <th>Dosen Pembimbing</th>
-                        {{-- <th>Progress</th> --}}
-                        {{-- <th>Bidang Ilmu</th> --}}
+                        <th>Progress</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -41,20 +40,114 @@ Data Mahasiswa
                         @php
                         $no=1;
                         @endphp
-                        @foreach($datamhs as $data)
-                        <tr>
-                            <td>{{ $no }}</td>
-                            <td>{{ $data->kode_unik }}</td>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->dosen_pembimbing_utama ?? 'Tidak Ada' }}</td>
-                            {{-- <td>{{  'In Progress' }}</td> --}}
-                            {{-- <td>{{ $data->topik_bidang_ilmu ?? 'Tidak Ada' }}</td> --}}
-                            <td><a href="{{ url('/ketua_jurusan/data_mahasiswa/detail/' . $data->id) }}" class="btn btn-primary">Detail</a></td>
-                        </tr>
-                        @php
-                        $no++;
-                        @endphp
-                    @endforeach
+                      @foreach($datamhs as $data)
+                      <tr>
+                          <td>{{ $no }}</td>
+                          <td>{{ $data->kode_unik }}</td>
+                          <td>{{ $data->name }}</td>
+                          <td>{{ $data->dosen_pembimbing_utama ?? 'Tidak Ada' }}</td>
+                          <td>
+                            @php
+                                $progressMahasiswa = 0;
+                                $totalDataPart1 = 0;
+                                $completedTablesPart1 = 0;
+
+                                // Hitung progress untuk setiap fase pada mahasiswa
+                                $totalTablesPart1 = count($tablesPart1);
+
+                                foreach ($tablesPart1 as $table) {
+                                    $result = \DB::table($table)->where('users_id', $data->id)->get();
+                                    $totalDataPart1 += count($result);
+
+                                    // Periksa apakah hasil query tidak null dan memiliki data
+                                    if ($result !== null && count($result) > 0) {
+                                        $completedTablesPart1++;
+                                    }
+                                }
+
+                                $progressPercentagePart1 = ($completedTablesPart1 / $totalTablesPart1) * 50;
+
+                                $totalTablesPart2 = count($tablesPart2);
+                                $totalDataPart2 = 0;
+                                $completedTablesPart2 = 0;
+
+                                foreach ($tablesPart2 as $table) {
+                                    $result = \DB::table($table)->where('users_id', $data->id)->get();
+                                    $totalDataPart2 += count($result);
+
+                                    // Periksa apakah hasil query tidak null dan memiliki data
+                                    if ($result !== null && count($result) > 0) {
+                                        $completedTablesPart2++;
+                                    }
+                                }
+
+                                $countRevisiSidang = \DB::table('berita_acara_skripsi')
+                                    ->whereNotNull('acc_dospem')
+                                    ->whereNotNull('acc_penguji_1')
+                                    ->whereNotNull('acc_penguji_2')
+                                    ->whereNotNull('acc_penguji_3')
+                                    ->where('users_id', Auth::user()->id)
+                                    ->count();
+
+                                // dd($countRevisiSidang);
+
+                                if ($countRevisiSidang > 0) {
+                                    // Blok ini seharusnya dijalankan jika $countRevisiSidang lebih dari 0
+                                    $progressRevisiSidang = 1; // Atur nilai progress tambahan
+                                    $tahap = 'selesai';
+                                } else {
+                                    // Blok ini seharusnya dijalankan jika $countRevisiSidang kurang dari atau sama dengan 0
+                                    $progressRevisiSidang = 0;
+                                }
+                                $totalpart2 = count($tablesPart2);
+                                $totalcompleted2 = $totalpart2 + 1;
+
+                                $totaltabelhasil = $totalTablesPart2 + $progressRevisiSidang;
+
+                                $progressPercentagePart2 = ($totaltabelhasil / $totalcompleted2) * 50;
+                                // $progressPercentagePart2 = ($completedTablesPart2 / ($tablesPart2)) * 50;
+                                // dd($progressPercentagePart2, $totaltabelhasil, $totalcompleted2);
+
+
+                                $totalData = $totalDataPart1 + $totalDataPart2;
+                                $progressMahasiswa = ($totalData / ($totalTablesPart1 + count($tablesPart2))) * 100;
+                            @endphp
+
+                            {{-- {{ number_format($progressMahasiswa, 2) }}% --}}
+                            @if($progressMahasiswa == 0)
+                            <span class="mt-2">Anda belum memulai tahap skripsi</span>
+                        @elseif($progressMahasiswa > 0 && $progressMahasiswa <= 10)
+                            <span class="mt-2"><strong> Pengajuan Judul</strong></span>
+                        @elseif($progressMahasiswa > 10 && $progressMahasiswa <= 20)
+                            <span class="mt-2"><strong> Bimbingan Proposal</strong></span>
+                        @elseif($progressMahasiswa > 20 && $progressMahasiswa <= 30)
+                            <span class="mt-2"><strong>Sidang Proposal</strong></span>
+                        @elseif($progressMahasiswa > 30 && $progressMahasiswa <= 40)
+                            <span class="mt-2"><strong>Revisi Sidang Proposal</strong></span>
+                        @elseif($progressMahasiswa > 40 && $progressMahasiswa <= 50)
+                            <span class="mt-2"><strong>Surat Tugas</strong></span>
+                        @elseif($progressMahasiswa > 50 && $progressMahasiswa <= 62.50)
+                            <span class="mt-2"><strong>Bimbingan Skripsi</strong></span>
+                        @elseif($progressMahasiswa > 62.50 && $progressMahasiswa <= 75)
+                            <span class="mt-2"><strong>Sidang Skripsi</strong></span>
+                        @elseif($progressMahasiswa > 75.00 && $progressMahasiswa <= 87.50)
+                            <span class="mt-2"><strong>Revisi Sidang Skripsi</strong></span>
+                        @elseif($progressMahasiswa > 87.50 && $progressMahasiswa <= 100)
+                            <span class="mt-2"><strong> Skripsi Telah Selesai</strong></span>
+                        @else
+                            <span class="mt-2">Selamat, Proses Skripsi Telah Selesai</span>
+                        @endif
+                        </td>
+
+                          <td>
+                              <a href="{{ url('/ketua_jurusan/data_mahasiswa/detail/' . $data->id) }}" class="btn btn-primary">Detail</a>
+                          </td>
+                      </tr>
+                      @php
+                          $no++;
+                      @endphp
+                  @endforeach
+
                     </tbody>
                 </table>
 

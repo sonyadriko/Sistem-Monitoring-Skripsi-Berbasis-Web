@@ -25,15 +25,40 @@
 	<div class="row">
 		<div class="col-lg-12 col-xl-12 grid-margin stretch-card">
 			<div class="card">
+                <h6 class="card-header" style="font-weight: bold">Progress Skripsi</h6>
 				<div class="card-body">
-					<h6 style="font-weight: bold">Progress Skripsi</h6>
-					<div class="progress mt-4">
+					<div class="progress">
 						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
 					</div>
 					<div class="row mt-1">
 						@foreach ($tables as $table)
-							<div class="col text-center" style="font-weight: bold">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
+							<div class="col text-center mb-4" style="font-weight: bold">{{  ucwords(str_replace('_', ' ', $table)) }}</div>
 						@endforeach
+                        @if($progressPercentage == 0)
+                            <span class="mt-2">Anda belum memulai tahap skripsi</span>
+                        @elseif($progressPercentage > 0 && $progressPercentage <= 10)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong> Pengajuan Judul</strong></span>
+                        @elseif($progressPercentage > 10 && $progressPercentage <= 20)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong> Bimbingan Proposal</strong></span>
+                        @elseif($progressPercentage > 20 && $progressPercentage <= 30)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Sidang Proposal</strong></span>
+                        @elseif($progressPercentage > 30 && $progressPercentage <= 40)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Revisi Sidang Proposal</strong></span>
+                        @elseif($progressPercentage > 40 && $progressPercentage <= 50)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Surat Tugas</strong></span>
+                        @elseif($progressPercentage > 50 && $progressPercentage <= 62.50)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Bimbingan Skripsi</strong></span>
+                        @elseif($progressPercentage > 62.50 && $progressPercentage <= 75)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Sidang Skripsi</strong></span>
+                        @elseif($progressPercentage > 75.00 && $progressPercentage <= 87.50)
+                            <span class="mt-2">Progress diatas menampilkan bahwa anda sekarang sedang menyelesaikan <strong>Revisi Sidang Skripsi</strong></span>
+                        @elseif($progressPercentage > 87.50 && $progressPercentage <= 100)
+                            <span class="mt-2">Selamat, <strong> Skripsi Telah Selesai</strong></span>
+                        @else
+                            <span class="mt-2">Selamat, Proses Skripsi Telah Selesai</span>
+                        @endif
+
+
 					</div>
 				</div>
 			</div>
@@ -41,26 +66,22 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-8 col-xl-4 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<div class="d-flex justify-content-between align-items-baseline mb-2">
-						<h6 class="card-title mb-0">Info Penting</h6>
-					</div>
-					<div class="col-lg-5 col-xl-4 grid-margin stretch-card mx-auto">
-						<div class="card">
-							<div class="card-body text-center">
-								<img alt="Additional Information" class="img-fluid mx-auto" src="{{ asset('img/undraw_add_information_j2wg.svg') }}" style="width: 100%; max-width: 100%; height: auto;">
-							</div>
-						</div>
-					</div>
+        <div class="col-lg-8 col-xl-5 grid-margin stretch-card">
+            <div class="card">
+                <h6 class="card-header mb-0" style="font-weight: bold">Info Penting</h6>
+                <div class="card-body">
+                    <div class="col-lg-8 col-xl-7 grid-margin stretch-card text-center" style="margin: auto;">
+                        <img alt="Additional Information" class="img-fluid" src="{{ asset('img/info_penting.svg') }}" style="width: 100%; max-width: 100%; height: auto;">
+                    </div>
 
-					<p class="text-dark mb-2">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
-					<p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <p class="text-dark mb-2 mt-4">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
+                    <p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 	{{-- !-- row --> --}}
 @endsection

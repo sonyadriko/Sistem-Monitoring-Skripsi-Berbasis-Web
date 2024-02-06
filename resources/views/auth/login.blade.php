@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7">
-                        <div class="mb-4" style="text-align: center">
+                        <div style="text-align: center">
                             <img src="{{ asset('img/login/itats.png') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
                             <img src="{{ asset('img/login/logo_si_mini_normal.svg') }}" alt="User Icon" class="img-fluid mb-3" style="max-width: 600px;">
                         </div>
@@ -39,7 +39,6 @@
                                     </span>
                                 @enderror
                             </div>
-
                             <div class="mb-3">
                                 <label for="password" class="form-label text-dark">Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror text-dark" name="password" id="password" placeholder="Password" required autocomplete="current-password">
@@ -49,7 +48,6 @@
                                     </span>
                                 @enderror
                             </div>
-
                             <div class="mb-0">
                                 <button type="submit" class="btn btn-primary w-100">Login</button>
                             </div>
