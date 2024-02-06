@@ -2,8 +2,6 @@
 
 @push('plugin-styles')
 	<link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-5/4G/HRRsZOLVSCcf8iP4lwzNcJ6cvW8Z6t+GjK7EGLQx3+5tiZdL2pWrzeXG+Ou71rCDrxpC2O6IQ8buPofITg==" crossorigin="anonymous" />
-
 @endpush
 
 @section('title')
