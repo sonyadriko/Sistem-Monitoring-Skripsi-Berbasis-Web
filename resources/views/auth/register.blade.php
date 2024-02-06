@@ -1,7 +1,7 @@
 @extends('layout.master_login')
 
 @section('title')
-    Login
+Register
 @endsection
 
 @section('content')
