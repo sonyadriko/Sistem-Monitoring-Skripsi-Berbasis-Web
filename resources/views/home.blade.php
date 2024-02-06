@@ -2,6 +2,8 @@
 
 @push('plugin-styles')
 	<link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-5/4G/HRRsZOLVSCcf8iP4lwzNcJ6cvW8Z6t+GjK7EGLQx3+5tiZdL2pWrzeXG+Ou71rCDrxpC2O6IQ8buPofITg==" crossorigin="anonymous" />
+
 @endpush
 
 @section('title')
@@ -14,13 +16,13 @@
 			{{ session('success') }}
 		</div>
 	@endif
-	<div class="d-flex justify-content-between align-items-center grid-margin flex-wrap">
-
+	{{-- <div class="d-flex justify-content-between align-items-center grid-margin flex-wrap">
 		<div>
 			<h4 class="mb-md-0 mb-3">Selamat Datang</h4>
 		</div>
-	</div>
-	<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
+	</div> --}}
+    <h4 class="mb-2" style="font-weight: normal;">Selamat Datang <strong>{{ Auth::user()->name }}</strong></h4>
+	<h6 class="mb-4" style="font-weight: normal;">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
 
 	<div class="row">
 		<div class="col-lg-12 col-xl-12 grid-margin stretch-card">
@@ -73,9 +75,29 @@
                     <div class="col-lg-8 col-xl-7 grid-margin stretch-card text-center" style="margin: auto;">
                         <img alt="Additional Information" class="img-fluid" src="{{ asset('img/info_penting.svg') }}" style="width: 100%; max-width: 100%; height: auto;">
                     </div>
-
                     <p class="text-dark mb-2 mt-4">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
                     <p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xl-2 grid-margin">
+            <div class="card">
+                <h6 class="card-header mb-0" style="font-weight: bold">Download Template tersedia</h6>
+                <div class="card-body">
+                    <p class="text-dark" style="color: #171717; font-size: 16px; margin-bottom: 14px">Template Proposal Skripsi.</p>
+                    {{-- <a href="{{ asset('Template Proposal Skripsi.docx') }}" type="application/pdf" target="_blank" class="btn btn-dark d-flex align-items-center">
+                        <iconify-icon icon="lucide:download-cloud" style="margin-left: 12px" width="24" height="24"></iconify-icon>
+                        <span style="margin-left: 7px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
+                    </a> --}}
+                    <button onclick="window.open('{{ asset('Template Proposal Skripsi.docx') }}', '_blank')" class="btn btn-dark d-flex align-items-center">
+                        <iconify-icon icon="lucide:download-cloud" style="margin-left: 12px" width="24" height="24"></iconify-icon>
+                        <span style="margin-left: 7px; margin-right: 12px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
+                    </button>
+
+                    {{-- <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p> --}}
+
+
+                    {{-- <p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p> --}}
                 </div>
             </div>
         </div>
