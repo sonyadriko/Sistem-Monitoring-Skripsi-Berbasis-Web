@@ -31,7 +31,7 @@ Bimbingan Proposal
             <h5 class="card-header">Review Bimbingan Proposal</h5>
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
-                    <span class="span0-1 mt-4 mb-4">Revisi : </span>
+                    <span class="span0-1 mt-4 mb-4" style="font-weight: bold">Revisi : </span><br>
                     @if (!is_null($detailbim))
                         @if (is_null($detailbim->revisi))
                             <span class="span0-1 alert alert-warning">Menunggu review dari dosen pembimbing</span><br>
@@ -105,12 +105,9 @@ Bimbingan Proposal
                 @endif
             </div>
             <div class="mb-3">
-                <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
-
+                <a href="{{ route('his-bim-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
             </div>
-
         </div>
-
         @endif
     </div>
 </div>

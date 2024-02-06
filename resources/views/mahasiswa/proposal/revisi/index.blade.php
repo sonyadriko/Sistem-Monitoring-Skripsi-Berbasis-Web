@@ -120,7 +120,7 @@ Revisi Sidang Proposal
         </div>
     </div>
     <div class="mb-3">
-        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary mt-4">History Revisi Sidang Proposal</a>
+        <a href="{{ route('his-rev-pro.index') }}" class="btn btn-primary">History Revisi Sidang Proposal</a>
     </div>
     @endif
 </div>

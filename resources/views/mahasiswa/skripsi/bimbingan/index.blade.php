@@ -31,7 +31,7 @@ Bimbingan Skripsi
             <h5 class="card-header">Review Bimbingan Skripsi</h5>
             <div class="card-body">
                 <p class="revisi-rumusan-masa">
-                    <span class="span0-1">Revisi:<br/></span>
+                    <span class="span0-1" style="font-weight: bold">Revisi : <br/></span>
                     @if (!is_null($detailbim) && !is_null($detailbim->revisi))
                     <span class="span0-1">{{ $detailbim->revisi }}</span><br>
                 @else
@@ -99,7 +99,7 @@ Bimbingan Skripsi
             @endif
         </div>
         <div class="mb-3">
-            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary mt-4">History Bimbingan</a>
+            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
         </div>
         @endif
     </div>

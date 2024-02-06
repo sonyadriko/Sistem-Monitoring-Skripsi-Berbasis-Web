@@ -81,7 +81,7 @@ Revisi Sidang Skripsi
             </div>
         </div>
         <div class="mb-3">
-            <a href="{{ route('his-rev-mhs.index') }}" class="btn btn-primary mt-4">History Revisi Sidang Skripsi</a>
+            <a href="{{ route('his-rev-mhs.index') }}" class="btn btn-primary">History Revisi Sidang Skripsi</a>
         </div>
         @endif
     </div>
