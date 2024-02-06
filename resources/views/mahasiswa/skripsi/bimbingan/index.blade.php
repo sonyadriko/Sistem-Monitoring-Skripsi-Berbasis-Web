@@ -21,7 +21,7 @@ Bimbingan Skripsi
 </div>
 <h6 class="mb-4">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</h6>
 <div class="row">
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-lg-12 col-xl-12 grid-margin stretch-card">
         @if(is_null($bimbingans) || is_null($bimbingans->id_bimbingan_skripsi))
         <div class="alert alert-warning" role="alert">
             Harap selesaikan tahap proposal terlebih dahulu sampai mempunyai surat tugas bimbingan.
@@ -30,80 +30,83 @@ Bimbingan Skripsi
         <div class="card mb-4">
             <h5 class="card-header">Review Bimbingan Skripsi</h5>
             <div class="card-body">
-                <p class="revisi-rumusan-masa">
-                    <span class="span0-1" style="font-weight: bold">Revisi : <br/></span>
-                    @if (!is_null($detailbim) && !is_null($detailbim->revisi))
+                {{-- <p class="revisi-rumusan-masa"> --}}
+                <span class="span0-1 mt-4 mb-4" style="font-weight: bold">Revisi : <br> <br></span>
+                @if (!is_null($detailbim) && !is_null($detailbim->revisi))
                     <span class="span0-1">{{ $detailbim->revisi }}</span><br>
                 @else
                     <span class="span0-1 text-danger">Menunggu review dari dosen pembimbing</span><br>
                 @endif
-                </p>
+                {{-- </p> --}}
             </div>
         </div>
-        <div class="row">
-            @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <h5 class="card-header">Persetujuan Sidang</h5>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
-                            </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                @if(is_null($bimbingans->acc_dosen_utama))
-                                <button type="submit" class="btn btn-secondary" disabled">
-                                    Daftar
-                                </button>
-                                @else
-                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
-                                    Daftar
-                                </button>
-                                @endif
-                            </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-4 grid-margin stretch-card">
+        @if ($bimbingans->dosen_pembimbing_ii == 'tidak ada')
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <h5 class="card-header">Persetujuan Sidang</h5>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                            <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            @if(is_null($bimbingans->acc_dosen_utama))
+                            <button type="submit" class="btn btn-secondary" disabled">
+                                Daftar
+                            </button>
+                            @else
+                            <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                Daftar
+                            </button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            @else
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <h5 class="card-header">Persetujuan Sidang</h5>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
-                                <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $bimbingans->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
-                                <label class="form-check-label" for="persetujuan2"> Dosen Pembimbing 2 </label>
-                            </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                @if(is_null($bimbingans->acc_dosen_utama) || is_null($bimbingans->acc_dosen_ii))
-                                <button type="submit" class="btn btn-secondary" disabled">
-                                    Daftar
-                                </button>
-                                @else
-                                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
-                                    Daftar
-                                </button>
-                                @endif
-                            </div>
+        @else
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <h5 class="card-header">Persetujuan Sidang</h5>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" name="persetujuan1" id="persetujuan1" {{ $bimbingans->acc_dosen_utama ? 'checked disabled' : '' }} disabled/>
+                            <label class="form-check-label" for="persetujuan1"> Dosen Pembimbing 1 </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="persetujuan2" id="persetujuan2" {{ $bimbingans->acc_dosen_ii ? 'checked disabled' : '' }} disabled />
+                            <label class="form-check-label" for="persetujuan2"> Dosen Pembimbing 2 </label>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            @if(is_null($bimbingans->acc_dosen_utama) || is_null($bimbingans->acc_dosen_ii))
+                            <button type="submit" class="btn btn-secondary" disabled">
+                                Daftar
+                            </button>
+                            @else
+                            <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">
+                                Daftar
+                            </button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-            @endif
-        </div>
-        <div class="mb-3">
-            <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
         </div>
         @endif
     </div>
+    <div class="mb-3">
+        <a href="{{ route('his-bims-mhs.index') }}" class="btn btn-primary">History Bimbingan</a>
+    </div>
 </div>
+
+@endif
 
 
 
