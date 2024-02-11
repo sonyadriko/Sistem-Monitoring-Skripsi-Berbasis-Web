@@ -19,7 +19,7 @@ Mata Kuliah Pendukung
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Manajemen</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
+      <li class="breadcrumb-item active" aria-current="page">Mata Kuliah Pendukung</li>
     </ol>
 </nav>
 <div class="row">

@@ -113,7 +113,7 @@ Daftar Sidang Proposal
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                                <p><span>{{ $datas->dosen_pembimbing_ii }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->dosen_pembimbing_ii }}</span></p>
                             </div>
                         </div>
                     </div>

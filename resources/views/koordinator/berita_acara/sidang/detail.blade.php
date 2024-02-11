@@ -42,7 +42,7 @@ Detail Berita Acara Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Nama </label>
-                                <p><span>{{ $data->name }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $data->name }}</span></p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -60,7 +60,7 @@ Detail Berita Acara Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Judul </label>
-                                <p><span>{{ $data->judul }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $data->judul }}</span></p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -74,13 +74,13 @@ Detail Berita Acara Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1 </label>
-                                <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span></p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2 </label>
-                                <p><span>{{$data->dosen_pembimbing_ii}}</span></p>
+                                <p><span style="text-transform: capitalize;">{{$data->dosen_pembimbing_ii}}</span></p>
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ Detail Berita Acara Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
-                                <p><span>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                <p><span style="text-transform: capitalize;">{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                     {{$data->nama_penguji_2}} (Dosen Penguji 2)<br/>
                                     {{$data->nama_penguji_3}} (Dosen Penguji 3)<br/>
                                     {{$data->nama_sekretaris}} (Sekretaris)</span></p>

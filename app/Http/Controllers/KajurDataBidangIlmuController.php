@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class KajurDataBidangIlmuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         $databi = DB::table('bidang_ilmu')

@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Sidang Skripsi
+Detail Sidang Skripsi
 @endsection
 
 @section('css')

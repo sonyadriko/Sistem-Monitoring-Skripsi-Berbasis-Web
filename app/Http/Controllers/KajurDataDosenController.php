@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class KajurDataDosenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         // Use get() to execute the query and get the results as an array of objects

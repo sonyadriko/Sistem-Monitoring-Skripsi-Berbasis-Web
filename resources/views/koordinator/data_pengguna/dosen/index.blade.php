@@ -31,7 +31,7 @@ Data Pengguna
                             <th>No</th>
                             <th>NIP</th>
                             <th>Nama</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                             {{-- <th>Email</th> --}}
 
                         </tr>
@@ -45,7 +45,7 @@ Data Pengguna
                             <td>{{ $no }}</td>
                             <td>{{ $data->kode_unik }}</td>
                             <td>{{ $data->name }}</td>
-                            <td><a href="{{ url('/koordinator/data_pengguna/dosen/' . $data->id) }}" class="btn btn-primary">Detail</a></td>
+                            {{-- <td><a href="{{ url('/koordinator/data_pengguna/dosen/' . $data->id) }}" class="btn btn-primary">Detail</a></td> --}}
 
                             {{-- <td>{{ $data->email }}</td> --}}
                         </tr>

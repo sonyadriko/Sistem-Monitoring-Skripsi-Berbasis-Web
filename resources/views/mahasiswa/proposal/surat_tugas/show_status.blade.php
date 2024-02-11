@@ -67,7 +67,7 @@ Daftar Surat Tugas
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Nama</label>
-                                <p><span>{{ $datas->name }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->name }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ Daftar Surat Tugas
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Judul</label>
-                                <p><span>{{ $datas->judul }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->judul }}</span></p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -94,7 +94,7 @@ Daftar Surat Tugas
                                     $carbonTanggal = \Carbon\Carbon::parse($datas->tanggal_terbit);
                                     $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
                                 @endphp
-                                <p><span>{{ $formatTanggal }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $formatTanggal }}</span></p>
                             </div>
                         </div>
                         <div class="col-sm-6">

@@ -99,9 +99,6 @@ Revisi Sidang Skripsi
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    // Pastikan elemen sudah dimuat di dalam DOM
-
-
     document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitBtn');
 
@@ -176,7 +173,7 @@ Revisi Sidang Skripsi
                 }
             });
         } else {
-            console.error('Element with ID "submitBtn" not found.');
+            // console.error('Element with ID "submitBtn" not found.');
         }
     });
 </script>

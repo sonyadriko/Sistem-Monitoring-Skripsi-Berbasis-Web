@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-Sidang Proposal
+Detail Sidang Proposal
 @endsection
 
 @section('css')

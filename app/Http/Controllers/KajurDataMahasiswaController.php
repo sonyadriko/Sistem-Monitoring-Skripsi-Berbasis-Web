@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class KajurDataMahasiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         // Mengambil data mahasiswa dan informasi kemajuan

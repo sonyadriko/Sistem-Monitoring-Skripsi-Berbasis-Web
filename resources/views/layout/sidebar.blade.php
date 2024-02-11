@@ -17,7 +17,6 @@
     }
 @endphp
 <a href="{{ $dashboardUrl }}" class="sidebar-brand">
-    {{-- <a href="{{ auth()->user()->role_id === 2 ? url('/dosen') : (auth()->user()->role_id === 3 ? url('/koordinator') : url('/dashboard')) }}" class="sidebar-brand"> --}}
       SM<span> SKRIPSI</span>
     </a>
     <div class="sidebar-toggler not-active">
@@ -65,8 +64,6 @@
                 <ul class="nav sub-menu">
                     <li class="nav-item">
                     <a href="{{ route('pengajuan-judul.form') }}" class="nav-link">Pengajuan Judul</a>
-                    {{-- <a href="{{ route('pengajuan-judul.create') }}" class="nav-link">Pengajuan Judul</a> --}}
-
                     </li>
                     <li class="nav-item">
                     <a href="{{ route('seminar-proposal.check')}}" class="nav-link">Sidang Proposal</a>
@@ -77,12 +74,6 @@
                     <li class="nav-item">
                         <a href="{{ route('sidang-skripsi.check')}}" class="nav-link">Sidang Skripsi</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('yudisium.check')}}" class="nav-link">Yudisium</a>
-                    </li> --}}
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('surat-survey.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-                    </li> --}}
                 </ul>
             </div>
         </li>
@@ -130,9 +121,6 @@
             </a>
             <div class="collapse" id="lainlain">
                 <ul class="nav sub-menu">
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Surat Survey Perusahaan</a>
-                    </li> --}}
                     <li class="nav-item">
                         <a href="{{ route('faq')}}" class="nav-link">FAQ</a>
                     </li>
@@ -158,7 +146,6 @@
             <ul class="nav sub-menu">
                 <li class="nav-item">
                     <a href="{{ route('pengajuan-judul.index')}}" class="nav-link">Pengajuan Judul</a>
-
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('koor-surat-tugas.index')}}" class="nav-link">Surat Tugas</a>
@@ -166,10 +153,6 @@
                 <li class="nav-item">
                     <a href="{{ route('bidang-ilmu.index')}}" class="nav-link">Tema Penelitian</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('koor-yudisium.index')}}" class="nav-link">Yudisium</a>
-                </li> --}}
-
             </ul>
         </div>
     </li>

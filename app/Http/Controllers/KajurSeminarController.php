@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class KajurSeminarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         $sempros = DB::table('seminar_proposal')

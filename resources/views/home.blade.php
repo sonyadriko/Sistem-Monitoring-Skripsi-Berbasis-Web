@@ -37,7 +37,7 @@
 						<div class="row mt-1">
 							@foreach ($tables as $key => $table)
 								@if (Agent::isMobile() && $loop->last)
-									<div class="col-lg m-2 text-left" style="font-weight: bold;">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
+									{{-- <div class="col-lg m-2 text-left" style="font-weight: bold;">{{ ucwords(str_replace('_', ' ', $table)) }}</div> --}}
 								@elseif (!Agent::isMobile())
 									<div class="col-sm m-2 text-center" style="font-weight: bold;">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
 								@endif
@@ -113,10 +113,8 @@
 @endsection
 
 @push('plugin-scripts')
-	<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}">
-		< /s> <
-		script src = "{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}" >
-	</script>
+	<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+	<script src = "{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')

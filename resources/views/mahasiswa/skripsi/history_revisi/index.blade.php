@@ -68,23 +68,23 @@ History Revisi Sidang
                 </tr>
                 <tr>
                     <td>Nama</td>
-                    <td>{{ $hbmhs->name }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->name }}</td>
                 </tr>
                 <tr>
                     <td>Judul</td>
-                    <td>{{ $hbmhs->judul }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->judul }}</td>
                 </tr>
                 <tr>
                     <td>Bidang Ilmu</td>
-                    <td>{{ $hbmhs->topik_bidang_ilmu }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->topik_bidang_ilmu }}</td>
                 </tr>
                 <tr>
                     <td>Dosen Pembimbing Utama</td>
-                    <td>{{ $hbmhs->dosen_pembimbing_utama }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->dosen_pembimbing_utama }}</td>
                 </tr>
                 <tr>
                     <td>Dosen Pembimbing II</td>
-                    <td>{{ $hbmhs->dosen_pembimbing_ii }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->dosen_pembimbing_ii }}</td>
                 </tr>
                 @break
                 @endforeach

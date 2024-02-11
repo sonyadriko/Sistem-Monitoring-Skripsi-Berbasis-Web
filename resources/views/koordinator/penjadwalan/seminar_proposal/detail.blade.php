@@ -38,21 +38,21 @@ Sidang Proposal
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label class="form-label"style="font-weight: bold" >Judul</label>
-                            <p><span>{{ $data->judul }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->judul }}</span></p>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" style="font-weight: bold">Bidang Ilmu</label>
-                            <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->topik_bidang_ilmu }}</span></p>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="dospem_utama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                            <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span></p>
                         </div>
                         <div class="col-md-6">
                             <label for="dospem_2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                            <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span></p>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -161,27 +161,27 @@ Sidang Proposal
                 </div>
                 <div class="col-md-6">
                     <label for="name" class="form-label" style="font-weight: bold">Nama Mahasiswa</label>
-                    <p><span>{{ $data->name }}</span></p>
+                    <p><span style="text-transform: capitalize;">{{ $data->name }}</span></p>
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="npm" class="form-label" style="font-weight: bold">Judul</label>
-                    <p><span>{{ $data->judul }}</span></p>
+                    <p><span style="text-transform: capitalize;">{{ $data->judul }}</span></p>
                 </div>
                 <div class="col-md-6">
                     <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
-                    <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
+                    <p><span style="text-transform: capitalize;">{{ $data->topik_bidang_ilmu }}</span></p>
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="dospem_utama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                    <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                    <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span></p>
                 </div>
                 <div class="col-md-6">
                     <label for="dospem_2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                    <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                    <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span></p>
                 </div>
             </div>
               <div class="mb-3 row">
@@ -410,8 +410,8 @@ function showConfirmation() {
         if (result.isConfirmed) {
             // Tampilkan pesan sukses sebelum reload
             Swal.fire({
-                title: 'Berita Acara Dicetak',
-                text: 'Berita Acara Sidang Proposal berhasil dicetak.',
+                title: 'Berita Acara Dibuat',
+                text: 'Berita Acara Sidang Proposal berhasil dibuat.',
                 icon: 'success',
             }).then(() => {
                 // Submit form cetak

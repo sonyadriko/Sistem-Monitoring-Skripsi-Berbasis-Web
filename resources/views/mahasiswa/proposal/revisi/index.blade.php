@@ -38,14 +38,14 @@ Revisi Sidang Proposal
                 <span class="span0-1">Revisi : <br/></span>
                 @if (!is_null($detailrev))
                 @php
-    $groupedRevisions = collect($detailrev)->groupBy('users_id');
-@endphp
+                    $groupedRevisions = collect($detailrev)->groupBy('users_id');
+                @endphp
 
-@foreach($groupedRevisions as $userId => $revisions)
-    @foreach($revisions as $revisi)
-        <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->unique_names}}</span><br>
-    @endforeach
-@endforeach
+            @foreach($groupedRevisions as $userId => $revisions)
+                @foreach($revisions as $revisi)
+                    <span class="span0-1">{{$revisi->revisi}} dari {{$revisi->unique_names}}</span><br>
+                @endforeach
+            @endforeach
 
             @else
                 <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>

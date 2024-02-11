@@ -67,7 +67,7 @@ Pengajuan Judul
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Nama</label>
-                                <p><span>{{ $datas->name }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->name }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -75,13 +75,13 @@ Pengajuan Judul
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Judul</label>
-                                <p><span>{{ $datas->judul }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->judul }}</span></p>
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Bidang Ilmu</label>
-                                <p><span>{{ $datas->topik_bidang_ilmu }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->topik_bidang_ilmu }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -89,13 +89,13 @@ Pengajuan Judul
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                                <p><span>{{ $datas->dosen_pembimbing_utama }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->dosen_pembimbing_utama }}</span></p>
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                                <p><span>{{ $datas->dosen_pembimbing_ii }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->dosen_pembimbing_ii }}</span></p>
                             </div>
                         </div>
                     </div>

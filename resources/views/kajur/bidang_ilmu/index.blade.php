@@ -56,56 +56,6 @@ Data Bidang Ilmu
         </tr>
     @endforeach
 </tbody>
-{{-- <tbody>
-    @php
-    $no = 1;
-    $groupedData = [];
-
-    // echo $databi[4]->mata_kuliah_pendukung;
-
-    foreach ($databi as $data) {
-        $topikBidangIlmu = $data->topik_bidang_ilmu;
-        // $mkp = $data->nama_mata_kuliah;
-
-        if (!array_key_exists($topikBidangIlmu, $groupedData)) {
-            $groupedData[$topikBidangIlmu] = [
-                'no' => $no++,
-                'topik_bidang_ilmu' => $topikBidangIlmu,
-                'name' => $data->name,
-                // 'nama_mata_kuliah' => explode(',', $data->nama_mata_kuliah),
-                'nama_mata_kuliah' => $data->nama_mata_kuliah,
-            ];
-        }
-        else {
-            // Jika topik bidang ilmu sudah ada, tambahkan name dan mata_kuliah_pendukung ke array yang sudah ada
-            // $groupedData[$topikBidangIlmu]['name'] .= ', ' . $data->name;
-
-            // $groupedData[$mkp]['nama_mata_kuliah'] .= ', ' . $data->nama_mata_kuliah;
-
-            // Pecah string mata kuliah_pendukung menjadi array dan tambahkan ke array yang sudah ada
-            // $mataKuliahPendukung = explode(',', $data->nama_mata_kuliah);
-            // $groupedData[$topikBidangIlmu]['nama_mata_kuliah'] = array_merge(
-            //     $groupedData[$topikBidangIlmu]['nama_mata_kuliah'],
-            //     array_diff($mataKuliahPendukung, $groupedData[$topikBidangIlmu]['nama_mata_kuliah'])
-            // );
-        }
-    }
-    // echo $databi[2];
-
-    @endphp
-
-    @foreach($groupedData as $data)
-        <tr>
-            <td>{{ $data['no'] }}</td>
-            <td>{{ $data['topik_bidang_ilmu'] }}</td>
-            <td>{{ $data['name'] }}</td>
-            {{-- <td>{{ implode(', ', $data['nama_mata_kuliah']) }}</td> <!-- Gabungkan array mata kuliah_pendukung menjadi string --> --}}
-            {{-- <td>{{ $data['nama_mata_kuliah'] }}</td> <!-- Gabungkan array mata kuliah_pendukung menjadi string -->
-        </tr>
-    @endforeach
-</tbody> --}}
-
-
                 </table>
 
             </div>

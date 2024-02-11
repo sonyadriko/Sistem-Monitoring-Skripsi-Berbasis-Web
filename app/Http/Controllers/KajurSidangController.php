@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class KajurSidangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         $semhas = DB::table('sidang_skripsi')

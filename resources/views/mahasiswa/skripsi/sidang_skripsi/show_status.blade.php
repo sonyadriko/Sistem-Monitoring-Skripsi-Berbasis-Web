@@ -99,7 +99,7 @@ Daftar Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Ruang</label>
-                                <p><span>{{ $datas->nama_ruangan }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->nama_ruangan }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -107,13 +107,13 @@ Daftar Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                                <p><span>{{ $datas->dosen_pembimbing_utama }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->dosen_pembimbing_utama }}</span></p>
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                                <p><span>{{ $datas->dosen_pembimbing_ii }}</span></p>
+                                <p><span style="text-transform: capitalize;">{{ $datas->dosen_pembimbing_ii }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,8 @@ Daftar Sidang Skripsi
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" style="font-weight: bold">Dosen Penguji</label>
-                                <p><span>{{$datas->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                <p><span style="text-transform: capitalize;">
+                                    {{$datas->nama_penguji_1}} (Dosen Penguji 1)<br/>
                                     {{$datas->nama_penguji_2}} (Dosen Penguji 2)<br/>
                                     {{$datas->nama_penguji_3}} (Dosen Penguji 3)<br/>
                                     {{$datas->nama_sekretaris}} (Sekretaris)</span></p>

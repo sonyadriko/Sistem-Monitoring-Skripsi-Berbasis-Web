@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'checkDosen' => \App\Http\Middleware\CheckDosen::class,
         'checkMahasiswa' => \App\Http\Middleware\CheckMahasiswa::class,
         'checkKoordinator' => \App\Http\Middleware\CheckKoordinator::class,
+        'checkKajur' => \App\Http\Middleware\CheckKajur::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,

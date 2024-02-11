@@ -86,8 +86,8 @@ Detail Berita Acara Proposal
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
-                            <p><span>{{$data->nama_penguji_1}}<br/>
-                                {{$data->nama_penguji_2}}</span></p>
+                            <p><span>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
+                                {{$data->nama_penguji_2}} (Dosen Penguji 2)s</span></p>
                         </div>
                     </div>
                 </div>

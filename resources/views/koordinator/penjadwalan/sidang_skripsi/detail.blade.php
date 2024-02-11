@@ -52,12 +52,12 @@ Sidang Skripsi
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="dospemUtama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                            <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                            <p><span  style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span></p>
                             {{-- <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="dospem2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                            <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                            <p><span  style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span></p>
                             {{-- <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
@@ -172,24 +172,24 @@ Sidang Skripsi
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="npm" class="form-label" style="font-weight: bold">Judul</label>
-                            <p><span>{{ $data->judul }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->judul }}</span></p>
                             {{-- <input type="text" class="form-control" id="judul" name="judul" value="{{$data->judul}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="bidang_ilmu" class="form-label" style="font-weight: bold">Bidang Ilmu</label>
-                            <p><span>{{ $data->topik_bidang_ilmu }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->topik_bidang_ilmu }}</span></p>
                             {{-- <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu" value="{{$data->topik_bidang_ilmu}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <label for="dospemUtama" class="form-label" style="font-weight: bold">Dosen Pembimbing 1</label>
-                            <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span></p>
                             {{-- <input type="text" class="form-control" id="dospemUtama" name="dospemUtama" value="{{$data->dosen_pembimbing_utama}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="dospem2" class="form-label" style="font-weight: bold">Dosen Pembimbing 2</label>
-                            <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span></p>
                             {{-- <input type="text" class="form-control" name="dospem2" id="dospem2" value="{{$data->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly /> --}}
                         </div>
                     </div>
@@ -534,7 +534,7 @@ function showConfirmation() {
             // Tampilkan pesan sukses sebelum reload
             Swal.fire({
                 title: 'Success',
-                text: 'Data berhasil dicetak.',
+                text: 'Data berhasil dibuat.',
                 icon: 'success',
             }).then(() => {
                 // Submit form cetak

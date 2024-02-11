@@ -30,11 +30,11 @@ Profile
             </div>
             <div class="mb-3">
                 <label for="viewName" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="viewName" value="{{ Auth::user()->name }}" placeholder="Nama" disabled>
+                <input type="text" class="form-control" id="viewName" style="text-transform: capitalize;" value="{{ Auth::user()->name }}" placeholder="Nama" disabled>
             </div>
             <div class="mb-3">
                 <label for="viewAlamatMahasiswa" class="form-label">Alamat Mahasiswa</label>
-                <input type="text" class="form-control" id="viewAlamatMahasiswa" value="{{ $details->alamat_mhs }}" placeholder="Alamat" disabled>
+                <input type="text" class="form-control" id="viewAlamatMahasiswa" style="text-transform: capitalize;" value="{{ $details->alamat_mhs }}" placeholder="Alamat" disabled>
             </div>
             <div class="mb-3">
               <label for="viewNoTelpMahasiswa" class="form-label">No Telp Mahasiswa</label>
@@ -42,7 +42,7 @@ Profile
             </div>
             <div class="mb-3">
               <label for="viewAlamatOrangTua" class="form-label">Alamat Orang Tua</label>
-              <input type="text" class="form-control" id="viewAlamatOrangTua" value="{{ $details->alamat_orang_tua }}" autocomplete="off" placeholder="Alamat Orang Tua" disabled>
+              <input type="text" class="form-control" id="viewAlamatOrangTua" style="text-transform: capitalize;" value="{{ $details->alamat_orang_tua }}" autocomplete="off" placeholder="Alamat Orang Tua" disabled>
             </div>
             <div class="mb-3">
                 <label for="viewNoTelpOrangTua" class="form-label">No Telp Orang Tua</label>

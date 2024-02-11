@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class KajurJadwalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         $semproCount = DB::table('seminar_proposal')->whereIn('status', ['pending', 'terima'])->count();

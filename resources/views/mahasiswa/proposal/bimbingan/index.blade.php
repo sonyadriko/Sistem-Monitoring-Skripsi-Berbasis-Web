@@ -31,18 +31,16 @@ Bimbingan Proposal
         <div class="card">
             <h5 class="card-header">Review Bimbingan Proposal</h5>
             <div class="card-body mb-4">
-                {{-- <p class="revisi-rumusan-masa"> --}}
-                    <span class="span0-1 mt-4 mb-4" style="font-weight: bold">Revisi : <br> <br></span>
-                    @if (!is_null($detailbim))
-                        @if (is_null($detailbim->revisi))
-                            <span class="span0-1 alert alert-warning">Menunggu review dari dosen pembimbing</span><br>
-                        @else
-                            <span class="span0-1">{{ $detailbim->revisi }}</span><br>
-                        @endif
-                    @else
+                <span class="span0-1 mt-4 mb-4" style="font-weight: bold">Revisi : <br> <br></span>
+                @if (!is_null($detailbim))
+                    @if (is_null($detailbim->revisi))
                         <span class="span0-1 alert alert-warning">Menunggu review dari dosen pembimbing</span><br>
+                    @else
+                        <span class="span0-1">{{ $detailbim->revisi }}</span><br>
                     @endif
-                {{-- </p> --}}
+                @else
+                    <span class="span0-1 alert alert-warning">Menunggu review dari dosen pembimbing</span><br>
+                @endif
             </div>
         </div>
     </div>
@@ -111,94 +109,15 @@ Bimbingan Proposal
     </div>
 </div>
 @endif
-
-
-
-
-
-{{-- !-- row --> --}}
 @endsection
 
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- ... Bagian HTML lainnya ... -->
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-
 function handleButtonClick() {
         // Check your conditions here
             // Redirect to the specified route
             window.location.href = "{{ route('seminar-proposal.check') }}";
         // }
     }
-    // Pastikan elemen sudah dimuat di dalam DOM
-    document.addEventListener('DOMContentLoaded', function() {
-        const submitBtn = document.getElementById('submitBtn');
-
-        if (submitBtn) {
-            submitBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-
-                const file = document.getElementById('file_proposal').files[0];
-                const bimbinganProposalId = document.getElementById('bimbingan_proposal_id').value;
-
-                if (file && bimbinganProposalId) {
-                    const formData = new FormData();
-                    formData.append('file_proposal', file);
-                    formData.append('bimbingan_proposal_id', bimbinganProposalId);
-                    formData.append('_token', '{{ csrf_token() }}');
-
-                    fetch('{{ route('bimbingan-mhs.store') }}', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'File Proposal Successfully Submitted!',
-                                text: data.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function() {
-                                // location.reload();
-                                window.location.href = "{{ route('bimbingan-mhs.index') }}";
-
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: data.message
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'An error occurred while submitting the file.'
-                        });
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Please select a file.'
-                    });
-                }
-            });
-        } else {
-            // console.error('Element with ID "submitBtn" not found.');
-        }
-    });
 </script>

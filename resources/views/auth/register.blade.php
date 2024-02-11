@@ -60,7 +60,7 @@ Register
                             </div>
 
                             <div class="mb-3">
-                                <label for="password" class="form-label text-dark text-left">{{ __('Kata Sandi') }}</label>
+                                <label for="password" class="form-label text-dark text-left">{{ __('Password') }}</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror text-dark" name="password" required autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@ Register
                             </div>
 
                             <div class="mb-3">
-                                <label for="password-confirm" class="form-label text-dark text-left">{{ __('Ulang Kata Sandi') }}</label>
+                                <label for="password-confirm" class="form-label text-dark text-left">{{ __('Konfirmasi Password') }}</label>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
 

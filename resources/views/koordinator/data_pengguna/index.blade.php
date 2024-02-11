@@ -5,7 +5,7 @@
 @endpush
 
 @section('title')
-Dashboard
+Data Pengguna
 @endsection
 
 @section('content')

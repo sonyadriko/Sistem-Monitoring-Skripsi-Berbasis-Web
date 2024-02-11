@@ -32,12 +32,10 @@ History Revisi Sidang Proposal
         <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Tanggal</th>
                   <th>Bimbingan</th>
+                  <th>Tanggal</th>
+                  {{-- <th>Bimbingan</th> --}}
                   <th>Revisi</th>
-                  {{-- <th>Validasi Revisi</th> --}}
-                  {{-- <th>Status</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -48,10 +46,8 @@ History Revisi Sidang Proposal
                 <tr>
                     <td>{{ $no }}</td>
                     <td>{{ \Carbon\Carbon::parse($hbmhs->created_at)->format('d-m-Y H:i:s') }}</td>
-                    <td>{{ $no }}</td>
+                    {{-- <td>{{ $no }}</td> --}}
                     <td>{{ $hbmhs->revisi }} dari {{ $hbmhs->nama_penguji_1 }}</td>
-
-                    {{-- <td><a href="{{ url('/mahasiswa/history_bimbingan_proposal/detail/' . $hbmhs->id_detail_bimbingan_proposal) }}" class="btn btn-primary">Detail</a></td> --}}
                 </tr>
                 @php
                 $no++;
@@ -75,23 +71,23 @@ History Revisi Sidang Proposal
                 </tr>
                 <tr>
                     <td>Nama</td>
-                    <td>{{ $hbmhs->name }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->name }}</td>
                 </tr>
                 <tr>
                     <td>Judul</td>
-                    <td>{{ $hbmhs->judul }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->judul }}</td>
                 </tr>
                 <tr>
                     <td>Bidang Ilmu</td>
-                    <td>{{ $hbmhs->topik_bidang_ilmu }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->topik_bidang_ilmu }}</td>
                 </tr>
                 <tr>
                     <td>Dosen Pembimbing Utama</td>
-                    <td>{{ $hbmhs->dosen_pembimbing_utama }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->dosen_pembimbing_utama }}</td>
                 </tr>
                 <tr>
                     <td>Dosen Pembimbing II</td>
-                    <td>{{ $hbmhs->dosen_pembimbing_ii }}</td>
+                    <td style="text-transform: capitalize;">{{ $hbmhs->dosen_pembimbing_ii }}</td>
                 </tr>
                 @break
                 @endforeach

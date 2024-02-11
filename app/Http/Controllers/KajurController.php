@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class KajurController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('checkKajur');
+    }
     public function index()
     {
         $mahasiswaCount = DB::table('users')->where('role_id', '1')->count();

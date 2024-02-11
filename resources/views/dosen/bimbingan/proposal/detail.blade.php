@@ -14,12 +14,12 @@ Detail Bimbingan Proposal
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Bimbingan Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Proposal Skripsi</li>
     </ol>
 </nav>
 <div class="row">
-    <h4>Status Bimbingan Proposal</h4>
-    <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p>
+    {{-- <h4>Status Bimbingan Proposal</h4>
+    <p class="mb-2">Seluruh informasi mengenai bimbingan akan ditampilkan dibawah ini.</p> --}}
     <div class="col-md-12 stretch-card">
         <div class="card mb-4">
             <h5 class="card-header">Data Mahasiswa dan Dosen Pembimbing</h5>
@@ -62,7 +62,7 @@ Detail Bimbingan Proposal
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label" style="font-weight: bold">Dosen Pembimbing ii </label>
-                            <p><span>{{ $data->dosen_pembimbing_ii }}</span></p>
+                            <p><span style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span></p>
                         </div>
                     </div>
                 </div>
