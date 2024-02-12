@@ -1,7 +1,7 @@
 @extends('layout.master3')
 
 @section('title')
-Topik
+Tema Penelitian
 @endsection
 
 @section('css')
