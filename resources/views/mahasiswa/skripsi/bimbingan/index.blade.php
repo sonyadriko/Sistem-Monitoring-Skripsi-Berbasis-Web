@@ -26,6 +26,8 @@ Bimbingan Skripsi
         <div class="alert alert-warning" role="alert">
             Harap selesaikan tahap proposal terlebih dahulu sampai mempunyai surat tugas bimbingan.
         </div>
+    </div>
+</div>
         @else
         <div class="card mb-4">
             <h5 class="card-header">Review Bimbingan Skripsi</h5>

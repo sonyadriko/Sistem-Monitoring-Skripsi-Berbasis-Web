@@ -93,20 +93,12 @@
 			<div class="card">
 				<h6 class="card-header mb-0" style="font-weight: bold">Download Template tersedia</h6>
 				<div class="card-body">
-					<p class="text-dark" style="color: #171717; font-size: 16px; margin-bottom: 14px">Template Proposal Skripsi.</p>
-					{{-- <a href="{{ asset('Template Proposal Skripsi.docx') }}" type="application/pdf" target="_blank" class="btn btn-dark d-flex align-items-center">
-                        <iconify-icon icon="lucide:download-cloud" style="margin-left: 12px" width="24" height="24"></iconify-icon>
-                        <span style="margin-left: 7px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
-                    </a> --}}
-					<button class="btn btn-dark d-flex align-items-center" onclick="window.open('{{ asset('Template Proposal Skripsi.docx') }}', '_blank')">
-						<iconify-icon height="24" icon="lucide:download-cloud" style="margin-left: 12px" width="24"></iconify-icon>
-						<span style="margin-left: 7px; margin-right: 12px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
-					</button>
-
-					{{-- <p> <a href="{{ asset($data->file_proposal) }}" type="application/pdf" target="_blank">{{basename($data->file_proposal)}}</a>.</p> --}}
-
-					{{-- <p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p> --}}
-				</div>
+					<p class="text-dark" style="color: #171717; font-size: 1rem; margin-bottom: 14px">Template Proposal Skripsi.</p>
+					<button class="btn btn-dark btn-block text-center" onclick="window.open('{{ asset('Template Proposal Skripsi.docx') }}', '_blank')">
+                        <iconify-icon height="24" icon="lucide:download-cloud" style="margin-left: 12px" width="24"></iconify-icon>
+                        <span style="margin-left: 7px; margin-right: 12px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
+                    </button>
+                </div>
 			</div>
 		</div>
 	</div>

@@ -27,6 +27,8 @@ Bimbingan Proposal
         <div class="alert alert-warning" role="alert">
             Harap ajukan judul terlebih dahulu sebelum melanjutkan.
         </div>
+    </div>
+</div>
         @else
         <div class="card">
             <h5 class="card-header">Review Bimbingan Proposal</h5>
@@ -120,4 +122,5 @@ function handleButtonClick() {
             window.location.href = "{{ route('seminar-proposal.check') }}";
         // }
     }
+
 </script>
