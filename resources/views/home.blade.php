@@ -17,11 +17,6 @@
 			{{ session('success') }}
 		</div>
 	@endif
-	{{-- <div class="d-flex justify-content-between align-items-center grid-margin flex-wrap">
-		<div>
-			<h4 class="mb-md-0 mb-3">Selamat Datang</h4>
-		</div>
-	</div> --}}
 	<h4 class="mb-2" style="font-weight: normal;">Selamat Datang <strong>{{ Auth::user()->name }}</strong></h4>
 	<h6 class="mb-4" style="font-weight: normal;">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
 
