@@ -23,13 +23,10 @@ class SuratTugasController extends Controller
             ->leftjoin('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', 'bimbingan_proposal.pengajuan_id')
             ->where('users.id', Auth::user()->id)
             ->first();
-
-        // Check if $datas is null before passing it to the view
         if (!$datas) {
             // Handle the case where data is not found
             return view('mahasiswa/proposal/surat_tugas.index')->with('datas', null);
         }
-
         return view('mahasiswa/proposal/surat_tugas.index', compact('datas'));
     }
 
@@ -57,7 +54,6 @@ class SuratTugasController extends Controller
             ->where('pengajuan_judul.users_id', Auth::user()->id)
             ->latest('seminar_proposal.created_at')
             ->first();
-
         if (is_null($proposalData) || is_null($proposalData->id_seminar_proposal)) {
             return view('mahasiswa/proposal/surat_tugas.no_submission');
         } elseif (is_null($proposalData->alamat_mhs)) {
@@ -103,10 +99,8 @@ class SuratTugasController extends Controller
         ]);
 
         try {
-            // Generate unique file names
             $fileProposalName = $request->file('file_proposal')->getClientOriginalName();
             $fileSlipPembayaranName = $request->file('file_slip_pembayaran')->getClientOriginalName();
-            // $fileSlipPembayaranName = uniqid() . '.' . $request->file('file_slip_pembayaran')->getClientOriginalExtension();
 
             // Move the files to the appropriate directory
             $userFolder = Auth::user()->name;
