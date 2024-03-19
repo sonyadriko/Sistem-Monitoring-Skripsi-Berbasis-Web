@@ -289,8 +289,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::get('/', [KoordinatorSuratTugasController::class, 'index'])->name('koor-surat-tugas.index');
         Route::get('/detail/{id}', [KoordinatorSuratTugasController::class, 'detail'])->name('koor-surat-tugas.detail');
         Route::post('/update/{id}', [KoordinatorSuratTugasController::class, 'update'])->name('koor-surat-tugas.update');
+        Route::get('/lihat_file/{id}', [KoordinatorSuratTUgasController::class, 'showfile'])->name('koor-surat-tugas.lihat');
         Route::post('/tolak/{id}', [KoordinatorSuratTugasController::class, 'tolaksurat'])->name('koor-surat-tugas-tolak');
-
     });
 
     Route::controller(PembagianDosenController::class)->group(function ()
