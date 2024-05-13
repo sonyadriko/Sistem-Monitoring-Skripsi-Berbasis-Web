@@ -1,8 +1,6 @@
 @extends('layout.master3')
 
-@section('title')
-    Ruangan
-@endsection
+@section('title', 'Ruangan')
 
 @section('css')
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -23,7 +21,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="text-left">
-                        <h4 class="card-title" style="font-weight: bold">Tabel List Ruangan</h4>
+                        <h4 class="card-title" style="font-weight:bold">Tabel List Ruangan</h4>
                         <p class="card-title-desc">Tabel dibawah ini merupakan list ruangan.</p>
                     </div>
                     <div class="text-right">
@@ -31,7 +29,7 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -40,29 +38,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
-                            @foreach ($ruangan as $ruangan)
+                            @foreach ($ruangan as $index => $ruang)
                                 <tr>
-                                    <td>{{ $no }}</td>
-                                    <td>{{ $ruangan->nama_ruangan }}</td>
-                                    <td><a href="{{ url('/koordinator/ruangan/edit/' . $ruangan->id_ruangan) }}"
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $ruang->nama_ruangan }}</td>
+                                    <td>
+                                        <a href="{{ url('/koordinator/ruangan/edit/' . $ruang->id_ruangan) }}"
                                             class="btn btn-primary">Edit</a>
-                                        {{-- <form action="{{ url('/koordinator/ruangan/delete/' . $ruangan->id_ruangan) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')">Delete</button>
-                            </form> --}}
                                     </td>
                                 </tr>
-                                @php
-                                    $no++;
-                                @endphp
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div> <!-- end col -->

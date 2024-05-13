@@ -1,8 +1,6 @@
 @extends('layout.master')
 
-@section('title')
-    Detail Berita Acara Sidang Skripsi
-@endsection
+@section('title', 'Detail Berita Acara Sidang Skripsi')
 
 @section('css')
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -30,20 +28,20 @@
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">NPM </label>
+                                        <label class="form-label" style="font-weight:bold">NPM</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span>{{ $data->kode_unik }}</span></p>
+                                        <p>{{ $data->kode_unik }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">No Ujian </label>
+                                        <label class="form-label" style="font-weight:bold">No Ujian</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span>{{ $data->id_berita_acara_s }}</span></p>
+                                        <p>{{ $data->id_berita_acara_s }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -52,24 +50,26 @@
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Nama </label>
+                                        <label class="form-label" style="font-weight:bold">Nama</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span style="text-transform: capitalize;">{{ $data->name }}</span></p>
+                                        <p class="text-capitalize">{{ $data->name }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Tanggal </label>
+                                        <label class="form-label" style="font-weight:bold">Tanggal</label>
                                     </div>
                                     <div class="col-sm-9">
                                         @php
-                                            $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
-                                            $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
+                                            $formattedDate = \Carbon\Carbon::parse($data->tanggal)->isoFormat(
+                                                'dddd, D MMMM Y',
+                                                'id',
+                                            );
                                         @endphp
-                                        <p><span>{{ $formatTanggal }}</span></p>
+                                        <p>{{ $formattedDate }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -78,47 +78,20 @@
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Judul </label>
+                                        <label class="form-label" style="font-weight:bold">Judul</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span style="text-transform: capitalize;">{{ $data->judul }}</span></p>
+                                        <p class="text-capitalize">{{ $data->judul }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Ruang, Waktu </label>
+                                        <label class="form-label" style="font-weight:bold">Ruang, Waktu</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span style="text-transform: capitalize;">{{ $data->nama_ruangan }},
-                                                {{ $data->jam }}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1 </label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p><span
-                                                style="text-transform: capitalize;">{{ $data->dosen_pembimbing_utama }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2 </label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p><span
-                                                style="text-transform: capitalize;">{{ $data->dosen_pembimbing_ii }}</span>
-                                        </p>
+                                        <p class="text-capitalize">{{ $data->nama_ruangan }}, {{ $data->jam }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,31 +100,51 @@
                             <div class="col-sm-6">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
+                                        <label class="form-label" style="font-weight:bold">Dosen Pembimbing 1</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p><span style="text-transform: capitalize;">{{ $data->nama_penguji_1 }} (Dosen
-                                                Penguji
-                                                1)<br />
-                                                {{ $data->nama_penguji_2 }} (Dosen Penguji 2)<br />
-                                                {{ $data->nama_penguji_3 }} (Dosen Penguji 3)<br />
-                                                {{ $data->nama_sekretaris }} (Sekretaris)</span></p>
+                                        <p class="text-capitalize">{{ $data->dosen_pembimbing_utama }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <label class="form-label" style="font-weight:bold">Dosen Pembimbing 2</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-capitalize">{{ $data->dosen_pembimbing_ii }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <label class="form-label" style="font-weight:bold">Dosen Penguji</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-capitalize">{{ $data->nama_penguji_1 }} (Dosen Penguji 1)<br />
+                                            {{ $data->nama_penguji_2 }} (Dosen Penguji 2)<br />
+                                            {{ $data->nama_penguji_3 }} (Dosen Penguji 3)<br />
+                                            {{ $data->nama_sekretaris }} (Sekretaris)</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" name="berita_acara_skripsi_id" value="{{ $data->id_berita_acara_s }}" />
                         <div class="mb-3">
-                            <span>Cetak Revisi: </span>
+                            <span style="font-weight:bold">Cetak Revisi: </span>
                             @if (count($bad) >= 4)
                                 @if (is_null($data) || is_null($data->cetak_revisi))
                                     <button type="button" class="btn btn-primary"
                                         onclick="showConfirmation()">Cetak</button>
                                 @else
-                                    <span>Sudah dicetak </span>
+                                    <span>Sudah dicetak</span>
                                 @endif
                             @else
-                                <span style="color: #FF0000">Seluruh dosen belum mengisi berita acara</span>
+                                <span class="text-danger">Seluruh dosen belum mengisi berita acara</span>
                             @endif
                         </div>
                     </div>
@@ -164,31 +157,23 @@
             <h5 class="card-header">Review Dosen Pembimbing</h5>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Revisi</th>
                                 <th>Nilai</th>
-                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
-                            @foreach ($bad as $bad)
+                            @foreach ($bad as $index => $bad)
                                 <tr>
-                                    <td>{{ $no }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $bad->name }}</td>
                                     <td>{{ $bad->revisi }}</td>
                                     <td>{{ $bad->nilai_total }}</td>
-                                    {{-- <td><a href="{{ url('/koordinator/berita_acara_proposal/detail/' . $bad->id_detail_berita_acara_p) }}" class="btn btn-primary">Cetak</a></td>  --}}
                                 </tr>
-                                @php
-                                    $no++;
-                                @endphp
                             @endforeach
                         </tbody>
                     </table>
