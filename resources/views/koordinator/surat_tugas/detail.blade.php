@@ -1,8 +1,6 @@
 @extends('layout.master')
 
-@section('title')
-    Detail Surat Tugas
-@endsection
+@section('title', 'Detail Surat Tugas')
 
 @section('css')
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -23,92 +21,79 @@
             <div class="card mb-4">
                 <h5 class="card-header">Detail Pengajuan Surat Tugas</h5>
                 <div class="card-body">
-                    <form action="{{ route('koor-surat-tugas.update', ['id' => $data->id_surat_tugas]) }}" method="POST"
+                    <form action="{{ route('koor-surat-tugas.update', $data->id_surat_tugas) }}" method="POST"
                         id="cetakForm">
                         @csrf
                         <div class="mb-3">
                             <label for="npm" class="form-label">NPM</label>
                             <input type="text" class="form-control" id="npm" name="npm"
-                                value="{{ $data->kode_unik }}" aria-describedby="defaultFormControlHelp" readonly
-                                disabled />
+                                value="{{ $data->kode_unik }}" readonly disabled />
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Mahasiswa</label>
                             <input type="text" name="name" class="form-control" id="name"
-                                value="{{ $data->name }}" aria-describedby="defaultFormControlHelp" readonly disabled />
+                                value="{{ $data->name }}" readonly disabled />
                         </div>
                         <div class="mb-3">
                             <label for="bidang_ilmu" class="form-label">Alamat Mahasiswa</label>
                             <input type="text" class="form-control" id="bidang_ilmu" name="bidang_ilmu"
-                                value="{{ $data->alamat_mhs }}" aria-describedby="defaultFormControlHelp" readonly
-                                disabled />
+                                value="{{ $data->alamat_mhs }}" readonly disabled />
                         </div>
                         <div class="mb-3">
                             <label for="dospem_utama" class="form-label">Dosen Pembimbing 1</label>
                             <input type="text" class="form-control" id="dospem_utama" name="dospem_utama"
-                                value="{{ $data->dosen_pembimbing_utama }}" aria-describedby="defaultFormControlHelp"
-                                readonly disabled />
+                                value="{{ $data->dosen_pembimbing_utama }}" readonly disabled />
                         </div>
                         <div class="mb-3">
                             <label for="dospem_2" class="form-label">Dosen Pembimbing 2</label>
                             <input type="text" class="form-control" name="dospem_2" id="dospem_2"
-                                value="{{ $data->dosen_pembimbing_ii }}" aria-describedby="defaultFormControlHelp" readonly
-                                disabled />
+                                value="{{ $data->dosen_pembimbing_ii }}" readonly disabled />
                         </div>
                         <div class="mb-3">
-                            <label for="dospem_2" class="form-label">Tanggal Sidang Proposal</label>
-                            @php
-                                $carbonTanggal = \Carbon\Carbon::parse($data->tanggal_sidang_proposal);
-                                $formatTanggal = $carbonTanggal->formatLocalized(' %d %B %Y', 'id');
-                            @endphp
-                            {{-- <p><span>{{ $formatTanggal }}</span></p> --}}
+                            <label for="tgl_seminar" class="form-label">Tanggal Sidang Proposal</label>
                             <input type="text" class="form-control" name="tgl_seminar" id="tgl_seminar"
-                                value="{{ $formatTanggal }}" aria-describedby="defaultFormControlHelp" readonly disabled />
+                                value="{{ \Carbon\Carbon::parse($data->tanggal_sidang_proposal)->formatLocalized('%d %B %Y') }}"
+                                readonly disabled />
                         </div>
                         <input type="hidden" value="{{ $data->bimbingan_proposal_id }}" id="bimproid" name="bimproid" />
                         <input type="hidden" value="{{ $data->users_id }}" id="users_id" name="users_id" />
                         <div class="mb-3">
                             <label class="form-label">File Proposal</label>
-                            <a href="{{ asset($data->file_proposal) }}" target="_blank">
-                                {{ basename($data->file_proposal) }}
-                            </a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="{{ basename($data->file_proposal) }}"
+                                    readonly>
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="window.open('{{ asset($data->file_proposal) }}', '_blank')">Lihat</button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Slip Pembayaran Bimbingan</label>
-                            <a href="{{ asset($data->file_slip_pembayaran) }}" target="_blank">
-                                {{ basename($data->file_slip_pembayaran) }}
-                            </a>
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                    value="{{ basename($data->file_slip_pembayaran) }}" readonly>
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="window.open('{{ asset($data->file_slip_pembayaran) }}', '_blank')">Lihat</button>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-secondary"
                                 onclick="window.history.back();">Kembali</button>
                             @if ($data->status == 'pending')
-                                <button type="button" class="btn btn-primary" onclick="showConfirmation()">Cetak</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="showConfirmation()">Cetak</button>
                             @elseif($data->status == 'terima')
-                                {{-- <p>Data ini telah diterima.</p> --}}
-                                <td><a href="{{ url('/koordinator/surat_tugas/lihat_file/' . $data->id_surat_tugas) }}"
-                                        target="_blank" class="btn btn-primary">Lihat File</a></td>
-
-                                {{-- <button type="button" class="btn btn-primary" onclick="lihatFile()">Lihat File</button> --}}
-                                {{-- <a href="file.php" target="_blank" class="cetak-link">Cetak</a> --}}
+                                <a href="{{ url('/koordinator/surat_tugas/lihat_file/' . $data->id_surat_tugas) }}"
+                                    target="_blank" class="btn btn-primary">Lihat File</a>
                             @elseif($data->status == 'tolak')
                                 <p>Data ini telah ditolak.</p>
                             @endif
                         </div>
                     </form>
-
                 </div>
             </div>
-            {{-- <button type="button" class="btn btn-primary" onclick="lihatFile()">Lihat File</button> --}}
-
         </div>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
         <script>
-            function lihatFile() {
-                window.location.href = 'file.php';
-            }
-
             function showConfirmation() {
                 Swal.fire({
                     title: 'Apakah Anda yakin ingin mencetak?',
@@ -120,27 +105,17 @@
                     confirmButtonText: 'Ya, Cetak!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Tampilkan pesan sukses sebelum reload
                         Swal.fire({
                             title: 'Surat Tugas Dicetak',
                             text: 'Surat Tugas berhasil dicetak.',
                             icon: 'success',
                         }).then(() => {
-                            // Submit form cetak
                             document.getElementById('cetakForm').submit();
                         });
                     }
                 });
             }
         </script>
-
-
-
-
-
-
-
-
     </div>
 @endsection
 @push('plugin-scripts')

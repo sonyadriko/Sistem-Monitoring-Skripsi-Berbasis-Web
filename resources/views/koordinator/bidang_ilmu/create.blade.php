@@ -1,8 +1,6 @@
 @extends('layout.master')
 
-@section('title')
-    Tambah Topik
-@endsection
+@section('title', 'Tambah Tema Penelitian')
 
 @section('css')
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -14,7 +12,7 @@
 @section('content')
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Bidang Ilmu</a></li>
+            <li class="breadcrumb-item"><a href="#">Proposal & Skripsi</a></li>
             <li class="breadcrumb-item active" aria-current="page">Tema Penelitian</li>
         </ol>
     </nav>
@@ -23,65 +21,59 @@
             <div class="card mb-4">
                 <h5 class="card-header">Bidang Ilmu</h5>
                 <div class="card-body">
-                    <form action="{{ route('bidang-ilmu.submit') }}" method="POST"enctype="multipart/form-data"
+                    <form action="{{ route('bidang-ilmu.submit') }}" method="POST" enctype="multipart/form-data"
                         id="formBidangIlmu">
                         @csrf
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="topik_bidang_ilmu" class="form-label" style="font-weight: bold">Topik Bidang
-                                    Ilmu</label>
-                                <input type="text" class="form-control" id="topik_bidang_ilmu" name="topik_bidang_ilmu"
-                                    placeholder="Masukan Bidang Ilmu..." aria-describedby="defaultFormControlHelp" />
-                            </div>
+                        <div class="mb-3">
+                            <label for="topik_bidang_ilmu" class="form-label" style="font-weight:bold">Topik Bidang
+                                Ilmu</label>
+                            <input type="text" class="form-control" id="topik_bidang_ilmu" name="topik_bidang_ilmu"
+                                placeholder="Masukan Bidang Ilmu..." />
                         </div>
-                        <label class="form-label" style="font-weight: bold">Matakuliah Pendukung</label>
-                        <div class="mb-3" style="max-height: 200px; overflow-y: auto;">
-                            @foreach ($mkp as $mkp)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox"
-                                        value="{{ $mkp->id_mata_kuliah_pendukung }}" name="selected_mkp[]"
-                                        id="mkp_{{ $mkp->id_mata_kuliah_pendukung }}">
-                                    <label class="form-check-label"
-                                        for="mkp_{{ $mkp->id_mata_kuliah_pendukung }}">{{ $mkp->nama_mata_kuliah }}</label>
-                                </div>
-                            @endforeach
-                            @error('selected_mkp')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-                        <label class="form-label" style="font-weight: bold">Dosen Pengampu</label>
-                        <div class="mb-3" style="max-height: 200px; overflow-y: auto;">
-                            @foreach ($users as $user)
-                                @if ($user->role_id == 2)
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight:bold">Matakuliah Pendukung</label>
+                            <div class="overflow-auto" style="max-height: 200px;">
+                                @foreach ($mkp as $mkp)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $user->id }}"
-                                            name="selected_users[]" id="user_{{ $user->id }}">
+                                        <input class="form-check-input" type="checkbox"
+                                            value="{{ $mkp->id_mata_kuliah_pendukung }}" name="selected_mkp[]"
+                                            id="mkp_{{ $mkp->id_mata_kuliah_pendukung }}">
                                         <label class="form-check-label"
-                                            for="user_{{ $user->id }}">{{ $user->name }}</label>
+                                            for="mkp_{{ $mkp->id_mata_kuliah_pendukung }}">{{ $mkp->nama_mata_kuliah }}</label>
                                     </div>
-                                @endif
-                            @endforeach
-
-                            @error('selected_users')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="keterangan" class="form-label" style="font-weight: bold">Keterangan
-                                    Singkat</label>
-                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"
-                                    placeholder="Masukan keterangan singkat mengenai bidang ilmu penelitian"></textarea>
+                                @endforeach
+                                @error('selected_mkp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="window.history.back();">Kembali</button>
-                                <button type="button" id="submitBtn" class="btn btn-primary">Submit</button>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight:bold">Dosen Pengampu</label>
+                            <div class="overflow-auto" style="max-height: 200px;">
+                                @foreach ($users as $user)
+                                    @if ($user->role_id == 2)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ $user->id }}"
+                                                name="selected_users[]" id="user_{{ $user->id }}">
+                                            <label class="form-check-label"
+                                                for="user_{{ $user->id }}">{{ $user->name }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                @error('selected_users')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="keterangan" class="form-label" style="font-weight:bold">Keterangan Singkat</label>
+                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3"
+                                placeholder="Masukan keterangan singkat mengenai bidang ilmu penelitian..."></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="window.history.back();">Kembali</button>
+                            <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>

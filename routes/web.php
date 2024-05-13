@@ -252,7 +252,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
     Route::group(['prefix' => 'koordinator/pengajuan_judul'], function () {
         Route::get('/', [KoordinatorJudulController::class, 'index'])->name('pengajuan-judul.index');
-        Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail']);
+        Route::get('/detail/{id}', [KoordinatorJudulController::class, 'detail'])->name('pengajuan-judul.detail');
         Route::post('/update-status/{id}', [KoordinatorJudulController::class, 'updatestatus2'])->name('update_status');
         Route::post('/tolak/{id}', [KoordinatorJudulController::class, 'tolakpengajuan'])->name('pengajuan-judul-tolak');
     });
@@ -292,15 +292,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
         Route::get('/lihat_file/{id}', [KoordinatorSuratTUgasController::class, 'showfile'])->name('koor-surat-tugas.lihat');
         Route::post('/tolak/{id}', [KoordinatorSuratTugasController::class, 'tolaksurat'])->name('koor-surat-tugas-tolak');
     });
-
-    Route::controller(PembagianDosenController::class)->group(function ()
-    {
-        Route::get('/koordinator/pembagian_dosen', 'index')->name('pembagian-dosen.create');
-        Route::get('/koordinator/pembagian_dosen/edit/{id}', 'edit');
-        Route::post('/koordinator/pembagian_dosen/store', 'store')->name('pembagian-dosen.store');
-    });
-
-
 
 // });
 
@@ -408,4 +399,3 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
     });
 
 // });
-

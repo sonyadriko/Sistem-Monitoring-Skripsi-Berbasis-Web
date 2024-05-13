@@ -7,6 +7,7 @@ use App\Models\BeritaAcaraProposal as BeritaAcaraProposal;
 use App\Models\DetailBeritaAcaraProposal as DetailBeritaAcaraProposal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class BeritaAcaraProposalController extends Controller
 {

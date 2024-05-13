@@ -1,8 +1,6 @@
 @extends('layout.master3')
 
-@section('title')
-    Surat Tugas
-@endsection
+@section('title', 'Surat Tugas')
 
 @section('css')
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -22,10 +20,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" style="font-weight: bold">Pengajuan Surat Tugas Bimbingan</h4>
-                    <p class="card-title-desc">Tabel dibawah ini merupakan pengajuan surat tugas bimbingan skripsi yang
-                        telah dilakukan mahasiswa.
-                    </p>
+                    <h4 class="card-title" style="font-weight:bold">Pengajuan Surat Tugas Bimbingan</h4>
+                    <p class="card-title-desc">Tabel di bawah ini menampilkan pengajuan surat tugas bimbingan skripsi oleh
+                        mahasiswa.</p>
                 </div>
                 <div class="card-body table-responsive">
                     <div class="row mb-3">
@@ -33,7 +30,6 @@
                             <label for="statusFilter">Filter Status:</label>
                             <select id="statusFilter" class="form-control">
                                 <option value="">Semua</option>
-
                                 <option value="pending">Pending</option>
                                 <option value="terima">Terima</option>
                             </select>
@@ -48,7 +44,7 @@
                             </select>
                         </div>
                     </div>
-                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -61,28 +57,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
-                            @foreach ($surattugas as $st)
+                            @foreach ($surattugas as $index => $item)
                                 <tr>
-                                    <td>{{ $no }}</td>
-                                    <td>{{ $st->name }}</td>
-                                    <td>{{ $st->kode_unik }}</td>
-                                    <td>{{ implode(' ', array_slice(str_word_count($st->judul, 1), 0, 6)) }}...</td>
-                                    <td>{{ $st->topik_bidang_ilmu }}</td>
-                                    <td style="text-transform: capitalize;">{{ $st->status }}</td>
-                                    <td><a href="{{ url('/koordinator/surat_tugas/detail/' . $st->id_surat_tugas) }}"
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->kode_unik }}</td>
+                                    <td>{{ Str::limit($item->judul, 50, '...') }}</td>
+                                    <td>{{ $item->topik_bidang_ilmu }}</td>
+                                    <td class="text-capitalize">{{ $item->status }}</td>
+                                    <td>
+                                        <a href="{{ url('/koordinator/surat_tugas/detail/' . $item->id_surat_tugas) }}"
                                             class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
-                                @php
-                                    $no++;
-                                @endphp
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div> <!-- end col -->
