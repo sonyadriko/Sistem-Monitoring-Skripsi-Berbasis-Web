@@ -3,20 +3,24 @@
 @section('title', 'Data Mahasiswa')
 
 @section('css')
+    <!-- Linking CSS files for DataTables -->
     <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}"
         rel="stylesheet" type="text/css" />
-
 @endsection
+
 @section('content')
+    <!-- Breadcrumb for navigation -->
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Data</a></li>
             <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
         </ol>
     </nav>
+
+    <!-- Main content area -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -26,6 +30,7 @@
                         angkatan mahasiswa dan tombol detailnya.</p>
                 </div>
                 <div class="card-body table-responsive">
+                    <!-- Filter for batch year -->
                     <div class="row mb-3">
                         <div class="col-md-2">
                             <label for="tahunFilter">Filter Angkatan:</label>
@@ -37,7 +42,8 @@
                             </select>
                         </div>
                     </div>
-                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <!-- DataTable for displaying student data -->
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -57,11 +63,12 @@
                                     <td>{{ $data->dosen_pembimbing_utama ?? 'Tidak Ada' }}</td>
                                     <td>
                                         @php
+                                            // Calculate student progress in thesis phases
                                             $progressMahasiswa = 0;
                                             $totalDataPart1 = 0;
                                             $completedTablesPart1 = 0;
 
-                                            // Hitung progress untuk setiap fase pada mahasiswa
+                                            // Calculate progress for each phase for the student
                                             $totalTablesPart1 = count($tablesPart1);
                                             $completedTablesPart1 = 0;
                                             foreach ($tablesPart1 as $table) {
@@ -70,7 +77,7 @@
                                                     ->get();
                                                 $totalDataPart1 += count($result);
 
-                                                // Periksa apakah hasil query tidak null dan memiliki data
+                                                // Check if the query result is not null and has data
                                                 if ($result !== null && count($result) > 0) {
                                                     $completedTablesPart1++;
                                                 }
@@ -85,7 +92,7 @@
                                                     ->where('users_id', $data->id)
                                                     ->get();
                                                 $totalDataPart2 += count($result);
-                                                // Periksa apakah hasil query tidak null dan memiliki data
+                                                // Check if the query result is not null and has data
                                                 if ($result !== null && count($result) > 0) {
                                                     $completedTablesPart2++;
                                                 }
@@ -99,11 +106,11 @@
                                                 ->where('users_id', $data->id)
                                                 ->count();
                                             if ($countRevisiSidang > 0) {
-                                                // Blok ini seharusnya dijalankan jika $countRevisiSidang lebih dari 0
-                                                $progressRevisiSidang = 1; // Atur nilai progress tambahan
+                                                // This block should run if $countRevisiSidang is more than 0
+                                                $progressRevisiSidang = 1; // Set additional progress value
                                                 $tahap = 'selesai';
                                             } else {
-                                                // Blok ini seharusnya dijalankan jika $countRevisiSidang kurang dari atau sama dengan 0
+                                                // This block should run if $countRevisiSidang is less than or equal to 0
                                                 $progressRevisiSidang = 0;
                                             }
                                             $totalpart2 = count($tablesPart2);
@@ -115,6 +122,7 @@
                                             $hasilprogress = $proses1 + $proses2;
                                             $progressMahasiswa = number_format($hasilprogress, 2);
                                         @endphp
+                                        <!-- Display progress with conditional formatting -->
                                         @if ($progressMahasiswa == 0)
                                             <span class="mt-2">Belum memulai tahap skripsi</span>
                                         @elseif($progressMahasiswa > 0 && $progressMahasiswa <= 10)
@@ -140,6 +148,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <!-- Button to trigger detail modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#detailModal{{ $data->id }}">Detail</button>
                                     </td>
@@ -152,17 +161,20 @@
             </div>
         </div>
     </div>
+    <!-- Include modals for each student -->
     @foreach ($datamhs as $data)
         @include('components.mahasiswa_detail_modal', ['data' => $data])
     @endforeach
 
 @endsection
+
 @push('plugin-scripts')
+    <!-- Scripts for modal and chart functionalities -->
     <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            // Inisialisasi modal secara manual untuk setiap ID modal
+            // Manually initialize modals for each modal ID
             @foreach ($datamhs as $data)
                 $('#detailModal{{ $data->id }}').modal({
                     show: false,
@@ -179,15 +191,14 @@
 @endpush
 
 @section('script')
-    <!-- jQuery -->
+    <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <!-- DataTables scripts -->
     <script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
     <script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
     <script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
@@ -200,26 +211,26 @@
     <script src="{{ asset('assets2/js/app.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            // Periksa apakah DataTable sudah diinisialisasi sebelumnya
+            // Check if DataTable is already initialized
             if ($.fn.DataTable.isDataTable('#datatable')) {
-                // Hancurkan DataTable sebelum menginisialisasi ulang
+                // Destroy DataTable before reinitializing
                 $('#datatable').DataTable().destroy();
             }
 
-            // Inisialisasi DataTable
+            // Initialize DataTable
             var table = $('#datatable').DataTable({
-                // ... (pengaturan DataTable lainnya) ...
+                // ... (other DataTable settings) ...
             });
 
-            // Handle perubahan filter status
+            // Handle changes in status filter
             $('#statusFilter').change(function() {
                 var status = $(this).val();
-                table.column(5).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
+                table.column(5).search(status).draw(); // Adjust according to the correct column index
             });
 
             $('#tahunFilter').change(function() {
                 var tahun = $(this).val();
-                table.column(1).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+                table.column(1).search(tahun).draw(); // Adjust according to the column index containing NPM
             });
         });
     </script>
