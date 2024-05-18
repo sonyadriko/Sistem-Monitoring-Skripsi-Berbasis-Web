@@ -1,21 +1,22 @@
 @extends('layout.master3')
 
-@section('title')
-Berita Acara Sidang Proposal
-@endsection
+@section('title', 'Berita Acara Sidang Proposal')
 
 @section('css')
+<!-- Menghubungkan stylesheet untuk DataTables dan komponen-komponen terkait -->
 <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-
 @endsection
+
 @section('content')
+<!-- Menampilkan pesan sukses jika ada -->
 @if(session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
 @endif
+<!-- Breadcrumb untuk navigasi -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
@@ -26,13 +27,14 @@ Berita Acara Sidang Proposal
     <div class="col-12">
         <div class="card">
             <div class="card-header">
+                <!-- Judul dan deskripsi halaman -->
                 <h4 class="card-title" style="font-weight: bold">Tabel Berita Acara Sidang Proposal</h4>
-                <p class="card-title-desc">Jadwal Sidang Proposal sebagai dosen penguji dapat dilihat pada tabel dibawah ini.</code>.
-                </p>
+                <p class="card-title-desc">Jadwal Sidang Proposal sebagai dosen penguji dapat dilihat pada tabel dibawah ini.</p>
             </div>
             <div class="card-body table-responsive">
                 <div class="row mb-3">
                     <div class="col-md-2">
+                        <!-- Dropdown untuk filter berdasarkan angkatan -->
                         <label for="tahunFilter">Filter Angkatan:</label>
                         <select id="tahunFilter" class="form-control">
                             <option value="">Semua</option>
@@ -42,7 +44,8 @@ Berita Acara Sidang Proposal
                         </select>
                     </div>
                 </div>
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                <!-- Tabel yang menampilkan data berita acara sidang proposal -->
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
@@ -54,25 +57,15 @@ Berita Acara Sidang Proposal
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        @foreach($ba as $ba)
+                        @foreach($ba as $index => $ba)
                         <tr>
-                            <td>{{ $no }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>{{ $ba->name }}</td>
                             <td>{{ $ba->kode_unik }}</td>
                             <td>{{ $ba->nama_ruangan }}</td>
-                            @php
-                                $carbonTanggal = \Carbon\Carbon::parse($ba->tanggal);
-                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-                            @endphp
-                            <td>{{ $formatTanggal }}</td>
-                            <td><a href="{{ url('/dosen/berita_acara_proposal/detail/'.$ba->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
+                            <td>{{ \Carbon\Carbon::parse($ba->tanggal)->isoFormat('dddd, D MMMM Y', 'id') }}</td>
+                            <td><a href="{{ route('berita-acara-proposal.detail', $ba->id_berita_acara_p) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
-                        @php
-                        $no++;
-                        @endphp
                         @endforeach
                     </tbody>
                 </table>
@@ -80,20 +73,21 @@ Berita Acara Sidang Proposal
         </div>
     </div>
 </div>
-
-
-
 @endsection
+
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+<!-- Script untuk plugin yang digunakan pada halaman ini -->
+<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+<!-- Script khusus untuk halaman dashboard -->
+<script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
 
 @section('script')
+<!-- Script untuk menginisialisasi DataTables dan fungsi filter -->
 <script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
@@ -105,8 +99,8 @@ Berita Acara Sidang Proposal
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
 <script>
+    // Fungsi untuk filter berdasarkan angkatan pada tabel
     $(document).ready(function() {
-        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
         if ($.fn.DataTable.isDataTable('#datatable')) {
             // Hancurkan DataTable sebelum menginisialisasi ulang
             $('#datatable').DataTable().destroy();
@@ -116,16 +110,8 @@ Berita Acara Sidang Proposal
         var table = $('#datatable').DataTable({
             // ... (pengaturan DataTable lainnya) ...
         });
-
-        // Handle perubahan filter status
-        $('#statusFilter').change(function() {
-            var status = $(this).val();
-            table.column(4).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
-        });
-
         $('#tahunFilter').change(function() {
-            var tahun = $(this).val();
-            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+            table.column(2).search($(this).val()).draw();
         });
     });
 </script>
