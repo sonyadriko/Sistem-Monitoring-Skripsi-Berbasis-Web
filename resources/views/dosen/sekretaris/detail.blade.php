@@ -1,8 +1,6 @@
 @extends('layout.master')
 
-@section('title')
-Detail Berita Acara Sidang Skripsi
-@endsection
+@section('title', 'Detail Berita Acara Sidang Skripsi')
 
 @section('css')
 <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -10,7 +8,9 @@ Detail Berita Acara Sidang Skripsi
 <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
+
 @section('content')
+<!-- Breadcrumb untuk navigasi halaman -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Lain-lain</a></li>
@@ -21,81 +21,48 @@ Detail Berita Acara Sidang Skripsi
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card mb-3">
             <h5 class="card-header">Berita Acara Sidang Skripsi</h5>
+            <!-- Form untuk mencetak berita acara -->
             <form action="{{ route('koor-berita-acara-s-cetak.detail', ['id' => $data->id_berita_acara_s]) }}" method="POST" id="cetakForm">
                 @csrf
                 <div class="card-body">
+                    @php
+                        // Mendefinisikan array dengan informasi yang akan ditampilkan di halaman detail
+                        $infoFields = [
+                            ['label' => 'NPM', 'value' => $data->kode_unik],
+                            ['label' => 'No. Ujian', 'value' => $data->id_berita_acara_s],
+                            ['label' => 'Nama', 'value' => $data->name],
+                            ['label' => 'Tanggal', 'value' => \Carbon\Carbon::parse($data->tanggal)->isoFormat('dddd, D MMMM Y', 'id')],
+                            ['label' => 'Judul', 'value' => $data->judul],
+                            ['label' => 'Ruang, Waktu', 'value' => $data->nama_ruangan . ', ' . $data->jam],
+                            ['label' => 'Dosen Pembimbing 1', 'value' => $data->dosen_pembimbing_utama],
+                            ['label' => 'Dosen Pembimbing 2', 'value' => $data->dosen_pembimbing_ii],
+                            ['label' => 'Dosen Penguji', 'value' => implode('<br />', [
+                                $data->nama_penguji_1 . ' (Dosen Penguji 1)',
+                                $data->nama_penguji_2 . ' (Dosen Penguji 2)',
+                                $data->nama_penguji_3 . ' (Dosen Penguji 3)',
+                                $data->nama_sekretaris . ' (Sekretaris)'
+                            ])]
+                        ];
+                    @endphp
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">NPM </label>
-                                <p><span>{{ $data->kode_unik }}</span></p>
+                        {{-- // Loop melalui setiap field informasi untuk menampilkan label dan nilai --}}
+                        @foreach ($infoFields as $index => $field)
+                            <div class="col-md-6">
+                                <div class="row mb-3">
+                                    <div class="col-sm-4">
+                                        {{-- // Menampilkan label dengan gaya tebal --}}
+                                        <label class="form-label" style="font-weight: bold">{{ $field['label'] }}</label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{-- // Menampilkan nilai dari field informasi --}}
+                                        <p>{!! $field['value'] !!}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">No Ujian </label>
-                                <p><span>{{ $data->id_berita_acara_s }}</span></p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Nama </label>
-                                <p><span>{{ $data->name }}</span></p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Tanggal </label>
-                                @php
-                                    $carbonTanggal = \Carbon\Carbon::parse($data->tanggal);
-                                    $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-                                @endphp
-                                <p><span>{{ $formatTanggal }}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Judul </label>
-                                <p><span>{{ $data->judul }}</span></p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Ruang, Waktu </label>
-                                <p><span>{{$data->nama_ruangan}}, {{$data->jam}}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Dosen Pembimbing 1 </label>
-                                <p><span>{{ $data->dosen_pembimbing_utama }}</span></p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Dosen Pembimbing 2 </label>
-                                <p><span>{{$data->dosen_pembimbing_ii}}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-weight: bold">Dosen Penguji </label>
-                                <p><span>{{$data->nama_penguji_1}} (Dosen Penguji 1)<br/>
-                                    {{$data->nama_penguji_2}} (Dosen Penguji 2)<br/>
-                                    {{$data->nama_penguji_3}} (Dosen Penguji 3)<br/>
-                                    {{$data->nama_sekretaris}} (Sekretaris)</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="berita_acara_skripsi_id" value="{{$data->id_berita_acara_s}}" />
+                    {{-- // Menyimpan ID berita acara skripsi sebagai input tersembunyi --}}
+                    <input type="hidden" name="berita_acara_skripsi_id" value="{{ $data->id_berita_acara_s }}" />
                 </div>
             </form>
         </div>
@@ -106,7 +73,8 @@ Detail Berita Acara Sidang Skripsi
         <h5 class="card-header">Review Dosen Pembimbing</h5>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered id="dataTable" width="100%" cellspacing="0">
+                <!-- Tabel untuk menampilkan review dari dosen pembimbing -->
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                           <th>No</th>
@@ -121,12 +89,9 @@ Detail Berita Acara Sidang Skripsi
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        @foreach($bad as $bad)
+                        @foreach($bad as $index => $bad)
                         <tr>
-                            <td>{{ $no }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>{{ $bad->name }}</td>
                             <td>{{ $bad->revisi }}</td>
                             <td>{{ $bad->nilai_penulisan }}</td>
@@ -136,9 +101,6 @@ Detail Berita Acara Sidang Skripsi
                             <td>{{ $bad->nilai_penampilan }}</td>
                             <td>{{ $bad->nilai_total }}</td>
                         </tr>
-                        @php
-                        $no++;
-                        @endphp
                         @endforeach
                     </tbody>
                 </table>
@@ -147,6 +109,7 @@ Detail Berita Acara Sidang Skripsi
     </div>
 </div>
 <div class="d-flex justify-content-between mt-4">
+    <!-- Tombol untuk kembali ke halaman sebelumnya -->
     <button type="button" class="btn btn-secondary" onclick="window.history.back();">Kembali</button>
 </div>
 @endsection
@@ -160,8 +123,8 @@ Detail Berita Acara Sidang Skripsi
 @endpush
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-
 <script>
+    // Fungsi untuk menampilkan konfirmasi sebelum mencetak
     function showConfirmation() {
         Swal.fire({
             title: 'Apakah Anda yakin ingin mencetak?',
@@ -177,4 +140,4 @@ Detail Berita Acara Sidang Skripsi
             }
         });
     }
-    </script>
+</script>
