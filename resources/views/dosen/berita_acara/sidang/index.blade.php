@@ -22,7 +22,7 @@ Berita Acara Sidang Skripsi
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Sidang Skripsi</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Skripsi</li>
     </ol>
 </nav>
 <div class="row">

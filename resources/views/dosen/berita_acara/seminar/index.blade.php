@@ -20,7 +20,7 @@
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Berita Acara</a></li>
-      <li class="breadcrumb-item active" aria-current="page">BA Sidang Proposal</li>
+      <li class="breadcrumb-item active" aria-current="page">Sidang Proposal</li>
     </ol>
 </nav>
 <div class="row">

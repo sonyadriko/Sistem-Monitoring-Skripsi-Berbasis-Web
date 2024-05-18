@@ -1,13 +1,9 @@
 @extends('layout.master3')
 
-@section('title')
-Detail Tema Penelitian
-@endsection
+@section('title', 'Detail Tema Penelitian')
 
-@section('css')
-
-@endsection
 @section('content')
+<!-- Breadcrumb untuk navigasi halaman, memudahkan user mengetahui lokasi halaman saat ini -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bidang Ilmu</a></li>
@@ -19,6 +15,7 @@ Detail Tema Penelitian
         <div class="card">
             <h5 class="card-header">Detail Tema Penelitian</h5>
             <div class="card-body">
+                <!-- Bagian ini menampilkan informasi topik bidang ilmu yang dipilih -->
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
@@ -30,6 +27,7 @@ Detail Tema Penelitian
                             @endif
                         </div>
                     </div>
+                    <!-- Bagian ini menampilkan mata kuliah pendukung untuk topik bidang ilmu yang dipilih -->
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Mata Kuliah Pendukung </label>
@@ -47,6 +45,7 @@ Detail Tema Penelitian
                         </div>
                     </div>
                 </div>
+                <!-- Bagian ini menampilkan keterangan singkat tentang tema penelitian yang dipilih -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
@@ -60,7 +59,7 @@ Detail Tema Penelitian
                     </div>
                 </div>
 
-                {{-- <form action="{{route('dosen-bidang-ilmu.store')}}" method="POST"enctype="multipart/form-data"> --}}
+                <!-- Form ini digunakan untuk mengupload file paper acuan referensi yang mendukung tema penelitian -->
                 <form action="{{ route('dosen-bidang-ilmu.store', ['id' => $bidetail->id_bidang_ilmu]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -82,7 +81,7 @@ Detail Tema Penelitian
     </div>
 </div>
 <div class="row">
-    <!-- Papers Section -->
+    <!-- Bagian ini menampilkan daftar paper acuan/referensi yang telah diupload terkait tema penelitian -->
     <div class="col-md-6 stretch-card">
         <div class="card">
             <h5 class="card-header">Paper Acuan / Referensi</h5>
@@ -92,7 +91,7 @@ Detail Tema Penelitian
                         <div class="row">
                             <h5>
                                 <a href="{{ asset($p->file) }}" target="_blank">
-                                    <i data-feather="file-text"></i> <!-- Feather icon for file -->
+                                    <i data-feather="file-text"></i> <!-- Ikon feather untuk file -->
                                     {{ basename($p->file) }}
                                 </a>
                             </h5>
