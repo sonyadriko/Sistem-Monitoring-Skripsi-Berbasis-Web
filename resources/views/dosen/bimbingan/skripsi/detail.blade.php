@@ -24,16 +24,46 @@
             <div class="card mb-4">
                 <h5 class="card-header" style="color: #171717">Data Mahasiswa dan Dosen Pembimbing</h5>
                 <div class="card-body">
-                    @foreach (['NPM' => 'kode_unik', 'Nama' => 'name', 'Judul' => 'judul', 'Bidang Ilmu' => 'topik_bidang_ilmu', 'Dosen Pembimbing Utama' => 'dosen_pembimbing_utama', 'Dosen Pembimbing II' => 'dosen_pembimbing_ii'] as $label => $field)
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <label class="form-label" style="font-weight: bold">{{ $label }}</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <p><span>{{ $data->$field }}</span></p>
-                            </div>
+                    @php
+                        $infoFields = [
+                            ['label' => 'NPM', 'value' => $data->kode_unik],
+                            ['label' => 'Nama', 'value' => $data->name],
+                            ['label' => 'Judul', 'value' => $data->judul],
+                            ['label' => 'Bidang Ilmu', 'value' => $data->topik_bidang_ilmu],
+                            ['label' => 'Dosen Pembimbing Utama', 'value' => $data->dosen_pembimbing_utama],
+                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii]
+                        ];
+                    @endphp
+                    <div class="row">
+                        <div class="col-md-6">
+                            @foreach ($infoFields as $index => $field)
+                                @if ($index % 2 == 0)
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <label class="form-label" style="font-weight:bold">{{ $field['label'] }}</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p><span>{{ $field['value'] }}</span></p>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-                    @endforeach
+                        <div class="col-md-6">
+                            @foreach ($infoFields as $index => $field)
+                                @if ($index % 2 != 0)
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <label class="form-label" style="font-weight:bold">{{ $field['label'] }}</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p><span>{{ $field['value'] }}</span></p>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

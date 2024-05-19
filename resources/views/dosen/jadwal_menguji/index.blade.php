@@ -1,27 +1,29 @@
 @extends('layout.master3')
 
-@section('title')
-Jadwal Menguji
-@endsection
+@section('title', 'Jadwal Menguji')
 
 @section('css')
-<link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-
+<!-- Menghubungkan dengan CSS untuk DataTables -->
+<link href="{{ asset('assets2/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
+<!-- Menampilkan pesan sukses -->
 @if(session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
 @endif
+<!-- Breadcrumb untuk navigasi halaman -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
       <li class="breadcrumb-item active" aria-current="page">Daftar Jadwal</li>
     </ol>
 </nav>
+<!-- Tabel untuk menampilkan jadwal sidang -->
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -32,6 +34,7 @@ Jadwal Menguji
             <div class="card-body table-responsive">
                 <div class="row mb-3">
                     <div class="col-md-2">
+                        <!-- Dropdown untuk filter status sidang -->
                         <label for="statusFilter">Filter Status:</label>
                         <select id="statusFilter" class="form-control">
                             <option value="">Semua</option>
@@ -40,7 +43,8 @@ Jadwal Menguji
                         </select>
                     </div>
                 </div>
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                <!-- Tabel yang menampilkan data sidang -->
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
@@ -51,45 +55,36 @@ Jadwal Menguji
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach($uniqueJadwal as $jadwal)
+                        <!-- Looping data jadwal sidang -->
+                        @foreach($uniqueJadwal as $index => $jadwal)
                         <tr>
-                            <td>{{ $no }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>{{ $jadwal->jenis_sidang }}</td>
-                            @php
-                                $carbonTanggal = \Carbon\Carbon::parse($jadwal->tanggal);
-                                $formatTanggal = $carbonTanggal->formatLocalized('%A, %d %B %Y', 'id');
-                            @endphp
-                            <td>{{ $formatTanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($jadwal->tanggal)->isoFormat('dddd, D MMMM Y', 'id') }}</td>
                             <td>{{ $jadwal->nama_ruangan }}, {{ $jadwal->jam}}</td>
                             <td><a href="{{ url('/dosen/jadwal_menguji/detailjadwal/' . $jadwal->tanggal) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
-                        @php
-                        $no++;
-                        @endphp
-                    @endforeach
-
+                        @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
 
 @endsection
+
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+<script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
 
 @section('script')
+<!-- Menghubungkan dengan JavaScript untuk DataTables -->
 <script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
@@ -101,27 +96,11 @@ Jadwal Menguji
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
 <script>
+    // Inisialisasi DataTable dan fungsi filter
     $(document).ready(function() {
-        // Periksa apakah DataTable sudah diinisialisasi sebelumnya
-        if ($.fn.DataTable.isDataTable('#datatable')) {
-            // Hancurkan DataTable sebelum menginisialisasi ulang
-            $('#datatable').DataTable().destroy();
-        }
-
-        // Inisialisasi DataTable
-        var table = $('#datatable').DataTable({
-            // ... (pengaturan DataTable lainnya) ...
-        });
-
-        // Handle perubahan filter status
+        var table = $('#datatable').DataTable();
         $('#statusFilter').change(function() {
-            var status = $(this).val();
-            table.column(1).search(status).draw(); // Sesuaikan dengan indeks kolom yang benar
-        });
-
-        $('#tahunFilter').change(function() {
-            var tahun = $(this).val();
-            table.column(2).search(tahun).draw(); // Sesuaikan dengan indeks kolom yang berisi NPM
+            table.column(1).search(this.value).draw();
         });
     });
 </script>

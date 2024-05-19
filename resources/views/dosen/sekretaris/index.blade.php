@@ -3,18 +3,20 @@
 @section('title', 'Berita Acara Sidang Skripsi')
 
 @section('css')
+<!-- Menghubungkan stylesheet untuk DataTables -->
 <link href="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" type="text/css" />
-
 @endsection
 
 @section('content')
+<!-- Menampilkan pesan sukses -->
 @if(session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
 @endif
+<!-- Breadcrumb untuk navigasi halaman -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Lain-lain</a></li>
@@ -30,6 +32,7 @@
                 </p>
             </div>
             <div class="card-body table-responsive">
+                <!-- Filter berdasarkan angkatan -->
                 <div class="row mb-3">
                     <div class="col-md-2">
                         <label for="tahunFilter">Filter Angkatan:</label>
@@ -41,6 +44,7 @@
                         </select>
                     </div>
                 </div>
+                <!-- Tabel data sekretaris -->
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                     <tr>
@@ -82,6 +86,7 @@
 @endpush
 
 @section('script')
+<!-- Menghubungkan script untuk DataTables -->
 <script src="{{ asset('assets2/libs/datatables.net/datatables.net.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
 <script src="{{ asset('assets2/libs/datatables.net-buttons/datatables.net-buttons.min.js') }}"></script>
@@ -93,6 +98,7 @@
 <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets2/js/app.min.js') }}"></script>
 <script>
+    // Inisialisasi DataTable dan filter berdasarkan kolom angkatan
     $(document).ready(function() {
         var table = $('#datatable').DataTable();
         $('#tahunFilter').change(function() {
@@ -101,4 +107,3 @@
     });
 </script>
 @endsection
-
