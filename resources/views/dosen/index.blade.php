@@ -6,7 +6,6 @@
 @endpush
 
 @section('title')
-    <!-- Judul halaman -->
     Dashboard
 @endsection
 
