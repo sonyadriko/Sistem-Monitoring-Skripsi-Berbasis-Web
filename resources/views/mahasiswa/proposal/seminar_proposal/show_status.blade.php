@@ -5,6 +5,7 @@
 @endsection
 
 @push('plugin-styles')
+    <!-- Menghubungkan stylesheet untuk flatpickr dan jquery-steps -->
     <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
 @endpush
@@ -16,11 +17,13 @@
             /* Menggunakan auto untuk menghilangkan batasan minimum tinggi */
         }
     </style>
+    <!-- Menampilkan pesan sukses jika ada -->
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
+    <!-- Breadcrumb untuk navigasi halaman -->
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -29,6 +32,7 @@
     </nav>
     <div class="row">
         <div class="col-lg-12">
+            <!-- Menampilkan status pendaftaran sidang proposal -->
             @if ($datas->status == 'pending')
                 <div class="card">
                     <div class="card-body">
@@ -57,6 +61,7 @@
                                 </h4>
                     </div>
                 </div>
+                <!-- Menampilkan jadwal sidang proposal yang telah dibuat -->
                 <div class="card mb-3">
                     <div class="card-header">
                         <h4 class="card-title mb-0" style="font-weight: bold">Jadwal Sidang Proposal Skripsi.</h4>
@@ -173,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Menampilkan persiapan sidang proposal -->
                 <div class="card mb-3">
                     <div class="card-header">
                         <h4 class="card-title mb-0">Persiapan Sidang Proposal.</h4>
@@ -199,6 +205,7 @@
     {{-- !-- row --> --}}
 @endsection
 @push('plugin-scripts')
+    <!-- Menambahkan script untuk jquery-steps dan sweetalert2 -->
     <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
