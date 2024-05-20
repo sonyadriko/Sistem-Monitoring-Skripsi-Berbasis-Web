@@ -18981,7 +18981,7 @@ document.getElementById("sa-success").addEventListener("click", function () {
 
 document.getElementById("sa-warning").addEventListener("click", function () {
   Swal.fire({
-    title: "Are you sure?",
+    title: "Konfirmasi?",
     text: "You won't be able to revert this!",
     icon: "warning",
     showCancelButton: true,
@@ -18997,7 +18997,7 @@ document.getElementById("sa-warning").addEventListener("click", function () {
 
 document.getElementById("sa-params").addEventListener("click", function () {
   Swal.fire({
-    title: 'Are you sure?',
+    title: 'Konfirmasi?',
     text: "You won't be able to revert this!",
     icon: 'warning',
     showCancelButton: true,

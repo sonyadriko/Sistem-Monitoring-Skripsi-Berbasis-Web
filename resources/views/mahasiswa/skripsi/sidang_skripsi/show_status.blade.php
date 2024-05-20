@@ -1,8 +1,6 @@
 @extends('layout.master')
 
-@section('title')
-    Daftar Sidang Skripsi
-@endsection
+@section('title', 'Daftar Sidang Skripsi')
 
 @push('plugin-styles')
     <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
@@ -224,3 +222,4 @@
 @endpush
 @push('custom-scripts')
 @endpush
+

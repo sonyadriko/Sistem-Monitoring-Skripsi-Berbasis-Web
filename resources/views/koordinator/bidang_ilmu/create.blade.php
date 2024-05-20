@@ -115,7 +115,7 @@
                 } else {
                     // Tampilkan konfirmasi SweetAlert
                     Swal.fire({
-                        title: 'Are you sure?',
+                        title: 'Konfirmasi?',
                         text: 'Apakah Anda yakin ingin menyimpan perubahan?',
                         icon: 'question',
                         showCancelButton: true,

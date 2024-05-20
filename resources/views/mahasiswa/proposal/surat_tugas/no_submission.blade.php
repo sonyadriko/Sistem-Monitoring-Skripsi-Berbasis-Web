@@ -1,47 +1,47 @@
 @extends('layout.master')
 
-@section('title')
-Daftar Surat Tugas
-@endsection
+@section('title', 'Daftar Surat Tugas')
 
 @push('plugin-styles')
-<link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
+    <!-- Menghubungkan stylesheet untuk flatpickr dan jquery-steps -->
+    <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
-<style>
-    .wizard > .content {
-        min-height: 50em; /* Menggunakan auto untuk menghilangkan batasan minimum tinggi */
-    }
-</style>
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Forms</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Surat Tugas Bimbingan</li>
-    </ol>
-</nav>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="alert alert-warning" role="alert">
-            Selesaikan tahap yang sebelumnya terlebih dahulu.
+    <style>
+        .wizard>.content {
+            min-height: 50em;
+            /* Mengatur tinggi minimum konten wizard */
+        }
+    </style>
+    <!-- Menampilkan pesan sukses jika ada -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <!-- end card -->
+    @endif
+    <!-- Breadcrumb untuk navigasi halaman -->
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Forms</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Surat Tugas Bimbingan</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Informasi untuk menyelesaikan tahap sebelumnya terlebih dahulu -->
+            <div class="alert alert-warning" role="alert">
+                Selesaikan tahap yang sebelumnya terlebih dahulu.
+            </div>
+        </div>
     </div>
-    <!-- end col -->
-</div>
-
-{{-- !-- row --> --}}
 @endsection
 @push('plugin-scripts')
-<script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Menambahkan script untuk jquery-steps dan sweetalert2 -->
+    <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 @push('custom-scripts')
-
+    <!-- Tempat untuk menambahkan script kustom jika diperlukan -->
 @endpush

@@ -4,12 +4,7 @@
 	<link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
 @endpush
 
-@push('style')
-@endpush
-
-@section('title')
-	Dashboard
-@endsection
+@section('title', 'Dashboard')
 
 @section('content')
 	@if (session('success'))
@@ -17,30 +12,35 @@
 			{{ session('success') }}
 		</div>
 	@endif
-	<h4 class="mb-2" style="font-weight: normal;">Selamat Datang <strong>{{ Auth::user()->name }}</strong></h4>
-	<h6 class="mb-4" style="font-weight: normal;">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
+	<!-- Menampilkan pesan selamat datang kepada pengguna yang telah login -->
+	<h4 class="mb-2">Selamat Datang <strong>{{ Auth::user()->name }}</strong></h4>
+	<!-- Deskripsi singkat tentang halaman dashboard -->
+	<h6 class="mb-4">Halaman ini merupakan dashboard Sistem Monitoring Skripsi Jurusan Sistem Informasi ITATS.</h6>
 
 	<div class="row">
 		<div class="col-lg-12 col-xl-12 grid-margin stretch-card">
 			<div class="card">
-				<h6 class="card-header" style="font-weight: bold">Progress Skripsi</h6>
+				<h6 class="card-header font-weight-bold">Progress Skripsi</h6>
 				<div class="card-body">
 					<div class="p-2">
+						<!-- Bar progress untuk menunjukkan persentase kemajuan skripsi -->
 						<div class="progress" style="height: 20px;">
-							<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $progressPercentage }}" class="progress-bar progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;">{{ $progressPercentage }}%</div>
+							<div class="progress-bar progress-bar-animated" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">{{ $progressPercentage }}%</div>
 						</div>
 						<div class="row mt-1">
 							@foreach ($tables as $key => $table)
 								@if (Agent::isMobile() && $loop->last)
-									{{-- <div class="col-lg m-2 text-left" style="font-weight: bold;">{{ ucwords(str_replace('_', ' ', $table)) }}</div> --}}
+									{{-- <div class="col-lg m-2 text-left font-weight-bold">{{ ucwords(str_replace('_', ' ', $table)) }}</div> --}}
 								@elseif (!Agent::isMobile())
-									<div class="col-sm m-2 text-center" style="font-weight: bold;">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
+									<!-- Menampilkan nama tabel pada perangkat non-mobile -->
+									<div class="col-sm m-2 text-center font-weight-bold">{{ ucwords(str_replace('_', ' ', $table)) }}</div>
 								@endif
 							@endforeach
 						</div>
 					</div>
 					<div class="row mt-2">
 						<div class="col-lg">
+							<!-- Menampilkan pesan berdasarkan persentase kemajuan skripsi -->
 							@if ($progressPercentage == 0)
 								<span class="mt-2">Anda belum memulai tahap skripsi</span>
 							@elseif($progressPercentage > 0 && $progressPercentage <= 10)
@@ -74,11 +74,9 @@
 	<div class="row">
 		<div class="col-lg-8 col-xl-5 grid-margin stretch-card">
 			<div class="card">
-				<h6 class="card-header mb-0" style="font-weight: bold">Info Penting</h6>
-				<div class="card-body">
-					<div class="col-lg-8 col-xl-7 grid-margin stretch-card text-center" style="margin: auto;">
-						<img alt="Additional Information" class="img-fluid" src="{{ asset('img/info_penting.svg') }}" style="width: 100%; max-width: 100%; height: auto;">
-					</div>
+				<h6 class="card-header font-weight-bold">Info Penting</h6>
+				<div class="card-body text-center">
+					<img alt="Additional Information" class="img-fluid" src="{{ asset('img/info_penting.svg') }}" style="width: 100%; max-width: 100%; height: auto;">
 					<p class="text-dark mb-2 mt-4">Pengajuan proposal skripsi hanya dapat dilakukan oleh mahasiswa yang sudah melewati semester 6, dan sudah menempuh mata kuliah yang akan dijadikan sebagai topik proposal skripsi.</p>
 					<p class="mt-4">Untuk informasi lebih lanjut, <a href="{{ route('faq') }}">Lihat lebih banyak</a>.</p>
 				</div>
@@ -88,7 +86,7 @@
 			<div class="card">
 				<h6 class="card-header mb-0" style="font-weight: bold">Download Template tersedia</h6>
 				<div class="card-body">
-					<p class="text-dark" style="color: #171717; font-size: 1rem; margin-bottom: 14px">Template Proposal Skripsi.</p>
+					<p class="text-dark">Template Proposal Skripsi.</p>
 					<button class="btn btn-dark btn-block text-center" onclick="window.open('{{ asset('Template Proposal Skripsi.docx') }}', '_blank')">
                         <iconify-icon height="24" icon="lucide:download-cloud" style="margin-left: 12px" width="24"></iconify-icon>
                         <span style="margin-left: 7px; margin-right: 12px; margin-top: 6px; margin-bottom: 6px">Proposal Skripsi</span>
@@ -101,7 +99,7 @@
 
 @push('plugin-scripts')
 	<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-	<script src = "{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+	<script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')

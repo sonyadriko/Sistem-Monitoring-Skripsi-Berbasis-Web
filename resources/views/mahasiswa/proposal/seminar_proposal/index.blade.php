@@ -202,7 +202,7 @@
                 } else {
                     // Jika kedua file telah diunggah, tampilkan dialog konfirmasi
                     Swal.fire({
-                        title: 'Are you sure?',
+                        title: 'Konfirmasi?',
                         text: 'Apakah Anda ingin menyimpan perubahan?',
                         icon: 'question',
                         showCancelButton: true,

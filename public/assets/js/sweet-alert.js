@@ -61,7 +61,7 @@ $(function() {
       })
       
       swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
+        title: 'Konfirmasi?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,

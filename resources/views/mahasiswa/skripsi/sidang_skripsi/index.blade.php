@@ -1,8 +1,6 @@
 @extends('layout.master3')
 
-@section('title')
-Daftar Sidang Skripsi
-@endsection
+@section('title', 'Daftar Sidang Skripsi')
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
@@ -32,14 +30,13 @@ Daftar Sidang Skripsi
                     <h4 class="card-title mb-0">Alur Pengajuan Sidang Proposal </h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h6 class="card-title">Form Grid</h6> --}}
                     <h4 class="card-title mb-0">Pendaftaran Sidang Proposal Skripsi telah disubmit.</h4>
-                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
+                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h6>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-secondary" role="alert">
                             Tunggu diperiksa koordinator.
                         </div>
-                    </h4>
+                    </h6>
                 </div>
             </div>
             @elseif($datas->status == 'terima')
@@ -48,14 +45,13 @@ Daftar Sidang Skripsi
                     <h4 class="card-title mb-0">Alur Pengajuan Sidang Proposal </h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h6 class="card-title">Form Grid</h6> --}}
                     <h4 class="card-title mb-0">Pendaftaran Seminar Proposal Skripsi telah disubmit.</h4>
-                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h4>
+                    <h6 class="mb-3">Pendaftaran yang anda lakukan akan dicek terlebih dahulu oleh koordinator, lalu akan dibuatkan jadwal.</h6>
                     <h6 class="mb-3">Status Pendaftaran :
                         <div class="alert alert-success" role="alert">
                             Selamat.
                         </div>
-                    </h4>
+                    </h6>
                 </div>
             </div>
             @else
@@ -88,7 +84,7 @@ Daftar Sidang Skripsi
                             <div class="tab-pane" id="seller-details">
                                 <div class="text-center mb-4">
                                     <h5>Step Pertama</h5>
-                                    <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran sidang skripsi skripsi terdapat pada gambar dibawah ini.</p>
+                                    <p class="card-title-desc">Membaca urutan dari apa yang harus dilakukan dan dipersiapkan untuk melakukan pendaftaran sidang skripsi terdapat pada gambar dibawah ini.</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -138,7 +134,6 @@ Daftar Sidang Skripsi
                                             <label for="dospem2" class="form-label">Dosen Pembimbing 2</label>
                                             <input type="text" class="form-control" id="dospem2" placeholder="Dosen Pembimbing 2" value="{{$datas->dosen_pembimbing_ii}}" aria-describedby="defaultFormControlHelp" readonly />
                                         </div>
-                                        {{-- <input type="hidden" name="users_id" value="{{Auth::user()->id}}"> --}}
                                         <input type="hidden" name="id_bimbingan_skripsi" value="{{$datas->id_bimbingan_skripsi}}">
                                         <div class="mb-3">
                                             <label for="skripsi_file" class="form-label">Upload File Skripsi</label>
@@ -178,11 +173,7 @@ Daftar Sidang Skripsi
     </div>
     <!-- end col -->
 </div>
-
-
-{{-- !-- row --> --}}
 @endsection
-
 
 @section('script')
     <script src="{{ URL::asset('assets2/libs/jquery/jquery.min.js') }}"></script>
@@ -190,7 +181,7 @@ Daftar Sidang Skripsi
     <script src="{{ URL::asset('assets2/js/app.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Your existing nextTab function in the global scope
+        // Fungsi untuk berpindah ke tab selanjutnya
         function nextTab() {
             var nextTab = $('.nav-item.active').next('li.nav-item');
             if (nextTab.length > 0) {
@@ -198,7 +189,7 @@ Daftar Sidang Skripsi
             }
         }
 
-        // Your existing previousTab function in the global scope
+        // Fungsi untuk kembali ke tab sebelumnya
         function previousTab() {
             var prevTab = $('.nav-item.active').prev('li.nav-item');
             if (prevTab.length > 0) {
@@ -206,22 +197,20 @@ Daftar Sidang Skripsi
             }
         }
 
+        // Fungsi untuk menampilkan konfirmasi sebelum menyimpan perubahan
         function showConfirmation() {
-    // Check if both files are uploaded
             var proposalFile = $('#skripsi_file').val();
             var slipFile = $('#slip_file').val();
 
             if (proposalFile === '' || slipFile === '') {
-                // If either file is not uploaded, show an error message
                 Swal.fire({
                     title: 'Error',
                     text: 'Please upload both proposal and slip files before saving changes.',
                     icon: 'error',
                 });
             } else {
-                // If both files are uploaded, show the confirmation dialog
                 Swal.fire({
-                    title: 'Are you sure?',
+                    title: 'Konfirmasi?',
                     text: 'Apakah Anda ingin menyimpan perubahan?',
                     icon: 'question',
                     showCancelButton: true,
@@ -229,44 +218,32 @@ Daftar Sidang Skripsi
                     cancelButtonText: 'No',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // If the user clicks "Yes," submit the form
                         saveChanges();
                     }
                 });
             }
         }
+
+        // Fungsi untuk menyimpan perubahan
         function saveChanges() {
-            // Gather form data
-            var form = $('#yourFormId')[0]; // Replace 'yourFormId' with the actual ID of your form
+            var form = $('#yourFormId')[0]; // Ganti 'yourFormId' dengan ID form yang sesungguhnya
             form.submit();
         }
 
-
-
-
+        // Fungsi yang dijalankan saat dokumen siap
         $(document).ready(function () {
-            // Initialize the wizard
+            // Inisialisasi wizard
             $('#basic-pills-wizard').bootstrapWizard({
-                // Options and configurations for the wizard
-                // ...
-
                 onTabClick: function (tab, navigation, index) {
-                    // Handle tab click event if needed
                     return true;
                 },
-
                 onNext: function (tab, navigation, index) {
-                    // Handle next button click event if needed
-                    return true; // Return false to prevent moving to the next tab
+                    return true;
                 },
-
                 onPrevious: function (tab, navigation, index) {
-                    // Handle previous button click event if needed
-                    return true; // Return false to prevent moving to the previous tab
+                    return true;
                 },
-
                 onTabShow: function (tab, navigation, index) {
-                    // Handle tab show event if needed
                 }
             });
         });

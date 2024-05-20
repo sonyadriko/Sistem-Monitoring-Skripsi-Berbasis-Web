@@ -156,7 +156,7 @@ Daftar Sidang Proposal
         } else {
             // If both files are uploaded, show the confirmation dialog
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Konfirmasi?',
                 text: 'Apakah Anda ingin menyimpan perubahan?',
                 icon: 'question',
                 showCancelButton: true,

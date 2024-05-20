@@ -157,7 +157,7 @@ Pengajuan Surat Tugas
     function showConfirmation() {
     // Use SweetAlert to show a simple confirmation message
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'Konfirmasi?',
             text: 'Apakah Anda ingin menyimpan perubahan?',
             icon: 'question',
             showCancelButton: true,
