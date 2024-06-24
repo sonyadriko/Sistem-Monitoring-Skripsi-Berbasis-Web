@@ -26,9 +26,17 @@ class HistoryBimbinganController extends Controller
             ->where('users.id', $userId)
             ->get();
 
-        
+            $hisbimdet = DB::table('bimbingan_proposal')
+            ->join('users', 'users.id', '=', 'bimbingan_proposal.users_id')
+            ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', '=', 'bimbingan_proposal.bidang_ilmu_id')
+            ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', '=', 'bimbingan_proposal.pengajuan_id')
+            ->select('bimbingan_proposal.*', 'users.kode_unik', 'users.name', 'bidang_ilmu.topik_bidang_ilmu', 'pengajuan_judul.judul')
+            ->where('users.id', $userId)
+            ->get();
 
-        return view('mahasiswa/proposal/history_bimbingan.index', compact('hisbimmhs'));
+
+
+        return view('mahasiswa/proposal/history_bimbingan.index', compact('hisbimmhs', 'hisbimdet'));
     }
 
     public function store(Request $request)

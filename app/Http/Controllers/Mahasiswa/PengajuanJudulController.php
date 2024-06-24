@@ -106,6 +106,7 @@ class PengajuanJudulController extends Controller
                     'status' => 'pending', // Atur status ke 'pending' karena pengajuan baru
                     'alasan' => null, // Reset alasan penolakan jika ada
                 ]);
+                $pengajuanExist->increment('jumlah_pengajuan');
 
                 return redirect()->route('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => $pengajuanExist->id, 'status' => 'pending']);
             } else {
@@ -116,6 +117,7 @@ class PengajuanJudulController extends Controller
                     'bidang_ilmu_id' => $request->bidang_ilmu_id,
                     'mk_pilihan' => implode(', ', $request->mata_kuliah),
                     'status' => 'pending', // Set status ke 'pending'
+                    'jumlah_pengajuan' => 1, // Set jumlah_pengajuan menjadi 1
                 ]);
 
                 return redirect()->route('mahasiswa/proposal/pengajuan_judul.show_status', ['id' => auth()->user()->id, 'status' => 'pending']);

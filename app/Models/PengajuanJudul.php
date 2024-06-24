@@ -17,6 +17,7 @@ class PengajuanJudul extends Model
         'judul',
         'status',
         'alasan',
+        'jumlah_pengajuan',
         'updated_at',
         'created_at'
     ];

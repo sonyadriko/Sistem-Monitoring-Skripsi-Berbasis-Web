@@ -1,24 +1,21 @@
 @extends('layout.master')
 
-@section('title', 'Detail Bimbingan Proposal')
+@section('title')
+    Detail Bimbingan Proposal
+@endsection
 
 @section('css')
-    {{-- Loop untuk memasukkan beberapa CSS library yang berkaitan dengan DataTables --}}
-    @foreach(['datatables.net-bs4', 'datatables.net-buttons-bs4', 'datatables.net-responsive-bs4'] as $lib)
+    @foreach (['datatables.net-bs4', 'datatables.net-buttons-bs4', 'datatables.net-responsive-bs4'] as $lib)
         <link href="{{ asset("assets2/libs/$lib/$lib.min.css") }}" rel="stylesheet" type="text/css" />
     @endforeach
 @endsection
-
 @section('content')
-    {{-- Breadcrumb untuk navigasi halaman --}}
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Bimbingan & Revisi</a></li>
             <li class="breadcrumb-item active" aria-current="page">Proposal Skripsi</li>
         </ol>
     </nav>
-
-    {{-- Bagian informasi detail mahasiswa dan dosen pembimbing --}}
     <div class="row">
         <div class="col-md-12 stretch-card">
             <div class="card mb-4">
@@ -32,7 +29,7 @@
                             ['label' => 'Judul', 'value' => $data->judul],
                             ['label' => 'Bidang Ilmu', 'value' => $data->topik_bidang_ilmu],
                             ['label' => 'Dosen Pembimbing Utama', 'value' => $data->dosen_pembimbing_utama],
-                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii]
+                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii],
                         ];
                     @endphp
                     <!-- Menampilkan informasi dalam dua kolom -->
@@ -70,8 +67,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Bagian untuk menambahkan revisi jika belum ada --}}
     <div class="row">
         <div class="mb-3">
             {{-- Kondisi untuk menampilkan tombol tambah revisi berdasarkan user yang login dan status acc dosen --}}
@@ -88,7 +83,8 @@
                     </button>
                 @endif
             @endif
-            <input type="hidden" id="idBimbinganProposal" name="idBimbinganProposal" value="{{ $data->id_bimbingan_proposal }}">
+            <input type="hidden" id="idBimbinganProposal" name="idBimbinganProposal"
+                value="{{ $data->id_bimbingan_proposal }}">
             {{-- Tabel untuk menampilkan detail bimbingan jika ada --}}
             @if ($detail->isNotEmpty())
                 <div class="card mb-4 mb-xl-0">
@@ -118,20 +114,26 @@
         </div>
     </div>
 
-    @include('dosen.bimbingan.proposal.revisi-modal', ['id' => 'revisiModal', 'title' => 'Revisi Proposal', 'formId' => 'revisiForm', 'inputId' => 'revisiInput'])
-    @include('dosen.bimbingan.proposal.success-alert', ['id' => 'successAlert', 'message' => 'Revisi berhasil dikirim!', 'buttonId' => 'okButton'])
+    @include('dosen.bimbingan.proposal.revisi-modal', [
+        'id' => 'revisiModal',
+        'title' => 'Revisi Proposal',
+        'formId' => 'revisiForm',
+        'inputId' => 'revisiInput',
+    ])
+    @include('dosen.bimbingan.proposal.success-alert', [
+        'id' => 'successAlert',
+        'message' => 'Revisi berhasil dikirim!',
+        'buttonId' => 'okButton',
+    ])
+    @include('dosen.bimbingan.proposal.proposal-approval', ['data' => $data])
 
-    <div class="mb-3">
-        @include('dosen.bimbingan.proposal.proposal-approval', ['data' => $data])
-    </div>
 
 @endsection
-
-@section('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <script>
     function openRevisiModal() {
         // Open the modal
@@ -140,7 +142,6 @@
         // Optionally, you can set other values or perform other actions here
 
     }
-
     // Pastikan dokumen telah dimuat sepenuhnya
     document.addEventListener('DOMContentLoaded', function() {
         // Ambil elemen 'revisiForm' jika ada
@@ -256,8 +257,6 @@
             });
     }
 </script>
-@endsection
-
 @push('plugin-scripts')
     <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
@@ -266,5 +265,3 @@
 @push('custom-scripts')
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
-
-

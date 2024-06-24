@@ -52,6 +52,11 @@
                                     name="mk_pilihan" readonly disabled />
                             </div>
                             <div class="mb-3">
+                                <label for="mk_pilihan" class="form-label">Telah melakukan pengajuan sebanyak</label>
+                                <input class="form-control" type="text" id="mk_pilihan"
+                                    value="{{ $data->jumlah_pengajuan }}" name="mk_pilihan" readonly disabled />
+                            </div>
+                            <div class="mb-3">
                                 <label for="dosen_pembimbing_utama" class="form-label">Dosen Pembimbing Utama</label>
                                 <select class="form-select" id="select1" name="dosen_pembimbing_utama">
                                     <option value="" selected disabled>Open this select menu</option>
@@ -74,7 +79,7 @@
                                 <button type="button" class="btn btn-secondary"
                                     onclick="window.history.back();">Kembali</button>
                                 @if ($data->status != 'tolak')
-                                    <button type="submit" class="btn btn-primary">Terima</button>
+                                    <button type="submit" id="btn-terima" class="btn btn-primary">Terima</button>
                                 @endif
                             </div>
                         </form>
@@ -116,6 +121,11 @@
                             <label for="tbi" class="form-label">Mata Kuliah Pilihan Semester VIII dan VII</label>
                             <input class="form-control" type="text" id="tbi" value="{{ $data->mk_pilihan }}"
                                 name="tbi" readonly disabled />
+                        </div>
+                        <div class="mb-3">
+                            <label for="mk_pilihan" class="form-label">Telah melakukan pengajuan sebanyak</label>
+                            <input class="form-control" type="text" id="mk_pilihan"
+                                value="{{ $data->jumlah_pengajuan }}" name="mk_pilihan" readonly disabled />
                         </div>
                         <div class="mb-3">
                             <label for="tbi" class="form-label">Dosen Pembimbing Utama</label>
@@ -202,82 +212,11 @@
 <script>
     $(document).ready(function() {
         // Add SweetAlert confirmation when submitting the form
-        $('#btn-terima').click(function() {
-            // Get the selected values from the form
-            var selectedDosenUtama = $('#select1').val();
-            var selectedDosenII = $('#select2').val();
-
-            // Check if the required fields are filled
-            if (selectedDosenUtama && selectedDosenII) {
-                Swal.fire({
-                    title: 'Apakah Anda yakin ingin menerima pengajuan ini?',
-                    text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, Terima!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user clicks 'Ya, Terima!', proceed with form submission
-                        $.ajax({
-                            type: 'POST',
-                            url: $('#form-id').attr('action'),
-                            data: $('#form-id').serialize(), // Serialize the form data
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                    'content')
-                            },
-                            success: function(response) {
-                                // Handle success (if needed)
-                                Swal.fire({
-                                    title: 'Berhasil!',
-                                    text: 'Pengajuan berhasil diterima.',
-                                    icon: 'success',
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'OK'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Optionally redirect to another page or perform other actions
-                                        window.location.href =
-                                            '{{ route('pengajuan-judul.index') }}';
-                                    }
-                                });
-                            },
-                            error: function(error) {
-                                // Handle error (if needed)
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Terjadi kesalahan. Silakan coba lagi.',
-                                    icon: 'error',
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'OK'
-                                });
-                            }
-                        });
-                    }
-                });
-            } else {
-                // Display SweetAlert for validation error
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Harap mengisi semua input.',
-                    icon: 'error',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        // Add SweetAlert confirmation when submitting the form
         $('#form-id').submit(function(e) {
             e.preventDefault(); // Prevent the form from submitting
 
             Swal.fire({
-                title: 'Apakah Anda yakin ingin menerima atau menolak pengajuan ini?',
+                title: 'Apakah Anda yakin ingin menerima pengajuan ini?',
                 text: 'Pastikan data sudah benar sebelum mengonfirmasi.',
                 icon: 'question',
                 showCancelButton: true,
@@ -288,14 +227,50 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // If user clicks 'Ya, Terima!', proceed with form submission
-                    // ... your existing code for accepting
+                    $.ajax({
+                        type: 'POST',
+                        url: $('#form-id').attr('action'),
+                        data: $('#form-id').serialize(), // Serialize the form data
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Handle success (if needed)
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Pengajuan berhasil diterima.',
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Optionally redirect to another page or perform other actions
+                                    window.location.href =
+                                        '{{ route('pengajuan-judul.index') }}';
+                                }
+                            });
+                        },
+                        error: function(error) {
+                            // Handle error (if needed)
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Terjadi kesalahan. Silakan coba lagi.',
+                                icon: 'error',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     // If user clicks 'Tolak', show reject modal
                     $('#rejectModal').modal('show');
                 }
             });
         });
-
+    });
+</script>
+<script>
+    $(document).ready(function() {
         // Handle reject confirmation when modal is opened
         $('#rejectBtn').on('click', function() {
             $('#rejectModal').modal('show');
