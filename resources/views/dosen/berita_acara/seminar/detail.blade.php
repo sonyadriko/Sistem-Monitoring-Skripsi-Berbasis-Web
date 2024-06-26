@@ -5,8 +5,10 @@
 @section('css')
     <!-- Menghubungkan stylesheet untuk DataTables dan komponen-komponen terkait -->
     <link href="{{ asset('assets2/libs/datatables.net-bs4/css/datatables.net-bs4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/css/datatables.net-buttons-bs4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/css/datatables.net-responsive-bs4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets2/libs/datatables.net-buttons-bs4/css/datatables.net-buttons-bs4.min.css') }}"
+        rel="stylesheet" />
+    <link href="{{ asset('assets2/libs/datatables.net-responsive-bs4/css/datatables.net-responsive-bs4.min.css') }}"
+        rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -19,54 +21,58 @@
     </nav>
 
     <!-- Kontainer utama untuk detail berita acara -->
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="card mb-3">
-            <h5 class="card-header">Berita Acara Sidang Proposal</h5>
-            <div class="card-body table-responsive">
-                @php
-                    // Mendefinisikan field informasi yang akan ditampilkan
-                    $infoFields = [
-                        ['label' => 'NPM', 'value' => $data->kode_unik],
-                        ['label' => 'No. Ujian', 'value' => $data->id_berita_acara_p],
-                        ['label' => 'Nama', 'value' => $data->name],
-                        ['label' => 'Tanggal', 'value' => date('d F Y', strtotime($data->tanggal))],
-                        ['label' => 'Judul', 'value' => $data->judul],
-                        ['label' => 'Ruang, Waktu', 'value' => $data->nama_ruangan . ', ' . $data->jam],
-                        ['label' => 'Dosen Pembimbing 1', 'value' => $data->dosen_pembimbing_utama],
-                        ['label' => 'Dosen Pembimbing 2', 'value' => $data->dosen_pembimbing_ii],
-                        ['label' => 'Dosen Penguji 1', 'value' => $data->nama_penguji_1],
-                        ['label' => 'Dosen Penguji 2', 'value' => $data->nama_penguji_2]
-                    ];
-                @endphp
-                <!-- Menampilkan informasi dalam dua kolom -->
-                <div class="row">
-                    <div class="col-md-6">
-                        @foreach ($infoFields as $index => $field)
-                            @if ($index % 2 == 0)
-                                <div class="row mb-3">
-                                    <div class="col-sm-4">
-                                        <label class="form-label" style="font-weight: bold">{{ $field['label'] }}</label>
+    <div class="row">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card mb-3">
+                <h5 class="card-header">Berita Acara Sidang Proposal</h5>
+                <div class="card-body table-responsive">
+                    @php
+                        // Mendefinisikan field informasi yang akan ditampilkan
+                        $infoFields = [
+                            ['label' => 'NPM', 'value' => $data->kode_unik],
+                            ['label' => 'No. Ujian', 'value' => $data->id_berita_acara_p],
+                            ['label' => 'Nama', 'value' => $data->name],
+                            ['label' => 'Tanggal', 'value' => date('d F Y', strtotime($data->tanggal))],
+                            ['label' => 'Judul', 'value' => $data->judul],
+                            ['label' => 'Ruang, Waktu', 'value' => $data->nama_ruangan . ', ' . $data->jam],
+                            ['label' => 'Dosen Pembimbing 1', 'value' => $data->dosen_pembimbing_utama],
+                            ['label' => 'Dosen Pembimbing 2', 'value' => $data->dosen_pembimbing_ii],
+                            ['label' => 'Dosen Penguji 1', 'value' => $data->nama_penguji_1],
+                            ['label' => 'Dosen Penguji 2', 'value' => $data->nama_penguji_2],
+                        ];
+                    @endphp
+                    <!-- Menampilkan informasi dalam dua kolom -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            @foreach ($infoFields as $index => $field)
+                                @if ($index % 2 == 0)
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <label class="form-label"
+                                                style="font-weight: bold">{{ $field['label'] }}</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p><span>{!! $field['value'] !!}</span></p>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <p><span>{!! $field['value'] !!}</span></p>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="col-md-6">
+                            @foreach ($infoFields as $index => $field)
+                                @if ($index % 2 != 0)
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <label class="form-label"
+                                                style="font-weight: bold">{{ $field['label'] }}</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p><span>{!! $field['value'] !!}</span></p>
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="col-md-6">
-                        @foreach ($infoFields as $index => $field)
-                            @if ($index % 2 != 0)
-                                <div class="row mb-3">
-                                    <div class="col-sm-4">
-                                        <label class="form-label" style="font-weight: bold">{{ $field['label'] }}</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p><span>{!! $field['value'] !!}</span></p>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,4 +120,3 @@
         }
     }
 </script>
-

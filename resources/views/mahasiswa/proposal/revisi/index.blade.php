@@ -30,16 +30,29 @@
                         <p class="revisi-rumusan-masa">
                             <span class="span0-1">Revisi : <br /></span>
                             <!-- Menampilkan detail revisi jika ada -->
+                            @if (!is_null($revisisp2))
+                                @foreach ($revisisp2 as $revisi)
+                                    <div class="revision-item">
+                                        <span class="span0-1">{{ $revisi->revisi }} dari {{ $revisi->name }}</span>
+                                    </div>
+                                @endforeach
+                            @else
+                                <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <h5 class="card-header">Revisi Tambahan</h5>
+                    <div class="card-body">
+                        <p class="revisi-rumusan-masa">
+                            <span class="span0-1">Revisi : <br /></span>
+                            <!-- Menampilkan detail revisi jika ada -->
                             @if (!is_null($detailrev))
-                                @php
-                                    $groupedRevisions = collect($detailrev)->groupBy('users_id');
-                                @endphp
-
-                                @foreach ($groupedRevisions as $userId => $revisions)
-                                    @foreach ($revisions as $revisi)
-                                        <span class="span0-1">{{ $revisi->revisi }} dari
-                                            {{ $revisi->unique_names }}</span><br>
-                                    @endforeach
+                                @foreach ($detailrev as $revisi)
+                                    <div class="revision-item">
+                                        <span class="span0-1">{{ $revisi->revisi }} dari {{ $revisi->name }}</span>
+                                    </div>
                                 @endforeach
                             @else
                                 <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>
@@ -56,8 +69,7 @@
                                 <div class="mb-3">
                                     <div class="form-check mt-3">
                                         <input class="form-check-input" type="checkbox" value="" name="dospem"
-                                            id="dospem" {{ $revisisp->acc_dospem ? 'checked disabled' : '' }}
-                                            disabled />
+                                            id="dospem" {{ $revisisp->acc_dospem ? 'checked disabled' : '' }} disabled />
                                         <label class="form-check-label" for="dospem"> Dosen Pembimbing </label>
                                     </div>
                                     <div class="form-check">
@@ -108,4 +120,3 @@
         window.location.href = "{{ route('pengajuan-st.check') }}";
     }
 </script>
-

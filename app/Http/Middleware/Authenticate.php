@@ -25,7 +25,18 @@ class Authenticate extends Middleware
 
     protected function redirectTo($request)
     {
-        // if ($request->expectsJson()) {
+        if (!$request->expectsJson()) {
+            foreach ($this->guards as $guard) {
+                if (in_array($guard, ['mahasiswa', 'dosen', 'koordinator', 'ketuajurusan']) && auth()->guard($guard)->check()) {
+                    return redirect()->route('dashboard');
+                }
+            }
+            return redirect()->route('login');
+        }
+        return redirect()->route('login');
+    }
+}
+ // if ($request->expectsJson()) {
         //     return null;
         // }
         // foreach ($this->guards as $guard) {
@@ -44,15 +55,3 @@ class Authenticate extends Middleware
         //     return redirect()->route('login');
         //     // return redirect()->route('reig');
         // }
-
-        if (!$request->expectsJson()) {
-            foreach ($this->guards as $guard) {
-                if (in_array($guard, ['mahasiswa', 'dosen', 'koordinator', 'ketuajurusan']) && auth()->guard($guard)->check()) {
-                    return redirect()->route('dashboard');
-                }
-            }
-            return redirect()->route('login');
-        }
-        return redirect()->route('login');
-    }
-}

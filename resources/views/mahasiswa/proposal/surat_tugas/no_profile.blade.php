@@ -34,7 +34,7 @@
         <div class="col-lg-12">
             <!-- Informasi untuk melakukan pengisian profil -->
             <div class="alert alert-warning" role="alert">
-                Harap melakukan pengisian profil.
+                Harap melakukan pengisian profile.
             </div>
         </div>
     </div>
