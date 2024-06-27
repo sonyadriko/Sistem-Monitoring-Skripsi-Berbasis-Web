@@ -62,6 +62,7 @@ class DosenRevisiSidangSkripsiController extends Controller
                     ->join('revisi_sidang_skripsi', 'revisi_sidang_skripsi.id_revisi_sidang_skripsi', 'detail_revisi_sidang_skripsi.revisi_sidang_skripsi_id')
                     ->select('detail_revisi_sidang_skripsi.*')
                     ->where('id_revisi_sidang_skripsi', $id)
+                    ->where('detail_revisi_sidang_skripsi.users_id', Auth::user()->id)
                     ->get(),
             'revisi' => DB::table('detail_berita_acara_skripsi')
                     ->join('berita_acara_skripsi', 'berita_acara_skripsi.id_berita_acara_s', 'detail_berita_acara_skripsi.berita_acara_skripsi_id')

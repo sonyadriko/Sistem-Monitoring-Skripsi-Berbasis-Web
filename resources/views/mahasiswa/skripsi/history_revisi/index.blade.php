@@ -53,7 +53,7 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tbody>
-                                @foreach ($hisbimmhs as $hbmhs)
+                                @foreach ($dethisbimmhs as $hbmhs)
                                     <tr>
                                         <td>NPM</td>
                                         <td>{{ $hbmhs->kode_unik }}</td>

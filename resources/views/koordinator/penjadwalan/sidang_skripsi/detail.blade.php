@@ -545,8 +545,8 @@
                 if (formIsValid) {
                     // Tampilkan pesan sukses sebelum reload
                     Swal.fire({
-                        title: 'Success',
-                        text: 'Data berhasil disubmit.',
+                        title: 'Pembaruan Jadwal Berhasil',
+                        text: 'Jadwal sidang skripsi berhasil diperbarui.',
                         icon: 'success',
                     }).then(() => {
                         // Submit form
@@ -570,8 +570,8 @@
             if (result.isConfirmed) {
                 // Tampilkan pesan sukses sebelum reload
                 Swal.fire({
-                    title: 'Success',
-                    text: 'Data berhasil dibuat.',
+                    title: 'Berita Acara Dibuat',
+                    text: 'Berita Acara Sidang Skripsi berhasil dibuat.',
                     icon: 'success',
                 }).then(() => {
                     // Submit form cetak

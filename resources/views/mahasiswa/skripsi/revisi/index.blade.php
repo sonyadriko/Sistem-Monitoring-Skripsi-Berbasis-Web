@@ -33,6 +33,23 @@
                         </p>
                     </div>
                 </div>
+                <div class="card mb-4">
+                    <h5 class="card-header">Review Tambahan</h5>
+                    <div class="card-body">
+                        <p class="revisi-rumusan-masa">
+                            <span class="span0-1">Revisi:<br /></span>
+                            @if (!is_null($detailrev))
+                                @foreach ($detailrev as $revisi)
+                                    <div class="revision-item">
+                                        <span class="span0-1">{{ $revisi->revisi }} dari {{ $revisi->name }}</span>
+                                    </div>
+                                @endforeach
+                            @else
+                                <span class="span0-1 alert alert-warning">Menunggu review dari dosen</span><br>
+                            @endif
+                        </p>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xl-6">
                         {{-- Menampilkan status persetujuan revisi oleh dosen --}}

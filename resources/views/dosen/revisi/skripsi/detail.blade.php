@@ -30,7 +30,7 @@
                             ['label' => 'Judul', 'value' => $data->judul],
                             ['label' => 'Bidang Ilmu', 'value' => $data->topik_bidang_ilmu],
                             ['label' => 'Dosen Pembimbing Utama', 'value' => $data->dosen_pembimbing_utama],
-                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii]
+                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii],
                         ];
                     @endphp
                     <!-- Menampilkan informasi dalam dua kolom -->
@@ -74,54 +74,54 @@
             'nama_penguji_1' => 'tgl_acc_penguji_1',
             'nama_penguji_2' => 'tgl_acc_penguji_2',
             'nama_penguji_3' => 'tgl_acc_penguji_3',
-            'dosen_pembimbing_utama' => 'tgl_acc_dospem'
+            'dosen_pembimbing_utama' => 'tgl_acc_dospem',
         ];
     @endphp
-     <!-- Tombol untuk menambahkan revisi jika pengguna adalah penguji atau pembimbing yang belum menyetujui -->
-     @foreach ($roles as $role => $date)
-     @if (Auth::user()->name == $data->$role && is_null($data->$date))
-         <button type="button" class="btn btn-primary justify-content-end mb-4" id="tambahkanRevisiButton" onclick="openRevisiModal()">
-             Tambahkan Revisi
-         </button>
-         @break
-     @endif
- @endforeach
-    <!-- Input tersembunyi untuk menyimpan ID revisi -->
-    <input type="hidden" id="idRevisiBimbinganSkripsi" name="idRevisiBimbinganSkripsi"
+    <!-- Tombol untuk menambahkan revisi jika pengguna adalah penguji atau pembimbing yang belum menyetujui -->
+    @foreach ($roles as $role => $date)
+        @if (Auth::user()->name == $data->$role && is_null($data->$date))
+            <button type="button" class="btn btn-primary justify-content-end mb-4" id="tambahkanRevisiButton"
+                onclick="openRevisiModal()">
+                Tambahkan Revisi
+            </button>
+        @break
+    @endif
+@endforeach
+<!-- Input tersembunyi untuk menyimpan ID revisi -->
+<input type="hidden" id="idRevisiBimbinganSkripsi" name="idRevisiBimbinganSkripsi"
     value="{{ $data->id_revisi_sidang_skripsi }}">
-
-    <!-- Tabel untuk menampilkan detail revisi -->
-    <div class="row">
-        <div class="mb-3">
-            <div class="card mb-4">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
+<!-- Tabel untuk menampilkan detail revisi -->
+<div class="row">
+    <div class="mb-3">
+        <div class="card mb-4">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Revisi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($detail as $index => $item)
                             <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Revisi</th>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                <td>{{ $item->revisi }}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($detail as $index => $item)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                                    <td>{{ $item->revisi }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Include modal revisi, alert sukses, dan persetujuan revisi -->
-    @include('dosen.revisi.skripsi.modal-revisi')
-    @include('dosen.revisi.skripsi.alert_success')
-    @include('dosen.revisi.skripsi.persetujuan-revisi')
+<!-- Include modal revisi, alert sukses, dan persetujuan revisi -->
+@include('dosen.revisi.skripsi.modal-revisi')
+@include('dosen.revisi.skripsi.alert_success')
+@include('dosen.revisi.skripsi.persetujuan-revisi')
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -150,7 +150,8 @@
 
                 // Mengambil nilai input dari form
                 var revisiInput = document.getElementById("revisiInput").value;
-                var idRevisiBimbinganSkripsi = document.getElementById('idRevisiBimbinganSkripsi').value;
+                var idRevisiBimbinganSkripsi = document.getElementById('idRevisiBimbinganSkripsi')
+                    .value;
 
                 // Mengirim data revisi ke server menggunakan axios
                 axios.post(`/dosen/revisi_sidang_skripsi/tambahrevisi`, {
@@ -249,10 +250,10 @@
 </script>
 
 @push('plugin-scripts')
-    <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+<script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush

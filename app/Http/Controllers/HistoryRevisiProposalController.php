@@ -29,7 +29,7 @@ class HistoryRevisiProposalController extends Controller
             ->where('users.id', $userId)
             ->get();
 
-            $hisbimdet = DB::table('bimbingan_proposal')
+        $hisbimdet = DB::table('bimbingan_proposal')
             ->join('users', 'users.id', '=', 'bimbingan_proposal.users_id')
             ->join('bidang_ilmu', 'bidang_ilmu.id_bidang_ilmu', '=', 'bimbingan_proposal.bidang_ilmu_id')
             ->join('pengajuan_judul', 'pengajuan_judul.id_pengajuan_judul', '=', 'bimbingan_proposal.pengajuan_id')

@@ -44,8 +44,8 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: 'Success',
-                    text: 'Data berhasil disubmit.',
+                    title: 'Sukses',
+                    text: 'Berhasil Submit Berita Acara Sidang Skripsi.',
                     icon: 'success',
                 }).then(() => {
                     // Proses submit form

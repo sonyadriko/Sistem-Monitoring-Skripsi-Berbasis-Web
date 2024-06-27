@@ -31,7 +31,7 @@
                             ['label' => 'Judul', 'value' => $data->judul],
                             ['label' => 'Bidang Ilmu', 'value' => $data->topik_bidang_ilmu],
                             ['label' => 'Dosen Pembimbing Utama', 'value' => $data->dosen_pembimbing_utama],
-                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii]
+                            ['label' => 'Dosen Pembimbing II', 'value' => $data->dosen_pembimbing_ii],
                         ];
                     @endphp
                     <div class="row">
@@ -96,7 +96,8 @@
                         </div>
                         <div class="card-body mb-4 mb-xl-0">
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100" width="100%" cellspacing="0">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100" width="100%"
+                                    cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Bimbingan</th>
@@ -108,7 +109,8 @@
                                         @foreach ($detail as $index => $item)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}
+                                                </td>
                                                 <td>{{ $item->revisi }}</td>
                                             </tr>
                                         @endforeach
@@ -127,13 +129,12 @@
     @include('dosen.bimbingan.skripsi.skripsi-approval', ['minBimbingan' => 12])
 @endsection
 
-{{-- Menghubungkan file JavaScript yang diperlukan untuk DataTables dan fungsi lainnya --}}
-@section('script')
-    @foreach (['datatables.net', 'datatables.net-bs4', 'datatables.net-buttons', 'datatables.net-buttons-bs4', 'jszip', 'pdfmake', 'datatables.net-responsive', 'datatables.net-responsive-bs4'] as $lib)
-        <script src="{{ asset("assets2/libs/$lib/$lib.min.js") }}"></script>
-    @endforeach
-    <script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
-    <script src="{{ asset('assets2/js/app.min.js') }}"></script>
+
+@foreach (['datatables.net', 'datatables.net-bs4', 'datatables.net-buttons', 'datatables.net-buttons-bs4', 'jszip', 'pdfmake', 'datatables.net-responsive', 'datatables.net-responsive-bs4'] as $lib)
+    <script src="{{ asset("assets2/libs/$lib/$lib.min.js") }}"></script>
+@endforeach
+<script src="{{ asset('assets2/js/pages/datatables.init.js') }}"></script>
+<script src="{{ asset('assets2/js/app.min.js') }}"></script>
 
 {{-- Script untuk fungsi modal revisi, acc revisi, dan acc proposal --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -276,15 +277,11 @@
             });
     }
 </script>
-@endsection
 
 @push('plugin-scripts')
     <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endpush
-
-

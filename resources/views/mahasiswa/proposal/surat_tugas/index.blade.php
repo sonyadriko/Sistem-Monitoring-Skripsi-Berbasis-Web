@@ -49,7 +49,7 @@
                                     <div class="row">
                                         <div class="card-group">
                                             <div class="card">
-                                                <img src="{{ url('img/wizard/surat_tugas/step1.svg') }}"
+                                                <img src="{{ url('img/wizard/surat_tugas/step1.webp') }}"
                                                     class="card-img-top" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">Mempersiapkan File</h5>
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                             <div class="card">
-                                                <img src="{{ url('img/wizard/surat_tugas/step2.svg') }}"
+                                                <img src="{{ url('img/wizard/surat_tugas/step2.webp') }}"
                                                     class="card-img-top" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">Mengisi Form Surat Tugas</h5>
@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                             <div class="card">
-                                                <img src="{{ url('img/wizard/surat_tugas/step3.svg') }}"
+                                                <img src="{{ url('img/wizard/surat_tugas/step3.webp') }}"
                                                     class="card-img-top" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">Mengambil Surat Tugas</h5>

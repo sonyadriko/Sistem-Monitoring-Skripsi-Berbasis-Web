@@ -54,7 +54,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tbody>
                                 {{-- Loop untuk menampilkan data mahasiswa dan dosen pembimbing --}}
-                                @foreach ($hisbimmhs as $hbmhs)
+                                @foreach ($dethisbimmhs as $hbmhs)
                                     <tr>
                                         <td>NPM</td>
                                         <td>{{ $hbmhs->kode_unik }}</td>

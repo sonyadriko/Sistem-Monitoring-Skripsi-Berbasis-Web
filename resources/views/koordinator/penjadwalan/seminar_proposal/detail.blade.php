@@ -385,7 +385,7 @@
                     // Tampilkan pesan sukses sebelum reload
                     Swal.fire({
                         title: 'Pembaruan Jadwal Berhasil',
-                        text: 'Jadwal seminar berhasil diperbarui.',
+                        text: 'Jadwal Sidang Proposal berhasil diperbarui.',
                         icon: 'success',
                     }).then(() => {
                         // Submit form
