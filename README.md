@@ -1,5 +1,5 @@
 ## Latar Belakang
-Pengelolaan proyek skripsi melibatkan koordinasi berbagai tugas, termasuk pengajuan proposal, pelacakan kemajuan, evaluasi, dan pengumpulan akhir. Metode tradisional dalam mengelola proses-proses ini dapat memakan waktu dan rentan terhadap kesalahan. Proyek ini bertujuan untuk menyederhanakan dan mengotomatisasi proses pemantauan skripsi, menyediakan platform terpusat bagi semua pemangku kepentingan, termasuk mahasiswa, dosen pembimbing, koordinator skripsi, dan ketua jurusan.
+Sistem Monitoring skripsi melibatkan koordinasi berbagai tugas, termasuk pengajuan proposal, pelacakan kemajuan, evaluasi, dan pengumpulan akhir. Metode tradisional dalam mengelola proses-proses ini dapat memakan waktu dan rentan terhadap kesalahan. Proyek ini bertujuan untuk menyederhanakan dan mengotomatisasi proses pemantauan skripsi, menyediakan platform terpusat bagi semua pemangku kepentingan, termasuk mahasiswa, dosen pembimbing, koordinator skripsi, dan ketua jurusan.
 
 ## Fitur Utama
 - **Manajemen Mahasiswa**: Memungkinkan mahasiswa untuk mengajukan proposal skripsi, bimbingan proposal dan bimbingan skripsi, daftar sidang skripsi, dan proses revisi setelah sidang.
